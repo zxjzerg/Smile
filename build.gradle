@@ -6,9 +6,8 @@ buildscript {
     }
     dependencies {
         classpath 'com.android.tools.build:gradle:2.1.2'
-
-        // NOTE: Do not place your application dependencies here; they belong
-        // in the individual module build.gradle files
+        classpath 'com.neenbedankt.gradle.plugins:android-apt:1.8'
+        classpath 'me.tatarka:gradle-retrolambda:3.2.3'
     }
 }
 
@@ -20,4 +19,26 @@ allprojects {
 
 task clean(type: Delete) {
     delete rootProject.buildDir
+}
+
+ext {
+    // Android
+    androidVersionCode = 1
+    androidVersionName = "1.0"
+    androidBuildToolsVersion = "23.0.3"
+    androidMinSdkVersion = 15
+    androidTargetSdkVersion = 23
+    androidCompileSdkVersion = 23
+
+    // Dependencies
+    junit = 'junit:junit:4.12'
+    rxandroid = 'io.reactivex:rxandroid:1.1.0'
+    rxjava = 'io.reactivex:rxjava:1.1.0'
+    dagger_compiler = 'com.google.dagger:dagger-compiler:2.2'
+    dagger = 'com.google.dagger:dagger:2.2'
+    javax_inject = 'javax.inject:javax.inject:1'
+    timber = 'com.jakewharton.timber:timber:4.1.2'
+    android_support_v7 = 'com.android.support:appcompat-v7:23.4.0'
+    butterknife = 'com.jakewharton:butterknife:8.0.1'
+    butterknife_compiler = 'com.jakewharton:butterknife-compiler:8.0.1'
 }
