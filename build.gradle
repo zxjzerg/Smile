@@ -3,6 +3,9 @@
 buildscript {
     repositories {
         jcenter()
+        maven {
+            url "http://mvn.leancloud.cn/nexus/content/repositories/releases"
+        }
     }
     dependencies {
         classpath 'com.android.tools.build:gradle:2.1.2'
@@ -14,6 +17,9 @@ buildscript {
 allprojects {
     repositories {
         jcenter()
+        maven {
+            url "http://mvn.leancloud.cn/nexus/content/repositories/releases"
+        }
     }
 }
 
@@ -30,15 +36,28 @@ ext {
     androidTargetSdkVersion = 23
     androidCompileSdkVersion = 23
 
+    // Build Configurations
+    leancloud_app_key = '"HQu208J1eI4ucxKRMuaLnXmb"'
+    leancloud_app_id = '"PO1UbW5WDuikX3XLA8UDVcrG-gzGzoHsz"'
+
     // Dependencies
     junit = 'junit:junit:4.12'
+
     rxandroid = 'io.reactivex:rxandroid:1.1.0'
     rxjava = 'io.reactivex:rxjava:1.1.0'
+
     dagger_compiler = 'com.google.dagger:dagger-compiler:2.2'
     dagger = 'com.google.dagger:dagger:2.2'
     javax_inject = 'javax.inject:javax.inject:1'
-    timber = 'com.jakewharton.timber:timber:4.1.2'
-    android_support_v7 = 'com.android.support:appcompat-v7:23.4.0'
+
     butterknife = 'com.jakewharton:butterknife:8.0.1'
     butterknife_compiler = 'com.jakewharton:butterknife-compiler:8.0.1'
+
+    timber = 'com.jakewharton.timber:timber:4.1.2'
+
+    android_support_v4 = 'com.android.support:support-v4:23.4.0'
+    android_support_v7 = 'com.android.support:appcompat-v7:23.4.0'
+
+    leancloud_basic = 'cn.leancloud.android:avoscloud-sdk:v3.+'
+
 }

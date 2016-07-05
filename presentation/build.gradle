@@ -12,6 +12,9 @@ android {
         targetSdkVersion rootProject.ext.androidTargetSdkVersion
         versionCode rootProject.ext.androidVersionCode
         versionName rootProject.ext.androidVersionName
+
+        buildConfigField "String", "LEANCOULD_APP_KEY", rootProject.ext.leancloud_app_key
+        buildConfigField "String", "LEANCOULD_APP_ID", rootProject.ext.leancloud_app_id
     }
 
     buildTypes {
@@ -24,6 +27,15 @@ android {
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
+    }
+
+    packagingOptions {
+        exclude 'META-INF/LICENSE.txt'
+        exclude 'META-INF/NOTICE.txt'
+    }
+
+    lintOptions {
+        abortOnError false
     }
 }
 
@@ -38,6 +50,7 @@ dependencies {
     compile rootProject.ext.rxandroid
     compile rootProject.ext.dagger
     compile rootProject.ext.butterknife
+    compile rootProject.ext.leancloud_basic
 
     apt rootProject.ext.dagger_compiler
     apt rootProject.ext.butterknife_compiler
