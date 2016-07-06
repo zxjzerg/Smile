@@ -51,9 +51,11 @@ dependencies {
     compile rootProject.ext.dagger
     compile rootProject.ext.butterknife
     compile rootProject.ext.leancloud_basic
+    compile rootProject.ext.timber
 
     apt rootProject.ext.dagger_compiler
     apt rootProject.ext.butterknife_compiler
 
     testCompile rootProject.ext.junit
+    compile 'com.android.support:design:23.4.0'
 }
