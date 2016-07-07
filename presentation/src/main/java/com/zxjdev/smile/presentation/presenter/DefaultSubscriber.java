@@ -8,7 +8,7 @@ import com.avos.avoscloud.AVException;
 import rx.Subscriber;
 import timber.log.Timber;
 
-public class DefaultSubscriber extends Subscriber {
+public class DefaultSubscriber<T> extends Subscriber<T> {
 
     private Context context;
 
@@ -42,7 +42,7 @@ public class DefaultSubscriber extends Subscriber {
     }
 
     @Override
-    public void onNext(Object o) {
+    public void onNext(T data) {
 
     }
 }

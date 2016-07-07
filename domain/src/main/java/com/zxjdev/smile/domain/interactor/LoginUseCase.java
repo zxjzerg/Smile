@@ -7,7 +7,7 @@ import javax.inject.Inject;
 import rx.Observable;
 import rx.Scheduler;
 
-public class RegisterUseCase extends UseCase {
+public class LoginUseCase extends UseCase {
 
     private UserRepository userRepository;
 
@@ -15,14 +15,14 @@ public class RegisterUseCase extends UseCase {
     private String password;
 
     @Inject
-    public RegisterUseCase(UserRepository userRepository, Scheduler postExecutionThread) {
+    public LoginUseCase(UserRepository userRepository, Scheduler postExecutionThread) {
         super(postExecutionThread);
         this.userRepository = userRepository;
     }
 
     @Override
     protected Observable buildUseCaseObservable() {
-        return this.userRepository.register(this.username, this.password);
+        return this.userRepository.login(this.username, this.password);
     }
 
     public void setInput(String username, String password) {

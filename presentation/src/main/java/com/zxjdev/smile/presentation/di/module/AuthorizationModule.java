@@ -2,7 +2,7 @@ package com.zxjdev.smile.presentation.di.module;
 
 import com.zxjdev.smile.domain.interactor.RegisterUseCase;
 import com.zxjdev.smile.presentation.di.scope.PerActivity;
-import com.zxjdev.smile.presentation.presenter.RegisterPresenter;
+import com.zxjdev.smile.presentation.presenter.authorization.RegisterPresenter;
 
 import dagger.Module;
 import dagger.Provides;

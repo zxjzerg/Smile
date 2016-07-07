@@ -4,6 +4,7 @@ import android.os.Bundle;
 
 import com.zxjdev.smile.presentation.di.component.AuthorizationComponent;
 import com.zxjdev.smile.presentation.di.component.DaggerAuthorizationComponent;
+import com.zxjdev.smile.presentation.di.module.ActivityModule;
 import com.zxjdev.smile.presentation.view.activity.BaseActivity;
 
 public abstract class AuthorizationActivity extends BaseActivity {
@@ -19,6 +20,7 @@ public abstract class AuthorizationActivity extends BaseActivity {
     private void initInjector() {
         mAuthorizationComponent = DaggerAuthorizationComponent.builder()
                 .applicationComponent(getApplicationComponent())
+                .activityModule(new ActivityModule(this))
                 .build();
     }
 

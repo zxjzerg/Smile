@@ -1,25 +1,29 @@
 package com.zxjdev.smile.data.repository.datastore;
 
-import com.avos.avoscloud.AVException;
-import com.avos.avoscloud.AVUser;
+import com.zxjdev.smile.data.entity.UserEntity;
+import com.zxjdev.smile.data.net.AVCloudHelper;
 
 import rx.Observable;
 
+/**
+ * 负责云端用户数据的处理
+ *
+ * @author Andrew
+ */
 public class CloudUserDataStore implements UserDataStore {
 
     @Override
     public Observable<Void> register(String username, String password) {
-        AVUser user = new AVUser();
-        user.setUsername(username);
-        user.setPassword(password);
+        return AVCloudHelper.register(username, password);
+    }
 
-        return Observable.create(subscriber -> {
-            try {
-                user.signUp();
-                subscriber.onCompleted();
-            } catch (AVException e) {
-                subscriber.onError(e);
-            }
-        });
+    @Override
+    public Observable<UserEntity> login(String username, String password) {
+        return AVCloudHelper.login(username, password);
+    }
+
+    @Override
+    public Observable<Boolean> checkHasAuthorized() {
+        return AVCloudHelper.checkHasAuthorized();
     }
 }

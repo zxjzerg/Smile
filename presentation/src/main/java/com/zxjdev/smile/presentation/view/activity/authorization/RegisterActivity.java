@@ -1,12 +1,14 @@
 package com.zxjdev.smile.presentation.view.activity.authorization;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.widget.EditText;
 
 import com.zxjdev.smile.R;
-import com.zxjdev.smile.presentation.presenter.RegisterPresenter;
-import com.zxjdev.smile.presentation.view.i.IRegisterView;
+import com.zxjdev.smile.presentation.presenter.authorization.RegisterPresenter;
+import com.zxjdev.smile.presentation.view.activity.MainActivity;
+import com.zxjdev.smile.presentation.view.i.authorization.IRegisterView;
 
 import javax.inject.Inject;
 
@@ -46,5 +48,12 @@ public class RegisterActivity extends AuthorizationActivity implements IRegister
     @Override
     public void toast(String message) {
         showToast(message);
+    }
+
+    @Override
+    public void navigateToMain() {
+        Intent intent = new Intent(mContext, MainActivity.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        startActivity(intent);
     }
 }

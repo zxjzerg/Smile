@@ -1,7 +1,8 @@
-package com.zxjdev.smile.presentation.presenter;
+package com.zxjdev.smile.presentation.presenter.authorization;
 
 import com.zxjdev.smile.domain.interactor.RegisterUseCase;
-import com.zxjdev.smile.presentation.view.i.IRegisterView;
+import com.zxjdev.smile.presentation.presenter.DefaultSubscriber;
+import com.zxjdev.smile.presentation.view.i.authorization.IRegisterView;
 
 import javax.inject.Inject;
 
@@ -24,7 +25,7 @@ public class RegisterPresenter {
         mRegisterUseCase.execute(new DefaultSubscriber(mView.context()) {
             @Override
             public void onCompleted() {
-
+                mView.navigateToMain();
             }
 
             @Override
