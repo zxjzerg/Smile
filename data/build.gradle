@@ -32,6 +32,9 @@ dependencies {
 
     compile rootProject.ext.android_support_v7
     compile rootProject.ext.javax_inject
+    compile rootProject.ext.leancloud_basic
+    compile rootProject.ext.rxjava
+    compile rootProject.ext.dagger
 
     testCompile rootProject.ext.junit
 }
