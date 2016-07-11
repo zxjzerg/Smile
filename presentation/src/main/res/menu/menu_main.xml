@@ -3,12 +3,12 @@
     <group android:checkableBehavior="single">
         <item
             android:id="@+id/navi_item_moments"
-            android:icon="@drawable/ic_public"
+            android:icon="@drawable/ic_public_white_24dp"
             android:title="@string/moments" />
 
         <item
             android:id="@+id/navi_item_settings"
-            android:icon="@drawable/ic_settings"
+            android:icon="@drawable/ic_settings_white_24dp"
             android:title="@string/settings" />
     </group>
 </menu>
