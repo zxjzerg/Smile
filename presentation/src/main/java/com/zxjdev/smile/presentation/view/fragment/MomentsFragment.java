@@ -2,11 +2,23 @@ package com.zxjdev.smile.presentation.view.fragment;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.design.widget.FloatingActionButton;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.zxjdev.smile.R;
+
+import butterknife.BindView;
+import butterknife.ButterKnife;
+import butterknife.OnClick;
+import timber.log.Timber;
+
 public class MomentsFragment extends BaseFragment {
+
+    public static final String TAG = MomentsFragment.class.getSimpleName();
+
+    @BindView(R.id.fbtn_add_new_moment) FloatingActionButton mBtnNewMoment;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -17,6 +29,14 @@ public class MomentsFragment extends BaseFragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState
     ) {
-        return super.onCreateView(inflater, container, savedInstanceState);
+        View view = inflater.inflate(R.layout.fragment_moments, container, false);
+        ButterKnife.bind(this, view);
+
+        return view;
+    }
+
+    @OnClick(R.id.fbtn_add_new_moment)
+    public void addNewMomentClick() {
+        Timber.d("Add new moment click");
     }
 }

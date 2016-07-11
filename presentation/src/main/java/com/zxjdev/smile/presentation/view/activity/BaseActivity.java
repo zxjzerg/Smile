@@ -17,6 +17,8 @@ import com.zxjdev.smile.presentation.di.component.ApplicationComponent;
  */
 public abstract class BaseActivity extends AppCompatActivity {
 
+    public final String TAG = this.getClass().getSimpleName();
+
     protected Context mContext = this;
 
     @Override
@@ -35,6 +37,18 @@ public abstract class BaseActivity extends AppCompatActivity {
     protected void addFragment(@IdRes int container, Fragment fragment) {
         FragmentTransaction fragmentTransaction = this.getFragmentManager().beginTransaction();
         fragmentTransaction.add(container, fragment);
+        fragmentTransaction.commit();
+    }
+
+    protected void replaceFragment(@IdRes int container, Fragment fragment, String tag) {
+        FragmentTransaction fragmentTransaction = this.getFragmentManager().beginTransaction();
+        fragmentTransaction.replace(container, fragment, tag);
+        fragmentTransaction.commit();
+    }
+
+    protected void replaceFragment(@IdRes int container, Fragment fragment) {
+        FragmentTransaction fragmentTransaction = this.getFragmentManager().beginTransaction();
+        fragmentTransaction.replace(container, fragment);
         fragmentTransaction.commit();
     }
 }

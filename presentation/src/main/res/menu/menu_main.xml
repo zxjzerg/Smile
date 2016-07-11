@@ -1,13 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
-    <group android:checkableBehavior="none">
+    <group android:checkableBehavior="single">
         <item
-            android:id="@+id/navigation_original"
-            android:checked="true"
-            android:title="选项1" />
+            android:id="@+id/navi_item_moments"
+            android:icon="@drawable/ic_public"
+            android:title="@string/moments" />
 
         <item
-            android:id="@+id/navigation_library"
-            android:title="选项2" />
+            android:id="@+id/navi_item_settings"
+            android:icon="@drawable/ic_settings"
+            android:title="@string/settings" />
     </group>
 </menu>

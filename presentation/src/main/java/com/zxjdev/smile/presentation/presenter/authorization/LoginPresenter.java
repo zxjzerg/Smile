@@ -28,7 +28,7 @@ public class LoginPresenter {
         mLoginUseCase.execute(new DefaultSubscriber<User>(mView.context()) {
             @Override
             public void onNext(User user) {
-                Timber.d("login success. user: " + user.getUsername());
+                Timber.d("login success. user: %s", user.getUsername());
                 mView.navigateToMain();
             }
         });

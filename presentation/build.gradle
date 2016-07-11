@@ -37,6 +37,12 @@ android {
     lintOptions {
         abortOnError false
     }
+
+    productFlavors {
+        develop {
+            minSdkVersion 21
+        }
+    }
 }
 
 dependencies {

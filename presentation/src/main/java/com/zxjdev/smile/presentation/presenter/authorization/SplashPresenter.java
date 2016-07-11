@@ -30,7 +30,7 @@ public class SplashPresenter {
             public void onNext(Boolean data) {
                 if (data) {
                     // 自动登录
-                    mHandler.postDelayed(mNavigateToMainTask, 2000);
+                    mHandler.postDelayed(mNavigateToMainTask, 500);
                 } else {
                     // 显示登录和注册按钮
                     mView.showButtons();
