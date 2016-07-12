@@ -6,6 +6,7 @@ import android.support.design.widget.NavigationView;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.widget.Toolbar;
+import android.view.View;
 
 import com.zxjdev.smile.R;
 import com.zxjdev.smile.presentation.view.fragment.MomentsFragment;
@@ -43,6 +44,8 @@ public class MainActivity extends BaseActivity {
     private void initUi() {
         mDrawerToggle = new ActionBarDrawerToggle(this, mDlytContainer, mViewToolbar, R.string.open,
                 R.string.close);
+
+        // 添加侧边菜单的点击事件
         mViewNavigation.setNavigationItemSelectedListener(item -> {
             switch (item.getItemId()) {
                 case R.id.navi_item_moments:
@@ -55,5 +58,8 @@ public class MainActivity extends BaseActivity {
             mDlytContainer.closeDrawers();
             return true;
         });
+        // 侧边菜单添加Header布局
+        View header = mViewNavigation.inflateHeaderView(R.layout.view_main_drawer_header);
+        // mViewNavigation.addHeaderView(header);
     }
 }

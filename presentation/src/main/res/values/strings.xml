@@ -8,5 +8,6 @@
     <string name="close">关闭</string>
     <string name="moments">时刻</string>
     <string name="settings">设置</string>
+    <string name="content_hint">写点内容吧...</string>
 
 </resources>

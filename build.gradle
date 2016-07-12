@@ -57,7 +57,10 @@ ext {
 
     android_support_v4 = 'com.android.support:support-v4:23.4.0'
     android_support_v7 = 'com.android.support:appcompat-v7:23.4.0'
+    android_support_design = 'com.android.support:design:23.4.0'
 
     leancloud_basic = 'cn.leancloud.android:avoscloud-sdk:v3.+'
+
+    circle_image = 'de.hdodenhof:circleimageview:2.1.0'
 
 }
