@@ -7,11 +7,10 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
-import android.widget.Button;
 
 import com.zxjdev.smile.R;
 import com.zxjdev.smile.presentation.view.activity.base.BaseActivity;
-import com.zxjdev.smile.presentation.view.activity.moments.MomentsFragment;
+import com.zxjdev.smile.presentation.view.activity.moment.MomentsFragment;
 import com.zxjdev.smile.presentation.view.activity.settings.SettingsFragment;
 
 import butterknife.BindView;
@@ -23,7 +22,6 @@ public class MainActivity extends BaseActivity {
     @BindView(R.id.view_toolbar) Toolbar mViewToolbar;
     @BindView(R.id.view_navigation) NavigationView mViewNavigation;
     private ActionBarDrawerToggle mDrawerToggle;
-    private Button mBtn;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

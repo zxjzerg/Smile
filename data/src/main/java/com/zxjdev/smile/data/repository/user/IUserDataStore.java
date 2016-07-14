@@ -1,10 +1,10 @@
-package com.zxjdev.smile.data.repository.datastore;
+package com.zxjdev.smile.data.repository.user;
 
 import com.zxjdev.smile.data.entity.UserEntity;
 
 import rx.Observable;
 
-public interface UserDataStore {
+public interface IUserDataStore {
 
     Observable<Void> register(String username, String password);
 

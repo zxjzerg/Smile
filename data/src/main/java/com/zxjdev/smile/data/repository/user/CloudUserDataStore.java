@@ -1,4 +1,4 @@
-package com.zxjdev.smile.data.repository.datastore;
+package com.zxjdev.smile.data.repository.user;
 
 import com.zxjdev.smile.data.entity.UserEntity;
 import com.zxjdev.smile.data.net.AVCloudHelper;
@@ -10,7 +10,7 @@ import rx.Observable;
  *
  * @author Andrew
  */
-public class CloudUserDataStore implements UserDataStore {
+public class CloudUserDataStore implements IUserDataStore {
 
     @Override
     public Observable<Void> register(String username, String password) {

@@ -27,7 +27,13 @@
         <activity android:name=".presentation.view.activity.authorization.LoginActivity" />
         <activity android:name=".presentation.view.activity.authorization.RegisterActivity" />
 
-        <activity android:name=".presentation.view.activity.MainActivity" />
+        <activity
+            android:name=".presentation.view.activity.MainActivity"
+            android:launchMode="singleTask" />
+
+        <activity
+            android:name=".presentation.view.activity.moment.NewMomentActivity"
+            android:parentActivityName=".presentation.view.activity.MainActivity" />
     </application>
 
 </manifest>

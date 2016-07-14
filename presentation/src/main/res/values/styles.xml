@@ -8,13 +8,13 @@
         <item name="colorAccent">@color/colorAccent</item>
     </style>
 
-    <style name="AppTheme.NoActionBar">
-        <item name="windowActionBar">false</item>
-        <item name="windowNoTitle">true</item>
+    <style name="Smile.ActionBarTheme" parent="@style/ThemeOverlay.AppCompat.ActionBar">
+        <!-- 修改了返回箭头的颜色 -->
+        <item name="colorControlNormal">@android:color/white</item>
     </style>
 
-    <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
+    <style name="Smile.PopupTheme" parent="@style/ThemeOverlay.AppCompat.Light">
 
-    <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
+    </style>
 
 </resources>

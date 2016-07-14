@@ -1,5 +1,6 @@
-package com.zxjdev.smile.presentation.view.activity.moments;
+package com.zxjdev.smile.presentation.view.activity.moment;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
@@ -13,7 +14,6 @@ import com.zxjdev.smile.presentation.view.activity.base.BaseFragment;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
-import timber.log.Timber;
 
 public class MomentsFragment extends BaseFragment {
 
@@ -38,10 +38,7 @@ public class MomentsFragment extends BaseFragment {
 
     @OnClick(R.id.fbtn_add_new_moment)
     public void addNewMomentClick() {
-        Timber.d("Add new moment click");
-    }
-
-    private void initInjector() {
-
+        Intent addMoment = new Intent(getActivity(), NewMomentActivity.class);
+        startActivity(addMoment);
     }
 }

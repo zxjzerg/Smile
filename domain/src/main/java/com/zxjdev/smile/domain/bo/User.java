@@ -3,8 +3,8 @@ package com.zxjdev.smile.domain.bo;
 public class User {
 
     private String username;
-
     private String nickname;
+    private String avatar;
 
     public String getUsername() {
         return username;
@@ -20,5 +20,13 @@ public class User {
 
     public void setNickname(String nickname) {
         this.nickname = nickname;
+    }
+
+    public String getAvatar() {
+        return avatar;
+    }
+
+    public void setAvatar(String avatar) {
+        this.avatar = avatar;
     }
 }
