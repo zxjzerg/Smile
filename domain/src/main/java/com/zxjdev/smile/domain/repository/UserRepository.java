@@ -12,4 +12,6 @@ public interface UserRepository {
 
     /** 检查是否已经在本机登录了 */
     Observable<Boolean> checkHasAuthorized();
+
+    Observable<Void> logout();
 }

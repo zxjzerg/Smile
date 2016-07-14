@@ -8,6 +8,7 @@ import android.widget.EditText;
 import com.zxjdev.smile.R;
 import com.zxjdev.smile.presentation.presenter.authorization.LoginPresenter;
 import com.zxjdev.smile.presentation.view.activity.MainActivity;
+import com.zxjdev.smile.presentation.view.activity.base.BaseActivity;
 import com.zxjdev.smile.presentation.view.i.authorization.ILoginView;
 
 import javax.inject.Inject;
@@ -20,7 +21,7 @@ import butterknife.OnClick;
  * 登录界面
  * Created by Andrew on 7/5/16.
  */
-public class LoginActivity extends AuthorizationActivity implements ILoginView {
+public class LoginActivity extends BaseActivity implements ILoginView {
 
     @BindView(R.id.et_username) EditText mEtUsername;
     @BindView(R.id.et_password) EditText mEtPassword;
@@ -30,8 +31,9 @@ public class LoginActivity extends AuthorizationActivity implements ILoginView {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        super.buildCommonInjector().inject(this);
+
         setContentView(R.layout.activity_login);
-        super.getComponent().inject(this);
         ButterKnife.bind(this);
 
         mPresenter.setView(this);

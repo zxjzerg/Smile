@@ -1,4 +1,4 @@
-package com.zxjdev.smile.presentation.view.fragment;
+package com.zxjdev.smile.presentation.view.activity.moments;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -8,6 +8,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.zxjdev.smile.R;
+import com.zxjdev.smile.presentation.view.activity.base.BaseFragment;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -38,5 +39,9 @@ public class MomentsFragment extends BaseFragment {
     @OnClick(R.id.fbtn_add_new_moment)
     public void addNewMomentClick() {
         Timber.d("Add new moment click");
+    }
+
+    private void initInjector() {
+
     }
 }

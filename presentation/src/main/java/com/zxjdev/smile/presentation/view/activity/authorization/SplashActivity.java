@@ -10,6 +10,7 @@ import android.widget.Button;
 import com.zxjdev.smile.R;
 import com.zxjdev.smile.presentation.presenter.authorization.SplashPresenter;
 import com.zxjdev.smile.presentation.view.activity.MainActivity;
+import com.zxjdev.smile.presentation.view.activity.base.BaseActivity;
 import com.zxjdev.smile.presentation.view.i.authorization.ISplashView;
 
 import javax.inject.Inject;
@@ -22,7 +23,7 @@ import butterknife.OnClick;
  * 开屏界面
  * Created by Andrew on 7/4/16.
  */
-public class SplashActivity extends AuthorizationActivity implements ISplashView {
+public class SplashActivity extends BaseActivity implements ISplashView {
 
     @BindView(R.id.btn_login) Button mBtnLogin;
     @BindView(R.id.btn_register) Button mBtnRegister;
@@ -32,7 +33,7 @@ public class SplashActivity extends AuthorizationActivity implements ISplashView
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        getComponent().inject(this);
+        super.buildCommonInjector().inject(this);
 
         setContentView(R.layout.activity_splash);
         ButterKnife.bind(this);

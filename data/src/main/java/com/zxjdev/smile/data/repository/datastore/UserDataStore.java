@@ -11,4 +11,6 @@ public interface UserDataStore {
     Observable<UserEntity> login(String username, String password);
 
     Observable<Boolean> checkHasAuthorized();
+
+    Observable<Void> logout();
 }

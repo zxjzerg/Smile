@@ -38,4 +38,11 @@ public class AVCloudHelper {
             subscriber.onNext(AVUser.getCurrentUser() != null);
         });
     }
+
+    public static Observable<Void> logout() {
+        return Observable.create(subscriber -> {
+            AVUser.logOut();
+            subscriber.onCompleted();
+        });
+    }
 }

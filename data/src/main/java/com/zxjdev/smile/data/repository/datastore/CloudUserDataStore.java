@@ -26,4 +26,9 @@ public class CloudUserDataStore implements UserDataStore {
     public Observable<Boolean> checkHasAuthorized() {
         return AVCloudHelper.checkHasAuthorized();
     }
+
+    @Override
+    public Observable<Void> logout() {
+        return AVCloudHelper.logout();
+    }
 }

@@ -7,10 +7,12 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
+import android.widget.Button;
 
 import com.zxjdev.smile.R;
-import com.zxjdev.smile.presentation.view.fragment.MomentsFragment;
-import com.zxjdev.smile.presentation.view.fragment.SettingsFragment;
+import com.zxjdev.smile.presentation.view.activity.base.BaseActivity;
+import com.zxjdev.smile.presentation.view.activity.moments.MomentsFragment;
+import com.zxjdev.smile.presentation.view.activity.settings.SettingsFragment;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -21,6 +23,7 @@ public class MainActivity extends BaseActivity {
     @BindView(R.id.view_toolbar) Toolbar mViewToolbar;
     @BindView(R.id.view_navigation) NavigationView mViewNavigation;
     private ActionBarDrawerToggle mDrawerToggle;
+    private Button mBtn;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,6 +48,10 @@ public class MainActivity extends BaseActivity {
         mDrawerToggle = new ActionBarDrawerToggle(this, mDlytContainer, mViewToolbar, R.string.open,
                 R.string.close);
 
+        initNavigationView();
+    }
+
+    private void initNavigationView() {
         // 添加侧边菜单的点击事件
         mViewNavigation.setNavigationItemSelectedListener(item -> {
             switch (item.getItemId()) {
@@ -58,8 +65,13 @@ public class MainActivity extends BaseActivity {
             mDlytContainer.closeDrawers();
             return true;
         });
-        // 侧边菜单添加Header布局
-        View header = mViewNavigation.inflateHeaderView(R.layout.view_main_drawer_header);
-        // mViewNavigation.addHeaderView(header);
+
+        if (mViewNavigation.getHeaderCount() > 0) {
+            View view = mViewNavigation.getHeaderView(0);
+        }
+    }
+
+    private void setNavigationHeader() {
+
     }
 }

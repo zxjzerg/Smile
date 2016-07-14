@@ -27,4 +27,10 @@ public class UserDataRepository implements UserRepository {
         UserDataStore userDataStore = new CloudUserDataStore();
         return userDataStore.checkHasAuthorized();
     }
+
+    @Override
+    public Observable<Void> logout() {
+        UserDataStore userDataStore = new CloudUserDataStore();
+        return userDataStore.logout();
+    }
 }
