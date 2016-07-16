@@ -1,4 +1,7 @@
-package com.zxjdev.smile.data.repository.user;
+package com.zxjdev.smile.data.repository.store.factory;
+
+import com.zxjdev.smile.data.repository.store.CloudUserDataStore;
+import com.zxjdev.smile.data.repository.store.i.IUserDataStore;
 
 import javax.inject.Inject;
 

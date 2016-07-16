@@ -1,7 +1,8 @@
-package com.zxjdev.smile.data.repository.user;
+package com.zxjdev.smile.data.repository.store;
 
 import com.zxjdev.smile.data.entity.UserEntity;
-import com.zxjdev.smile.data.net.AVCloudHelper;
+import com.zxjdev.smile.data.net.AuthorizationService;
+import com.zxjdev.smile.data.repository.store.i.IUserDataStore;
 
 import rx.Observable;
 
@@ -14,21 +15,21 @@ public class CloudUserDataStore implements IUserDataStore {
 
     @Override
     public Observable<Void> register(String username, String password) {
-        return AVCloudHelper.register(username, password);
+        return AuthorizationService.register(username, password);
     }
 
     @Override
     public Observable<UserEntity> login(String username, String password) {
-        return AVCloudHelper.login(username, password);
+        return AuthorizationService.login(username, password);
     }
 
     @Override
     public Observable<Boolean> checkHasAuthorized() {
-        return AVCloudHelper.checkHasAuthorized();
+        return AuthorizationService.checkHasAuthorized();
     }
 
     @Override
     public Observable<Void> logout() {
-        return AVCloudHelper.logout();
+        return AuthorizationService.logout();
     }
 }

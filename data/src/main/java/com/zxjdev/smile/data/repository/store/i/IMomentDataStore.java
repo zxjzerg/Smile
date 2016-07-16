@@ -1,4 +1,4 @@
-package com.zxjdev.smile.data.repository.moment;
+package com.zxjdev.smile.data.repository.store.i;
 
 import rx.Observable;
 

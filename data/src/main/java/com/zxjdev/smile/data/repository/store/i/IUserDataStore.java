@@ -1,4 +1,4 @@
-package com.zxjdev.smile.data.repository.user;
+package com.zxjdev.smile.data.repository.store.i;
 
 import com.zxjdev.smile.data.entity.UserEntity;
 

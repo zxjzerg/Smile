@@ -1,5 +1,6 @@
-package com.zxjdev.smile.data.repository.moment;
+package com.zxjdev.smile.data.repository;
 
+import com.zxjdev.smile.data.repository.store.factory.MomentDataStoreFactory;
 import com.zxjdev.smile.domain.bo.Moment;
 import com.zxjdev.smile.domain.repository.MomentRepository;
 

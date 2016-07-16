@@ -1,8 +1,8 @@
-package com.zxjdev.smile.data.repository.user;
+package com.zxjdev.smile.data.repository;
 
 import com.zxjdev.smile.data.entity.mapper.UserMapper;
-import com.zxjdev.smile.data.repository.user.IUserDataStore;
-import com.zxjdev.smile.data.repository.user.UserDataStoreFactory;
+import com.zxjdev.smile.data.repository.store.i.IUserDataStore;
+import com.zxjdev.smile.data.repository.store.factory.UserDataStoreFactory;
 import com.zxjdev.smile.domain.bo.User;
 import com.zxjdev.smile.domain.repository.UserRepository;
 

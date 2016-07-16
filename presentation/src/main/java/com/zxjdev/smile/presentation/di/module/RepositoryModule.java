@@ -1,9 +1,9 @@
 package com.zxjdev.smile.presentation.di.module;
 
-import com.zxjdev.smile.data.repository.moment.MomentDataRepository;
-import com.zxjdev.smile.data.repository.moment.MomentDataStoreFactory;
-import com.zxjdev.smile.data.repository.user.UserDataRepository;
-import com.zxjdev.smile.data.repository.user.UserDataStoreFactory;
+import com.zxjdev.smile.data.repository.MomentDataRepository;
+import com.zxjdev.smile.data.repository.store.factory.MomentDataStoreFactory;
+import com.zxjdev.smile.data.repository.UserDataRepository;
+import com.zxjdev.smile.data.repository.store.factory.UserDataStoreFactory;
 import com.zxjdev.smile.domain.repository.MomentRepository;
 import com.zxjdev.smile.domain.repository.UserRepository;
 
