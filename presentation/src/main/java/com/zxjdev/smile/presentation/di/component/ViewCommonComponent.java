@@ -13,7 +13,7 @@ import dagger.Component;
 
 @PerActivity
 @Component(dependencies = ApplicationComponent.class, modules = {
-        ActivityModule.class, RepositoryModule.class
+    ActivityModule.class, RepositoryModule.class
 })
 public interface ViewCommonComponent {
 

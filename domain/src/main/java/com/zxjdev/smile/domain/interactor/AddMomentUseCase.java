@@ -14,8 +14,7 @@ public class AddMomentUseCase extends UseCase {
     private String content;
 
     @Inject
-    public AddMomentUseCase(Scheduler postExecutionThread, MomentRepository momentRepository
-    ) {
+    public AddMomentUseCase(Scheduler postExecutionThread, MomentRepository momentRepository) {
         super(postExecutionThread);
         this.momentRepository = momentRepository;
     }

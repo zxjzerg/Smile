@@ -44,7 +44,7 @@ public class MainActivity extends BaseActivity {
 
     private void initUi() {
         mDrawerToggle = new ActionBarDrawerToggle(this, mDlytContainer, mViewToolbar, R.string.open,
-                R.string.close);
+            R.string.close);
 
         initNavigationView();
     }

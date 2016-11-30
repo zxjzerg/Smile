@@ -38,7 +38,7 @@ public class RegisterActivity extends BaseActivity implements IRegisterView {
     @OnClick(R.id.btn_register)
     void handleRegisterClick() {
         mPresenter.handleRegister(mEtUsername.getText().toString(),
-                mEtPassword.getText().toString());
+            mEtPassword.getText().toString());
     }
 
     @Override

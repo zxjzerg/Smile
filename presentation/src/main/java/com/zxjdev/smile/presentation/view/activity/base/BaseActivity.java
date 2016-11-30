@@ -45,9 +45,9 @@ public abstract class BaseActivity extends AppCompatActivity {
      */
     protected ViewCommonComponent buildCommonInjector() {
         return DaggerViewCommonComponent.builder()
-                .applicationComponent(this.getApplicationComponent())
-                .activityModule(new ActivityModule(this))
-                .build();
+            .applicationComponent(this.getApplicationComponent())
+            .activityModule(new ActivityModule(this))
+            .build();
     }
 
     protected void addFragment(@IdRes int container, Fragment fragment) {

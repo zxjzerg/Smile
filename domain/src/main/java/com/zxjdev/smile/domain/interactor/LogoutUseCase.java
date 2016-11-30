@@ -8,6 +8,7 @@ import rx.Observable;
 import rx.Scheduler;
 
 public class LogoutUseCase extends UseCase {
+
     private UserRepository userRepository;
 
     @Inject

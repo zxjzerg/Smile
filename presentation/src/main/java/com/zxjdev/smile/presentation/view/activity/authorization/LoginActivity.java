@@ -48,7 +48,7 @@ public class LoginActivity extends BaseActivity implements ILoginView {
     @OnClick(R.id.btn_login)
     public void loginClick() {
         mPresenter.handleLoginClick(mEtUsername.getText().toString(),
-                mEtPassword.getText().toString());
+            mEtPassword.getText().toString());
     }
 
     @Override

@@ -50,8 +50,8 @@ public class SmileApplication extends Application {
 
     private void initInjector() {
         mApplicationComponent = DaggerApplicationComponent.builder()
-                .applicationModule(new ApplicationModule(this))
-                .build();
+            .applicationModule(new ApplicationModule(this))
+            .build();
     }
 
     public ApplicationComponent getApplicationComponent() {

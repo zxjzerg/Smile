@@ -21,9 +21,9 @@ public abstract class UseCase {
     @SuppressWarnings("unchecked")
     public void execute(Subscriber subscriber) {
         this.subscription = this.buildUseCaseObservable()
-                .subscribeOn(Schedulers.io())
-                .observeOn(this.postExecutionThread)
-                .subscribe(subscriber);
+            .subscribeOn(Schedulers.io())
+            .observeOn(this.postExecutionThread)
+            .subscribe(subscriber);
     }
 
     public void unSubscribe() {
