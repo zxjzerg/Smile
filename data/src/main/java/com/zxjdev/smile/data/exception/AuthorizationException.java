@@ -1,4 +1,4 @@
-package com.zxjdev.smile.data.Exception;
+package com.zxjdev.smile.data.exception;
 
 public class AuthorizationException extends RuntimeException {
 
