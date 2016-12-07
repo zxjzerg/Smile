@@ -9,7 +9,7 @@
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
 
     <application
-        android:name=".presentation.SmileApplication"
+        android:name=".presentation.application.SmileApplication"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
@@ -17,23 +17,23 @@
         android:theme="@style/AppTheme">
 
         <!-- authorization -->
-        <activity android:name=".presentation.view.activity.authorization.SplashActivity">
+        <activity android:name=".presentation.common.splash.SplashActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".presentation.view.activity.authorization.LoginActivity" />
-        <activity android:name=".presentation.view.activity.authorization.RegisterActivity" />
+        <activity android:name=".presentation.user.authorization.login.LoginActivity" />
+        <activity android:name=".presentation.user.authorization.register.RegisterActivity" />
 
         <activity
-            android:name=".presentation.view.activity.MainActivity"
+            android:name=".presentation.common.main.MainActivity"
             android:launchMode="singleTask" />
 
         <activity
-            android:name=".presentation.view.activity.moment.NewMomentActivity"
-            android:parentActivityName=".presentation.view.activity.MainActivity" />
+            android:name=".presentation.moment.create.NewMomentActivity"
+            android:parentActivityName=".presentation.common.main.MainActivity" />
     </application>
 
 </manifest>

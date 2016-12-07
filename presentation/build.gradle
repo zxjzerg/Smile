@@ -55,14 +55,13 @@ dependencies {
     compile rootProject.ext.rxjava
     compile rootProject.ext.rxandroid
     compile rootProject.ext.dagger
+    apt rootProject.ext.dagger_compiler
     compile rootProject.ext.butterknife
+    apt rootProject.ext.butterknife_compiler
     compile rootProject.ext.leancloud_basic
     compile rootProject.ext.timber
     compile rootProject.ext.circle_image
     compile rootProject.ext.android_support_design
-
-    apt rootProject.ext.dagger_compiler
-    apt rootProject.ext.butterknife_compiler
-
+    
     testCompile rootProject.ext.junit
 }
