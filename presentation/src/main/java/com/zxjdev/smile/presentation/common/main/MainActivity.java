@@ -1,6 +1,9 @@
 package com.zxjdev.smile.presentation.common.main;
 
+import android.app.Fragment;
+import android.app.FragmentTransaction;
 import android.os.Bundle;
+import android.support.annotation.IdRes;
 import android.support.annotation.Nullable;
 import android.support.design.widget.NavigationView;
 import android.support.v4.widget.DrawerLayout;
@@ -16,6 +19,9 @@ import com.zxjdev.smile.presentation.application.di.module.MainActivityModule;
 import com.zxjdev.smile.presentation.moment.list.MomentsFragment;
 import com.zxjdev.smile.presentation.user.settings.SettingsFragment;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
@@ -28,15 +34,19 @@ public class MainActivity extends BaseActivity {
 
     private MainActivityComponent mMainActivityComponent;
 
+    private List<String> mFragmentTags = new ArrayList<>();
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
         initUi();
+        mFragmentTags.add(MomentsFragment.TAG);
+        mFragmentTags.add(SettingsFragment.TAG);
 
         if (savedInstanceState == null) {
-            replaceFragment(R.id.flyt_content, new MomentsFragment(), MomentsFragment.TAG);
+            showFragment(R.id.flyt_content, new MomentsFragment(), MomentsFragment.TAG);
             mViewNavigation.setCheckedItem(R.id.navi_item_moments);
         }
     }
@@ -72,10 +82,12 @@ public class MainActivity extends BaseActivity {
         mViewNavigation.setNavigationItemSelectedListener(item -> {
             switch (item.getItemId()) {
                 case R.id.navi_item_moments:
-                    replaceFragment(R.id.flyt_content, new MomentsFragment());
+                    // replaceFragment(R.id.flyt_content, new MomentsFragment());
+                    showFragment(R.id.flyt_content, new MomentsFragment(), MomentsFragment.TAG);
                     break;
                 case R.id.navi_item_settings:
-                    replaceFragment(R.id.flyt_content, new SettingsFragment());
+                    // replaceFragment(R.id.flyt_content, new SettingsFragment());
+                    showFragment(R.id.flyt_content, new SettingsFragment(), SettingsFragment.TAG);
                     break;
             }
             mDlytContainer.closeDrawers();
@@ -93,5 +105,33 @@ public class MainActivity extends BaseActivity {
 
     public MainActivityComponent getComponent() {
         return mMainActivityComponent;
+    }
+
+    private void showFragment(@IdRes int container, Fragment fragment, String tag) {
+        boolean isShowing = false;
+
+        FragmentTransaction fragmentTransaction = getFragmentManager().beginTransaction();
+        for (String fragmentTag : mFragmentTags) {
+            Fragment frag = getFragmentManager().findFragmentByTag(fragmentTag);
+            if (frag != null && !frag.isDetached()) {
+                if (fragmentTag.equals(tag)) {
+                    // Do nothing
+                    isShowing = true;
+                } else {
+                    fragmentTransaction.detach(frag);
+                }
+            }
+        }
+
+        if (!isShowing) {
+            Fragment frag = getFragmentManager().findFragmentByTag(tag);
+            if (frag != null) {
+                fragmentTransaction.attach(frag);
+            } else {
+                fragmentTransaction.add(container, fragment, tag);
+            }
+        }
+        fragmentTransaction.commit();
+        getFragmentManager().executePendingTransactions();
     }
 }

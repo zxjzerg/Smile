@@ -10,9 +10,9 @@ import android.view.ViewGroup;
 import android.widget.Button;
 
 import com.zxjdev.smile.R;
+import com.zxjdev.smile.presentation.application.base.BaseFragment;
 import com.zxjdev.smile.presentation.application.di.module.ActivityModule;
 import com.zxjdev.smile.presentation.common.splash.SplashActivity;
-import com.zxjdev.smile.presentation.application.base.BaseFragment;
 
 import javax.inject.Inject;
 
@@ -22,9 +22,15 @@ import butterknife.OnClick;
 
 public class SettingsFragment extends BaseFragment implements ISettingsView {
 
+    public static final String TAG = SettingsFragment.class.getSimpleName();
+
     @BindView(R.id.btn_logout) Button mBtnLogout;
 
     @Inject SettingsPresenter mSettingsPresenter;
+
+    public SettingsFragment() {
+        setRetainInstance(true);
+    }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {

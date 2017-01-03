@@ -52,16 +52,26 @@ dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
 
     compile rootProject.ext.android_support_v7
+    compile rootProject.ext.android_support_design
+
     compile rootProject.ext.rxjava
     compile rootProject.ext.rxandroid
+
     compile rootProject.ext.dagger
     apt rootProject.ext.dagger_compiler
+
     compile rootProject.ext.butterknife
     apt rootProject.ext.butterknife_compiler
+
     compile rootProject.ext.leancloud_basic
+
     compile rootProject.ext.timber
+
     compile rootProject.ext.circle_image
-    compile rootProject.ext.android_support_design
-    
+
+    debugCompile rootProject.ext.leak_canary_debug
+    releaseCompile leak_canary_release
+    testCompile leak_canary_release
+
     testCompile rootProject.ext.junit
 }
