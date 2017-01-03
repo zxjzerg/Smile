@@ -8,7 +8,7 @@ buildscript {
         }
     }
     dependencies {
-        classpath 'com.android.tools.build:gradle:2.2.2'
+        classpath 'com.android.tools.build:gradle:2.2.3'
         classpath 'com.neenbedankt.gradle.plugins:android-apt:1.8'
         classpath 'me.tatarka:gradle-retrolambda:3.2.3'
     }
@@ -63,4 +63,6 @@ ext {
 
     circle_image = 'de.hdodenhof:circleimageview:2.1.0'
 
+    leak_canary_debug = 'com.squareup.leakcanary:leakcanary-android:1.5'
+    leak_canary_release = 'com.squareup.leakcanary:leakcanary-android-no-op:1.5'
 }
