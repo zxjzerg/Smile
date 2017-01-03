@@ -18,6 +18,8 @@ public abstract class BaseFragment extends Fragment {
     protected boolean mLogLifeCycle = true;
     protected String mClassName = BaseFragment.this.getClass().getSimpleName();
 
+    protected boolean mInitializedInjector = false;
+
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
@@ -28,7 +30,6 @@ public abstract class BaseFragment extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         if (mLogLifeCycle) Timber.d("%s onCreate", mClassName);
-        initializeInjector();
     }
 
     @Nullable
@@ -37,6 +38,7 @@ public abstract class BaseFragment extends Fragment {
         ViewGroup container,
         Bundle savedInstanceState) {
         if (mLogLifeCycle) Timber.d("%s onCreateView", mClassName);
+
         return super.onCreateView(inflater, container, savedInstanceState);
     }
 
@@ -44,6 +46,11 @@ public abstract class BaseFragment extends Fragment {
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         if (mLogLifeCycle) Timber.d("%s onActivityCreated", mClassName);
+
+        if (!mInitializedInjector) {
+            initializeComponent();
+            mInitializedInjector = true;
+        }
     }
 
     @Override
@@ -80,6 +87,9 @@ public abstract class BaseFragment extends Fragment {
     public void onDestroy() {
         super.onDestroy();
         if (mLogLifeCycle) Timber.d("%s onDestroy", mClassName);
+
+        releaseComponent();
+        mInitializedInjector = true;
     }
 
     @Override
@@ -103,7 +113,9 @@ public abstract class BaseFragment extends Fragment {
     /**
      * 配置依赖注入
      */
-    protected abstract void initializeInjector();
+    protected abstract void initializeComponent();
+
+    protected abstract void releaseComponent();
 
     protected ApplicationComponent getApplicationComponent() {
         return ((SmileApplication) getActivity().getApplication()).getApplicationComponent();
