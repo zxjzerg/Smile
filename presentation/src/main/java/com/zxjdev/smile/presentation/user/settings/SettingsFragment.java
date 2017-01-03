@@ -35,13 +35,16 @@ public class SettingsFragment extends BaseFragment implements ISettingsView {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
-        mSettingsPresenter.setView(this);
     }
 
     @Override
-    protected void initializeInjector() {
+    protected void initializeComponent() {
         getApplicationComponent().plus(new ActivityModule(getActivity())).inject(this);
+    }
+
+    @Override
+    protected void releaseComponent() {
+
     }
 
     @Nullable
@@ -52,6 +55,12 @@ public class SettingsFragment extends BaseFragment implements ISettingsView {
         View view = inflater.inflate(R.layout.fragment_settings, container, false);
         ButterKnife.bind(this, view);
         return view;
+    }
+
+    @Override
+    public void onActivityCreated(Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+        mSettingsPresenter.setView(this);
     }
 
     @Override
