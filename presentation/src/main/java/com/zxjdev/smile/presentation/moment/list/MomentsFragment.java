@@ -44,12 +44,17 @@ public class MomentsFragment extends BaseFragment {
     }
 
     @Override
-    protected void initializeInjector() {
+    protected void initializeComponent() {
         if (getActivity() instanceof MainActivity) {
             mMomentsFragmentComponent = ((MainActivity) getActivity()).getComponent()
                 .plus(new MomentsFragmentModule());
             mMomentsFragmentComponent.inject(this);
         }
+    }
+
+    @Override
+    protected void releaseComponent() {
+        mMomentsFragmentComponent = null;
     }
 
     @Nullable
@@ -64,10 +69,18 @@ public class MomentsFragment extends BaseFragment {
         return view;
     }
 
-    private void initUi() {
-        mRvMoments.setAdapter(mAdapter);
-        mRvMoments.setLayoutManager(new LinearLayoutManager(getActivity()));
+    @Override
+    public void onActivityCreated(Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+        initData();
+    }
 
+    private void initUi() {
+        mRvMoments.setLayoutManager(new LinearLayoutManager(getActivity()));
+    }
+
+    private void initData() {
+        mRvMoments.setAdapter(mAdapter);
         mAdapter.setMoments(moments);
     }
 

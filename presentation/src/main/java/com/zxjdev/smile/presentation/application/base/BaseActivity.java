@@ -26,7 +26,7 @@ public abstract class BaseActivity extends AppCompatActivity {
         initializeInjector();
     }
 
-    /*@Override
+    @Override
     protected void onStart() {
         super.onStart();
         if (mLogLifeCycle) Timber.d("onStart");
@@ -48,7 +48,7 @@ public abstract class BaseActivity extends AppCompatActivity {
     protected void onStop() {
         super.onStop();
         if (mLogLifeCycle) Timber.d("onStop");
-    }*/
+    }
 
     @Override
     protected void onDestroy() {
