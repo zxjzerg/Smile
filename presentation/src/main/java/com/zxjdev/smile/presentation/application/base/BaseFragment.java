@@ -38,7 +38,7 @@ public abstract class BaseFragment extends Fragment {
         ViewGroup container,
         Bundle savedInstanceState) {
         if (mLogLifeCycle) Timber.d("%s onCreateView", mClassName);
-
+        // nothing at all
         return super.onCreateView(inflater, container, savedInstanceState);
     }
 
