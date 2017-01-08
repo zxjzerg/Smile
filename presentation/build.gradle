@@ -73,5 +73,7 @@ dependencies {
     releaseCompile leak_canary_release
     testCompile leak_canary_release
 
+    compile rootProject.ext.stetho
+
     testCompile rootProject.ext.junit
 }
