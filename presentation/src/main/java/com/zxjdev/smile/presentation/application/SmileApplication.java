@@ -5,6 +5,7 @@ import android.app.Application;
 import com.avos.avoscloud.AVOSCloud;
 import com.avos.avoscloud.AVObject;
 import com.avos.avoscloud.AVUser;
+import com.facebook.stetho.Stetho;
 import com.zxjdev.smile.BuildConfig;
 import com.zxjdev.smile.data.moment.MomentEntity;
 import com.zxjdev.smile.data.user.UserEntity;
@@ -31,6 +32,8 @@ public class SmileApplication extends Application {
         initLeanCloud();
 
         initTimber();
+
+        initStetho();
     }
 
     private void initLeanCloud() {
@@ -52,6 +55,10 @@ public class SmileApplication extends Application {
         mApplicationComponent = DaggerApplicationComponent.builder()
             .applicationModule(new ApplicationModule(this))
             .build();
+    }
+
+    private void initStetho() {
+        Stetho.initializeWithDefaults(this);
     }
 
     public ApplicationComponent getApplicationComponent() {
