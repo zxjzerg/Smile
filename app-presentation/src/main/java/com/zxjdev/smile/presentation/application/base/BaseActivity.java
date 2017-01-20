@@ -6,7 +6,9 @@ import android.support.v7.app.AppCompatActivity;
 import android.widget.Toast;
 
 import com.zxjdev.smile.presentation.application.SmileApplication;
+import com.zxjdev.smile.presentation.application.di.component.ActivityComponent;
 import com.zxjdev.smile.presentation.application.di.component.ApplicationComponent;
+import com.zxjdev.smile.presentation.application.di.module.ActivityModule;
 
 import timber.log.Timber;
 
@@ -79,5 +81,9 @@ public abstract class BaseActivity extends AppCompatActivity {
 
     protected ApplicationComponent getApplicationComponent() {
         return ((SmileApplication) getApplication()).getApplicationComponent();
+    }
+
+    protected ActivityComponent getActivityComponent() {
+        return getApplicationComponent().getActivityComponent(new ActivityModule(this));
     }
 }

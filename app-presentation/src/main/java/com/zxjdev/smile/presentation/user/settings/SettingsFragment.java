@@ -39,7 +39,7 @@ public class SettingsFragment extends BaseFragment implements ISettingsView {
 
     @Override
     protected void initializeComponent() {
-        getApplicationComponent().plus(new ActivityModule(getActivity())).inject(this);
+        getApplicationComponent().getActivityComponent(new ActivityModule(getActivity())).inject(this);
     }
 
     @Override

@@ -35,7 +35,7 @@ public class RegisterActivity extends BaseActivity implements IRegisterView {
 
     @Override
     protected void initializeInjector() {
-        getApplicationComponent().plus(new ActivityModule(this)).inject(this);
+        getApplicationComponent().getActivityComponent(new ActivityModule(this)).inject(this);
     }
 
     @OnClick(R.id.btn_register)

@@ -22,7 +22,7 @@ import dagger.Component;
 })
 public interface ApplicationComponent {
 
-    ActivityComponent plus(ActivityModule module);
+    ActivityComponent getActivityComponent(ActivityModule activityModule);
 
     MainActivityComponent plus(ActivityModule activityModule,
         MainActivityModule mainActivityModule);

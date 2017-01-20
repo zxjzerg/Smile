@@ -39,7 +39,7 @@ public class LoginActivity extends BaseActivity implements ILoginView {
 
     @Override
     protected void initializeInjector() {
-        getApplicationComponent().plus(new ActivityModule(this)).inject(this);
+        getApplicationComponent().getActivityComponent(new ActivityModule(this)).inject(this);
     }
 
     @Override
