@@ -3,6 +3,8 @@ package com.zxjdev.smile.presentation.moment.create;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.widget.EditText;
 
 import com.zxjdev.smile.R;
@@ -12,7 +14,6 @@ import javax.inject.Inject;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import butterknife.OnClick;
 
 public class NewMomentActivity extends BaseActivity implements NewMomentContract.View {
 
@@ -46,9 +47,21 @@ public class NewMomentActivity extends BaseActivity implements NewMomentContract
         mNewMomentComponent = null;
     }
 
-    @OnClick(R.id.btn_send)
-    public void sendClick() {
-        mPresenter.handleAddMoment(mEtContent.getText().toString());
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu_new_moment, menu);
+        return super.onCreateOptionsMenu(menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.action_send:
+                mPresenter.handleAddMoment(mEtContent.getText().toString());
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
     }
 
     @Override
@@ -63,6 +76,6 @@ public class NewMomentActivity extends BaseActivity implements NewMomentContract
 
     private void initUi() {
         setSupportActionBar(mViewToolbar);
-        if (getSupportActionBar() != null) getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
     }
 }
