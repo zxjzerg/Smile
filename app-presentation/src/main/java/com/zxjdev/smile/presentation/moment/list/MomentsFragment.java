@@ -1,5 +1,6 @@
 package com.zxjdev.smile.presentation.moment.list;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -27,7 +28,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
-public class MomentsFragment extends BaseFragment {
+public class MomentsFragment extends BaseFragment implements MomentsContract.View {
 
     public static final String TAG = MomentsFragment.class.getSimpleName();
 
@@ -35,6 +36,7 @@ public class MomentsFragment extends BaseFragment {
     @BindView(R.id.fbtn_add_new_moment) FloatingActionButton mBtnNewMoment;
 
     @Inject MomentAdapter mAdapter;
+    @Inject MomentsContract.Presenter mPresenter;
 
     private MomentsFragmentComponent mMomentsFragmentComponent;
     private List<MomentModel> moments;
@@ -47,7 +49,7 @@ public class MomentsFragment extends BaseFragment {
     protected void initializeComponent() {
         if (getActivity() instanceof MainActivity) {
             mMomentsFragmentComponent = ((MainActivity) getActivity()).getComponent()
-                .plus(new MomentsFragmentModule());
+                .getMomentsFragmentComponent(new MomentsFragmentModule());
             mMomentsFragmentComponent.inject(this);
         }
     }
@@ -82,6 +84,9 @@ public class MomentsFragment extends BaseFragment {
     private void initData() {
         mRvMoments.setAdapter(mAdapter);
         mAdapter.setMoments(moments);
+
+        mPresenter.setView(this);
+        mPresenter.create();
     }
 
     @Override
@@ -104,5 +109,10 @@ public class MomentsFragment extends BaseFragment {
             moments.add(moment);
         }
         return moments;
+    }
+
+    @Override
+    public Context context() {
+        return getActivity();
     }
 }

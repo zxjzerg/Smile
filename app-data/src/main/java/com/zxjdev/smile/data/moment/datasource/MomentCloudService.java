@@ -36,7 +36,7 @@ public class MomentCloudService implements IMomentCloudService {
     public Observable<List<MomentEntity>> getMomentList() {
         return Observable.create(subscriber -> {
             AVQuery<MomentEntity> query = AVObject.getQuery(MomentEntity.class);
-            query.whereNotEqualTo("user", LeanCloudUtils.getCurrentUser());
+            query.whereNotEqualTo("user", LeanCloudUtils.getCurrentUser().getObjectId());
             query.limit(LeanCloudUtils.QUERY_LIMIT);
             try {
                 subscriber.onNext(query.find());
