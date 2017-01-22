@@ -4,8 +4,7 @@ import com.avos.avoscloud.AVException;
 import com.avos.avoscloud.AVObject;
 import com.avos.avoscloud.AVQuery;
 import com.zxjdev.smile.data.moment.MomentEntity;
-import com.zxjdev.smile.data.user.UserEntity;
-import com.zxjdev.smile.data.exception.AuthorizationException;
+import com.zxjdev.smile.data.utils.LeanCloudUtils;
 
 import java.util.List;
 
@@ -20,15 +19,11 @@ public class MomentCloudService implements IMomentCloudService {
 
     }
 
-    public Observable<Void> addMoment(String content, UserEntity currentUser) {
+    public Observable<Void> addMoment(String content) {
         return Observable.create(subscriber -> {
-            if (currentUser == null) {
-                subscriber.onError(new AuthorizationException("用户未登录"));
-                return;
-            }
             MomentEntity momentEntity = new MomentEntity();
             momentEntity.setContent(content);
-            momentEntity.setOwner(currentUser);
+            momentEntity.setOwner(LeanCloudUtils.getCurrentUser());
             try {
                 momentEntity.save();
                 subscriber.onCompleted();
@@ -38,14 +33,11 @@ public class MomentCloudService implements IMomentCloudService {
         });
     }
 
-    public Observable<List<MomentEntity>> getMomentList(UserEntity currentUser) {
+    public Observable<List<MomentEntity>> getMomentList() {
         return Observable.create(subscriber -> {
-            if (currentUser == null) {
-                subscriber.onError(new AuthorizationException("您没有登录"));
-                return;
-            }
             AVQuery<MomentEntity> query = AVObject.getQuery(MomentEntity.class);
-            query.whereNotEqualTo("user", currentUser);
+            query.whereNotEqualTo("user", LeanCloudUtils.getCurrentUser());
+            query.limit(LeanCloudUtils.QUERY_LIMIT);
             try {
                 subscriber.onNext(query.find());
                 subscriber.onCompleted();

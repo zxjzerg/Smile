@@ -1,7 +1,5 @@
 package com.zxjdev.smile.data.moment.datasource;
 
-import com.zxjdev.smile.data.common.InternalDataStore;
-
 import javax.inject.Inject;
 
 import rx.Observable;
@@ -16,6 +14,6 @@ public class MomentCloudDataSource {
     }
 
     public Observable<Void> addMoment(String content) {
-        return momentService.addMoment(content, InternalDataStore.getCurrentUser());
+        return momentService.addMoment(content);
     }
 }
