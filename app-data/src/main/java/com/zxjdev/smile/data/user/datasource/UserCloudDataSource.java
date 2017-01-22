@@ -1,4 +1,6 @@
-package com.zxjdev.smile.data.user;
+package com.zxjdev.smile.data.user.datasource;
+
+import com.zxjdev.smile.data.user.UserEntity;
 
 import javax.inject.Inject;
 
@@ -9,12 +11,12 @@ import rx.Observable;
  *
  * @author Andrew
  */
-public class UserCloudDataStore {
+public class UserCloudDataSource {
 
-    private IAuthorizationService authorizationService;
+    private IAuthorizationCloudService authorizationService;
 
     @Inject
-    public UserCloudDataStore(IAuthorizationService authorizationService) {
+    public UserCloudDataSource(IAuthorizationCloudService authorizationService) {
         this.authorizationService = authorizationService;
     }
 

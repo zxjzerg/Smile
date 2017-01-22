@@ -1,4 +1,4 @@
-package com.zxjdev.smile.data.moment;
+package com.zxjdev.smile.data.moment.datasource;
 
 import com.zxjdev.smile.data.common.InternalDataStore;
 
@@ -6,12 +6,12 @@ import javax.inject.Inject;
 
 import rx.Observable;
 
-public class MomentCloudDataStore {
+public class MomentCloudDataSource {
 
-    private IMomentService momentService;
+    private IMomentCloudService momentService;
 
     @Inject
-    public MomentCloudDataStore(IMomentService momentService) {
+    public MomentCloudDataSource(IMomentCloudService momentService) {
         this.momentService = momentService;
     }
 

@@ -1,5 +1,6 @@
 package com.zxjdev.smile.data.moment;
 
+import com.zxjdev.smile.data.moment.datasource.MomentCloudDataSource;
 import com.zxjdev.smile.domain.moment.Moment;
 import com.zxjdev.smile.domain.moment.MomentRepository;
 
@@ -11,16 +12,16 @@ import rx.Observable;
 
 public class MomentDataRepository implements MomentRepository {
 
-    private MomentCloudDataStore momentCloudDataStore;
+    private MomentCloudDataSource momentCloudDataSource;
 
     @Inject
-    public MomentDataRepository(MomentCloudDataStore momentCloudDataStore) {
-        this.momentCloudDataStore = momentCloudDataStore;
+    public MomentDataRepository(MomentCloudDataSource momentCloudDataSource) {
+        this.momentCloudDataSource = momentCloudDataSource;
     }
 
     @Override
     public Observable<Void> addMoment(String content) {
-        return momentCloudDataStore.addMoment(content);
+        return momentCloudDataSource.addMoment(content);
     }
 
     @Override

@@ -1,8 +1,9 @@
-package com.zxjdev.smile.data.moment;
+package com.zxjdev.smile.data.moment.datasource;
 
 import com.avos.avoscloud.AVException;
 import com.avos.avoscloud.AVObject;
 import com.avos.avoscloud.AVQuery;
+import com.zxjdev.smile.data.moment.MomentEntity;
 import com.zxjdev.smile.data.user.UserEntity;
 import com.zxjdev.smile.data.exception.AuthorizationException;
 
@@ -12,10 +13,10 @@ import javax.inject.Inject;
 
 import rx.Observable;
 
-public class MomentService implements IMomentService {
+public class MomentCloudService implements IMomentCloudService {
 
     @Inject
-    public MomentService() {
+    public MomentCloudService() {
 
     }
 

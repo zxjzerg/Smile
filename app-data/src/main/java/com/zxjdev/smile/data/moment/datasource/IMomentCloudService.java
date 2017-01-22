@@ -1,12 +1,13 @@
-package com.zxjdev.smile.data.moment;
+package com.zxjdev.smile.data.moment.datasource;
 
+import com.zxjdev.smile.data.moment.MomentEntity;
 import com.zxjdev.smile.data.user.UserEntity;
 
 import java.util.List;
 
 import rx.Observable;
 
-public interface IMomentService {
+public interface IMomentCloudService {
 
     /**
      * 发表一个“时刻”

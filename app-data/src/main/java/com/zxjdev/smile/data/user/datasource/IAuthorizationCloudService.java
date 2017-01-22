@@ -1,8 +1,10 @@
-package com.zxjdev.smile.data.user;
+package com.zxjdev.smile.data.user.datasource;
+
+import com.zxjdev.smile.data.user.UserEntity;
 
 import rx.Observable;
 
-public interface IAuthorizationService {
+public interface IAuthorizationCloudService {
 
     Observable<Void> register(String username, String password);
 

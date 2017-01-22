@@ -1,13 +1,14 @@
-package com.zxjdev.smile.data.user;
+package com.zxjdev.smile.data.user.datasource;
 
 import com.avos.avoscloud.AVException;
 import com.avos.avoscloud.AVUser;
+import com.zxjdev.smile.data.user.UserEntity;
 
 import javax.inject.Inject;
 
 import rx.Observable;
 
-public class AuthorizationService implements IAuthorizationService {
+public class AuthorizationService implements IAuthorizationCloudService {
 
     @Inject
     public AuthorizationService() {
