@@ -13,10 +13,13 @@ import rx.Observable;
 public class MomentDataRepository implements MomentRepository {
 
     private MomentCloudDataSource momentCloudDataSource;
+    private MomentMapper momentMapper;
 
     @Inject
-    public MomentDataRepository(MomentCloudDataSource momentCloudDataSource) {
+    public MomentDataRepository(MomentCloudDataSource momentCloudDataSource,
+        MomentMapper momentMapper) {
         this.momentCloudDataSource = momentCloudDataSource;
+        this.momentMapper = momentMapper;
     }
 
     @Override
@@ -26,7 +29,8 @@ public class MomentDataRepository implements MomentRepository {
 
     @Override
     public Observable<List<Moment>> queryMomentList() {
-        return null;
+        return momentCloudDataSource.getMomentList()
+            .map(momentEntities -> momentMapper.transform(momentEntities));
     }
 
     @Override

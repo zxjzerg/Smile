@@ -5,6 +5,11 @@ import rx.Subscriber;
 import rx.Subscription;
 import rx.subscriptions.Subscriptions;
 
+/**
+ * Super class of all UseCase classes.
+ *
+ * @param <T> the return data type of this UseCase
+ */
 public abstract class UseCase<T> {
 
     private Subscription subscription = Subscriptions.empty();

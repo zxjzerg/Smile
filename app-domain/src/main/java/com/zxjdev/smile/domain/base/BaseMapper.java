@@ -6,17 +6,17 @@ import java.util.List;
 /**
  * 各种Mapper类的基类
  *
- * @param <T> 目标类型
- * @param <V> 数据类型
+ * @param <T> 目标数据类型
+ * @param <O> 源数据类型
  */
-public abstract class BaseMapper<T, V> {
+public abstract class BaseMapper<T, O> {
 
-    public abstract T transform(V data);
+    public abstract T transform(O data);
 
-    public List<T> transform(List<V> dataList) {
+    public List<T> transform(List<O> dataList) {
         List<T> output = new ArrayList<>();
         if (dataList != null) {
-            for (V data : dataList) {
+            for (O data : dataList) {
                 output.add(transform(data));
             }
         }
