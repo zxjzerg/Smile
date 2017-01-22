@@ -9,6 +9,7 @@ import android.support.design.widget.NavigationView;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.widget.Toolbar;
+import android.view.Gravity;
 import android.view.View;
 
 import com.zxjdev.smile.R;
@@ -74,6 +75,14 @@ public class MainActivity extends BaseActivity {
         mDrawerToggle = new ActionBarDrawerToggle(this, mDlytContainer, mViewToolbar, R.string.open,
             R.string.close);
 
+        // disable the default implementation of ActionBarDrawerToggle adding a navigation icon to
+        // the Toolbar, because we cannot change the icon style
+        mDrawerToggle.setDrawerIndicatorEnabled(false);
+        // set custom navigation icon in the ToolBar
+        mViewToolbar.setNavigationIcon(R.drawable.ic_menu_white_24dp);
+        // handle click event for showing the drawer
+        mViewToolbar.setNavigationOnClickListener(v -> mDlytContainer.openDrawer(Gravity.LEFT));
+
         initNavigationView();
     }
 
@@ -82,11 +91,9 @@ public class MainActivity extends BaseActivity {
         mViewNavigation.setNavigationItemSelectedListener(item -> {
             switch (item.getItemId()) {
                 case R.id.navi_item_moments:
-                    // replaceFragment(R.id.flyt_content, new MomentsFragment());
                     showFragment(R.id.flyt_content, new MomentsFragment(), MomentsFragment.TAG);
                     break;
                 case R.id.navi_item_settings:
-                    // replaceFragment(R.id.flyt_content, new SettingsFragment());
                     showFragment(R.id.flyt_content, new SettingsFragment(), SettingsFragment.TAG);
                     break;
             }
