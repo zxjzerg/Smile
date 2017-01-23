@@ -1,4 +1,4 @@
-package com.zxjdev.smile.presentation.application.di.module.usecase;
+package com.zxjdev.smile.presentation.user;
 
 import com.zxjdev.smile.domain.base.UseCaseConfig;
 import com.zxjdev.smile.domain.user.AutoLoginUseCase;

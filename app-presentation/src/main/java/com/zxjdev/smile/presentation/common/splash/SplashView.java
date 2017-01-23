@@ -2,7 +2,7 @@ package com.zxjdev.smile.presentation.common.splash;
 
 import android.content.Context;
 
-public interface ISplashView {
+public interface SplashView {
 
     Context context();
 

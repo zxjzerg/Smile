@@ -7,29 +7,29 @@ import javax.inject.Inject;
 
 public class SettingsPresenter {
 
-    private ISettingsView mView;
-    @Inject LogoutUseCase mLogoutUseCase;
+    private SettingsView view;
+    @Inject LogoutUseCase logoutUseCase;
 
     @Inject
     public SettingsPresenter() {
 
     }
 
-    public void setView(ISettingsView view) {
-        mView = view;
+    public void setView(SettingsView view) {
+        this.view = view;
     }
 
     public void handleLogout() {
-        mLogoutUseCase.execute(new DefaultSubscriber<Void>(mView.context()) {
+        logoutUseCase.execute(new DefaultSubscriber<Void>(view.context()) {
             @Override
             public void onCompleted() {
                 super.onCompleted();
-                mView.navigateToSplash();
+                view.navigateToSplash();
             }
         });
     }
 
     public void destroy() {
-        mLogoutUseCase.unSubscribe();
+        logoutUseCase.unSubscribe();
     }
 }

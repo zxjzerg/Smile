@@ -2,7 +2,7 @@ package com.zxjdev.smile.presentation.user.authorization.login;
 
 import android.content.Context;
 
-public interface ILoginView {
+public interface LoginView {
 
     Context context();
 

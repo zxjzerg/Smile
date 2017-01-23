@@ -2,7 +2,7 @@ package com.zxjdev.smile.presentation.moment.list;
 
 import android.content.Context;
 
-public interface MomentsContract {
+public interface MomentListContract {
 
     interface View {
 

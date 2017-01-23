@@ -6,9 +6,9 @@ import android.os.Bundle;
 import android.widget.EditText;
 
 import com.zxjdev.smile.R;
-import com.zxjdev.smile.presentation.application.di.module.ActivityModule;
+import com.zxjdev.smile.presentation.application.base.activity.ActivityModule;
 import com.zxjdev.smile.presentation.common.main.MainActivity;
-import com.zxjdev.smile.presentation.application.base.BaseActivity;
+import com.zxjdev.smile.presentation.application.base.activity.BaseActivity;
 
 import javax.inject.Inject;
 
@@ -20,12 +20,12 @@ import butterknife.OnClick;
  * 登录界面
  * Created by Andrew on 7/5/16.
  */
-public class LoginActivity extends BaseActivity implements ILoginView {
+public class LoginActivity extends BaseActivity implements LoginView {
 
-    @BindView(R.id.et_username) EditText mEtUsername;
-    @BindView(R.id.et_password) EditText mEtPassword;
+    @BindView(R.id.et_username) EditText etUsername;
+    @BindView(R.id.et_password) EditText etPassword;
 
-    @Inject LoginPresenter mPresenter;
+    @Inject LoginPresenter presenter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,7 +34,7 @@ public class LoginActivity extends BaseActivity implements ILoginView {
         setContentView(R.layout.activity_login);
         ButterKnife.bind(this);
 
-        mPresenter.setView(this);
+        presenter.setView(this);
     }
 
     @Override
@@ -45,23 +45,23 @@ public class LoginActivity extends BaseActivity implements ILoginView {
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        mPresenter.destroy();
+        presenter.destroy();
     }
 
     @OnClick(R.id.btn_login)
     public void loginClick() {
-        mPresenter.handleLogin(mEtUsername.getText().toString(),
-            mEtPassword.getText().toString());
+        presenter.handleLogin(etUsername.getText().toString(),
+            etPassword.getText().toString());
     }
 
     @Override
     public Context context() {
-        return mContext;
+        return context;
     }
 
     @Override
     public void navigateToMain() {
-        Intent intent = new Intent(mContext, MainActivity.class);
+        Intent intent = new Intent(context, MainActivity.class);
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
         startActivity(intent);
     }

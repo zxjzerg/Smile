@@ -6,18 +6,18 @@ import com.zxjdev.smile.presentation.application.DefaultSubscriber;
 
 import java.util.List;
 
-public class MomentsPresenter implements MomentsContract.Presenter {
+public class MomentListPresenter implements MomentListContract.Presenter {
 
-    private MomentsContract.View mView;
-    private GetMomentListUseCase mGetMomentListUseCase;
+    private MomentListContract.View view;
+    private GetMomentListUseCase getMomentListUseCase;
 
-    public MomentsPresenter(GetMomentListUseCase getMomentListUseCase) {
-        mGetMomentListUseCase = getMomentListUseCase;
+    public MomentListPresenter(GetMomentListUseCase getMomentListUseCase) {
+        this.getMomentListUseCase = getMomentListUseCase;
     }
 
     @Override
-    public void setView(MomentsContract.View view) {
-        mView = view;
+    public void setView(MomentListContract.View view) {
+        this.view = view;
     }
 
     @Override
@@ -27,7 +27,7 @@ public class MomentsPresenter implements MomentsContract.Presenter {
 
     @Override
     public void loadMoments() {
-        mGetMomentListUseCase.execute(new DefaultSubscriber<List<Moment>>(mView.context()) {
+        getMomentListUseCase.execute(new DefaultSubscriber<List<Moment>>(view.context()) {
             @Override
             public void onNext(List<Moment> data) {
 

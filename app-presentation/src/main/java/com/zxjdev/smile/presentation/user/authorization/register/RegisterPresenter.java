@@ -7,24 +7,24 @@ import javax.inject.Inject;
 
 public class RegisterPresenter {
 
-    private IRegisterView mView;
-    @Inject RegisterUseCase mRegisterUseCase;
+    private RegisterView view;
+    @Inject RegisterUseCase registerUseCase;
 
     @Inject
     public RegisterPresenter() {
 
     }
 
-    public void setView(IRegisterView view) {
-        mView = view;
+    public void setView(RegisterView view) {
+        this.view = view;
     }
 
     public void handleRegister(String username, String password) {
-        mRegisterUseCase.setInput(username, password);
-        mRegisterUseCase.execute(new DefaultSubscriber(mView.context()) {
+        registerUseCase.setInput(username, password);
+        registerUseCase.execute(new DefaultSubscriber(view.context()) {
             @Override
             public void onCompleted() {
-                mView.navigateToMain();
+                view.navigateToMain();
             }
 
             @Override

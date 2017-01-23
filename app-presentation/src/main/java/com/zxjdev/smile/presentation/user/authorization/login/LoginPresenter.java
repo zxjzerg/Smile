@@ -10,30 +10,30 @@ import timber.log.Timber;
 
 public class LoginPresenter {
 
-    @Inject LoginUseCase mLoginUseCase;
-    private ILoginView mView;
+    @Inject LoginUseCase loginUseCase;
+    private LoginView view;
 
     @Inject
     public LoginPresenter() {
 
     }
 
-    public void setView(ILoginView view) {
-        this.mView = view;
+    public void setView(LoginView view) {
+        this.view = view;
     }
 
     public void handleLogin(String username, String password) {
-        mLoginUseCase.setInput(username, password);
-        mLoginUseCase.execute(new DefaultSubscriber<User>(mView.context()) {
+        loginUseCase.setInput(username, password);
+        loginUseCase.execute(new DefaultSubscriber<User>(view.context()) {
             @Override
             public void onNext(User user) {
                 Timber.d("login success. user: %s", user.getUsername());
-                mView.navigateToMain();
+                view.navigateToMain();
             }
         });
     }
 
     public void destroy() {
-        mLoginUseCase.unSubscribe();
+        loginUseCase.unSubscribe();
     }
 }

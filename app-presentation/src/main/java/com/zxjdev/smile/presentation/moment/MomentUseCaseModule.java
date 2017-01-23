@@ -1,4 +1,4 @@
-package com.zxjdev.smile.presentation.application.di.module.usecase;
+package com.zxjdev.smile.presentation.moment;
 
 import com.zxjdev.smile.domain.base.UseCaseConfig;
 import com.zxjdev.smile.domain.moment.AddMomentUseCase;

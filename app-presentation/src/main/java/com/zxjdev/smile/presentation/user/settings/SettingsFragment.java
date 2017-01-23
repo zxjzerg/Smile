@@ -10,8 +10,8 @@ import android.view.ViewGroup;
 import android.widget.Button;
 
 import com.zxjdev.smile.R;
-import com.zxjdev.smile.presentation.application.base.BaseFragment;
-import com.zxjdev.smile.presentation.application.di.module.ActivityModule;
+import com.zxjdev.smile.presentation.application.base.fragment.BaseFragment;
+import com.zxjdev.smile.presentation.application.base.activity.ActivityModule;
 import com.zxjdev.smile.presentation.common.splash.SplashActivity;
 
 import javax.inject.Inject;
@@ -20,13 +20,13 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
-public class SettingsFragment extends BaseFragment implements ISettingsView {
+public class SettingsFragment extends BaseFragment implements SettingsView {
 
     public static final String TAG = SettingsFragment.class.getSimpleName();
 
-    @BindView(R.id.btn_logout) Button mBtnLogout;
+    @BindView(R.id.btn_logout) Button btnLogout;
 
-    @Inject SettingsPresenter mSettingsPresenter;
+    @Inject SettingsPresenter settingsPresenter;
 
     public SettingsFragment() {
         setRetainInstance(true);
@@ -60,18 +60,18 @@ public class SettingsFragment extends BaseFragment implements ISettingsView {
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        mSettingsPresenter.setView(this);
+        settingsPresenter.setView(this);
     }
 
     @Override
     public void onDestroy() {
         super.onDestroy();
-        mSettingsPresenter.destroy();
+        settingsPresenter.destroy();
     }
 
     @OnClick(R.id.btn_logout)
     public void logoutClick() {
-        mSettingsPresenter.handleLogout();
+        settingsPresenter.handleLogout();
     }
 
     @Override

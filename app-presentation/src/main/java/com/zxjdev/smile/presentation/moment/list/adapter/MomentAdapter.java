@@ -1,4 +1,4 @@
-package com.zxjdev.smile.presentation.moment.list;
+package com.zxjdev.smile.presentation.moment.list.adapter;
 
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -29,7 +29,7 @@ public class MomentAdapter extends RecyclerView.Adapter<MomentViewHolder> {
     @Override
     public void onBindViewHolder(MomentViewHolder holder, int position) {
         MomentModel moment = moments.get(position);
-        holder.tvContet.setText(moment.getContent());
+        holder.tvContent.setText(moment.getContent());
     }
 
     @Override

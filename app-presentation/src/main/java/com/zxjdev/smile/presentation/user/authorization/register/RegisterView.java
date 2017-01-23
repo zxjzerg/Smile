@@ -2,7 +2,7 @@ package com.zxjdev.smile.presentation.user.authorization.register;
 
 import android.content.Context;
 
-public interface IRegisterView {
+public interface RegisterView {
 
     Context context();
 

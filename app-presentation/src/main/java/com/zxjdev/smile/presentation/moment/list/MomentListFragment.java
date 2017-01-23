@@ -12,12 +12,13 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.zxjdev.smile.R;
-import com.zxjdev.smile.presentation.application.base.BaseFragment;
-import com.zxjdev.smile.presentation.application.di.component.MomentsFragmentComponent;
-import com.zxjdev.smile.presentation.application.di.module.MomentsFragmentModule;
+import com.zxjdev.smile.presentation.application.base.fragment.BaseFragment;
 import com.zxjdev.smile.presentation.common.main.MainActivity;
 import com.zxjdev.smile.presentation.moment.MomentModel;
 import com.zxjdev.smile.presentation.moment.create.NewMomentActivity;
+import com.zxjdev.smile.presentation.moment.list.adapter.MomentAdapter;
+import com.zxjdev.smile.presentation.moment.list.di.MomentListFragmentComponent;
+import com.zxjdev.smile.presentation.moment.list.di.MomentListFragmentModule;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -28,35 +29,35 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
-public class MomentsFragment extends BaseFragment implements MomentsContract.View {
+public class MomentListFragment extends BaseFragment implements MomentListContract.View {
 
-    public static final String TAG = MomentsFragment.class.getSimpleName();
+    public static final String TAG = MomentListFragment.class.getSimpleName();
 
-    @BindView(R.id.rv_moments) RecyclerView mRvMoments;
-    @BindView(R.id.fbtn_add_new_moment) FloatingActionButton mBtnNewMoment;
+    @BindView(R.id.rv_moments) RecyclerView rvMoments;
+    @BindView(R.id.fbtn_add_new_moment) FloatingActionButton btnNewMoment;
 
-    @Inject MomentAdapter mAdapter;
-    @Inject MomentsContract.Presenter mPresenter;
+    @Inject MomentAdapter momentAdapter;
+    @Inject MomentListContract.Presenter presenter;
 
-    private MomentsFragmentComponent mMomentsFragmentComponent;
+    private MomentListFragmentComponent momentListFragmentComponent;
     private List<MomentModel> moments;
 
-    public MomentsFragment() {
+    public MomentListFragment() {
         moments = mockMoments();
     }
 
     @Override
     protected void initializeComponent() {
         if (getActivity() instanceof MainActivity) {
-            mMomentsFragmentComponent = ((MainActivity) getActivity()).getComponent()
-                .getMomentsFragmentComponent(new MomentsFragmentModule());
-            mMomentsFragmentComponent.inject(this);
+            momentListFragmentComponent = ((MainActivity) getActivity()).getComponent()
+                .getMomentsFragmentComponent(new MomentListFragmentModule());
+            momentListFragmentComponent.inject(this);
         }
     }
 
     @Override
     protected void releaseComponent() {
-        mMomentsFragmentComponent = null;
+        momentListFragmentComponent = null;
     }
 
     @Nullable
@@ -78,21 +79,21 @@ public class MomentsFragment extends BaseFragment implements MomentsContract.Vie
     }
 
     private void initUi() {
-        mRvMoments.setLayoutManager(new LinearLayoutManager(getActivity()));
+        rvMoments.setLayoutManager(new LinearLayoutManager(getActivity()));
     }
 
     private void initData() {
-        mRvMoments.setAdapter(mAdapter);
-        mAdapter.setMoments(moments);
+        rvMoments.setAdapter(momentAdapter);
+        momentAdapter.setMoments(moments);
 
-        mPresenter.setView(this);
-        mPresenter.create();
+        presenter.setView(this);
+        presenter.create();
     }
 
     @Override
     public void onDestroy() {
         super.onDestroy();
-        mMomentsFragmentComponent = null;
+        momentListFragmentComponent = null;
     }
 
     @OnClick(R.id.fbtn_add_new_moment)

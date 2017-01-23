@@ -1,4 +1,4 @@
-package com.zxjdev.smile.presentation.application.di.module;
+package com.zxjdev.smile.presentation.common.main.di;
 
 import dagger.Module;
 

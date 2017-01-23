@@ -6,9 +6,9 @@ import android.os.Bundle;
 import android.widget.EditText;
 
 import com.zxjdev.smile.R;
-import com.zxjdev.smile.presentation.application.di.module.ActivityModule;
+import com.zxjdev.smile.presentation.application.base.activity.ActivityModule;
 import com.zxjdev.smile.presentation.common.main.MainActivity;
-import com.zxjdev.smile.presentation.application.base.BaseActivity;
+import com.zxjdev.smile.presentation.application.base.activity.BaseActivity;
 
 import javax.inject.Inject;
 
@@ -16,7 +16,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
-public class RegisterActivity extends BaseActivity implements IRegisterView {
+public class RegisterActivity extends BaseActivity implements RegisterView {
 
     @BindView(R.id.et_username) EditText mEtUsername;
     @BindView(R.id.et_password) EditText mEtPassword;
@@ -46,7 +46,7 @@ public class RegisterActivity extends BaseActivity implements IRegisterView {
 
     @Override
     public Context context() {
-        return mContext;
+        return context;
     }
 
     @Override
@@ -56,7 +56,7 @@ public class RegisterActivity extends BaseActivity implements IRegisterView {
 
     @Override
     public void navigateToMain() {
-        Intent intent = new Intent(mContext, MainActivity.class);
+        Intent intent = new Intent(context, MainActivity.class);
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
         startActivity(intent);
     }

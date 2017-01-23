@@ -1,7 +1,6 @@
-package com.zxjdev.smile.presentation.application.di.module;
+package com.zxjdev.smile.presentation.application.base.activity;
 
 import android.app.Activity;
-import android.os.Handler;
 
 import com.zxjdev.smile.presentation.application.di.scope.ActivityScope;
 
@@ -21,11 +20,5 @@ public class ActivityModule {
     @Provides
     Activity provideActivity() {
         return activity;
-    }
-
-    @ActivityScope
-    @Provides
-    Handler provideHandler() {
-        return new Handler();
     }
 }

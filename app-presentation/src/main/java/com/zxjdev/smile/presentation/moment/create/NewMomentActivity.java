@@ -8,7 +8,8 @@ import android.view.MenuItem;
 import android.widget.EditText;
 
 import com.zxjdev.smile.R;
-import com.zxjdev.smile.presentation.application.base.BaseActivity;
+import com.zxjdev.smile.presentation.application.base.activity.BaseActivity;
+import com.zxjdev.smile.presentation.moment.create.di.NewMomentComponent;
 
 import javax.inject.Inject;
 
@@ -17,12 +18,12 @@ import butterknife.ButterKnife;
 
 public class NewMomentActivity extends BaseActivity implements NewMomentContract.View {
 
-    @BindView(R.id.view_toolbar) Toolbar mViewToolbar;
-    @BindView(R.id.et_content) EditText mEtContent;
+    @BindView(R.id.view_toolbar) Toolbar toolbar;
+    @BindView(R.id.et_content) EditText etContent;
 
-    @Inject NewMomentContract.Presenter mPresenter;
+    @Inject NewMomentContract.Presenter presenter;
 
-    private NewMomentComponent mNewMomentComponent;
+    private NewMomentComponent newMomentComponent;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,20 +32,20 @@ public class NewMomentActivity extends BaseActivity implements NewMomentContract
         ButterKnife.bind(this);
         initUi();
 
-        mPresenter.setView(this);
+        presenter.setView(this);
     }
 
     @Override
     protected void initializeInjector() {
-        mNewMomentComponent = getActivityComponent().getNewMomentComponent();
-        mNewMomentComponent.inject(this);
+        newMomentComponent = getActivityComponent().getNewMomentComponent();
+        newMomentComponent.inject(this);
     }
 
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        mPresenter.destroy();
-        mNewMomentComponent = null;
+        presenter.destroy();
+        newMomentComponent = null;
     }
 
     @Override
@@ -57,7 +58,7 @@ public class NewMomentActivity extends BaseActivity implements NewMomentContract
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.action_send:
-                mPresenter.handleAddMoment(mEtContent.getText().toString());
+                presenter.handleAddMoment(etContent.getText().toString());
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
@@ -66,7 +67,7 @@ public class NewMomentActivity extends BaseActivity implements NewMomentContract
 
     @Override
     public Context context() {
-        return mContext;
+        return context;
     }
 
     @Override
@@ -75,7 +76,7 @@ public class NewMomentActivity extends BaseActivity implements NewMomentContract
     }
 
     private void initUi() {
-        setSupportActionBar(mViewToolbar);
+        setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
     }
 }

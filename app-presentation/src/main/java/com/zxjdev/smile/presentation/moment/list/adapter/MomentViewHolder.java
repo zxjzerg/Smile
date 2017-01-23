@@ -1,4 +1,4 @@
-package com.zxjdev.smile.presentation.moment.list;
+package com.zxjdev.smile.presentation.moment.list.adapter;
 
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
@@ -11,7 +11,7 @@ import butterknife.ButterKnife;
 
 public class MomentViewHolder extends RecyclerView.ViewHolder {
 
-    @BindView(R.id.tv_content) TextView tvContet;
+    @BindView(R.id.tv_content) TextView tvContent;
 
     public MomentViewHolder(View itemView) {
         super(itemView);

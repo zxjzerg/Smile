@@ -8,11 +8,11 @@ import android.view.View;
 import android.widget.Button;
 
 import com.zxjdev.smile.R;
-import com.zxjdev.smile.presentation.application.di.module.ActivityModule;
+import com.zxjdev.smile.presentation.application.base.activity.BaseActivity;
+import com.zxjdev.smile.presentation.application.base.activity.ActivityModule;
+import com.zxjdev.smile.presentation.common.main.MainActivity;
 import com.zxjdev.smile.presentation.user.authorization.login.LoginActivity;
 import com.zxjdev.smile.presentation.user.authorization.register.RegisterActivity;
-import com.zxjdev.smile.presentation.common.main.MainActivity;
-import com.zxjdev.smile.presentation.application.base.BaseActivity;
 
 import javax.inject.Inject;
 
@@ -24,12 +24,12 @@ import butterknife.OnClick;
  * 开屏界面
  * Created by Andrew on 7/4/16.
  */
-public class SplashActivity extends BaseActivity implements ISplashView {
+public class SplashActivity extends BaseActivity implements SplashView {
 
-    @BindView(R.id.btn_login) Button mBtnLogin;
-    @BindView(R.id.btn_register) Button mBtnRegister;
+    @BindView(R.id.btn_login) Button btnLogin;
+    @BindView(R.id.btn_register) Button btnRegister;
 
-    @Inject SplashPresenter mPresenter;
+    @Inject SplashPresenter presenter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,8 +39,8 @@ public class SplashActivity extends BaseActivity implements ISplashView {
         ButterKnife.bind(this);
         initUi();
 
-        mPresenter.setView(this);
-        mPresenter.handleAutoLogin();
+        presenter.setView(this);
+        presenter.handleAutoLogin();
     }
 
     @Override
@@ -51,14 +51,14 @@ public class SplashActivity extends BaseActivity implements ISplashView {
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        mPresenter.destroy();
+        presenter.destroy();
     }
 
     private void initUi() {
         // 设置自定义的字体
         Typeface customFont = Typeface.createFromAsset(this.getAssets(), "fonts/AaPangYaer.ttf");
-        mBtnLogin.setTypeface(customFont);
-        mBtnRegister.setTypeface(customFont);
+        btnLogin.setTypeface(customFont);
+        btnRegister.setTypeface(customFont);
     }
 
     @OnClick(R.id.btn_login)
@@ -72,30 +72,30 @@ public class SplashActivity extends BaseActivity implements ISplashView {
     }
 
     private void navigateToLogin() {
-        Intent login = new Intent(mContext, LoginActivity.class);
+        Intent login = new Intent(context, LoginActivity.class);
         startActivity(login);
     }
 
     private void navigateToRegister() {
-        Intent login = new Intent(mContext, RegisterActivity.class);
+        Intent login = new Intent(context, RegisterActivity.class);
         startActivity(login);
     }
 
     @Override
     public Context context() {
-        return mContext;
+        return context;
     }
 
     @Override
     public void navigateToMain() {
-        Intent intent = new Intent(mContext, MainActivity.class);
+        Intent intent = new Intent(context, MainActivity.class);
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
         startActivity(intent);
     }
 
     @Override
     public void showButtons() {
-        mBtnLogin.setVisibility(View.VISIBLE);
-        mBtnRegister.setVisibility(View.VISIBLE);
+        btnLogin.setVisibility(View.VISIBLE);
+        btnRegister.setVisibility(View.VISIBLE);
     }
 }

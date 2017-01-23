@@ -5,30 +5,30 @@ import com.zxjdev.smile.presentation.application.DefaultSubscriber;
 
 public class NewMomentPresenter implements NewMomentContract.Presenter {
 
-    private NewMomentContract.View mView;
+    private NewMomentContract.View view;
 
-    private AddMomentUseCase mAddMomentUseCase;
+    private AddMomentUseCase addMomentUseCase;
 
     public NewMomentPresenter(AddMomentUseCase addMomentUseCase) {
-        mAddMomentUseCase = addMomentUseCase;
+        this.addMomentUseCase = addMomentUseCase;
     }
 
     public void setView(NewMomentContract.View view) {
-        mView = view;
+        this.view = view;
     }
 
     public void handleAddMoment(String content) {
-        mAddMomentUseCase.setInput(content);
-        mAddMomentUseCase.execute(new DefaultSubscriber<Void>(mView.context()) {
+        addMomentUseCase.setInput(content);
+        addMomentUseCase.execute(new DefaultSubscriber<Void>(view.context()) {
             @Override
             public void onCompleted() {
                 super.onCompleted();
-                mView.close();
+                view.close();
             }
         });
     }
 
     public void destroy() {
-        mAddMomentUseCase.unSubscribe();
+        addMomentUseCase.unSubscribe();
     }
 }

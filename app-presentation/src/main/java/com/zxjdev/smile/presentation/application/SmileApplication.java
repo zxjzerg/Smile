@@ -17,7 +17,7 @@ import timber.log.Timber;
 
 public class SmileApplication extends Application {
 
-    private ApplicationComponent mApplicationComponent;
+    private ApplicationComponent applicationComponent;
 
     @Override
     public void onCreate() {
@@ -52,7 +52,7 @@ public class SmileApplication extends Application {
     }
 
     private void initInjector() {
-        mApplicationComponent = DaggerApplicationComponent.builder()
+        applicationComponent = DaggerApplicationComponent.builder()
             .applicationModule(new ApplicationModule(this))
             .build();
     }
@@ -62,7 +62,7 @@ public class SmileApplication extends Application {
     }
 
     public ApplicationComponent getApplicationComponent() {
-        return mApplicationComponent;
+        return applicationComponent;
     }
 }
 

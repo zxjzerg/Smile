@@ -9,44 +9,44 @@ import javax.inject.Inject;
 
 public class SplashPresenter {
 
-    private AutoLoginUseCase mAutoLoginUseCase;
-    private ISplashView mView;
-    private Handler mHandler;
+    private AutoLoginUseCase autoLoginUseCase;
+    private SplashView view;
+    private Handler handler;
 
     @Inject
-    public SplashPresenter(AutoLoginUseCase autoLoginUseCase, Handler handler) {
-        mAutoLoginUseCase = autoLoginUseCase;
-        mHandler = handler;
+    public SplashPresenter(AutoLoginUseCase autoLoginUseCase) {
+        this.autoLoginUseCase = autoLoginUseCase;
+        this.handler = new Handler();
     }
 
-    public void setView(ISplashView view) {
-        mView = view;
+    public void setView(SplashView view) {
+        this.view = view;
     }
 
     public void handleAutoLogin() {
-        mAutoLoginUseCase.execute(new DefaultSubscriber<Boolean>(mView.context()) {
+        autoLoginUseCase.execute(new DefaultSubscriber<Boolean>(view.context()) {
             @Override
             public void onNext(Boolean data) {
                 if (data) {
                     // 自动登录
-                    mHandler.postDelayed(mNavigateToMainTask, 500);
+                    handler.postDelayed(mNavigateToMainTask, 500);
                 } else {
                     // 显示登录和注册按钮
-                    mView.showButtons();
+                    view.showButtons();
                 }
             }
         });
     }
 
     public void destroy() {
-        mAutoLoginUseCase.unSubscribe();
-        mHandler.removeCallbacks(mNavigateToMainTask);
+        autoLoginUseCase.unSubscribe();
+        handler.removeCallbacks(mNavigateToMainTask);
     }
 
     private Runnable mNavigateToMainTask = new Runnable() {
         @Override
         public void run() {
-            mView.navigateToMain();
+            view.navigateToMain();
         }
     };
 }
