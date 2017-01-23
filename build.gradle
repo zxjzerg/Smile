@@ -67,4 +67,6 @@ ext {
     leak_canary_release = 'com.squareup.leakcanary:leakcanary-android-no-op:1.5'
 
     stetho = 'com.facebook.stetho:stetho:1.4.2'
+
+    glide = 'com.github.bumptech.glide:glide:3.7.0'
 }

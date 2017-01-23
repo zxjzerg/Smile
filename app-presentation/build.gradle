@@ -76,4 +76,6 @@ dependencies {
     compile rootProject.ext.stetho
 
     testCompile rootProject.ext.junit
+
+    compile rootProject.ext.glide
 }
