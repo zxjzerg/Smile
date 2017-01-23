@@ -1,27 +1,26 @@
 package com.zxjdev.smile.presentation.user.authorization.login;
 
-import com.zxjdev.smile.domain.user.User;
 import com.zxjdev.smile.domain.user.LoginUseCase;
+import com.zxjdev.smile.domain.user.User;
 import com.zxjdev.smile.presentation.application.DefaultSubscriber;
-
-import javax.inject.Inject;
 
 import timber.log.Timber;
 
-public class LoginPresenter {
+public class LoginPresenter implements LoginContract.Presenter {
 
-    @Inject LoginUseCase loginUseCase;
-    private LoginView view;
+    private LoginUseCase loginUseCase;
+    private LoginContract.View view;
 
-    @Inject
-    public LoginPresenter() {
-
+    public LoginPresenter(LoginUseCase loginUseCase) {
+        this.loginUseCase = loginUseCase;
     }
 
-    public void setView(LoginView view) {
+    @Override
+    public void setView(LoginContract.View view) {
         this.view = view;
     }
 
+    @Override
     public void handleLogin(String username, String password) {
         loginUseCase.setInput(username, password);
         loginUseCase.execute(new DefaultSubscriber<User>(view.context()) {
@@ -33,6 +32,7 @@ public class LoginPresenter {
         });
     }
 
+    @Override
     public void destroy() {
         loginUseCase.unSubscribe();
     }

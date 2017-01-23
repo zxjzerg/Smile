@@ -11,8 +11,10 @@ import android.widget.Button;
 
 import com.zxjdev.smile.R;
 import com.zxjdev.smile.presentation.application.base.fragment.BaseFragment;
-import com.zxjdev.smile.presentation.application.base.activity.ActivityModule;
+import com.zxjdev.smile.presentation.common.main.MainActivity;
 import com.zxjdev.smile.presentation.common.splash.SplashActivity;
+import com.zxjdev.smile.presentation.user.settings.di.SettingsFragmentComponent;
+import com.zxjdev.smile.presentation.user.settings.di.SettingsFragmentModule;
 
 import javax.inject.Inject;
 
@@ -20,13 +22,15 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
-public class SettingsFragment extends BaseFragment implements SettingsView {
+public class SettingsFragment extends BaseFragment implements SettingsContract.View {
 
     public static final String TAG = SettingsFragment.class.getSimpleName();
 
     @BindView(R.id.btn_logout) Button btnLogout;
 
-    @Inject SettingsPresenter settingsPresenter;
+    @Inject SettingsContract.Presenter settingsPresenter;
+
+    private SettingsFragmentComponent settingsFragmentComponent;
 
     public SettingsFragment() {
         setRetainInstance(true);
@@ -39,12 +43,16 @@ public class SettingsFragment extends BaseFragment implements SettingsView {
 
     @Override
     protected void initializeComponent() {
-        getApplicationComponent().getActivityComponent(new ActivityModule(getActivity())).inject(this);
+        if (getActivity() instanceof MainActivity) {
+            settingsFragmentComponent = ((MainActivity) getActivity()).getComponent()
+                .getSettingsFragmentComponent(new SettingsFragmentModule());
+            settingsFragmentComponent.inject(this);
+        }
     }
 
     @Override
     protected void releaseComponent() {
-
+        settingsFragmentComponent = null;
     }
 
     @Nullable

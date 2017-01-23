@@ -9,8 +9,9 @@ import android.widget.Button;
 
 import com.zxjdev.smile.R;
 import com.zxjdev.smile.presentation.application.base.activity.BaseActivity;
-import com.zxjdev.smile.presentation.application.base.activity.ActivityModule;
 import com.zxjdev.smile.presentation.common.main.MainActivity;
+import com.zxjdev.smile.presentation.common.splash.di.SplashActivityComponent;
+import com.zxjdev.smile.presentation.common.splash.di.SplashActivityhModule;
 import com.zxjdev.smile.presentation.user.authorization.login.LoginActivity;
 import com.zxjdev.smile.presentation.user.authorization.register.RegisterActivity;
 
@@ -24,12 +25,14 @@ import butterknife.OnClick;
  * 开屏界面
  * Created by Andrew on 7/4/16.
  */
-public class SplashActivity extends BaseActivity implements SplashView {
+public class SplashActivity extends BaseActivity implements SplashContract.View {
 
     @BindView(R.id.btn_login) Button btnLogin;
     @BindView(R.id.btn_register) Button btnRegister;
 
-    @Inject SplashPresenter presenter;
+    @Inject SplashContract.Presenter presenter;
+
+    private SplashActivityComponent splashActivityComponent;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,13 +48,16 @@ public class SplashActivity extends BaseActivity implements SplashView {
 
     @Override
     protected void initializeInjector() {
-        getApplicationComponent().getActivityComponent(new ActivityModule(this)).inject(this);
+        splashActivityComponent = getActivityComponent().getSplashComponent(
+            new SplashActivityhModule());
+        splashActivityComponent.inject(this);
     }
 
     @Override
     protected void onDestroy() {
         super.onDestroy();
         presenter.destroy();
+        splashActivityComponent = null;
     }
 
     private void initUi() {

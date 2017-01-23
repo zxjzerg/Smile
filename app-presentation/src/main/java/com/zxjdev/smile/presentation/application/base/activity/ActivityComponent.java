@@ -1,12 +1,14 @@
 package com.zxjdev.smile.presentation.application.base.activity;
 
 import com.zxjdev.smile.presentation.application.di.scope.ActivityScope;
-import com.zxjdev.smile.presentation.common.main.MainActivity;
-import com.zxjdev.smile.presentation.common.splash.SplashActivity;
-import com.zxjdev.smile.presentation.moment.create.di.NewMomentComponent;
-import com.zxjdev.smile.presentation.user.authorization.login.LoginActivity;
-import com.zxjdev.smile.presentation.user.authorization.register.RegisterActivity;
-import com.zxjdev.smile.presentation.user.settings.SettingsFragment;
+import com.zxjdev.smile.presentation.common.splash.di.SplashActivityComponent;
+import com.zxjdev.smile.presentation.common.splash.di.SplashActivityhModule;
+import com.zxjdev.smile.presentation.moment.create.di.NewMomentActivityComponent;
+import com.zxjdev.smile.presentation.moment.create.di.NewMomentActivityModule;
+import com.zxjdev.smile.presentation.user.authorization.login.di.LoginActivityComponent;
+import com.zxjdev.smile.presentation.user.authorization.login.di.LoginActivityModule;
+import com.zxjdev.smile.presentation.user.authorization.register.di.RegisterActivityComponent;
+import com.zxjdev.smile.presentation.user.authorization.register.di.RegisterActivityModule;
 
 import dagger.Subcomponent;
 
@@ -17,15 +19,11 @@ import dagger.Subcomponent;
 @ActivityScope
 public interface ActivityComponent {
 
-    void inject(LoginActivity activity);
+    NewMomentActivityComponent getNewMomentComponent(NewMomentActivityModule newMomentActivityModule);
 
-    void inject(MainActivity activity);
+    LoginActivityComponent getLoginComponent(LoginActivityModule loginActivityModule);
 
-    void inject(RegisterActivity activity);
+    RegisterActivityComponent getRegisterComponent(RegisterActivityModule registerActivityModule);
 
-    void inject(SplashActivity activity);
-
-    void inject(SettingsFragment fragment);
-
-    NewMomentComponent getNewMomentComponent();
+    SplashActivityComponent getSplashComponent(SplashActivityhModule splashActivityhModule);
 }

@@ -6,9 +6,10 @@ import android.os.Bundle;
 import android.widget.EditText;
 
 import com.zxjdev.smile.R;
-import com.zxjdev.smile.presentation.application.base.activity.ActivityModule;
-import com.zxjdev.smile.presentation.common.main.MainActivity;
 import com.zxjdev.smile.presentation.application.base.activity.BaseActivity;
+import com.zxjdev.smile.presentation.common.main.MainActivity;
+import com.zxjdev.smile.presentation.user.authorization.register.di.RegisterActivityComponent;
+import com.zxjdev.smile.presentation.user.authorization.register.di.RegisterActivityModule;
 
 import javax.inject.Inject;
 
@@ -16,12 +17,14 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
-public class RegisterActivity extends BaseActivity implements RegisterView {
+public class RegisterActivity extends BaseActivity implements RegisterContract.View {
 
-    @BindView(R.id.et_username) EditText mEtUsername;
-    @BindView(R.id.et_password) EditText mEtPassword;
+    @BindView(R.id.et_username) EditText etUsername;
+    @BindView(R.id.et_password) EditText etPassword;
 
-    @Inject RegisterPresenter mPresenter;
+    @Inject RegisterContract.Presenter presenter;
+
+    private RegisterActivityComponent registerActivityComponent;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,28 +33,30 @@ public class RegisterActivity extends BaseActivity implements RegisterView {
         setContentView(R.layout.activity_register);
         ButterKnife.bind(this);
 
-        mPresenter.setView(this);
+        presenter.setView(this);
     }
 
     @Override
     protected void initializeInjector() {
-        getApplicationComponent().getActivityComponent(new ActivityModule(this)).inject(this);
+        registerActivityComponent = getActivityComponent().getRegisterComponent(
+            new RegisterActivityModule());
+        registerActivityComponent.inject(this);
+    }
+
+    @Override
+    protected void onDestroy() {
+        registerActivityComponent = null;
+        super.onDestroy();
     }
 
     @OnClick(R.id.btn_register)
     void handleRegisterClick() {
-        mPresenter.handleRegister(mEtUsername.getText().toString(),
-            mEtPassword.getText().toString());
+        presenter.handleRegister(etUsername.getText().toString(), etPassword.getText().toString());
     }
 
     @Override
     public Context context() {
         return context;
-    }
-
-    @Override
-    public void toast(String message) {
-        showToast(message);
     }
 
     @Override

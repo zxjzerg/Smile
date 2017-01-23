@@ -3,22 +3,21 @@ package com.zxjdev.smile.presentation.user.authorization.register;
 import com.zxjdev.smile.domain.user.RegisterUseCase;
 import com.zxjdev.smile.presentation.application.DefaultSubscriber;
 
-import javax.inject.Inject;
+public class RegisterPresenter implements RegisterContract.Presenter {
 
-public class RegisterPresenter {
+    private RegisterContract.View view;
+    private RegisterUseCase registerUseCase;
 
-    private RegisterView view;
-    @Inject RegisterUseCase registerUseCase;
-
-    @Inject
-    public RegisterPresenter() {
-
+    public RegisterPresenter(RegisterUseCase registerUseCase) {
+        this.registerUseCase = registerUseCase;
     }
 
-    public void setView(RegisterView view) {
+    @Override
+    public void setView(RegisterContract.View view) {
         this.view = view;
     }
 
+    @Override
     public void handleRegister(String username, String password) {
         registerUseCase.setInput(username, password);
         registerUseCase.execute(new DefaultSubscriber(view.context()) {

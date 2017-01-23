@@ -7,10 +7,10 @@ import com.zxjdev.smile.presentation.application.DefaultSubscriber;
 
 import javax.inject.Inject;
 
-public class SplashPresenter {
+public class SplashPresenter implements SplashContract.Presenter {
 
     private AutoLoginUseCase autoLoginUseCase;
-    private SplashView view;
+    private SplashContract.View view;
     private Handler handler;
 
     @Inject
@@ -19,10 +19,12 @@ public class SplashPresenter {
         this.handler = new Handler();
     }
 
-    public void setView(SplashView view) {
+    @Override
+    public void setView(SplashContract.View view) {
         this.view = view;
     }
 
+    @Override
     public void handleAutoLogin() {
         autoLoginUseCase.execute(new DefaultSubscriber<Boolean>(view.context()) {
             @Override
@@ -38,6 +40,7 @@ public class SplashPresenter {
         });
     }
 
+    @Override
     public void destroy() {
         autoLoginUseCase.unSubscribe();
         handler.removeCallbacks(mNavigateToMainTask);

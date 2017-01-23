@@ -8,7 +8,7 @@ import dagger.Module;
 import dagger.Provides;
 
 @Module
-public class NewMomentModule {
+public class NewMomentActivityModule {
 
     @Provides
     NewMomentContract.Presenter providePresenter(AddMomentUseCase addMomentUseCase) {

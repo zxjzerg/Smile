@@ -9,7 +9,8 @@ import android.widget.EditText;
 
 import com.zxjdev.smile.R;
 import com.zxjdev.smile.presentation.application.base.activity.BaseActivity;
-import com.zxjdev.smile.presentation.moment.create.di.NewMomentComponent;
+import com.zxjdev.smile.presentation.moment.create.di.NewMomentActivityComponent;
+import com.zxjdev.smile.presentation.moment.create.di.NewMomentActivityModule;
 
 import javax.inject.Inject;
 
@@ -23,7 +24,7 @@ public class NewMomentActivity extends BaseActivity implements NewMomentContract
 
     @Inject NewMomentContract.Presenter presenter;
 
-    private NewMomentComponent newMomentComponent;
+    private NewMomentActivityComponent newMomentActivityComponent;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,15 +38,16 @@ public class NewMomentActivity extends BaseActivity implements NewMomentContract
 
     @Override
     protected void initializeInjector() {
-        newMomentComponent = getActivityComponent().getNewMomentComponent();
-        newMomentComponent.inject(this);
+        newMomentActivityComponent = getActivityComponent().getNewMomentComponent(
+            new NewMomentActivityModule());
+        newMomentActivityComponent.inject(this);
     }
 
     @Override
     protected void onDestroy() {
         super.onDestroy();
         presenter.destroy();
-        newMomentComponent = null;
+        newMomentActivityComponent = null;
     }
 
     @Override

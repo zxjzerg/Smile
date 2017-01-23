@@ -3,22 +3,22 @@ package com.zxjdev.smile.presentation.user.settings;
 import com.zxjdev.smile.domain.user.LogoutUseCase;
 import com.zxjdev.smile.presentation.application.DefaultSubscriber;
 
-import javax.inject.Inject;
+public class SettingsPresenter implements SettingsContract.Presenter {
 
-public class SettingsPresenter {
+    private SettingsContract.View view;
 
-    private SettingsView view;
-    @Inject LogoutUseCase logoutUseCase;
+    private LogoutUseCase logoutUseCase;
 
-    @Inject
-    public SettingsPresenter() {
-
+    public SettingsPresenter(LogoutUseCase logoutUseCase) {
+        this.logoutUseCase = logoutUseCase;
     }
 
-    public void setView(SettingsView view) {
+    @Override
+    public void setView(SettingsContract.View view) {
         this.view = view;
     }
 
+    @Override
     public void handleLogout() {
         logoutUseCase.execute(new DefaultSubscriber<Void>(view.context()) {
             @Override
@@ -29,6 +29,7 @@ public class SettingsPresenter {
         });
     }
 
+    @Override
     public void destroy() {
         logoutUseCase.unSubscribe();
     }
