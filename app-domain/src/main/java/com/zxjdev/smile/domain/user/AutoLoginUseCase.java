@@ -5,7 +5,7 @@ import com.zxjdev.smile.domain.base.UseCaseConfig;
 
 import rx.Observable;
 
-public class AutoLoginUseCase extends UseCase {
+public class AutoLoginUseCase extends UseCase<AutoLoginUseCase.RequestParams, Boolean> {
 
     private UserRepository userRepository;
 
@@ -15,7 +15,11 @@ public class AutoLoginUseCase extends UseCase {
     }
 
     @Override
-    protected Observable buildUseCaseObservable() {
+    protected Observable<Boolean> buildUseCaseObservable(RequestParams params) {
         return this.userRepository.checkHasAuthorized();
+    }
+
+    public static class RequestParams implements UseCase.RequestParams {
+
     }
 }

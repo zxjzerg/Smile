@@ -19,17 +19,17 @@ public class RegisterPresenter implements RegisterContract.Presenter {
 
     @Override
     public void handleRegister(String username, String password) {
-        registerUseCase.setInput(username, password);
-        registerUseCase.execute(new DefaultSubscriber(view.context()) {
-            @Override
-            public void onCompleted() {
-                view.navigateToMain();
-            }
+        registerUseCase.execute(new RegisterUseCase.RequestParams(username, password),
+            new DefaultSubscriber<Void>(view.context()) {
+                @Override
+                public void onCompleted() {
+                    view.navigateToMain();
+                }
 
-            @Override
-            public void onError(Throwable e) {
-                super.onError(e);
-            }
-        });
+                @Override
+                public void onError(Throwable e) {
+                    super.onError(e);
+                }
+            });
     }
 }

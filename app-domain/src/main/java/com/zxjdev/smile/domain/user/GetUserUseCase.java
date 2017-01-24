@@ -5,7 +5,7 @@ import com.zxjdev.smile.domain.base.UseCaseConfig;
 
 import rx.Observable;
 
-public class GetUserUseCase extends UseCase<User> {
+public class GetUserUseCase extends UseCase<GetUserUseCase.RequestParams, User> {
 
     private UserRepository userRepository;
 
@@ -15,7 +15,11 @@ public class GetUserUseCase extends UseCase<User> {
     }
 
     @Override
-    protected Observable<User> buildUseCaseObservable() {
+    protected Observable<User> buildUseCaseObservable(RequestParams params) {
         return null;
+    }
+
+    public static final class RequestParams implements UseCase.RequestParams {
+
     }
 }

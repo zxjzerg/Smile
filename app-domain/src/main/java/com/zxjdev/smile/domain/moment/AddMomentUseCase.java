@@ -5,11 +5,9 @@ import com.zxjdev.smile.domain.base.UseCaseConfig;
 
 import rx.Observable;
 
-public class AddMomentUseCase extends UseCase {
+public class AddMomentUseCase extends UseCase<AddMomentUseCase.RequestParams, Void> {
 
     private MomentRepository momentRepository;
-
-    private String content;
 
     public AddMomentUseCase(UseCaseConfig useCaseConfig, MomentRepository momentRepository) {
         super(useCaseConfig);
@@ -17,11 +15,20 @@ public class AddMomentUseCase extends UseCase {
     }
 
     @Override
-    protected Observable buildUseCaseObservable() {
-        return momentRepository.addMoment(this.content);
+    protected Observable<Void> buildUseCaseObservable(RequestParams params) {
+        return momentRepository.addMoment(params.getContent());
     }
 
-    public void setInput(String content) {
-        this.content = content;
+    public static class RequestParams implements UseCase.RequestParams {
+
+        private String content;
+
+        public RequestParams(String content) {
+            this.content = content;
+        }
+
+        public String getContent() {
+            return content;
+        }
     }
 }

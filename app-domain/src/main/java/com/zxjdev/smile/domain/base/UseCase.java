@@ -10,7 +10,7 @@ import rx.subscriptions.Subscriptions;
  *
  * @param <T> the return data type of this UseCase
  */
-public abstract class UseCase<T> {
+public abstract class UseCase<R extends UseCase.RequestParams, T> {
 
     private Subscription subscription = Subscriptions.empty();
     private UseCaseConfig useCaseConfig;
@@ -19,11 +19,18 @@ public abstract class UseCase<T> {
         this.useCaseConfig = useCaseConfig;
     }
 
-    protected abstract Observable<T> buildUseCaseObservable();
+    protected abstract Observable<T> buildUseCaseObservable(R params);
 
     @SuppressWarnings("unchecked")
-    public void execute(Subscriber subscriber) {
-        this.subscription = this.buildUseCaseObservable()
+    public void execute(R params, Subscriber<T> subscriber) {
+        this.subscription = this.buildUseCaseObservable(params)
+            .subscribeOn(useCaseConfig.getSubscribeScheduler())
+            .observeOn(useCaseConfig.getObserveScheduler())
+            .subscribe(subscriber);
+    }
+
+    public void execute(Subscriber<T> subscriber) {
+        this.subscription = this.buildUseCaseObservable(null)
             .subscribeOn(useCaseConfig.getSubscribeScheduler())
             .observeOn(useCaseConfig.getObserveScheduler())
             .subscribe(subscriber);
@@ -33,5 +40,9 @@ public abstract class UseCase<T> {
         if (!this.subscription.isUnsubscribed()) {
             this.subscription.unsubscribe();
         }
+    }
+
+    public interface RequestParams {
+
     }
 }

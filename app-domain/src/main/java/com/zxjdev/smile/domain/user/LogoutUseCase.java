@@ -5,7 +5,7 @@ import com.zxjdev.smile.domain.base.UseCaseConfig;
 
 import rx.Observable;
 
-public class LogoutUseCase extends UseCase<Void> {
+public class LogoutUseCase extends UseCase<LogoutUseCase.RequestParams, Void> {
 
     private UserRepository userRepository;
 
@@ -15,7 +15,11 @@ public class LogoutUseCase extends UseCase<Void> {
     }
 
     @Override
-    protected Observable<Void> buildUseCaseObservable() {
+    protected Observable<Void> buildUseCaseObservable(RequestParams params) {
         return this.userRepository.logout();
+    }
+
+    public static class RequestParams implements UseCase.RequestParams {
+
     }
 }

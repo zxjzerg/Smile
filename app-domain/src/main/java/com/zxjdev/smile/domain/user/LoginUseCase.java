@@ -7,12 +7,9 @@ import javax.inject.Inject;
 
 import rx.Observable;
 
-public class LoginUseCase extends UseCase<User> {
+public class LoginUseCase extends UseCase<LoginUseCase.RequestParams, User> {
 
     private UserRepository userRepository;
-
-    private String username;
-    private String password;
 
     @Inject
     public LoginUseCase(UseCaseConfig useCaseConfig, UserRepository userRepository) {
@@ -21,12 +18,26 @@ public class LoginUseCase extends UseCase<User> {
     }
 
     @Override
-    protected Observable<User> buildUseCaseObservable() {
-        return this.userRepository.login(this.username, this.password);
+    protected Observable<User> buildUseCaseObservable(RequestParams params) {
+        return this.userRepository.login(params.getUsername(), params.getPassword());
     }
 
-    public void setInput(String username, String password) {
-        this.username = username;
-        this.password = password;
+    public static class RequestParams implements UseCase.RequestParams {
+
+        private String username;
+        private String password;
+
+        public RequestParams(String username, String password) {
+            this.username = username;
+            this.password = password;
+        }
+
+        public String getUsername() {
+            return username;
+        }
+
+        public String getPassword() {
+            return password;
+        }
     }
 }

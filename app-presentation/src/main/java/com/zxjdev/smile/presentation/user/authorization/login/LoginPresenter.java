@@ -22,14 +22,14 @@ public class LoginPresenter implements LoginContract.Presenter {
 
     @Override
     public void handleLogin(String username, String password) {
-        loginUseCase.setInput(username, password);
-        loginUseCase.execute(new DefaultSubscriber<User>(view.context()) {
-            @Override
-            public void onNext(User user) {
-                Timber.d("login success. user: %s", user.getUsername());
-                view.navigateToMain();
-            }
-        });
+        loginUseCase.execute(new LoginUseCase.RequestParams(username, password),
+            new DefaultSubscriber<User>(view.context()) {
+                @Override
+                public void onNext(User user) {
+                    Timber.d("login success. user: %s", user.getUsername());
+                    view.navigateToMain();
+                }
+            });
     }
 
     @Override

@@ -5,12 +5,9 @@ import com.zxjdev.smile.domain.base.UseCaseConfig;
 
 import rx.Observable;
 
-public class RegisterUseCase extends UseCase<Void> {
+public class RegisterUseCase extends UseCase<RegisterUseCase.RequestParams, Void> {
 
     private UserRepository userRepository;
-
-    private String username;
-    private String password;
 
     public RegisterUseCase(UseCaseConfig useCaseConfig, UserRepository userRepository) {
         super(useCaseConfig);
@@ -18,12 +15,26 @@ public class RegisterUseCase extends UseCase<Void> {
     }
 
     @Override
-    protected Observable<Void> buildUseCaseObservable() {
-        return this.userRepository.register(this.username, this.password);
+    protected Observable<Void> buildUseCaseObservable(RequestParams params) {
+        return this.userRepository.register(params.getUsername(), params.getPassword());
     }
 
-    public void setInput(String username, String password) {
-        this.username = username;
-        this.password = password;
+    public static class RequestParams implements UseCase.RequestParams {
+
+        private String username;
+        private String password;
+
+        public RequestParams(String username, String password) {
+            this.username = username;
+            this.password = password;
+        }
+
+        public String getUsername() {
+            return username;
+        }
+
+        public String getPassword() {
+            return password;
+        }
     }
 }

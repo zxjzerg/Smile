@@ -7,7 +7,8 @@ import java.util.List;
 
 import rx.Observable;
 
-public class GetMomentListUseCase extends UseCase<List<Moment>> {
+public class GetMomentListUseCase
+    extends UseCase<GetMomentListUseCase.RequestParams, List<Moment>> {
 
     private MomentRepository momentRepository;
 
@@ -17,7 +18,11 @@ public class GetMomentListUseCase extends UseCase<List<Moment>> {
     }
 
     @Override
-    protected Observable<List<Moment>> buildUseCaseObservable() {
+    protected Observable<List<Moment>> buildUseCaseObservable(RequestParams params) {
         return momentRepository.queryMomentList();
+    }
+
+    public static class RequestParams implements UseCase.RequestParams {
+
     }
 }

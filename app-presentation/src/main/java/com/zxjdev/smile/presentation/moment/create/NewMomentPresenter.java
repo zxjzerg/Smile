@@ -18,14 +18,14 @@ public class NewMomentPresenter implements NewMomentContract.Presenter {
     }
 
     public void handleAddMoment(String content) {
-        addMomentUseCase.setInput(content);
-        addMomentUseCase.execute(new DefaultSubscriber<Void>(view.context()) {
-            @Override
-            public void onCompleted() {
-                super.onCompleted();
-                view.close();
-            }
-        });
+        addMomentUseCase.execute(new AddMomentUseCase.RequestParams(content),
+            new DefaultSubscriber<Void>(view.context()) {
+                @Override
+                public void onCompleted() {
+                    super.onCompleted();
+                    view.close();
+                }
+            });
     }
 
     public void destroy() {
