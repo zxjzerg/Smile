@@ -8,7 +8,7 @@ import dagger.Module;
 import dagger.Provides;
 
 @Module
-public class SplashActivityhModule {
+public class SplashActivityModule {
 
     @Provides
     SplashContract.Presenter providePresenter(AutoLoginUseCase autoLoginUseCase) {

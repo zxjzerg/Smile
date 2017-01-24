@@ -2,6 +2,7 @@ package com.zxjdev.smile.presentation.common.main;
 
 import android.app.Fragment;
 import android.app.FragmentTransaction;
+import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.IdRes;
 import android.support.annotation.Nullable;
@@ -14,19 +15,21 @@ import android.view.View;
 
 import com.zxjdev.smile.R;
 import com.zxjdev.smile.presentation.application.base.activity.BaseActivity;
-import com.zxjdev.smile.presentation.application.base.activity.ActivityModule;
 import com.zxjdev.smile.presentation.common.main.di.MainActivityComponent;
 import com.zxjdev.smile.presentation.common.main.di.MainActivityModule;
 import com.zxjdev.smile.presentation.moment.list.MomentListFragment;
+import com.zxjdev.smile.presentation.user.UserModel;
 import com.zxjdev.smile.presentation.user.settings.SettingsFragment;
 
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.inject.Inject;
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-public class MainActivity extends BaseActivity {
+public class MainActivity extends BaseActivity implements MainContract.View {
 
     @BindView(R.id.dlyt_container) DrawerLayout dlytContainer;
     @BindView(R.id.view_toolbar) Toolbar toolbar;
@@ -37,7 +40,8 @@ public class MainActivity extends BaseActivity {
 
     private List<String> fragmentTags = new ArrayList<>();
 
-    @Override
+    @Inject MainContract.Presenter mPresenter;
+
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
@@ -50,12 +54,14 @@ public class MainActivity extends BaseActivity {
             showFragment(R.id.flyt_content, new MomentListFragment(), MomentListFragment.TAG);
             navigationView.setCheckedItem(R.id.navi_item_moments);
         }
+
+        mPresenter.setView(this);
     }
 
     @Override
     protected void initializeInjector() {
-        mainActivityComponent = getApplicationComponent().getMainActivityComponent(
-            new ActivityModule(this), new MainActivityModule());
+        mainActivityComponent = getActivityComponent().getMainActivityComponent(
+            new MainActivityModule());
         mainActivityComponent.inject(this);
     }
 
@@ -91,7 +97,8 @@ public class MainActivity extends BaseActivity {
         navigationView.setNavigationItemSelectedListener(item -> {
             switch (item.getItemId()) {
                 case R.id.navi_item_moments:
-                    showFragment(R.id.flyt_content, new MomentListFragment(), MomentListFragment.TAG);
+                    showFragment(R.id.flyt_content, new MomentListFragment(),
+                        MomentListFragment.TAG);
                     break;
                 case R.id.navi_item_settings:
                     showFragment(R.id.flyt_content, new SettingsFragment(), SettingsFragment.TAG);
@@ -140,5 +147,15 @@ public class MainActivity extends BaseActivity {
         }
         fragmentTransaction.commit();
         getFragmentManager().executePendingTransactions();
+    }
+
+    @Override
+    public Context context() {
+        return this;
+    }
+
+    @Override
+    public void displayUser(UserModel user) {
+
     }
 }

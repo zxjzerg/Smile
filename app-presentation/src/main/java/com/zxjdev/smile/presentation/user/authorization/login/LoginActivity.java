@@ -41,7 +41,7 @@ public class LoginActivity extends BaseActivity implements LoginContract.View {
 
     @Override
     protected void initializeInjector() {
-        loginActivityComponent = getActivityComponent().getLoginComponent(
+        loginActivityComponent = getActivityComponent().getLoginActivityComponent(
             new LoginActivityModule());
         loginActivityComponent.inject(this);
     }

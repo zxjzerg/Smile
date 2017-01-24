@@ -1,6 +1,7 @@
 package com.zxjdev.smile.data.user.datasource;
 
 import com.zxjdev.smile.data.user.UserEntity;
+import com.zxjdev.smile.data.utils.LeanCloudUtils;
 
 import javax.inject.Inject;
 
@@ -34,5 +35,13 @@ public class UserCloudDataSource {
 
     public Observable<Void> logout() {
         return authorizationService.logout();
+    }
+
+    public Observable<UserEntity> getUser(String id) {
+        if (id == null) {
+            return Observable.just(LeanCloudUtils.getCurrentUser());
+        } else {
+            return Observable.empty();
+        }
     }
 }

@@ -38,7 +38,7 @@ public class NewMomentActivity extends BaseActivity implements NewMomentContract
 
     @Override
     protected void initializeInjector() {
-        newMomentActivityComponent = getActivityComponent().getNewMomentComponent(
+        newMomentActivityComponent = getActivityComponent().getNewMomentActivityComponent(
             new NewMomentActivityModule());
         newMomentActivityComponent.inject(this);
     }

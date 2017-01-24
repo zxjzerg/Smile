@@ -11,7 +11,7 @@ import com.zxjdev.smile.R;
 import com.zxjdev.smile.presentation.application.base.activity.BaseActivity;
 import com.zxjdev.smile.presentation.common.main.MainActivity;
 import com.zxjdev.smile.presentation.common.splash.di.SplashActivityComponent;
-import com.zxjdev.smile.presentation.common.splash.di.SplashActivityhModule;
+import com.zxjdev.smile.presentation.common.splash.di.SplashActivityModule;
 import com.zxjdev.smile.presentation.user.authorization.login.LoginActivity;
 import com.zxjdev.smile.presentation.user.authorization.register.RegisterActivity;
 
@@ -48,8 +48,8 @@ public class SplashActivity extends BaseActivity implements SplashContract.View 
 
     @Override
     protected void initializeInjector() {
-        splashActivityComponent = getActivityComponent().getSplashComponent(
-            new SplashActivityhModule());
+        splashActivityComponent = getActivityComponent().getSplashActivityComponent(
+            new SplashActivityModule());
         splashActivityComponent.inject(this);
     }
 

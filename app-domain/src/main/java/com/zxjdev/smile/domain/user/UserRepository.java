@@ -12,4 +12,6 @@ public interface UserRepository {
     Observable<Boolean> checkHasAuthorized();
 
     Observable<Void> logout();
+
+    Observable<User> getUser(String id);
 }

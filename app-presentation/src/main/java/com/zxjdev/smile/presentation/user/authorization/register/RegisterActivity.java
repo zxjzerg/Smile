@@ -38,7 +38,7 @@ public class RegisterActivity extends BaseActivity implements RegisterContract.V
 
     @Override
     protected void initializeInjector() {
-        registerActivityComponent = getActivityComponent().getRegisterComponent(
+        registerActivityComponent = getActivityComponent().getRegisterActivityComponent(
             new RegisterActivityModule());
         registerActivityComponent.inject(this);
     }

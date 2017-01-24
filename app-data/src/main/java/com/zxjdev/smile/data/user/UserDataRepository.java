@@ -38,4 +38,9 @@ public class UserDataRepository implements UserRepository {
     public Observable<Void> logout() {
         return userCloudDataSource.logout();
     }
+
+    @Override
+    public Observable<User> getUser(String id) {
+        return userCloudDataSource.getUser(id).map(userEntity -> userMapper.transform(userEntity));
+    }
 }

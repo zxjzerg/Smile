@@ -1,8 +1,10 @@
 package com.zxjdev.smile.presentation.application.base.activity;
 
 import com.zxjdev.smile.presentation.application.di.scope.ActivityScope;
+import com.zxjdev.smile.presentation.common.main.di.MainActivityComponent;
+import com.zxjdev.smile.presentation.common.main.di.MainActivityModule;
 import com.zxjdev.smile.presentation.common.splash.di.SplashActivityComponent;
-import com.zxjdev.smile.presentation.common.splash.di.SplashActivityhModule;
+import com.zxjdev.smile.presentation.common.splash.di.SplashActivityModule;
 import com.zxjdev.smile.presentation.moment.create.di.NewMomentActivityComponent;
 import com.zxjdev.smile.presentation.moment.create.di.NewMomentActivityModule;
 import com.zxjdev.smile.presentation.user.authorization.login.di.LoginActivityComponent;
@@ -19,11 +21,13 @@ import dagger.Subcomponent;
 @ActivityScope
 public interface ActivityComponent {
 
-    NewMomentActivityComponent getNewMomentComponent(NewMomentActivityModule newMomentActivityModule);
+    NewMomentActivityComponent getNewMomentActivityComponent(NewMomentActivityModule newMomentActivityModule);
 
-    LoginActivityComponent getLoginComponent(LoginActivityModule loginActivityModule);
+    LoginActivityComponent getLoginActivityComponent(LoginActivityModule loginActivityModule);
 
-    RegisterActivityComponent getRegisterComponent(RegisterActivityModule registerActivityModule);
+    RegisterActivityComponent getRegisterActivityComponent(RegisterActivityModule registerActivityModule);
 
-    SplashActivityComponent getSplashComponent(SplashActivityhModule splashActivityhModule);
+    SplashActivityComponent getSplashActivityComponent(SplashActivityModule splashActivityModule);
+
+    MainActivityComponent getMainActivityComponent(MainActivityModule mainActivityModule);
 }
