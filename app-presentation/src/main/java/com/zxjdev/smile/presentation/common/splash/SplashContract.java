@@ -15,8 +15,6 @@ public interface SplashContract {
 
     interface Presenter {
 
-        void setView(View view);
-
         void handleAutoLogin();
 
         void destroy();

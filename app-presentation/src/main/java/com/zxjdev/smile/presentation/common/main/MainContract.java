@@ -15,6 +15,5 @@ public interface MainContract {
 
     interface Presenter {
 
-        void setView(View view);
     }
 }

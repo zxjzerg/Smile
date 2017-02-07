@@ -13,8 +13,6 @@ public interface NewMomentContract {
 
     interface Presenter {
 
-        void setView(View view);
-
         void destroy();
 
         void handleAddMoment(String context);

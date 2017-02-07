@@ -13,8 +13,6 @@ public interface SettingsContract {
 
     interface Presenter {
 
-        void setView(View view);
-
         void handleLogout();
 
         void destroy();

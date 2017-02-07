@@ -8,16 +8,12 @@ import timber.log.Timber;
 
 public class LoginPresenter implements LoginContract.Presenter {
 
-    private LoginUseCase loginUseCase;
     private LoginContract.View view;
+    private LoginUseCase loginUseCase;
 
-    public LoginPresenter(LoginUseCase loginUseCase) {
-        this.loginUseCase = loginUseCase;
-    }
-
-    @Override
-    public void setView(LoginContract.View view) {
+    public LoginPresenter(LoginContract.View view, LoginUseCase loginUseCase) {
         this.view = view;
+        this.loginUseCase = loginUseCase;
     }
 
     @Override

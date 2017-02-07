@@ -45,7 +45,7 @@ public class SettingsFragment extends BaseFragment implements SettingsContract.V
     protected void initializeComponent() {
         if (getActivity() instanceof MainActivity) {
             settingsFragmentComponent = ((MainActivity) getActivity()).getComponent()
-                .getSettingsFragmentComponent(new SettingsFragmentModule());
+                .getSettingsFragmentComponent(new SettingsFragmentModule(this));
             settingsFragmentComponent.inject(this);
         }
     }
@@ -63,12 +63,6 @@ public class SettingsFragment extends BaseFragment implements SettingsContract.V
         View view = inflater.inflate(R.layout.fragment_settings, container, false);
         ButterKnife.bind(this, view);
         return view;
-    }
-
-    @Override
-    public void onActivityCreated(Bundle savedInstanceState) {
-        super.onActivityCreated(savedInstanceState);
-        settingsPresenter.setView(this);
     }
 
     @Override

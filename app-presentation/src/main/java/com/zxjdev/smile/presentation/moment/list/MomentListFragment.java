@@ -50,7 +50,7 @@ public class MomentListFragment extends BaseFragment implements MomentListContra
     protected void initializeComponent() {
         if (getActivity() instanceof MainActivity) {
             momentListFragmentComponent = ((MainActivity) getActivity()).getComponent()
-                .getMomentsFragmentComponent(new MomentListFragmentModule());
+                .getMomentsFragmentComponent(new MomentListFragmentModule(this));
             momentListFragmentComponent.inject(this);
         }
     }
@@ -86,7 +86,6 @@ public class MomentListFragment extends BaseFragment implements MomentListContra
         rvMoments.setAdapter(momentAdapter);
         momentAdapter.setMoments(moments);
 
-        presenter.setView(this);
         presenter.create();
     }
 

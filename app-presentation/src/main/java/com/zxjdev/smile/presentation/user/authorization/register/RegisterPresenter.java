@@ -8,13 +8,9 @@ public class RegisterPresenter implements RegisterContract.Presenter {
     private RegisterContract.View view;
     private RegisterUseCase registerUseCase;
 
-    public RegisterPresenter(RegisterUseCase registerUseCase) {
-        this.registerUseCase = registerUseCase;
-    }
-
-    @Override
-    public void setView(RegisterContract.View view) {
+    public RegisterPresenter(RegisterContract.View view, RegisterUseCase registerUseCase) {
         this.view = view;
+        this.registerUseCase = registerUseCase;
     }
 
     @Override

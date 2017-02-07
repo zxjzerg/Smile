@@ -14,14 +14,10 @@ public class SplashPresenter implements SplashContract.Presenter {
     private Handler handler;
 
     @Inject
-    public SplashPresenter(AutoLoginUseCase autoLoginUseCase) {
+    public SplashPresenter(SplashContract.View view, AutoLoginUseCase autoLoginUseCase) {
+        this.view = view;
         this.autoLoginUseCase = autoLoginUseCase;
         this.handler = new Handler();
-    }
-
-    @Override
-    public void setView(SplashContract.View view) {
-        this.view = view;
     }
 
     @Override

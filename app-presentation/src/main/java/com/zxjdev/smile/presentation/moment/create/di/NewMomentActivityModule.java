@@ -10,8 +10,14 @@ import dagger.Provides;
 @Module
 public class NewMomentActivityModule {
 
+    private NewMomentContract.View view;
+
+    public NewMomentActivityModule(NewMomentContract.View view) {
+        this.view = view;
+    }
+
     @Provides
     NewMomentContract.Presenter providePresenter(AddMomentUseCase addMomentUseCase) {
-        return new NewMomentPresenter(addMomentUseCase);
+        return new NewMomentPresenter(view, addMomentUseCase);
     }
 }

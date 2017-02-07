@@ -38,14 +38,12 @@ public class LoginActivity extends BaseActivity implements LoginContract.View {
         setContentView(R.layout.activity_login);
         ButterKnife.bind(this);
         initUi();
-
-        presenter.setView(this);
     }
 
     @Override
     protected void initializeInjector() {
         loginActivityComponent = getActivityComponent().getLoginActivityComponent(
-            new LoginActivityModule());
+            new LoginActivityModule(this));
         loginActivityComponent.inject(this);
     }
 

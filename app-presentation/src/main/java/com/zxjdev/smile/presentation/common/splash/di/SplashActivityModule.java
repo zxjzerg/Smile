@@ -10,8 +10,14 @@ import dagger.Provides;
 @Module
 public class SplashActivityModule {
 
+    private SplashContract.View view;
+
+    public SplashActivityModule(SplashContract.View view) {
+        this.view = view;
+    }
+
     @Provides
     SplashContract.Presenter providePresenter(AutoLoginUseCase autoLoginUseCase) {
-        return new SplashPresenter(autoLoginUseCase);
+        return new SplashPresenter(view, autoLoginUseCase);
     }
 }

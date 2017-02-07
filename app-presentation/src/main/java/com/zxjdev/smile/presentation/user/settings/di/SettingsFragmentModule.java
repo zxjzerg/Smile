@@ -11,9 +11,15 @@ import dagger.Provides;
 @Module
 public class SettingsFragmentModule {
 
+    private SettingsContract.View view;
+
+    public SettingsFragmentModule(SettingsContract.View view) {
+        this.view = view;
+    }
+
     @Provides
     @FragmentScope
     SettingsContract.Presenter providePresenter(LogoutUseCase logoutUseCase) {
-        return new SettingsPresenter(logoutUseCase);
+        return new SettingsPresenter(view, logoutUseCase);
     }
 }

@@ -10,8 +10,14 @@ import dagger.Provides;
 @Module
 public class RegisterActivityModule {
 
+    private RegisterContract.View view;
+
+    public RegisterActivityModule(RegisterContract.View view) {
+        this.view = view;
+    }
+
     @Provides
     RegisterContract.Presenter providePresenter(RegisterUseCase registerUseCase) {
-        return new RegisterPresenter(registerUseCase);
+        return new RegisterPresenter(view, registerUseCase);
     }
 }

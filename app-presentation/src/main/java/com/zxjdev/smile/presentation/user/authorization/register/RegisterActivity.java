@@ -35,14 +35,12 @@ public class RegisterActivity extends BaseActivity implements RegisterContract.V
         setContentView(R.layout.activity_register);
         ButterKnife.bind(this);
         initUi();
-
-        presenter.setView(this);
     }
 
     @Override
     protected void initializeInjector() {
         registerActivityComponent = getActivityComponent().getRegisterActivityComponent(
-            new RegisterActivityModule());
+            new RegisterActivityModule(this));
         registerActivityComponent.inject(this);
     }
 

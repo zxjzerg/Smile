@@ -12,6 +12,7 @@ import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.widget.Toolbar;
 import android.view.Gravity;
 import android.view.View;
+import android.widget.TextView;
 
 import com.zxjdev.smile.R;
 import com.zxjdev.smile.presentation.application.base.activity.BaseActivity;
@@ -35,6 +36,7 @@ public class MainActivity extends BaseActivity implements MainContract.View {
     @BindView(R.id.view_toolbar) Toolbar toolbar;
     @BindView(R.id.view_navigation) NavigationView navigationView;
     private ActionBarDrawerToggle drawerToggle;
+    private TextView tvUsername;
 
     private MainActivityComponent mainActivityComponent;
 
@@ -54,14 +56,12 @@ public class MainActivity extends BaseActivity implements MainContract.View {
             showFragment(R.id.flyt_content, new MomentListFragment(), MomentListFragment.TAG);
             navigationView.setCheckedItem(R.id.navi_item_moments);
         }
-
-        mPresenter.setView(this);
     }
 
     @Override
     protected void initializeInjector() {
         mainActivityComponent = getActivityComponent().getMainActivityComponent(
-            new MainActivityModule());
+            new MainActivityModule(this));
         mainActivityComponent.inject(this);
     }
 
@@ -110,11 +110,9 @@ public class MainActivity extends BaseActivity implements MainContract.View {
 
         if (navigationView.getHeaderCount() > 0) {
             View view = navigationView.getHeaderView(0);
+            tvUsername = (TextView) view.findViewById(R.id.tv_name);
+            tvUsername.setText("username");
         }
-    }
-
-    private void setNavigationHeader() {
-
     }
 
     public MainActivityComponent getComponent() {

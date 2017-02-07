@@ -6,15 +6,11 @@ import com.zxjdev.smile.presentation.application.DefaultSubscriber;
 public class NewMomentPresenter implements NewMomentContract.Presenter {
 
     private NewMomentContract.View view;
-
     private AddMomentUseCase addMomentUseCase;
 
-    public NewMomentPresenter(AddMomentUseCase addMomentUseCase) {
-        this.addMomentUseCase = addMomentUseCase;
-    }
-
-    public void setView(NewMomentContract.View view) {
+    public NewMomentPresenter(NewMomentContract.View view, AddMomentUseCase addMomentUseCase) {
         this.view = view;
+        this.addMomentUseCase = addMomentUseCase;
     }
 
     public void handleAddMoment(String content) {

@@ -11,8 +11,6 @@ public interface MomentListContract {
 
     interface Presenter {
 
-        void setView(View view);
-
         void create();
 
         void loadMoments();

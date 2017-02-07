@@ -13,8 +13,6 @@ public interface RegisterContract {
 
     interface Presenter {
 
-        void setView(View view);
-
         void handleRegister(String username, String password);
     }
 }

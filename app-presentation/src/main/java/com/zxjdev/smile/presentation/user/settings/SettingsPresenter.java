@@ -9,13 +9,9 @@ public class SettingsPresenter implements SettingsContract.Presenter {
 
     private LogoutUseCase logoutUseCase;
 
-    public SettingsPresenter(LogoutUseCase logoutUseCase) {
-        this.logoutUseCase = logoutUseCase;
-    }
-
-    @Override
-    public void setView(SettingsContract.View view) {
+    public SettingsPresenter(SettingsContract.View view, LogoutUseCase logoutUseCase) {
         this.view = view;
+        this.logoutUseCase = logoutUseCase;
     }
 
     @Override

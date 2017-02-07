@@ -42,14 +42,13 @@ public class SplashActivity extends BaseActivity implements SplashContract.View 
         ButterKnife.bind(this);
         initUi();
 
-        presenter.setView(this);
         presenter.handleAutoLogin();
     }
 
     @Override
     protected void initializeInjector() {
         splashActivityComponent = getActivityComponent().getSplashActivityComponent(
-            new SplashActivityModule());
+            new SplashActivityModule(this));
         splashActivityComponent.inject(this);
     }
 

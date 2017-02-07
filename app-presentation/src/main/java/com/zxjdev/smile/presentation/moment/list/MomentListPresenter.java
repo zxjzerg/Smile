@@ -11,13 +11,10 @@ public class MomentListPresenter implements MomentListContract.Presenter {
     private MomentListContract.View view;
     private GetMomentListUseCase getMomentListUseCase;
 
-    public MomentListPresenter(GetMomentListUseCase getMomentListUseCase) {
-        this.getMomentListUseCase = getMomentListUseCase;
-    }
-
-    @Override
-    public void setView(MomentListContract.View view) {
+    public MomentListPresenter(MomentListContract.View view,
+        GetMomentListUseCase getMomentListUseCase) {
         this.view = view;
+        this.getMomentListUseCase = getMomentListUseCase;
     }
 
     @Override

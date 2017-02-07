@@ -32,14 +32,12 @@ public class NewMomentActivity extends BaseActivity implements NewMomentContract
         setContentView(R.layout.activity_new_moment);
         ButterKnife.bind(this);
         initUi();
-
-        presenter.setView(this);
     }
 
     @Override
     protected void initializeInjector() {
         newMomentActivityComponent = getActivityComponent().getNewMomentActivityComponent(
-            new NewMomentActivityModule());
+            new NewMomentActivityModule(this));
         newMomentActivityComponent.inject(this);
     }
 

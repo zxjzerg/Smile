@@ -13,8 +13,6 @@ public interface LoginContract {
 
     interface Presenter {
 
-        void setView(View view);
-
         void destroy();
 
         void handleLogin(String username, String password);
