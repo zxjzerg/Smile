@@ -3,6 +3,7 @@ package com.zxjdev.smile.presentation.user.authorization.login;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v7.widget.Toolbar;
 import android.widget.EditText;
 
 import com.zxjdev.smile.R;
@@ -25,6 +26,7 @@ public class LoginActivity extends BaseActivity implements LoginContract.View {
 
     @BindView(R.id.et_username) EditText etUsername;
     @BindView(R.id.et_password) EditText etPassword;
+    @BindView(R.id.toolbar) Toolbar toolbar;
 
     @Inject LoginContract.Presenter presenter;
     private LoginActivityComponent loginActivityComponent;
@@ -35,6 +37,7 @@ public class LoginActivity extends BaseActivity implements LoginContract.View {
 
         setContentView(R.layout.activity_login);
         ButterKnife.bind(this);
+        initUi();
 
         presenter.setView(this);
     }
@@ -68,5 +71,11 @@ public class LoginActivity extends BaseActivity implements LoginContract.View {
         Intent intent = new Intent(context, MainActivity.class);
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
         startActivity(intent);
+    }
+
+    private void initUi() {
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setTitle(null);
     }
 }

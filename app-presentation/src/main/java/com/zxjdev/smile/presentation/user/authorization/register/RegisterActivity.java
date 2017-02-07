@@ -3,6 +3,7 @@ package com.zxjdev.smile.presentation.user.authorization.register;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v7.widget.Toolbar;
 import android.widget.EditText;
 
 import com.zxjdev.smile.R;
@@ -21,6 +22,7 @@ public class RegisterActivity extends BaseActivity implements RegisterContract.V
 
     @BindView(R.id.et_username) EditText etUsername;
     @BindView(R.id.et_password) EditText etPassword;
+    @BindView(R.id.toolbar) Toolbar toolbar;
 
     @Inject RegisterContract.Presenter presenter;
 
@@ -32,6 +34,7 @@ public class RegisterActivity extends BaseActivity implements RegisterContract.V
 
         setContentView(R.layout.activity_register);
         ButterKnife.bind(this);
+        initUi();
 
         presenter.setView(this);
     }
@@ -64,5 +67,11 @@ public class RegisterActivity extends BaseActivity implements RegisterContract.V
         Intent intent = new Intent(context, MainActivity.class);
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
         startActivity(intent);
+    }
+
+    private void initUi() {
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setTitle(null);
     }
 }

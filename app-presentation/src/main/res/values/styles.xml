@@ -6,12 +6,15 @@
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
-        <item name="android:windowTranslucentStatus">true</item>
+        <item name="android:windowTranslucentStatus">false</item>
     </style>
 
     <style name="Smile.ActionBarTheme" parent="@style/ThemeOverlay.AppCompat.ActionBar">
         <!-- 修改了返回箭头的颜色 -->
         <item name="colorControlNormal">@android:color/white</item>
+        <item name="titleTextColor">@android:color/white</item>
+        <item name="android:background">?attr/colorPrimary</item>
+        <item name="popupTheme">@style/ThemeOverlay.AppCompat.Light</item>
     </style>
 
     <style name="Smile.PopupTheme" parent="@style/ThemeOverlay.AppCompat.Light">

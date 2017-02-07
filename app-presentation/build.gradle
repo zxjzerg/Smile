@@ -78,4 +78,5 @@ dependencies {
     testCompile rootProject.ext.junit
 
     compile rootProject.ext.glide
+    compile 'com.android.support.constraint:constraint-layout:1.0.0-beta4'
 }
