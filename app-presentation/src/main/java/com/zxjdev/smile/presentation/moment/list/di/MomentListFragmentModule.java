@@ -1,6 +1,5 @@
 package com.zxjdev.smile.presentation.moment.list.di;
 
-import com.zxjdev.smile.domain.moment.GetMomentListUseCase;
 import com.zxjdev.smile.presentation.application.di.scope.FragmentScope;
 import com.zxjdev.smile.presentation.moment.list.MomentListContract;
 import com.zxjdev.smile.presentation.moment.list.MomentListPresenter;
@@ -26,7 +25,13 @@ public class MomentListFragmentModule {
 
     @Provides
     @FragmentScope
-    MomentListContract.Presenter providePresenter(GetMomentListUseCase getMomentListUseCase) {
-        return new MomentListPresenter(view, getMomentListUseCase);
+    MomentListContract.View provideView() {
+        return view;
+    }
+
+    @Provides
+    @FragmentScope
+    MomentListContract.Presenter providePresenter(MomentListPresenter presenter) {
+        return presenter;
     }
 }

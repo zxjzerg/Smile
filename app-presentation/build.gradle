@@ -82,4 +82,6 @@ dependencies {
     compile rootProject.ext.android_support_constaint
 
     compile rootProject.ext.android_support_cardview
+
+    compile rootProject.ext.android_support_percent
 }

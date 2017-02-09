@@ -20,7 +20,6 @@ import com.zxjdev.smile.presentation.moment.list.adapter.MomentAdapter;
 import com.zxjdev.smile.presentation.moment.list.di.MomentListFragmentComponent;
 import com.zxjdev.smile.presentation.moment.list.di.MomentListFragmentModule;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -40,10 +39,9 @@ public class MomentListFragment extends BaseFragment implements MomentListContra
     @Inject MomentListContract.Presenter presenter;
 
     private MomentListFragmentComponent momentListFragmentComponent;
-    private List<MomentModel> moments;
 
     public MomentListFragment() {
-        moments = mockMoments();
+
     }
 
     @Override
@@ -84,7 +82,6 @@ public class MomentListFragment extends BaseFragment implements MomentListContra
 
     private void initData() {
         rvMoments.setAdapter(momentAdapter);
-        momentAdapter.setMoments(moments);
 
         presenter.create();
     }
@@ -101,18 +98,13 @@ public class MomentListFragment extends BaseFragment implements MomentListContra
         startActivity(addMoment);
     }
 
-    private List<MomentModel> mockMoments() {
-        List<MomentModel> moments = new ArrayList<>();
-        for (int i = 1; i <= 100; i++) {
-            MomentModel moment = new MomentModel();
-            moment.setContent(String.valueOf(i));
-            moments.add(moment);
-        }
-        return moments;
-    }
-
     @Override
     public Context context() {
         return getActivity();
+    }
+
+    @Override
+    public void displayMomentList(List<MomentModel> momentModels) {
+        momentAdapter.setMoments(momentModels);
     }
 }
