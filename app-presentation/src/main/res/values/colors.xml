@@ -4,4 +4,6 @@
     <color name="colorPrimaryDark">#F06292</color>
     <color name="colorAccent">#FF4081</color>
     <color name="statusBar">#99F06292</color>
+    <color name="titleTextColor">#DE000000</color>
+    <color name="subtitleTextColor">#8A000000</color>
 </resources>

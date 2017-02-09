@@ -30,6 +30,7 @@ public class MomentAdapter extends RecyclerView.Adapter<MomentViewHolder> {
     public void onBindViewHolder(MomentViewHolder holder, int position) {
         MomentModel moment = moments.get(position);
         holder.tvContent.setText(moment.getContent());
+        holder.tvName.setText(moment.getOwner().getUsername());
     }
 
     @Override

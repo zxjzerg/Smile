@@ -12,6 +12,7 @@ import butterknife.ButterKnife;
 public class MomentViewHolder extends RecyclerView.ViewHolder {
 
     @BindView(R.id.tv_content) TextView tvContent;
+    @BindView(R.id.tv_name) TextView tvName;
 
     public MomentViewHolder(View itemView) {
         super(itemView);

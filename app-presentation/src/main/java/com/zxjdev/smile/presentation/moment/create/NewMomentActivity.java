@@ -78,5 +78,6 @@ public class NewMomentActivity extends BaseActivity implements NewMomentContract
     private void initUi() {
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setTitle(null);
     }
 }
