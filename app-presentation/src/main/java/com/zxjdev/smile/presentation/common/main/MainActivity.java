@@ -10,10 +10,13 @@ import android.support.design.widget.NavigationView;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.widget.Toolbar;
+import android.text.TextUtils;
 import android.view.Gravity;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.zxjdev.smile.R;
 import com.zxjdev.smile.presentation.application.base.activity.BaseActivity;
 import com.zxjdev.smile.presentation.common.main.di.MainActivityComponent;
@@ -29,6 +32,7 @@ import javax.inject.Inject;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import jp.wasabeef.glide.transformations.CropCircleTransformation;
 
 public class MainActivity extends BaseActivity implements MainContract.View {
 
@@ -36,13 +40,12 @@ public class MainActivity extends BaseActivity implements MainContract.View {
     @BindView(R.id.view_toolbar) Toolbar toolbar;
     @BindView(R.id.view_navigation) NavigationView navigationView;
     private ActionBarDrawerToggle drawerToggle;
-    private TextView tvUsername;
 
     private MainActivityComponent mainActivityComponent;
 
     private List<String> fragmentTags = new ArrayList<>();
 
-    @Inject MainContract.Presenter mPresenter;
+    @Inject MainContract.Presenter presenter;
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -56,6 +59,8 @@ public class MainActivity extends BaseActivity implements MainContract.View {
             showFragment(R.id.flyt_content, new MomentListFragment(), MomentListFragment.TAG);
             navigationView.setCheckedItem(R.id.navi_item_moments);
         }
+
+        presenter.onCreate();
     }
 
     @Override
@@ -107,12 +112,6 @@ public class MainActivity extends BaseActivity implements MainContract.View {
             dlytContainer.closeDrawers();
             return true;
         });
-
-        if (navigationView.getHeaderCount() > 0) {
-            View view = navigationView.getHeaderView(0);
-            tvUsername = (TextView) view.findViewById(R.id.tv_name);
-            tvUsername.setText("username");
-        }
     }
 
     public MainActivityComponent getComponent() {
@@ -154,6 +153,23 @@ public class MainActivity extends BaseActivity implements MainContract.View {
 
     @Override
     public void displayUser(UserModel user) {
+        if (navigationView.getHeaderCount() <= 0) return;
 
+        View view = navigationView.getHeaderView(0);
+        TextView tvUsername = (TextView) view.findViewById(R.id.tv_name);
+        ImageView ivAvatar = (ImageView) view.findViewById(R.id.iv_avatar);
+
+        tvUsername.setText(user.getUsername());
+        if (TextUtils.isEmpty(user.getAvatar())) {
+            Glide.with(this)
+                .load(R.drawable.default_avatar)
+                .bitmapTransform(new CropCircleTransformation(this))
+                .into(ivAvatar);
+        } else {
+            Glide.with(this)
+                .load(user.getAvatar())
+                .bitmapTransform(new CropCircleTransformation(this))
+                .into(ivAvatar);
+        }
     }
 }

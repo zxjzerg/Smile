@@ -14,4 +14,6 @@ public interface UserRepository {
     Observable<Void> logout();
 
     Observable<User> getUser(String id);
+
+    Observable<User> getCurrentUser();
 }

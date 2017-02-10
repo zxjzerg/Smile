@@ -73,4 +73,5 @@ ext {
     stetho = 'com.facebook.stetho:stetho:1.4.2'
 
     glide = 'com.github.bumptech.glide:glide:3.7.0'
+    glide_transformations = 'jp.wasabeef:glide-transformations:2.0.1'
 }

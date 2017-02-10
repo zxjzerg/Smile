@@ -2,6 +2,7 @@ package com.zxjdev.smile.presentation.user;
 
 import com.zxjdev.smile.domain.base.UseCaseConfig;
 import com.zxjdev.smile.domain.user.AutoLoginUseCase;
+import com.zxjdev.smile.domain.user.GetCurrentUserUseCase;
 import com.zxjdev.smile.domain.user.LoginUseCase;
 import com.zxjdev.smile.domain.user.LogoutUseCase;
 import com.zxjdev.smile.domain.user.RegisterUseCase;
@@ -33,5 +34,11 @@ public class UserUseCaseModule {
     RegisterUseCase provideRegisterUseCase(UseCaseConfig useCaseConfig,
         UserRepository userRepository) {
         return new RegisterUseCase(useCaseConfig, userRepository);
+    }
+
+    @Provides
+    GetCurrentUserUseCase provideGetCurrentUserUseCase(UseCaseConfig useCaseConfig,
+        UserRepository userRepository) {
+        return new GetCurrentUserUseCase(useCaseConfig, userRepository);
     }
 }
