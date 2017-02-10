@@ -29,25 +29,25 @@
 
             <TextView
                 android:id="@+id/tv_name"
+                style="@style/Smile.RobotoMedium"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignTop="@id/iv_avatar"
-                android:layout_marginLeft="8dp"
+                android:layout_marginStart="8dp"
                 android:layout_toEndOf="@id/iv_avatar"
+                android:alpha="0.87"
                 android:textColor="@color/titleTextColor"
-                android:textSize="14sp"
-                android:textStyle="bold"
                 tools:text="名字" />
 
             <TextView
                 android:id="@+id/tv_time"
+                style="@style/Smile.RobotoMedium"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignStart="@id/tv_name"
                 android:layout_below="@id/tv_name"
-                android:layout_marginTop="8dp"
-                android:textColor="@color/subtitleTextColor"
-                android:textSize="14sp"
+                android:layout_marginTop="4dp"
+                android:alpha="0.5"
                 tools:text="2013.06.09" />
 
         </RelativeLayout>
@@ -61,12 +61,14 @@
 
         <TextView
             android:id="@+id/tv_content"
+            style="@style/Smile.RobotoRegular"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical|start"
             android:layout_marginBottom="24dp"
             android:layout_marginLeft="16dp"
             android:layout_marginRight="16dp"
+            android:alpha="0.54"
             tools:text="内容" />
 
     </LinearLayout>

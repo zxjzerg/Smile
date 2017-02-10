@@ -1,7 +1,7 @@
 <resources>
 
     <!-- Base application theme. -->
-    <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
+    <style name="Smile" parent="Theme.AppCompat.Light.NoActionBar">
         <!-- Customize your theme here. -->
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
@@ -20,6 +20,21 @@
 
     <style name="Smile.PopupTheme" parent="@style/ThemeOverlay.AppCompat.Light">
 
+    </style>
+
+    <style name="Smile.RobotoMedium">
+        <item name="android:textSize">14sp</item>
+        <item name="android:fontFamily">@string/font_family_medium</item>
+    </style>
+
+    <style name="Smile.RobotoLight">
+        <item name="android:textSize">14sp</item>
+        <item name="android:fontFamily">@string/font_family_light</item>
+    </style>
+
+    <style name="Smile.RobotoRegular">
+        <item name="android:textSize">14sp</item>
+        <item name="android:fontFamily">@string/font_family_regular</item>
     </style>
 
 </resources>
