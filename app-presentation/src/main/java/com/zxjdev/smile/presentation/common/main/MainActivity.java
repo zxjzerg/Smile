@@ -47,6 +47,7 @@ public class MainActivity extends BaseActivity implements MainContract.View {
 
     @Inject MainContract.Presenter presenter;
 
+    @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
@@ -82,6 +83,40 @@ public class MainActivity extends BaseActivity implements MainContract.View {
         super.onDestroy();
     }
 
+    @Override
+    public Context context() {
+        return this;
+    }
+
+    @Override
+    public void displayUser(UserModel user) {
+        if (navigationView.getHeaderCount() <= 0) return;
+
+        View view = navigationView.getHeaderView(0);
+        TextView tvUsername = (TextView) view.findViewById(R.id.tv_name);
+        ImageView ivAvatar = (ImageView) view.findViewById(R.id.iv_avatar);
+
+        tvUsername.setText(user.getUsername());
+        if (TextUtils.isEmpty(user.getAvatar())) {
+            Glide.with(this)
+                .load(R.drawable.default_avatar)
+                .bitmapTransform(new CropCircleTransformation(this))
+                .into(ivAvatar);
+        } else {
+            Glide.with(this)
+                .load(user.getAvatar())
+                .bitmapTransform(new CropCircleTransformation(this))
+                .into(ivAvatar);
+        }
+    }
+
+    /**
+     * Get the dagger component of MainActivity. Used in Fragments of MainActivity.
+     */
+    public MainActivityComponent getComponent() {
+        return mainActivityComponent;
+    }
+
     private void initUi() {
         drawerToggle = new ActionBarDrawerToggle(this, dlytContainer, toolbar, R.string.open,
             R.string.close);
@@ -97,6 +132,9 @@ public class MainActivity extends BaseActivity implements MainContract.View {
         initNavigationView();
     }
 
+    /**
+     * Initialize the navigation view in the left drawer.
+     */
     private void initNavigationView() {
         // 添加侧边菜单的点击事件
         navigationView.setNavigationItemSelectedListener(item -> {
@@ -114,10 +152,13 @@ public class MainActivity extends BaseActivity implements MainContract.View {
         });
     }
 
-    public MainActivityComponent getComponent() {
-        return mainActivityComponent;
-    }
-
+    /**
+     * Display a certain fragment.
+     *
+     * @param container resource id of the container
+     * @param fragment fragment instance to show
+     * @param tag unique tag of the fragment
+     */
     private void showFragment(@IdRes int container, Fragment fragment, String tag) {
         boolean isShowing = false;
 
@@ -144,32 +185,5 @@ public class MainActivity extends BaseActivity implements MainContract.View {
         }
         fragmentTransaction.commit();
         getFragmentManager().executePendingTransactions();
-    }
-
-    @Override
-    public Context context() {
-        return this;
-    }
-
-    @Override
-    public void displayUser(UserModel user) {
-        if (navigationView.getHeaderCount() <= 0) return;
-
-        View view = navigationView.getHeaderView(0);
-        TextView tvUsername = (TextView) view.findViewById(R.id.tv_name);
-        ImageView ivAvatar = (ImageView) view.findViewById(R.id.iv_avatar);
-
-        tvUsername.setText(user.getUsername());
-        if (TextUtils.isEmpty(user.getAvatar())) {
-            Glide.with(this)
-                .load(R.drawable.default_avatar)
-                .bitmapTransform(new CropCircleTransformation(this))
-                .into(ivAvatar);
-        } else {
-            Glide.with(this)
-                .load(user.getAvatar())
-                .bitmapTransform(new CropCircleTransformation(this))
-                .into(ivAvatar);
-        }
     }
 }
