@@ -3,14 +3,16 @@ package com.zxjdev.smile.presentation.moment.create;
 import com.zxjdev.smile.domain.moment.AddMomentUseCase;
 import com.zxjdev.smile.presentation.application.DefaultSubscriber;
 
+import javax.inject.Inject;
+
 public class NewMomentPresenter implements NewMomentContract.Presenter {
 
-    private NewMomentContract.View view;
-    private AddMomentUseCase addMomentUseCase;
+    @Inject NewMomentContract.View view;
+    @Inject AddMomentUseCase addMomentUseCase;
 
-    public NewMomentPresenter(NewMomentContract.View view, AddMomentUseCase addMomentUseCase) {
-        this.view = view;
-        this.addMomentUseCase = addMomentUseCase;
+    @Inject
+    public NewMomentPresenter() {
+
     }
 
     public void handleAddMoment(String content) {

@@ -1,11 +1,14 @@
 package com.zxjdev.smile.presentation.common.main;
 
+import javax.inject.Inject;
+
 public class MainPresenter implements MainContract.Presenter {
 
-    private MainContract.View view;
+    @Inject MainContract.View view;
 
-    public MainPresenter(MainContract.View view) {
-        this.view = view;
+    @Inject
+    public MainPresenter() {
+
     }
 
     public void setView(MainContract.View view) {

@@ -1,6 +1,5 @@
 package com.zxjdev.smile.presentation.user.authorization.login.di;
 
-import com.zxjdev.smile.domain.user.LoginUseCase;
 import com.zxjdev.smile.presentation.user.authorization.login.LoginContract;
 import com.zxjdev.smile.presentation.user.authorization.login.LoginPresenter;
 
@@ -17,7 +16,12 @@ public class LoginActivityModule {
     }
 
     @Provides
-    LoginContract.Presenter providePresenter(LoginUseCase loginUseCase) {
-        return new LoginPresenter(view, loginUseCase);
+    LoginContract.View provideView() {
+        return view;
+    }
+
+    @Provides
+    LoginContract.Presenter providePresenter(LoginPresenter presenter) {
+        return presenter;
     }
 }

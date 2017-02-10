@@ -4,16 +4,18 @@ import com.zxjdev.smile.domain.user.LoginUseCase;
 import com.zxjdev.smile.domain.user.User;
 import com.zxjdev.smile.presentation.application.DefaultSubscriber;
 
+import javax.inject.Inject;
+
 import timber.log.Timber;
 
 public class LoginPresenter implements LoginContract.Presenter {
 
-    private LoginContract.View view;
-    private LoginUseCase loginUseCase;
+    @Inject LoginContract.View view;
+    @Inject LoginUseCase loginUseCase;
 
-    public LoginPresenter(LoginContract.View view, LoginUseCase loginUseCase) {
-        this.view = view;
-        this.loginUseCase = loginUseCase;
+    @Inject
+    public LoginPresenter() {
+
     }
 
     @Override

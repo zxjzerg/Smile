@@ -9,14 +9,12 @@ import javax.inject.Inject;
 
 public class SplashPresenter implements SplashContract.Presenter {
 
-    private AutoLoginUseCase autoLoginUseCase;
-    private SplashContract.View view;
+    @Inject AutoLoginUseCase autoLoginUseCase;
+    @Inject SplashContract.View view;
     private Handler handler;
 
     @Inject
-    public SplashPresenter(SplashContract.View view, AutoLoginUseCase autoLoginUseCase) {
-        this.view = view;
-        this.autoLoginUseCase = autoLoginUseCase;
+    public SplashPresenter() {
         this.handler = new Handler();
     }
 

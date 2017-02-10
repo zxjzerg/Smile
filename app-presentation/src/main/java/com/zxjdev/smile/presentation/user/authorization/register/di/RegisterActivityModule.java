@@ -1,6 +1,5 @@
 package com.zxjdev.smile.presentation.user.authorization.register.di;
 
-import com.zxjdev.smile.domain.user.RegisterUseCase;
 import com.zxjdev.smile.presentation.user.authorization.register.RegisterContract;
 import com.zxjdev.smile.presentation.user.authorization.register.RegisterPresenter;
 
@@ -17,7 +16,12 @@ public class RegisterActivityModule {
     }
 
     @Provides
-    RegisterContract.Presenter providePresenter(RegisterUseCase registerUseCase) {
-        return new RegisterPresenter(view, registerUseCase);
+    RegisterContract.View provideView() {
+        return view;
+    }
+
+    @Provides
+    RegisterContract.Presenter providePresenter(RegisterPresenter presenter) {
+        return presenter;
     }
 }

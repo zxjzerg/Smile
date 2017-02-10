@@ -16,7 +16,12 @@ public class MainActivityModule {
     }
 
     @Provides
-    MainContract.Presenter providePresenter() {
-        return new MainPresenter(view);
+    MainContract.View provideView() {
+        return view;
+    }
+
+    @Provides
+    MainContract.Presenter providePresenter(MainPresenter presenter) {
+        return presenter;
     }
 }

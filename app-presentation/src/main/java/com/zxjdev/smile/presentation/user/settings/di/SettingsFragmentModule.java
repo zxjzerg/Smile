@@ -1,6 +1,5 @@
 package com.zxjdev.smile.presentation.user.settings.di;
 
-import com.zxjdev.smile.domain.user.LogoutUseCase;
 import com.zxjdev.smile.presentation.application.di.scope.FragmentScope;
 import com.zxjdev.smile.presentation.user.settings.SettingsContract;
 import com.zxjdev.smile.presentation.user.settings.SettingsPresenter;
@@ -18,8 +17,13 @@ public class SettingsFragmentModule {
     }
 
     @Provides
+    SettingsContract.View provideView() {
+        return view;
+    }
+
+    @Provides
     @FragmentScope
-    SettingsContract.Presenter providePresenter(LogoutUseCase logoutUseCase) {
-        return new SettingsPresenter(view, logoutUseCase);
+    SettingsContract.Presenter providePresenter(SettingsPresenter presenter) {
+        return presenter;
     }
 }

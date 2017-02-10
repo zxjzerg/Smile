@@ -1,6 +1,5 @@
 package com.zxjdev.smile.presentation.common.splash.di;
 
-import com.zxjdev.smile.domain.user.AutoLoginUseCase;
 import com.zxjdev.smile.presentation.common.splash.SplashContract;
 import com.zxjdev.smile.presentation.common.splash.SplashPresenter;
 
@@ -17,7 +16,12 @@ public class SplashActivityModule {
     }
 
     @Provides
-    SplashContract.Presenter providePresenter(AutoLoginUseCase autoLoginUseCase) {
-        return new SplashPresenter(view, autoLoginUseCase);
+    SplashContract.View provideView() {
+        return view;
+    }
+
+    @Provides
+    SplashContract.Presenter providePresenter(SplashPresenter presenter) {
+        return presenter;
     }
 }
