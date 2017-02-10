@@ -79,6 +79,7 @@ public class MainActivity extends BaseActivity implements MainContract.View {
 
     @Override
     protected void onDestroy() {
+        presenter.onDestroy();
         mainActivityComponent = null;
         super.onDestroy();
     }
