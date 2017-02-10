@@ -57,7 +57,7 @@ public class MainActivity extends BaseActivity implements MainContract.View {
         fragmentTags.add(SettingsFragment.TAG);
 
         if (savedInstanceState == null) {
-            showFragment(R.id.flyt_content, new MomentListFragment(), MomentListFragment.TAG);
+            showFragment(R.id.flyt_content, MomentListFragment.class, MomentListFragment.TAG);
             navigationView.setCheckedItem(R.id.navi_item_moments);
         }
 
@@ -140,11 +140,11 @@ public class MainActivity extends BaseActivity implements MainContract.View {
         navigationView.setNavigationItemSelectedListener(item -> {
             switch (item.getItemId()) {
                 case R.id.navi_item_moments:
-                    showFragment(R.id.flyt_content, new MomentListFragment(),
+                    showFragment(R.id.flyt_content, MomentListFragment.class,
                         MomentListFragment.TAG);
                     break;
                 case R.id.navi_item_settings:
-                    showFragment(R.id.flyt_content, new SettingsFragment(), SettingsFragment.TAG);
+                    showFragment(R.id.flyt_content, SettingsFragment.class, SettingsFragment.TAG);
                     break;
             }
             dlytContainer.closeDrawers();
@@ -159,6 +159,7 @@ public class MainActivity extends BaseActivity implements MainContract.View {
      * @param fragment fragment instance to show
      * @param tag unique tag of the fragment
      */
+    @Deprecated
     private void showFragment(@IdRes int container, Fragment fragment, String tag) {
         boolean isShowing = false;
 
@@ -181,6 +182,42 @@ public class MainActivity extends BaseActivity implements MainContract.View {
                 fragmentTransaction.attach(frag);
             } else {
                 fragmentTransaction.add(container, fragment, tag);
+            }
+        }
+        fragmentTransaction.commit();
+        getFragmentManager().executePendingTransactions();
+    }
+
+    /**
+     * Display a certain fragment.
+     *
+     * @param container resource id of the container
+     * @param cls class of the fragment to show
+     * @param tag unique tag of the fragment
+     */
+    private void showFragment(@IdRes int container, Class<? extends Fragment> cls, String tag) {
+        boolean isShowing = false;
+
+        FragmentTransaction fragmentTransaction = getFragmentManager().beginTransaction();
+        for (String fragmentTag : fragmentTags) {
+            Fragment frag = getFragmentManager().findFragmentByTag(fragmentTag);
+            if (frag != null && !frag.isDetached()) {
+                if (fragmentTag.equals(tag)) {
+                    // Do nothing
+                    isShowing = true;
+                } else {
+                    fragmentTransaction.detach(frag);
+                }
+            }
+        }
+
+        if (!isShowing) {
+            Fragment frag = getFragmentManager().findFragmentByTag(tag);
+            if (frag != null) {
+                fragmentTransaction.attach(frag);
+            } else {
+                frag = Fragment.instantiate(context, cls.getName());
+                fragmentTransaction.add(container, frag, tag);
             }
         }
         fragmentTransaction.commit();
