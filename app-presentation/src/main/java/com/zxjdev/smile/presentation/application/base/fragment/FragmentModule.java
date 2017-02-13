@@ -1,12 +1,12 @@
-package com.zxjdev.smile.presentation.application.base.activity;
+package com.zxjdev.smile.presentation.application.base.fragment;
 
-import android.app.Activity;
+import android.app.Fragment;
 import android.content.Context;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.RequestManager;
 import com.zxjdev.smile.presentation.application.di.DiConstant;
-import com.zxjdev.smile.presentation.application.di.scope.ActivityScope;
+import com.zxjdev.smile.presentation.application.di.scope.FragmentScope;
 import com.zxjdev.smile.presentation.application.util.image.ImageLoader;
 import com.zxjdev.smile.presentation.application.util.image.SmileImageLoader;
 
@@ -16,25 +16,25 @@ import dagger.Module;
 import dagger.Provides;
 
 @Module
-public class ActivityModule {
+public class FragmentModule {
 
-    private Activity activity;
+    private Fragment fragment;
 
-    public ActivityModule(Activity activity) {
-        this.activity = activity;
+    public FragmentModule(Fragment fragment) {
+        this.fragment = fragment;
     }
 
     @Provides
-    @ActivityScope
-    Activity provideActivity() {
-        return activity;
+    @FragmentScope
+    RequestManager provideRequestManager() {
+        return Glide.with(fragment);
     }
 
     @Provides
-    @ActivityScope
-    @Named(DiConstant.ACTIVITY_IMAGE_LOADER)
+    @FragmentScope
+    @Named(DiConstant.FRAGMENT_IMAGE_LOADER)
     ImageLoader provideImageLoader(Context context) {
-        RequestManager requestManager = Glide.with(activity);
+        RequestManager requestManager = Glide.with(fragment);
         return new SmileImageLoader(context, requestManager);
     }
 }

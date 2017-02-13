@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -13,6 +14,7 @@ import android.view.ViewGroup;
 
 import com.zxjdev.smile.R;
 import com.zxjdev.smile.presentation.application.base.fragment.BaseFragment;
+import com.zxjdev.smile.presentation.application.base.fragment.FragmentModule;
 import com.zxjdev.smile.presentation.common.main.MainActivity;
 import com.zxjdev.smile.presentation.moment.MomentModel;
 import com.zxjdev.smile.presentation.moment.create.NewMomentActivity;
@@ -34,6 +36,7 @@ public class MomentListFragment extends BaseFragment implements MomentListContra
 
     @BindView(R.id.rv_moments) RecyclerView rvMoments;
     @BindView(R.id.fbtn_add_new_moment) FloatingActionButton btnNewMoment;
+    @BindView(R.id.layout_swipe) SwipeRefreshLayout layoutSwipe;
 
     @Inject MomentAdapter momentAdapter;
     @Inject MomentListContract.Presenter presenter;
@@ -48,7 +51,8 @@ public class MomentListFragment extends BaseFragment implements MomentListContra
     protected void initializeComponent() {
         if (getActivity() instanceof MainActivity) {
             momentListFragmentComponent = ((MainActivity) getActivity()).getComponent()
-                .getMomentsFragmentComponent(new MomentListFragmentModule(this));
+                .getMomentsFragmentComponent(new FragmentModule(this),
+                    new MomentListFragmentModule(this));
             momentListFragmentComponent.inject(this);
         }
     }
@@ -78,6 +82,9 @@ public class MomentListFragment extends BaseFragment implements MomentListContra
 
     private void initUi() {
         rvMoments.setLayoutManager(new LinearLayoutManager(getActivity()));
+
+        layoutSwipe.setColorSchemeResources(R.color.colorAccent);
+        layoutSwipe.setOnRefreshListener(() -> presenter.refreshMoments());
     }
 
     private void initData() {
@@ -106,5 +113,10 @@ public class MomentListFragment extends BaseFragment implements MomentListContra
     @Override
     public void displayMomentList(List<MomentModel> momentModels) {
         momentAdapter.setMoments(momentModels);
+    }
+
+    @Override
+    public void dismissRefreshingView() {
+        layoutSwipe.setRefreshing(false);
     }
 }

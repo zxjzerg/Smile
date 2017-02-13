@@ -6,6 +6,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.zxjdev.smile.R;
+import com.zxjdev.smile.presentation.application.util.image.ImageLoader;
 import com.zxjdev.smile.presentation.moment.MomentModel;
 
 import java.util.ArrayList;
@@ -14,9 +15,10 @@ import java.util.List;
 public class MomentAdapter extends RecyclerView.Adapter<MomentViewHolder> {
 
     private List<MomentModel> moments = new ArrayList<>();
+    private ImageLoader imageLoader;
 
-    public MomentAdapter() {
-
+    public MomentAdapter(ImageLoader imageLoader) {
+        this.imageLoader = imageLoader;
     }
 
     @Override
@@ -31,6 +33,8 @@ public class MomentAdapter extends RecyclerView.Adapter<MomentViewHolder> {
         MomentModel moment = moments.get(position);
         holder.tvContent.setText(moment.getContent());
         holder.tvName.setText(moment.getOwner().getUsername());
+
+        imageLoader.loadCircleImage(R.drawable.default_avatar, holder.ivAvatar);
     }
 
     @Override

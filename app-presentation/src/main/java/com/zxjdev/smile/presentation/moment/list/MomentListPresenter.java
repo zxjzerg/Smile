@@ -36,4 +36,16 @@ public class MomentListPresenter implements MomentListContract.Presenter {
             }
         });
     }
+
+    @Override
+    public void refreshMoments() {
+        getMomentListUseCase.execute(new DefaultSubscriber<List<Moment>>(view.context()) {
+            @Override
+            public void onNext(List<Moment> data) {
+                List<MomentModel> momentModels = momentModelMapper.transform(data);
+                view.displayMomentList(momentModels);
+                view.dismissRefreshingView();
+            }
+        });
+    }
 }

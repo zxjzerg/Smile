@@ -16,9 +16,10 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.bumptech.glide.Glide;
 import com.zxjdev.smile.R;
 import com.zxjdev.smile.presentation.application.base.activity.BaseActivity;
+import com.zxjdev.smile.presentation.application.di.DiConstant;
+import com.zxjdev.smile.presentation.application.util.image.ImageLoader;
 import com.zxjdev.smile.presentation.common.main.di.MainActivityComponent;
 import com.zxjdev.smile.presentation.common.main.di.MainActivityModule;
 import com.zxjdev.smile.presentation.moment.list.MomentListFragment;
@@ -29,10 +30,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.inject.Inject;
+import javax.inject.Named;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import jp.wasabeef.glide.transformations.CropCircleTransformation;
 
 public class MainActivity extends BaseActivity implements MainContract.View {
 
@@ -46,6 +47,9 @@ public class MainActivity extends BaseActivity implements MainContract.View {
     private List<String> fragmentTags = new ArrayList<>();
 
     @Inject MainContract.Presenter presenter;
+    @Inject
+    @Named(DiConstant.ACTIVITY_IMAGE_LOADER)
+    ImageLoader imageLoader;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -99,15 +103,9 @@ public class MainActivity extends BaseActivity implements MainContract.View {
 
         tvUsername.setText(user.getUsername());
         if (TextUtils.isEmpty(user.getAvatar())) {
-            Glide.with(this)
-                .load(R.drawable.default_avatar)
-                .bitmapTransform(new CropCircleTransformation(this))
-                .into(ivAvatar);
+            imageLoader.loadCircleImage(R.drawable.default_avatar, ivAvatar);
         } else {
-            Glide.with(this)
-                .load(user.getAvatar())
-                .bitmapTransform(new CropCircleTransformation(this))
-                .into(ivAvatar);
+            imageLoader.loadCircleImage(user.getAvatar(), ivAvatar);
         }
     }
 

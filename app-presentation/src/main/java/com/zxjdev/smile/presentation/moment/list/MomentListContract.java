@@ -13,6 +13,8 @@ public interface MomentListContract {
         Context context();
 
         void displayMomentList(List<MomentModel> momentModels);
+
+        void dismissRefreshingView();
     }
 
     interface Presenter {
@@ -20,5 +22,7 @@ public interface MomentListContract {
         void create();
 
         void loadMoments();
+
+        void refreshMoments();
     }
 }
