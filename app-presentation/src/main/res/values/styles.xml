@@ -8,11 +8,11 @@
         <item name="colorAccent">@color/colorAccent</item>
         <item name="android:windowTranslucentStatus">false</item>
         <item name="android:statusBarColor">@color/statusBar</item>
+        <!-- 修改了返回箭头的颜色 -->
+        <item name="colorControlNormal">@android:color/white</item>
     </style>
 
     <style name="Smile.ActionBarTheme" parent="@style/ThemeOverlay.AppCompat.ActionBar">
-        <!-- 修改了返回箭头的颜色 -->
-        <item name="colorControlNormal">@android:color/white</item>
         <item name="titleTextColor">@android:color/white</item>
         <item name="android:background">?attr/colorPrimary</item>
         <item name="popupTheme">@style/ThemeOverlay.AppCompat.Light</item>
@@ -35,6 +35,12 @@
     <style name="Smile.RobotoRegular">
         <item name="android:textSize">14sp</item>
         <item name="android:fontFamily">@string/font_family_regular</item>
+    </style>
+
+    <style name="Smile.ColoredButton" parent="Widget.AppCompat.Button.Colored">
+        <item name="android:textSize">18sp</item>
+        <item name="android:fontFamily">@string/font_family_medium</item>
+        <item name="android:minHeight">60dp</item>
     </style>
 
 </resources>

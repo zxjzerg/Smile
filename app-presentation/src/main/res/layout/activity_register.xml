@@ -65,13 +65,11 @@
 
     <Button
         android:id="@+id/btn_register"
-        style="@style/Widget.AppCompat.Button.Colored"
+        style="@style/Smile.ColoredButton"
         android:layout_width="0dp"
         android:layout_height="60dp"
         android:layout_marginTop="32dp"
-        android:fontFamily="sans-serif-medium"
         android:text="@string/register"
-        android:textSize="18sp"
         app:layout_constraintLeft_toLeftOf="@+id/layout_password"
         app:layout_constraintRight_toRightOf="@+id/layout_password"
         app:layout_constraintTop_toBottomOf="@+id/layout_password"
