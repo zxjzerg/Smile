@@ -75,9 +75,13 @@ public class MomentListFragment extends BaseFragment implements MomentListContra
     }
 
     @Override
-    public void onActivityCreated(Bundle savedInstanceState) {
-        super.onActivityCreated(savedInstanceState);
-        initData();
+    protected void onDependencyReady() {
+        rvMoments.setAdapter(momentAdapter);
+    }
+
+    @Override
+    protected void onInitialized() {
+        presenter.create();
     }
 
     private void initUi() {
@@ -85,12 +89,6 @@ public class MomentListFragment extends BaseFragment implements MomentListContra
 
         layoutSwipe.setColorSchemeResources(R.color.colorAccent);
         layoutSwipe.setOnRefreshListener(() -> presenter.refreshMoments());
-    }
-
-    private void initData() {
-        rvMoments.setAdapter(momentAdapter);
-
-        presenter.create();
     }
 
     @Override

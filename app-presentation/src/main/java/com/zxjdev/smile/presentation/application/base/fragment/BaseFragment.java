@@ -16,6 +16,12 @@ public abstract class BaseFragment extends Fragment {
         if (!initializedInjector) {
             initializeComponent();
             initializedInjector = true;
+
+            onDependencyReady();
+
+            onInitialized();
+        } else {
+            onDependencyReady();
         }
     }
 
@@ -24,6 +30,21 @@ public abstract class BaseFragment extends Fragment {
         super.onDestroy();
         releaseComponent();
         initializedInjector = true;
+    }
+
+    /**
+     * Called after view is created and all dependencies is ready. Share same lifecycle with onActivityCreated().
+     */
+    protected void onDependencyReady() {
+
+    }
+
+    /**
+     * Called after view is created and all dependencies is ready. Only called once if activity is
+     * not destroyed.
+     */
+    protected void onInitialized() {
+
     }
 
     /**
