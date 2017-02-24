@@ -1,9 +1,9 @@
 package com.zxjdev.smile.presentation.application.di.module;
 
-import com.zxjdev.smile.data.moment.datasource.IMomentCloudService;
 import com.zxjdev.smile.data.moment.datasource.MomentCloudService;
-import com.zxjdev.smile.data.user.datasource.AuthorizationService;
-import com.zxjdev.smile.data.user.datasource.IAuthorizationCloudService;
+import com.zxjdev.smile.data.moment.datasource.MomentCloudServiceLeanCloudImpl;
+import com.zxjdev.smile.data.user.datasource.UserCloudService;
+import com.zxjdev.smile.data.user.datasource.UserCloudServiceLeanCloudImpl;
 
 import javax.inject.Singleton;
 
@@ -15,13 +15,13 @@ public class NetworkModule {
 
     @Provides
     @Singleton
-    IAuthorizationCloudService provideAuthorizationService(AuthorizationService authorizationService) {
-        return authorizationService;
+    UserCloudService provideAuthorizationService(UserCloudServiceLeanCloudImpl userCloudService) {
+        return userCloudService;
     }
 
     @Provides
     @Singleton
-    IMomentCloudService provideMomentService(MomentCloudService momentCloudService) {
+    MomentCloudService provideMomentService(MomentCloudServiceLeanCloudImpl momentCloudService) {
         return momentCloudService;
     }
 }

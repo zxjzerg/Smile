@@ -10,10 +10,10 @@ import rx.Observable;
 
 public class MomentCloudDataSource {
 
-    private IMomentCloudService momentService;
+    private MomentCloudService momentService;
 
     @Inject
-    public MomentCloudDataSource(IMomentCloudService momentService) {
+    public MomentCloudDataSource(MomentCloudService momentService) {
         this.momentService = momentService;
     }
 

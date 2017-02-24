@@ -85,4 +85,6 @@ dependencies {
     compile rootProject.ext.android_support_cardview
 
     compile rootProject.ext.android_support_percent
+
+    compile rootProject.ext.image_crop
 }

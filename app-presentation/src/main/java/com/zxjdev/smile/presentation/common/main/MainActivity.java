@@ -3,7 +3,11 @@ package com.zxjdev.smile.presentation.common.main;
 import android.app.Fragment;
 import android.app.FragmentTransaction;
 import android.content.Context;
+import android.content.Intent;
+import android.database.Cursor;
+import android.net.Uri;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.support.annotation.IdRes;
 import android.support.annotation.Nullable;
 import android.support.design.widget.NavigationView;
@@ -16,6 +20,7 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.soundcloud.android.crop.Crop;
 import com.zxjdev.smile.R;
 import com.zxjdev.smile.presentation.application.base.activity.BaseActivity;
 import com.zxjdev.smile.presentation.application.di.DiConstant;
@@ -26,6 +31,7 @@ import com.zxjdev.smile.presentation.moment.list.MomentListFragment;
 import com.zxjdev.smile.presentation.user.UserModel;
 import com.zxjdev.smile.presentation.user.settings.SettingsFragment;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -41,8 +47,8 @@ public class MainActivity extends BaseActivity implements MainContract.View {
     @BindView(R.id.view_toolbar) Toolbar toolbar;
     @BindView(R.id.view_navigation) NavigationView navigationView;
     private ActionBarDrawerToggle drawerToggle;
-
-    private MainActivityComponent mainActivityComponent;
+    private TextView tvUsername;
+    private ImageView ivAvatar;
 
     private List<String> fragmentTags = new ArrayList<>();
 
@@ -68,6 +74,8 @@ public class MainActivity extends BaseActivity implements MainContract.View {
         presenter.onCreate();
     }
 
+    private MainActivityComponent mainActivityComponent;
+
     @Override
     protected void initializeInjector() {
         mainActivityComponent = getActivityComponent().getMainActivityComponent(
@@ -89,17 +97,55 @@ public class MainActivity extends BaseActivity implements MainContract.View {
     }
 
     @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == PICK_IMAGE_REQUEST &&
+            resultCode == RESULT_OK &&
+            data != null &&
+            data.getData() != null) {
+
+            Uri uri = data.getData();
+            cropImage(uri);
+        } else if (requestCode == Crop.REQUEST_CROP && resultCode == RESULT_OK) {
+            presenter.handleChangeAvatar(outputUri.getPath());
+        }
+    }
+
+    private String getImagePathFromUri(Uri uri) {
+        String[] projection = {MediaStore.Images.Media.DATA};
+
+        Cursor cursor = getContentResolver().query(uri, projection, null, null, null);
+        cursor.moveToFirst();
+
+        int columnIndex = cursor.getColumnIndex(projection[0]);
+        String picturePath = cursor.getString(columnIndex);
+        cursor.close();
+        return picturePath;
+    }
+
+    private static final String TEMP_AVATAR_FILE_NAME = "avatar.jpg";
+    private Uri outputUri;
+
+    private void cropImage(Uri inputUri) {
+        File outputFile = new File(context.getCacheDir(), TEMP_AVATAR_FILE_NAME);
+        outputUri = Uri.fromFile(outputFile);
+        Crop.of(inputUri, outputUri).asSquare().start(this);
+    }
+
+    @Override
     public Context context() {
         return this;
     }
+
+    private static int PICK_IMAGE_REQUEST = 1;
 
     @Override
     public void displayUser(UserModel user) {
         if (navigationView.getHeaderCount() <= 0) return;
 
-        View view = navigationView.getHeaderView(0);
-        TextView tvUsername = (TextView) view.findViewById(R.id.tv_name);
-        ImageView ivAvatar = (ImageView) view.findViewById(R.id.iv_avatar);
+        View headerView = navigationView.getHeaderView(0);
+        TextView tvUsername = (TextView) headerView.findViewById(R.id.tv_name);
+        ImageView ivAvatar = (ImageView) headerView.findViewById(R.id.iv_avatar);
 
         tvUsername.setText(user.getUsername());
         if (TextUtils.isEmpty(user.getAvatar())) {
@@ -107,6 +153,17 @@ public class MainActivity extends BaseActivity implements MainContract.View {
         } else {
             imageLoader.loadCircleImage(user.getAvatar(), ivAvatar);
         }
+        ivAvatar.setOnClickListener(v -> {
+            Intent intent = new Intent();
+            intent.setType("image/*");
+            intent.setAction(Intent.ACTION_GET_CONTENT);
+            startActivityForResult(intent, PICK_IMAGE_REQUEST);
+        });
+    }
+
+    @Override
+    public void changeUserAvatar(String url) {
+        imageLoader.loadCircleImage(url, ivAvatar);
     }
 
     /**
@@ -135,7 +192,6 @@ public class MainActivity extends BaseActivity implements MainContract.View {
      * Initialize the navigation view in the left drawer.
      */
     private void initNavigationView() {
-        // 添加侧边菜单的点击事件
         navigationView.setNavigationItemSelectedListener(item -> {
             switch (item.getItemId()) {
                 case R.id.navi_item_moments:
@@ -149,6 +205,11 @@ public class MainActivity extends BaseActivity implements MainContract.View {
             dlytContainer.closeDrawers();
             return true;
         });
+        if (navigationView.getHeaderCount() > 0) {
+            View headerView = navigationView.getHeaderView(0);
+            tvUsername = (TextView) headerView.findViewById(R.id.tv_name);
+            ivAvatar = (ImageView) headerView.findViewById(R.id.iv_avatar);
+        }
     }
 
     /**

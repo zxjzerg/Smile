@@ -11,6 +11,8 @@ public interface MainContract {
         Context context();
 
         void displayUser(UserModel user);
+
+        void changeUserAvatar(String url);
     }
 
     interface Presenter {
@@ -18,5 +20,7 @@ public interface MainContract {
         void onCreate();
 
         void onDestroy();
+
+        void handleChangeAvatar(String picturePath);
     }
 }

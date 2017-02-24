@@ -6,6 +6,7 @@ import com.zxjdev.smile.domain.user.GetCurrentUserUseCase;
 import com.zxjdev.smile.domain.user.LoginUseCase;
 import com.zxjdev.smile.domain.user.LogoutUseCase;
 import com.zxjdev.smile.domain.user.RegisterUseCase;
+import com.zxjdev.smile.domain.user.UploadAvatarUseCase;
 import com.zxjdev.smile.domain.user.UserRepository;
 
 import dagger.Module;
@@ -40,5 +41,11 @@ public class UserUseCaseModule {
     GetCurrentUserUseCase provideGetCurrentUserUseCase(UseCaseConfig useCaseConfig,
         UserRepository userRepository) {
         return new GetCurrentUserUseCase(useCaseConfig, userRepository);
+    }
+
+    @Provides
+    UploadAvatarUseCase provideUploadAvatarUseCase(UseCaseConfig useCaseConfig,
+        UserRepository userRepository) {
+        return new UploadAvatarUseCase(useCaseConfig, userRepository);
     }
 }

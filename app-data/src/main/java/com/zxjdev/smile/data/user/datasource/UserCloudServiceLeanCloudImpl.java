@@ -1,17 +1,21 @@
 package com.zxjdev.smile.data.user.datasource;
 
 import com.avos.avoscloud.AVException;
+import com.avos.avoscloud.AVFile;
 import com.avos.avoscloud.AVUser;
 import com.zxjdev.smile.data.user.UserEntity;
+import com.zxjdev.smile.data.utils.LeanCloudUtils;
+
+import java.io.FileNotFoundException;
 
 import javax.inject.Inject;
 
 import rx.Observable;
 
-public class AuthorizationService implements IAuthorizationCloudService {
+public class UserCloudServiceLeanCloudImpl implements UserCloudService {
 
     @Inject
-    public AuthorizationService() {
+    public UserCloudServiceLeanCloudImpl() {
 
     }
 
@@ -53,6 +57,23 @@ public class AuthorizationService implements IAuthorizationCloudService {
         return Observable.create(subscriber -> {
             AVUser.logOut();
             subscriber.onCompleted();
+        });
+    }
+
+    @Override
+    public Observable<String> uploadAvatar(String localPath) {
+        return Observable.create(subscriber -> {
+            try {
+                AVFile file = AVFile.withAbsoluteLocalPath("avatar.jpg", localPath);
+                file.save();
+                UserEntity currentUser = LeanCloudUtils.getCurrentUser();
+                currentUser.setAvatar(file.getUrl());
+                currentUser.save();
+                subscriber.onNext(file.getUrl());
+                subscriber.onCompleted();
+            } catch (FileNotFoundException | AVException e) {
+                subscriber.onError(e);
+            }
         });
     }
 }

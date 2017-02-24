@@ -17,4 +17,12 @@ public class UserEntity extends AVUser {
     public String getNickName() {
         return this.getString("nickName");
     }
+
+    public void setAvatar(String url) {
+        this.put("avatar", url);
+    }
+
+    public String getAvatar() {
+        return this.getString("avatar");
+    }
 }

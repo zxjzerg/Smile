@@ -4,7 +4,7 @@ import com.zxjdev.smile.data.user.UserEntity;
 
 import rx.Observable;
 
-public interface IAuthorizationCloudService {
+public interface UserCloudService {
 
     Observable<Void> register(String username, String password);
 
@@ -18,4 +18,6 @@ public interface IAuthorizationCloudService {
     Observable<Boolean> checkHasAuthorized();
 
     Observable<Void> logout();
+
+    Observable<String> uploadAvatar(String localPath);
 }

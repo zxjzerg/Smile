@@ -14,27 +14,27 @@ import rx.Observable;
  */
 public class UserCloudDataSource {
 
-    private IAuthorizationCloudService authorizationService;
+    private UserCloudService userCloudService;
 
     @Inject
-    public UserCloudDataSource(IAuthorizationCloudService authorizationService) {
-        this.authorizationService = authorizationService;
+    public UserCloudDataSource(UserCloudService userCloudService) {
+        this.userCloudService = userCloudService;
     }
 
     public Observable<Void> register(String username, String password) {
-        return authorizationService.register(username, password);
+        return userCloudService.register(username, password);
     }
 
     public Observable<UserEntity> login(String username, String password) {
-        return authorizationService.login(username, password);
+        return userCloudService.login(username, password);
     }
 
     public Observable<Boolean> checkHasAuthorized() {
-        return authorizationService.checkHasAuthorized();
+        return userCloudService.checkHasAuthorized();
     }
 
     public Observable<Void> logout() {
-        return authorizationService.logout();
+        return userCloudService.logout();
     }
 
     public Observable<UserEntity> getUser(String id) {
@@ -43,5 +43,9 @@ public class UserCloudDataSource {
         } else {
             return Observable.empty();
         }
+    }
+
+    public Observable<String> uploadAvatar(String localPath) {
+        return userCloudService.uploadAvatar(localPath);
     }
 }

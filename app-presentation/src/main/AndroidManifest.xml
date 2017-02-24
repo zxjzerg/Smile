@@ -55,6 +55,9 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".presentation.common.main.MainActivity" />
         </activity>
+
+        <!-- activity from android-crop lib -->
+        <activity android:name="com.soundcloud.android.crop.CropImageActivity" />
     </application>
 
 </manifest>
