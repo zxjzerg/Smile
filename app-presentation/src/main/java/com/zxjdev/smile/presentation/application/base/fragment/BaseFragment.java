@@ -8,14 +8,14 @@ import com.zxjdev.smile.presentation.application.di.component.ApplicationCompone
 
 public abstract class BaseFragment extends Fragment {
 
-    protected boolean initializedInjector = false;
+    protected boolean componentInitialized = false;
 
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        if (!initializedInjector) {
-            initializeComponent();
-            initializedInjector = true;
+        if (!componentInitialized) {
+            initDaggerComponent();
+            componentInitialized = true;
 
             onDependencyReady();
 
@@ -27,9 +27,9 @@ public abstract class BaseFragment extends Fragment {
 
     @Override
     public void onDestroy() {
+        releaseDaggerComponent();
+        componentInitialized = false;
         super.onDestroy();
-        releaseComponent();
-        initializedInjector = true;
     }
 
     /**
@@ -47,12 +47,9 @@ public abstract class BaseFragment extends Fragment {
 
     }
 
-    /**
-     * 配置依赖注入
-     */
-    protected abstract void initializeComponent();
+    protected abstract void initDaggerComponent();
 
-    protected abstract void releaseComponent();
+    protected abstract void releaseDaggerComponent();
 
     protected ApplicationComponent getApplicationComponent() {
         return ((SmileApplication) getActivity().getApplication()).getApplicationComponent();

@@ -42,7 +42,7 @@ public class SettingsFragment extends BaseFragment implements SettingsContract.V
     }
 
     @Override
-    protected void initializeComponent() {
+    protected void initDaggerComponent() {
         if (getActivity() instanceof MainActivity) {
             settingsFragmentComponent = ((MainActivity) getActivity()).getComponent()
                 .getSettingsFragmentComponent(new SettingsFragmentModule(this));
@@ -51,7 +51,7 @@ public class SettingsFragment extends BaseFragment implements SettingsContract.V
     }
 
     @Override
-    protected void releaseComponent() {
+    protected void releaseDaggerComponent() {
         settingsFragmentComponent = null;
     }
 

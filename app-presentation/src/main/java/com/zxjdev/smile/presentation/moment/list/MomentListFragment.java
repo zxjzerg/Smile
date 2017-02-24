@@ -48,7 +48,7 @@ public class MomentListFragment extends BaseFragment implements MomentListContra
     }
 
     @Override
-    protected void initializeComponent() {
+    protected void initDaggerComponent() {
         if (getActivity() instanceof MainActivity) {
             momentListFragmentComponent = ((MainActivity) getActivity()).getComponent()
                 .getMomentsFragmentComponent(new FragmentModule(this),
@@ -58,7 +58,7 @@ public class MomentListFragment extends BaseFragment implements MomentListContra
     }
 
     @Override
-    protected void releaseComponent() {
+    protected void releaseDaggerComponent() {
         momentListFragmentComponent = null;
     }
 
