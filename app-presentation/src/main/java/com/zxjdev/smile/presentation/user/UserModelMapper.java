@@ -16,6 +16,7 @@ public class UserModelMapper extends BaseMapper<UserModel, User> {
     public UserModel transform(User data) {
         UserModel model = new UserModel();
         model.setUsername(data.getUsername());
+        model.setAvatar(data.getAvatar());
         return model;
     }
 }

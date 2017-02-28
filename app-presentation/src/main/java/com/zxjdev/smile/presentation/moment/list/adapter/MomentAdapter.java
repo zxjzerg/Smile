@@ -34,7 +34,7 @@ public class MomentAdapter extends RecyclerView.Adapter<MomentViewHolder> {
         holder.tvContent.setText(moment.getContent());
         holder.tvName.setText(moment.getOwner().getUsername());
 
-        imageLoader.loadCircleImage(R.drawable.default_avatar, holder.ivAvatar);
+        imageLoader.loadCircleImage(moment.getOwner().getAvatar(), holder.ivAvatar);
     }
 
     @Override
