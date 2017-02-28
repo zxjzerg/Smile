@@ -15,6 +15,7 @@ public class MomentViewHolder extends RecyclerView.ViewHolder {
     @BindView(R.id.tv_content) TextView tvContent;
     @BindView(R.id.tv_name) TextView tvName;
     @BindView(R.id.iv_avatar) ImageView ivAvatar;
+    @BindView(R.id.tv_time) TextView tvTime;
 
     public MomentViewHolder(View itemView) {
         super(itemView);

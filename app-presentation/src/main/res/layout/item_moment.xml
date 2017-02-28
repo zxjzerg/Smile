@@ -46,8 +46,8 @@
                 android:layout_height="wrap_content"
                 android:layout_alignStart="@id/tv_name"
                 android:layout_below="@id/tv_name"
-                android:layout_marginTop="4dp"
                 android:alpha="0.5"
+                android:textSize="12sp"
                 tools:text="2013.06.09" />
 
         </RelativeLayout>

@@ -20,6 +20,7 @@ public class MomentModelMapper extends BaseMapper<MomentModel, Moment> {
         MomentModel model = new MomentModel();
         model.setOwner(userModelMapper.transform(data.getOwner()));
         model.setContent(data.getContent());
+        model.setCreateAt(data.getCreateAt());
         return model;
     }
 }

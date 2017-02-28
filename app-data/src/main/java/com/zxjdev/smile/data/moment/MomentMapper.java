@@ -21,6 +21,7 @@ public class MomentMapper extends BaseMapper<Moment, MomentEntity> {
         moment.setId(data.getObjectId());
         moment.setOwner(userMapper.transform(data.getUser()));
         moment.setContent(data.getContent());
+        moment.setCreateAt(data.getCreatedAt());
         return moment;
     }
 }

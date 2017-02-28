@@ -9,8 +9,11 @@ import com.zxjdev.smile.R;
 import com.zxjdev.smile.presentation.application.util.image.ImageLoader;
 import com.zxjdev.smile.presentation.moment.MomentModel;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 
 public class MomentAdapter extends RecyclerView.Adapter<MomentViewHolder> {
 
@@ -33,6 +36,7 @@ public class MomentAdapter extends RecyclerView.Adapter<MomentViewHolder> {
         MomentModel moment = moments.get(position);
         holder.tvContent.setText(moment.getContent());
         holder.tvName.setText(moment.getOwner().getUsername());
+        holder.tvTime.setText(parseCreateDate(moment.getCreateAt()));
 
         imageLoader.loadCircleImage(moment.getOwner().getAvatar(), holder.ivAvatar);
     }
@@ -46,6 +50,11 @@ public class MomentAdapter extends RecyclerView.Adapter<MomentViewHolder> {
         this.moments = moments;
 
         notifyDataSetChanged();
+    }
+
+    private String parseCreateDate(Date date) {
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd", Locale.CHINA);
+        return dateFormat.format(date);
     }
 }
 
