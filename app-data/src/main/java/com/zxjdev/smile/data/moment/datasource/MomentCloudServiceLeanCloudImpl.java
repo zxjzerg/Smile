@@ -39,6 +39,7 @@ public class MomentCloudServiceLeanCloudImpl implements MomentCloudService {
             query.whereEqualTo("user", LeanCloudUtils.getCurrentUser());
             query.include("user");
             query.limit(LeanCloudUtils.QUERY_LIMIT);
+            query.orderByDescending("createdAt");
             try {
                 subscriber.onNext(query.find());
                 subscriber.onCompleted();
