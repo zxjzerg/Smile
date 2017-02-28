@@ -19,6 +19,7 @@ public class MomentCloudServiceLeanCloudImpl implements MomentCloudService {
 
     }
 
+    @Override
     public Observable<Void> addMoment(String content) {
         return Observable.create(subscriber -> {
             MomentEntity momentEntity = new MomentEntity();
@@ -33,6 +34,7 @@ public class MomentCloudServiceLeanCloudImpl implements MomentCloudService {
         });
     }
 
+    @Override
     public Observable<List<MomentEntity>> getMomentList() {
         return Observable.create(subscriber -> {
             AVQuery<MomentEntity> query = AVObject.getQuery(MomentEntity.class);

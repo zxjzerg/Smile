@@ -9,16 +9,16 @@ import rx.Observable;
 public interface MomentCloudService {
 
     /**
-     * 发表一个“时刻”
+     * Publish a moment
      *
-     * @param content 内容
+     * @param content text content of moment
      */
     Observable<Void> addMoment(String content);
 
     /**
-     * 获取用户发的“时刻”
+     * Get a list of moment
      *
-     * @return 用户发的“时刻”列表
+     * @return A list of moment
      */
     Observable<List<MomentEntity>> getMomentList();
 }
