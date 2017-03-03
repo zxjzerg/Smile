@@ -27,6 +27,7 @@ import butterknife.OnClick;
  */
 public class SplashActivity extends BaseActivity implements SplashContract.View {
 
+    @BindView(R.id.layout_button_container) View buttonContainer;
     @BindView(R.id.btn_login) Button btnLogin;
     @BindView(R.id.btn_register) Button btnRegister;
 
@@ -100,7 +101,6 @@ public class SplashActivity extends BaseActivity implements SplashContract.View 
 
     @Override
     public void showButtons() {
-        btnLogin.setVisibility(View.VISIBLE);
-        btnRegister.setVisibility(View.VISIBLE);
+        buttonContainer.setVisibility(View.VISIBLE);
     }
 }
