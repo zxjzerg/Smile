@@ -13,13 +13,13 @@
 2. Fernando Cejas的[Android-CleanArchitecture](https://github.com/android10/Android-CleanArchitecture)
 
 ### 界面层（app-presentation）
-通过UseCase与业务逻辑层进行交互，将获取到的数据进行展示，将用户操作反馈给业务逻辑层。
-采用MVP来分割界面层的代码，View负责所有界面逻辑，Presenter负责处理View的反馈和调用UseCase，Model负责装在数据。
-界面布局和样式尽可能的参考了Material Design。
+负责实现所有界面相关的代码。通过UseCase与业务逻辑层进行交互，将获取到的数据进行展示或是将用户操作反馈给业务逻辑层，例如通过GetUserUseCase来获取用户信息，然后渲染到Activity中，通过UploadUserAvatarUserCase将用户从相册中选中的头像图片上传到服务器。
+采用了MVP模式来分割代码，View专注于所有界面逻辑，Presenter负责处理View的反馈和调用UseCase，Model负责装载数据。
 
 ### 业务逻辑层（app-domain）
-负责封装业务逻辑，将业务逻辑拆分为不同的UseCase。定义了Repository的接口，包含各种操作数据的方法，但不提供具体实现。
+负责封装业务逻辑代码，将业务逻辑拆分为不同的UseCase。定义了Repository的接口，包含各种操作数据的方法，但不提供具体实现。UseCase可以调用Repository来完成具体的任务，例如LoginUserCase调用UserRepository.Login()方法实现用户的登录。
 
 ### 数据层
-负责实现具体的数据操作逻辑。选用LeanCloud提供云服务，用Repository模式封装数据的操作逻辑。
+负责实现具体的数据操作逻辑，提供了Repository的实现。数据层的Repository实现类负责管理用到的DataSource类。DataSource类封装了从不同的数据来源存取数据的方法，例如UserCloudDataSource是向云端存取User数据的类，UserLocalDataSource是在本地存取User数据的类。这些DataSource类负责调用NetworkService或是DAO来完成具体的数据操作，例如UserCloudDataSource会调用UserCloudService是进行网络请求，UserLocalDataSource会调用UserDao来操作本地数据库。
+
 
