@@ -177,11 +177,6 @@ public class MainActivity extends BaseActivity implements MainContract.View {
         drawerToggle = new ActionBarDrawerToggle(this, dlytContainer, toolbar, R.string.open,
             R.string.close);
 
-        // disable the default implementation of ActionBarDrawerToggle adding a navigationView icon to
-        // the Toolbar, because we cannot change the icon style
-        drawerToggle.setDrawerIndicatorEnabled(false);
-        // set custom navigationView icon in the ToolBar
-        toolbar.setNavigationIcon(R.drawable.ic_menu_white_24dp);
         // handle click event for showing the drawer
         toolbar.setNavigationOnClickListener(v -> dlytContainer.openDrawer(Gravity.LEFT));
 

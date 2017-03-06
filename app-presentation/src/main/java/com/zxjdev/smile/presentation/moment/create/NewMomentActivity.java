@@ -51,6 +51,10 @@ public class NewMomentActivity extends BaseActivity implements NewMomentContract
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.menu_new_moment, menu);
+        // Tint the icon in menu to white
+        menu.findItem(R.id.action_send)
+            .getIcon()
+            .setTint(getResources().getColor(android.R.color.white));
         return super.onCreateOptionsMenu(menu);
     }
 

@@ -8,14 +8,13 @@
         <item name="colorAccent">@color/colorAccent</item>
         <item name="android:windowTranslucentStatus">false</item>
         <item name="android:statusBarColor">@color/statusBar</item>
-        <!-- 修改了返回箭头的颜色 -->
-        <item name="colorControlNormal">@android:color/white</item>
     </style>
 
     <style name="Smile.ActionBarTheme" parent="@style/ThemeOverlay.AppCompat.ActionBar">
         <item name="titleTextColor">@android:color/white</item>
         <item name="android:background">?attr/colorPrimary</item>
-        <item name="popupTheme">@style/ThemeOverlay.AppCompat.Light</item>
+        <!-- Change controls color in the action bar, will not affect controls in menu-->
+        <item name="colorControlNormal">@android:color/white</item>
     </style>
 
     <style name="Smile.PopupTheme" parent="@style/ThemeOverlay.AppCompat.Light">
