@@ -1,6 +1,5 @@
 package com.zxjdev.smile.presentation.user.authorization.login;
 
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
@@ -57,11 +56,6 @@ public class LoginActivity extends BaseActivity implements LoginContract.View {
     @OnClick(R.id.btn_login)
     public void loginClick() {
         presenter.handleLogin(etUsername.getText().toString(), etPassword.getText().toString());
-    }
-
-    @Override
-    public Context context() {
-        return context;
     }
 
     @Override

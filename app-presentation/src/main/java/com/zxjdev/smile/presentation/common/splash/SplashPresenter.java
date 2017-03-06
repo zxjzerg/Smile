@@ -4,6 +4,7 @@ import android.os.Handler;
 
 import com.zxjdev.smile.domain.user.AutoLoginUseCase;
 import com.zxjdev.smile.presentation.application.DefaultSubscriber;
+import com.zxjdev.smile.presentation.application.util.ui.ErrorMessagePrinter;
 
 import javax.inject.Inject;
 
@@ -11,6 +12,7 @@ public class SplashPresenter implements SplashContract.Presenter {
 
     @Inject AutoLoginUseCase autoLoginUseCase;
     @Inject SplashContract.View view;
+    @Inject ErrorMessagePrinter errorMessagePrinter;
     private Handler handler;
 
     @Inject
@@ -20,7 +22,7 @@ public class SplashPresenter implements SplashContract.Presenter {
 
     @Override
     public void handleAutoLogin() {
-        autoLoginUseCase.execute(new DefaultSubscriber<Boolean>(view.context()) {
+        autoLoginUseCase.execute(new DefaultSubscriber<Boolean>(errorMessagePrinter) {
             @Override
             public void onNext(Boolean data) {
                 if (data) {

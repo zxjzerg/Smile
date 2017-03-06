@@ -4,6 +4,7 @@ import com.zxjdev.smile.domain.user.GetCurrentUserUseCase;
 import com.zxjdev.smile.domain.user.UploadAvatarUseCase;
 import com.zxjdev.smile.domain.user.User;
 import com.zxjdev.smile.presentation.application.DefaultSubscriber;
+import com.zxjdev.smile.presentation.application.util.ui.ErrorMessagePrinter;
 import com.zxjdev.smile.presentation.user.UserModel;
 import com.zxjdev.smile.presentation.user.UserModelMapper;
 
@@ -15,6 +16,7 @@ public class MainPresenter implements MainContract.Presenter {
     @Inject GetCurrentUserUseCase getCurrentUserUseCase;
     @Inject UserModelMapper userModelMapper;
     @Inject UploadAvatarUseCase uploadAvatarUseCase;
+    @Inject ErrorMessagePrinter errorMessagePrinter;
 
     @Inject
     public MainPresenter() {
@@ -27,7 +29,7 @@ public class MainPresenter implements MainContract.Presenter {
 
     @Override
     public void onCreate() {
-        getCurrentUserUseCase.execute(new DefaultSubscriber<User>(view.context()) {
+        getCurrentUserUseCase.execute(new DefaultSubscriber<User>(errorMessagePrinter) {
             @Override
             public void onNext(User data) {
                 UserModel userModel = userModelMapper.transform(data);
@@ -46,7 +48,7 @@ public class MainPresenter implements MainContract.Presenter {
     public void handleChangeAvatar(String picturePath) {
         UploadAvatarUseCase.RequestParams params = new UploadAvatarUseCase.RequestParams();
         params.setLocalPath(picturePath);
-        uploadAvatarUseCase.execute(params, new DefaultSubscriber<String>(view.context()) {
+        uploadAvatarUseCase.execute(params, new DefaultSubscriber<String>(errorMessagePrinter) {
             @Override
             public void onNext(String data) {
                 view.changeUserAvatar(data);

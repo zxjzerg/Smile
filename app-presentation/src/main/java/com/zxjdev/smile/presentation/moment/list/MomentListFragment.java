@@ -1,6 +1,5 @@
 package com.zxjdev.smile.presentation.moment.list;
 
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -101,11 +100,6 @@ public class MomentListFragment extends BaseFragment implements MomentListContra
     public void addNewMomentClick() {
         Intent addMoment = new Intent(getActivity(), NewMomentActivity.class);
         startActivity(addMoment);
-    }
-
-    @Override
-    public Context context() {
-        return getActivity();
     }
 
     @Override

@@ -3,6 +3,7 @@ package com.zxjdev.smile.presentation.moment.list;
 import com.zxjdev.smile.domain.moment.GetMomentListUseCase;
 import com.zxjdev.smile.domain.moment.Moment;
 import com.zxjdev.smile.presentation.application.DefaultSubscriber;
+import com.zxjdev.smile.presentation.application.util.ui.ErrorMessagePrinter;
 import com.zxjdev.smile.presentation.moment.MomentModel;
 import com.zxjdev.smile.presentation.moment.MomentModelMapper;
 
@@ -15,6 +16,7 @@ public class MomentListPresenter implements MomentListContract.Presenter {
     @Inject MomentListContract.View view;
     @Inject GetMomentListUseCase getMomentListUseCase;
     @Inject MomentModelMapper momentModelMapper;
+    @Inject ErrorMessagePrinter errorMessagePrinter;
 
     @Inject
     public MomentListPresenter() {
@@ -28,7 +30,7 @@ public class MomentListPresenter implements MomentListContract.Presenter {
 
     @Override
     public void loadMoments() {
-        getMomentListUseCase.execute(new DefaultSubscriber<List<Moment>>(view.context()) {
+        getMomentListUseCase.execute(new DefaultSubscriber<List<Moment>>(errorMessagePrinter) {
             @Override
             public void onNext(List<Moment> data) {
                 List<MomentModel> momentModels = momentModelMapper.transform(data);
@@ -39,7 +41,7 @@ public class MomentListPresenter implements MomentListContract.Presenter {
 
     @Override
     public void refreshMoments() {
-        getMomentListUseCase.execute(new DefaultSubscriber<List<Moment>>(view.context()) {
+        getMomentListUseCase.execute(new DefaultSubscriber<List<Moment>>(errorMessagePrinter) {
             @Override
             public void onNext(List<Moment> data) {
                 List<MomentModel> momentModels = momentModelMapper.transform(data);

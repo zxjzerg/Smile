@@ -9,6 +9,7 @@ import com.zxjdev.smile.presentation.application.di.DiConstant;
 import com.zxjdev.smile.presentation.application.di.scope.ActivityScope;
 import com.zxjdev.smile.presentation.application.util.image.ImageLoader;
 import com.zxjdev.smile.presentation.application.util.image.SmileImageLoader;
+import com.zxjdev.smile.presentation.application.util.ui.ErrorMessagePrinter;
 
 import javax.inject.Named;
 
@@ -36,5 +37,11 @@ public class ActivityModule {
     ImageLoader provideImageLoader(Context context) {
         RequestManager requestManager = Glide.with(activity);
         return new SmileImageLoader(context, requestManager);
+    }
+
+    @Provides
+    @ActivityScope
+    ErrorMessagePrinter provideErrorMessagePrinter(Context context) {
+        return new ErrorMessagePrinter(context);
     }
 }

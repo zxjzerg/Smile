@@ -2,7 +2,6 @@ package com.zxjdev.smile.presentation.common.main;
 
 import android.app.Fragment;
 import android.app.FragmentTransaction;
-import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
 import android.net.Uri;
@@ -130,11 +129,6 @@ public class MainActivity extends BaseActivity implements MainContract.View {
         File outputFile = new File(context.getCacheDir(), TEMP_AVATAR_FILE_NAME);
         outputUri = Uri.fromFile(outputFile);
         Crop.of(inputUri, outputUri).asSquare().start(this);
-    }
-
-    @Override
-    public Context context() {
-        return this;
     }
 
     private static int PICK_IMAGE_REQUEST = 1;

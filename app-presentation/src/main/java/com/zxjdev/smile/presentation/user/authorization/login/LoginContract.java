@@ -1,12 +1,8 @@
 package com.zxjdev.smile.presentation.user.authorization.login;
 
-import android.content.Context;
-
 public interface LoginContract {
 
     interface View {
-
-        Context context();
 
         void navigateToMain();
     }

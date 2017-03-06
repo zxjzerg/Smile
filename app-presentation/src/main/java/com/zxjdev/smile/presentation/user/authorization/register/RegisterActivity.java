@@ -1,6 +1,5 @@
 package com.zxjdev.smile.presentation.user.authorization.register;
 
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
@@ -53,11 +52,6 @@ public class RegisterActivity extends BaseActivity implements RegisterContract.V
     @OnClick(R.id.btn_register)
     void handleRegisterClick() {
         presenter.handleRegister(etUsername.getText().toString(), etPassword.getText().toString());
-    }
-
-    @Override
-    public Context context() {
-        return context;
     }
 
     @Override

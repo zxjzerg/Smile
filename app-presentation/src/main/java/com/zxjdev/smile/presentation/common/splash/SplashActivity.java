@@ -1,6 +1,5 @@
 package com.zxjdev.smile.presentation.common.splash;
 
-import android.content.Context;
 import android.content.Intent;
 import android.graphics.Typeface;
 import android.os.Bundle;
@@ -85,11 +84,6 @@ public class SplashActivity extends BaseActivity implements SplashContract.View 
     private void navigateToRegister() {
         Intent login = new Intent(context, RegisterActivity.class);
         startActivity(login);
-    }
-
-    @Override
-    public Context context() {
-        return context;
     }
 
     @Override

@@ -1,6 +1,5 @@
 package com.zxjdev.smile.presentation.user.settings;
 
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -74,11 +73,6 @@ public class SettingsFragment extends BaseFragment implements SettingsContract.V
     @OnClick(R.id.btn_logout)
     public void logoutClick() {
         settingsPresenter.handleLogout();
-    }
-
-    @Override
-    public Context context() {
-        return getActivity();
     }
 
     @Override

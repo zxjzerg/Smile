@@ -1,12 +1,8 @@
 package com.zxjdev.smile.presentation.user.authorization.register;
 
-import android.content.Context;
-
 public interface RegisterContract {
 
     interface View {
-
-        Context context();
 
         void navigateToMain();
     }

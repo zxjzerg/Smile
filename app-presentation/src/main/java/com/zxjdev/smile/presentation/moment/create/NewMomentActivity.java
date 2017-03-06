@@ -1,6 +1,5 @@
 package com.zxjdev.smile.presentation.moment.create;
 
-import android.content.Context;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
@@ -67,11 +66,6 @@ public class NewMomentActivity extends BaseActivity implements NewMomentContract
             default:
                 return super.onOptionsItemSelected(item);
         }
-    }
-
-    @Override
-    public Context context() {
-        return context;
     }
 
     @Override
