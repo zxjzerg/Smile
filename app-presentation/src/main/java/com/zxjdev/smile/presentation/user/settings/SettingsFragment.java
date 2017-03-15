@@ -9,7 +9,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 
 import com.zxjdev.smile.R;
-import com.zxjdev.smile.presentation.application.base.fragment.BaseFragment;
+import com.zxjdev.smile.presentation.application.base.fragment.DaggerBaseFragment;
 import com.zxjdev.smile.presentation.common.main.MainActivity;
 import com.zxjdev.smile.presentation.common.splash.SplashActivity;
 import com.zxjdev.smile.presentation.user.settings.di.SettingsFragmentComponent;
@@ -21,7 +21,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
-public class SettingsFragment extends BaseFragment implements SettingsContract.View {
+public class SettingsFragment extends DaggerBaseFragment implements SettingsContract.View {
 
     public static final String TAG = SettingsFragment.class.getSimpleName();
 

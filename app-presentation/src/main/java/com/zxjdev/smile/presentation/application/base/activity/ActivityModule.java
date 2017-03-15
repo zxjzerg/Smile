@@ -7,8 +7,8 @@ import com.bumptech.glide.Glide;
 import com.bumptech.glide.RequestManager;
 import com.zxjdev.smile.presentation.application.di.DiConstant;
 import com.zxjdev.smile.presentation.application.di.scope.ActivityScope;
+import com.zxjdev.smile.presentation.application.util.image.GlideImageLoader;
 import com.zxjdev.smile.presentation.application.util.image.ImageLoader;
-import com.zxjdev.smile.presentation.application.util.image.SmileImageLoader;
 import com.zxjdev.smile.presentation.application.util.ui.ErrorMessagePrinter;
 
 import javax.inject.Named;
@@ -36,7 +36,7 @@ public class ActivityModule {
     @Named(DiConstant.ACTIVITY_IMAGE_LOADER)
     ImageLoader provideImageLoader(Context context) {
         RequestManager requestManager = Glide.with(activity);
-        return new SmileImageLoader(context, requestManager);
+        return new GlideImageLoader(context, requestManager);
     }
 
     @Provides

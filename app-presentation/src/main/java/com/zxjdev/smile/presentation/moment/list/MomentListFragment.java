@@ -12,7 +12,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.zxjdev.smile.R;
-import com.zxjdev.smile.presentation.application.base.fragment.BaseFragment;
+import com.zxjdev.smile.presentation.application.base.fragment.DaggerBaseFragment;
 import com.zxjdev.smile.presentation.application.base.fragment.FragmentModule;
 import com.zxjdev.smile.presentation.common.main.MainActivity;
 import com.zxjdev.smile.presentation.moment.MomentModel;
@@ -29,7 +29,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
-public class MomentListFragment extends BaseFragment implements MomentListContract.View {
+public class MomentListFragment extends DaggerBaseFragment implements MomentListContract.View {
 
     public static final String TAG = MomentListFragment.class.getSimpleName();
 
@@ -37,7 +37,7 @@ public class MomentListFragment extends BaseFragment implements MomentListContra
     @BindView(R.id.fbtn_add_new_moment) FloatingActionButton btnNewMoment;
     @BindView(R.id.layout_swipe) SwipeRefreshLayout layoutSwipe;
 
-    @Inject MomentAdapter momentAdapter;
+    private MomentAdapter momentAdapter;
     @Inject MomentListContract.Presenter presenter;
 
     private MomentListFragmentComponent momentListFragmentComponent;
@@ -74,17 +74,14 @@ public class MomentListFragment extends BaseFragment implements MomentListContra
     }
 
     @Override
-    protected void onDependencyReady() {
-        rvMoments.setAdapter(momentAdapter);
-    }
-
-    @Override
-    protected void onInitialized() {
+    protected void onDependencyCreated() {
         presenter.create();
     }
 
     private void initUi() {
         rvMoments.setLayoutManager(new LinearLayoutManager(getActivity()));
+        momentAdapter = new MomentAdapter(super.getImageLoader());
+        rvMoments.setAdapter(momentAdapter);
 
         layoutSwipe.setColorSchemeResources(R.color.colorAccent);
         layoutSwipe.setOnRefreshListener(() -> presenter.refreshMoments());

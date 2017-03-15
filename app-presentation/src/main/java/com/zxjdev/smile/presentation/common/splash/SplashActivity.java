@@ -7,7 +7,7 @@ import android.view.View;
 import android.widget.Button;
 
 import com.zxjdev.smile.R;
-import com.zxjdev.smile.presentation.application.base.activity.BaseActivity;
+import com.zxjdev.smile.presentation.application.base.activity.BaseDaggerActivity;
 import com.zxjdev.smile.presentation.common.main.MainActivity;
 import com.zxjdev.smile.presentation.common.splash.di.SplashActivityComponent;
 import com.zxjdev.smile.presentation.common.splash.di.SplashActivityModule;
@@ -24,7 +24,7 @@ import butterknife.OnClick;
  * 开屏界面
  * Created by Andrew on 7/4/16.
  */
-public class SplashActivity extends BaseActivity implements SplashContract.View {
+public class SplashActivity extends BaseDaggerActivity implements SplashContract.View {
 
     @BindView(R.id.layout_button_container) View buttonContainer;
     @BindView(R.id.btn_login) Button btnLogin;
@@ -46,7 +46,7 @@ public class SplashActivity extends BaseActivity implements SplashContract.View 
     }
 
     @Override
-    protected void initializeInjector() {
+    protected void initDaggerComponent() {
         splashActivityComponent = getActivityComponent().getSplashActivityComponent(
             new SplashActivityModule(this));
         splashActivityComponent.inject(this);

@@ -21,7 +21,7 @@ import android.widget.TextView;
 
 import com.soundcloud.android.crop.Crop;
 import com.zxjdev.smile.R;
-import com.zxjdev.smile.presentation.application.base.activity.BaseActivity;
+import com.zxjdev.smile.presentation.application.base.activity.BaseDaggerActivity;
 import com.zxjdev.smile.presentation.application.di.DiConstant;
 import com.zxjdev.smile.presentation.application.util.image.ImageLoader;
 import com.zxjdev.smile.presentation.common.main.di.MainActivityComponent;
@@ -40,7 +40,7 @@ import javax.inject.Named;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-public class MainActivity extends BaseActivity implements MainContract.View {
+public class MainActivity extends BaseDaggerActivity implements MainContract.View {
 
     @BindView(R.id.dlyt_container) DrawerLayout dlytContainer;
     @BindView(R.id.view_toolbar) Toolbar toolbar;
@@ -76,7 +76,7 @@ public class MainActivity extends BaseActivity implements MainContract.View {
     private MainActivityComponent mainActivityComponent;
 
     @Override
-    protected void initializeInjector() {
+    protected void initDaggerComponent() {
         mainActivityComponent = getActivityComponent().getMainActivityComponent(
             new MainActivityModule(this));
         mainActivityComponent.inject(this);
@@ -205,42 +205,6 @@ public class MainActivity extends BaseActivity implements MainContract.View {
      * Display a certain fragment.
      *
      * @param container resource id of the container
-     * @param fragment fragment instance to show
-     * @param tag unique tag of the fragment
-     */
-    @Deprecated
-    private void showFragment(@IdRes int container, Fragment fragment, String tag) {
-        boolean isShowing = false;
-
-        FragmentTransaction fragmentTransaction = getFragmentManager().beginTransaction();
-        for (String fragmentTag : fragmentTags) {
-            Fragment frag = getFragmentManager().findFragmentByTag(fragmentTag);
-            if (frag != null && !frag.isDetached()) {
-                if (fragmentTag.equals(tag)) {
-                    // Do nothing
-                    isShowing = true;
-                } else {
-                    fragmentTransaction.detach(frag);
-                }
-            }
-        }
-
-        if (!isShowing) {
-            Fragment frag = getFragmentManager().findFragmentByTag(tag);
-            if (frag != null) {
-                fragmentTransaction.attach(frag);
-            } else {
-                fragmentTransaction.add(container, fragment, tag);
-            }
-        }
-        fragmentTransaction.commit();
-        getFragmentManager().executePendingTransactions();
-    }
-
-    /**
-     * Display a certain fragment.
-     *
-     * @param container resource id of the container
      * @param cls class of the fragment to show
      * @param tag unique tag of the fragment
      */
@@ -250,12 +214,12 @@ public class MainActivity extends BaseActivity implements MainContract.View {
         FragmentTransaction fragmentTransaction = getFragmentManager().beginTransaction();
         for (String fragmentTag : fragmentTags) {
             Fragment frag = getFragmentManager().findFragmentByTag(fragmentTag);
-            if (frag != null && !frag.isDetached()) {
+            if (frag != null && !frag.isHidden()) {
                 if (fragmentTag.equals(tag)) {
                     // Do nothing
                     isShowing = true;
                 } else {
-                    fragmentTransaction.detach(frag);
+                    fragmentTransaction.hide(frag);
                 }
             }
         }
@@ -263,7 +227,7 @@ public class MainActivity extends BaseActivity implements MainContract.View {
         if (!isShowing) {
             Fragment frag = getFragmentManager().findFragmentByTag(tag);
             if (frag != null) {
-                fragmentTransaction.attach(frag);
+                fragmentTransaction.show(frag);
             } else {
                 frag = Fragment.instantiate(context, cls.getName());
                 fragmentTransaction.add(container, frag, tag);

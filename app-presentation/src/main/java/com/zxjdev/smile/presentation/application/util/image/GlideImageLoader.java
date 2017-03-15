@@ -1,21 +1,34 @@
 package com.zxjdev.smile.presentation.application.util.image;
 
+import android.app.Activity;
+import android.app.Fragment;
 import android.content.Context;
 import android.support.annotation.DrawableRes;
 import android.widget.ImageView;
 
+import com.bumptech.glide.Glide;
 import com.bumptech.glide.RequestManager;
 
 import jp.wasabeef.glide.transformations.CropCircleTransformation;
 
-public class SmileImageLoader implements ImageLoader {
+public class GlideImageLoader implements ImageLoader {
 
     private Context context;
     private RequestManager requestManager;
 
-    public SmileImageLoader(Context context, RequestManager requestManager) {
+    public GlideImageLoader(Context context, RequestManager requestManager) {
         this.context = context;
         this.requestManager = requestManager;
+    }
+
+    public GlideImageLoader(Activity activity) {
+        this.context = activity.getApplicationContext();
+        this.requestManager = Glide.with(activity);
+    }
+
+    public GlideImageLoader(Fragment fragment) {
+        this.context = fragment.getActivity().getApplicationContext();
+        this.requestManager = Glide.with(fragment);
     }
 
     @Override
