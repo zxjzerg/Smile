@@ -1,7 +1,5 @@
 package com.zxjdev.smile.presentation.common.main;
 
-import android.app.Fragment;
-import android.app.FragmentTransaction;
 import android.content.Intent;
 import android.database.Cursor;
 import android.net.Uri;
@@ -10,6 +8,9 @@ import android.provider.MediaStore;
 import android.support.annotation.IdRes;
 import android.support.annotation.Nullable;
 import android.support.design.widget.NavigationView;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.widget.Toolbar;
@@ -210,10 +211,11 @@ public class MainActivity extends BaseDaggerActivity implements MainContract.Vie
      */
     private void showFragment(@IdRes int container, Class<? extends Fragment> cls, String tag) {
         boolean isShowing = false;
+        FragmentManager fragmentManager = super.getSupportFragmentManager();
+        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
 
-        FragmentTransaction fragmentTransaction = getFragmentManager().beginTransaction();
         for (String fragmentTag : fragmentTags) {
-            Fragment frag = getFragmentManager().findFragmentByTag(fragmentTag);
+            Fragment frag = fragmentManager.findFragmentByTag(fragmentTag);
             if (frag != null && !frag.isHidden()) {
                 if (fragmentTag.equals(tag)) {
                     // Do nothing
@@ -225,7 +227,7 @@ public class MainActivity extends BaseDaggerActivity implements MainContract.Vie
         }
 
         if (!isShowing) {
-            Fragment frag = getFragmentManager().findFragmentByTag(tag);
+            Fragment frag = fragmentManager.findFragmentByTag(tag);
             if (frag != null) {
                 fragmentTransaction.show(frag);
             } else {

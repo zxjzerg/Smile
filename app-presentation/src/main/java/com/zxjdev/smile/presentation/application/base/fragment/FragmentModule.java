@@ -1,7 +1,7 @@
 package com.zxjdev.smile.presentation.application.base.fragment;
 
-import android.app.Fragment;
 import android.content.Context;
+import android.support.v4.app.Fragment;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.RequestManager;

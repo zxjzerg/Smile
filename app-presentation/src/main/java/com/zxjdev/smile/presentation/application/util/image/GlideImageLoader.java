@@ -1,9 +1,9 @@
 package com.zxjdev.smile.presentation.application.util.image;
 
 import android.app.Activity;
-import android.app.Fragment;
 import android.content.Context;
 import android.support.annotation.DrawableRes;
+import android.support.v4.app.Fragment;
 import android.widget.ImageView;
 
 import com.bumptech.glide.Glide;
