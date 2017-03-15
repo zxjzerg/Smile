@@ -1,16 +1,10 @@
 package com.zxjdev.smile.presentation.application.base.fragment;
 
-import android.content.Context;
 import android.support.v4.app.Fragment;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.RequestManager;
-import com.zxjdev.smile.presentation.application.di.DiConstant;
 import com.zxjdev.smile.presentation.application.di.scope.FragmentScope;
-import com.zxjdev.smile.presentation.application.util.image.GlideImageLoader;
-import com.zxjdev.smile.presentation.application.util.image.ImageLoader;
-
-import javax.inject.Named;
 
 import dagger.Module;
 import dagger.Provides;
@@ -28,13 +22,5 @@ public class FragmentModule {
     @FragmentScope
     RequestManager provideRequestManager() {
         return Glide.with(fragment);
-    }
-
-    @Provides
-    @FragmentScope
-    @Named(DiConstant.FRAGMENT_IMAGE_LOADER)
-    ImageLoader provideImageLoader(Context context) {
-        RequestManager requestManager = Glide.with(fragment);
-        return new GlideImageLoader(context, requestManager);
     }
 }

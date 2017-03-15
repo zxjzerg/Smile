@@ -7,7 +7,12 @@ import com.zxjdev.smile.presentation.application.util.image.ImageLoader;
 
 public class BaseFragment extends Fragment {
 
+    private ImageLoader imageLoader;
+
     protected ImageLoader getImageLoader() {
-        return new GlideImageLoader(this);
+        if (imageLoader == null) {
+            imageLoader = new GlideImageLoader(this);
+        }
+        return imageLoader;
     }
 }

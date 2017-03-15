@@ -23,8 +23,6 @@ import android.widget.TextView;
 import com.soundcloud.android.crop.Crop;
 import com.zxjdev.smile.R;
 import com.zxjdev.smile.presentation.application.base.activity.BaseDaggerActivity;
-import com.zxjdev.smile.presentation.application.di.DiConstant;
-import com.zxjdev.smile.presentation.application.util.image.ImageLoader;
 import com.zxjdev.smile.presentation.common.main.di.MainActivityComponent;
 import com.zxjdev.smile.presentation.common.main.di.MainActivityModule;
 import com.zxjdev.smile.presentation.moment.list.MomentListFragment;
@@ -36,7 +34,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.inject.Inject;
-import javax.inject.Named;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -53,9 +50,6 @@ public class MainActivity extends BaseDaggerActivity implements MainContract.Vie
     private List<String> fragmentTags = new ArrayList<>();
 
     @Inject MainContract.Presenter presenter;
-    @Inject
-    @Named(DiConstant.ACTIVITY_IMAGE_LOADER)
-    ImageLoader imageLoader;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -144,9 +138,9 @@ public class MainActivity extends BaseDaggerActivity implements MainContract.Vie
 
         tvUsername.setText(user.getUsername());
         if (TextUtils.isEmpty(user.getAvatar())) {
-            imageLoader.loadCircleImage(R.drawable.default_avatar, ivAvatar);
+            getImageLoader().loadCircleImage(R.drawable.default_avatar, ivAvatar);
         } else {
-            imageLoader.loadCircleImage(user.getAvatar(), ivAvatar);
+            getImageLoader().loadCircleImage(user.getAvatar(), ivAvatar);
         }
         ivAvatar.setOnClickListener(v -> {
             Intent intent = new Intent();
@@ -158,7 +152,7 @@ public class MainActivity extends BaseDaggerActivity implements MainContract.Vie
 
     @Override
     public void changeUserAvatar(String url) {
-        imageLoader.loadCircleImage(url, ivAvatar);
+        getImageLoader().loadCircleImage(url, ivAvatar);
     }
 
     /**
