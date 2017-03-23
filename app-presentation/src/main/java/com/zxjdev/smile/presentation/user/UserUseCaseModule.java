@@ -1,13 +1,13 @@
 package com.zxjdev.smile.presentation.user;
 
 import com.zxjdev.smile.domain.base.UseCaseConfig;
-import com.zxjdev.smile.domain.user.AutoLoginUseCase;
-import com.zxjdev.smile.domain.user.GetCurrentUserUseCase;
-import com.zxjdev.smile.domain.user.LoginUseCase;
-import com.zxjdev.smile.domain.user.LogoutUseCase;
-import com.zxjdev.smile.domain.user.RegisterUseCase;
-import com.zxjdev.smile.domain.user.UploadAvatarUseCase;
 import com.zxjdev.smile.domain.user.UserRepository;
+import com.zxjdev.smile.domain.user.usecase.AutoLogin;
+import com.zxjdev.smile.domain.user.usecase.GetCurrentUser;
+import com.zxjdev.smile.domain.user.usecase.Login;
+import com.zxjdev.smile.domain.user.usecase.Logout;
+import com.zxjdev.smile.domain.user.usecase.Register;
+import com.zxjdev.smile.domain.user.usecase.UploadAvatar;
 
 import dagger.Module;
 import dagger.Provides;
@@ -16,36 +16,34 @@ import dagger.Provides;
 public class UserUseCaseModule {
 
     @Provides
-    AutoLoginUseCase provideAutoLoginUseCase(UseCaseConfig useCaseConfig,
+    AutoLogin provideAutoLogin(UseCaseConfig useCaseConfig, UserRepository userRepository) {
+        return new AutoLogin(useCaseConfig, userRepository);
+    }
+
+    @Provides
+    Login provideLogin(UseCaseConfig useCaseConfig, UserRepository userRepository) {
+        return new Login(useCaseConfig, userRepository);
+    }
+
+    @Provides
+    Logout provideLogout(UseCaseConfig useCaseConfig, UserRepository userRepository) {
+        return new Logout(useCaseConfig, userRepository);
+    }
+
+    @Provides
+    Register provideRegister(UseCaseConfig useCaseConfig, UserRepository userRepository) {
+        return new Register(useCaseConfig, userRepository);
+    }
+
+    @Provides
+    GetCurrentUser provideGetCurrentUser(UseCaseConfig useCaseConfig,
         UserRepository userRepository) {
-        return new AutoLoginUseCase(useCaseConfig, userRepository);
+        return new GetCurrentUser(useCaseConfig, userRepository);
     }
 
     @Provides
-    LoginUseCase provideLoginUseCase(UseCaseConfig useCaseConfig, UserRepository userRepository) {
-        return new LoginUseCase(useCaseConfig, userRepository);
-    }
-
-    @Provides
-    LogoutUseCase provideLogoutUseCase(UseCaseConfig useCaseConfig, UserRepository userRepository) {
-        return new LogoutUseCase(useCaseConfig, userRepository);
-    }
-
-    @Provides
-    RegisterUseCase provideRegisterUseCase(UseCaseConfig useCaseConfig,
+    UploadAvatar provideUploadAvatar(UseCaseConfig useCaseConfig,
         UserRepository userRepository) {
-        return new RegisterUseCase(useCaseConfig, userRepository);
-    }
-
-    @Provides
-    GetCurrentUserUseCase provideGetCurrentUserUseCase(UseCaseConfig useCaseConfig,
-        UserRepository userRepository) {
-        return new GetCurrentUserUseCase(useCaseConfig, userRepository);
-    }
-
-    @Provides
-    UploadAvatarUseCase provideUploadAvatarUseCase(UseCaseConfig useCaseConfig,
-        UserRepository userRepository) {
-        return new UploadAvatarUseCase(useCaseConfig, userRepository);
+        return new UploadAvatar(useCaseConfig, userRepository);
     }
 }

@@ -1,6 +1,6 @@
 package com.zxjdev.smile.presentation.moment.create;
 
-import com.zxjdev.smile.domain.moment.AddMomentUseCase;
+import com.zxjdev.smile.domain.moment.usecase.AddMoment;
 import com.zxjdev.smile.presentation.application.DefaultSubscriber;
 import com.zxjdev.smile.presentation.application.util.ui.ErrorMessagePrinter;
 
@@ -9,7 +9,7 @@ import javax.inject.Inject;
 public class NewMomentPresenter implements NewMomentContract.Presenter {
 
     @Inject NewMomentContract.View view;
-    @Inject AddMomentUseCase addMomentUseCase;
+    @Inject AddMoment addMoment;
     @Inject ErrorMessagePrinter errorMessagePrinter;
 
     @Inject
@@ -18,7 +18,7 @@ public class NewMomentPresenter implements NewMomentContract.Presenter {
     }
 
     public void handleAddMoment(String content) {
-        addMomentUseCase.execute(new AddMomentUseCase.RequestParams(content),
+        addMoment.execute(new AddMoment.RequestParams(content),
             new DefaultSubscriber<Void>(errorMessagePrinter) {
                 @Override
                 public void onCompleted() {
@@ -29,6 +29,6 @@ public class NewMomentPresenter implements NewMomentContract.Presenter {
     }
 
     public void destroy() {
-        addMomentUseCase.unSubscribe();
+        addMoment.unSubscribe();
     }
 }

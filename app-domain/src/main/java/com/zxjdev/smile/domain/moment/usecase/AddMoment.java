@@ -1,15 +1,16 @@
-package com.zxjdev.smile.domain.moment;
+package com.zxjdev.smile.domain.moment.usecase;
 
 import com.zxjdev.smile.domain.base.UseCase;
 import com.zxjdev.smile.domain.base.UseCaseConfig;
+import com.zxjdev.smile.domain.moment.MomentRepository;
 
 import rx.Observable;
 
-public class AddMomentUseCase extends UseCase<AddMomentUseCase.RequestParams, Void> {
+public class AddMoment extends UseCase<AddMoment.RequestParams, Void> {
 
     private MomentRepository momentRepository;
 
-    public AddMomentUseCase(UseCaseConfig useCaseConfig, MomentRepository momentRepository) {
+    public AddMoment(UseCaseConfig useCaseConfig, MomentRepository momentRepository) {
         super(useCaseConfig);
         this.momentRepository = momentRepository;
     }

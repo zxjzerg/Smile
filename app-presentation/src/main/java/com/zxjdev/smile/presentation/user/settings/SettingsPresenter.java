@@ -1,6 +1,6 @@
 package com.zxjdev.smile.presentation.user.settings;
 
-import com.zxjdev.smile.domain.user.LogoutUseCase;
+import com.zxjdev.smile.domain.user.usecase.Logout;
 import com.zxjdev.smile.presentation.application.DefaultSubscriber;
 import com.zxjdev.smile.presentation.application.util.ui.ErrorMessagePrinter;
 
@@ -9,7 +9,7 @@ import javax.inject.Inject;
 public class SettingsPresenter implements SettingsContract.Presenter {
 
     @Inject SettingsContract.View view;
-    @Inject LogoutUseCase logoutUseCase;
+    @Inject Logout logout;
     @Inject ErrorMessagePrinter errorMessagePrinter;
 
     @Inject
@@ -19,7 +19,7 @@ public class SettingsPresenter implements SettingsContract.Presenter {
 
     @Override
     public void handleLogout() {
-        logoutUseCase.execute(new DefaultSubscriber<Void>(errorMessagePrinter) {
+        logout.execute(new DefaultSubscriber<Void>(errorMessagePrinter) {
             @Override
             public void onCompleted() {
                 super.onCompleted();
@@ -30,6 +30,6 @@ public class SettingsPresenter implements SettingsContract.Presenter {
 
     @Override
     public void destroy() {
-        logoutUseCase.unSubscribe();
+        logout.unSubscribe();
     }
 }

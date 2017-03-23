@@ -1,9 +1,9 @@
 package com.zxjdev.smile.presentation.moment;
 
 import com.zxjdev.smile.domain.base.UseCaseConfig;
-import com.zxjdev.smile.domain.moment.AddMomentUseCase;
-import com.zxjdev.smile.domain.moment.GetMomentListUseCase;
 import com.zxjdev.smile.domain.moment.MomentRepository;
+import com.zxjdev.smile.domain.moment.usecase.AddMoment;
+import com.zxjdev.smile.domain.moment.usecase.GetMomentList;
 
 import dagger.Module;
 import dagger.Provides;
@@ -12,14 +12,13 @@ import dagger.Provides;
 public class MomentUseCaseModule {
 
     @Provides
-    AddMomentUseCase provideAddMomentUseCase(UseCaseConfig useCaseConfig,
-        MomentRepository momentRepository) {
-        return new AddMomentUseCase(useCaseConfig, momentRepository);
+    AddMoment provideAddMoment(UseCaseConfig useCaseConfig, MomentRepository momentRepository) {
+        return new AddMoment(useCaseConfig, momentRepository);
     }
 
     @Provides
-    GetMomentListUseCase provideGetMomentListUseCase(UseCaseConfig useCaseConfig,
+    GetMomentList provideGetMomentList(UseCaseConfig useCaseConfig,
         MomentRepository momentRepository) {
-        return new GetMomentListUseCase(useCaseConfig, momentRepository);
+        return new GetMomentList(useCaseConfig, momentRepository);
     }
 }

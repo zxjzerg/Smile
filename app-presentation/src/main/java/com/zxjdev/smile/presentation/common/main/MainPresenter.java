@@ -1,8 +1,8 @@
 package com.zxjdev.smile.presentation.common.main;
 
-import com.zxjdev.smile.domain.user.GetCurrentUserUseCase;
-import com.zxjdev.smile.domain.user.UploadAvatarUseCase;
 import com.zxjdev.smile.domain.user.User;
+import com.zxjdev.smile.domain.user.usecase.GetCurrentUser;
+import com.zxjdev.smile.domain.user.usecase.UploadAvatar;
 import com.zxjdev.smile.presentation.application.DefaultSubscriber;
 import com.zxjdev.smile.presentation.application.util.ui.ErrorMessagePrinter;
 import com.zxjdev.smile.presentation.user.UserModel;
@@ -13,9 +13,9 @@ import javax.inject.Inject;
 public class MainPresenter implements MainContract.Presenter {
 
     @Inject MainContract.View view;
-    @Inject GetCurrentUserUseCase getCurrentUserUseCase;
+    @Inject GetCurrentUser getCurrentUser;
     @Inject UserModelMapper userModelMapper;
-    @Inject UploadAvatarUseCase uploadAvatarUseCase;
+    @Inject UploadAvatar uploadAvatar;
     @Inject ErrorMessagePrinter errorMessagePrinter;
 
     @Inject
@@ -29,7 +29,7 @@ public class MainPresenter implements MainContract.Presenter {
 
     @Override
     public void onCreate() {
-        getCurrentUserUseCase.execute(new DefaultSubscriber<User>(errorMessagePrinter) {
+        getCurrentUser.execute(new DefaultSubscriber<User>(errorMessagePrinter) {
             @Override
             public void onNext(User data) {
                 UserModel userModel = userModelMapper.transform(data);
@@ -40,15 +40,15 @@ public class MainPresenter implements MainContract.Presenter {
 
     @Override
     public void onDestroy() {
-        getCurrentUserUseCase.unSubscribe();
-        uploadAvatarUseCase.unSubscribe();
+        getCurrentUser.unSubscribe();
+        uploadAvatar.unSubscribe();
     }
 
     @Override
     public void handleChangeAvatar(String picturePath) {
-        UploadAvatarUseCase.RequestParams params = new UploadAvatarUseCase.RequestParams();
+        UploadAvatar.RequestParams params = new UploadAvatar.RequestParams();
         params.setLocalPath(picturePath);
-        uploadAvatarUseCase.execute(params, new DefaultSubscriber<String>(errorMessagePrinter) {
+        uploadAvatar.execute(params, new DefaultSubscriber<String>(errorMessagePrinter) {
             @Override
             public void onNext(String data) {
                 view.changeUserAvatar(data);

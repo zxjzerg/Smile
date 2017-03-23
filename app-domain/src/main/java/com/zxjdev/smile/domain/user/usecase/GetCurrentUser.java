@@ -1,22 +1,24 @@
-package com.zxjdev.smile.domain.user;
+package com.zxjdev.smile.domain.user.usecase;
 
 import com.zxjdev.smile.domain.base.UseCase;
 import com.zxjdev.smile.domain.base.UseCaseConfig;
+import com.zxjdev.smile.domain.user.User;
+import com.zxjdev.smile.domain.user.UserRepository;
 
 import rx.Observable;
 
-public class GetUserUseCase extends UseCase<GetUserUseCase.RequestParams, User> {
+public class GetCurrentUser extends UseCase<GetCurrentUser.RequestParams, User> {
 
     private UserRepository userRepository;
 
-    public GetUserUseCase(UseCaseConfig useCaseConfig, UserRepository userRepository) {
+    public GetCurrentUser(UseCaseConfig useCaseConfig, UserRepository userRepository) {
         super(useCaseConfig);
         this.userRepository = userRepository;
     }
 
     @Override
     protected Observable<User> buildUseCaseObservable(RequestParams params) {
-        return null;
+        return userRepository.getCurrentUser();
     }
 
     public static final class RequestParams implements UseCase.RequestParams {

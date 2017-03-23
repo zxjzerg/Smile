@@ -1,25 +1,23 @@
-package com.zxjdev.smile.domain.user;
+package com.zxjdev.smile.domain.user.usecase;
 
 import com.zxjdev.smile.domain.base.UseCase;
 import com.zxjdev.smile.domain.base.UseCaseConfig;
-
-import javax.inject.Inject;
+import com.zxjdev.smile.domain.user.UserRepository;
 
 import rx.Observable;
 
-public class LoginUseCase extends UseCase<LoginUseCase.RequestParams, User> {
+public class Register extends UseCase<Register.RequestParams, Void> {
 
     private UserRepository userRepository;
 
-    @Inject
-    public LoginUseCase(UseCaseConfig useCaseConfig, UserRepository userRepository) {
+    public Register(UseCaseConfig useCaseConfig, UserRepository userRepository) {
         super(useCaseConfig);
         this.userRepository = userRepository;
     }
 
     @Override
-    protected Observable<User> buildUseCaseObservable(RequestParams params) {
-        return this.userRepository.login(params.getUsername(), params.getPassword());
+    protected Observable<Void> buildUseCaseObservable(RequestParams params) {
+        return this.userRepository.register(params.getUsername(), params.getPassword());
     }
 
     public static class RequestParams implements UseCase.RequestParams {

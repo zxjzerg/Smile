@@ -1,15 +1,16 @@
-package com.zxjdev.smile.domain.user;
+package com.zxjdev.smile.domain.user.usecase;
 
 import com.zxjdev.smile.domain.base.UseCase;
 import com.zxjdev.smile.domain.base.UseCaseConfig;
+import com.zxjdev.smile.domain.user.UserRepository;
 
 import rx.Observable;
 
-public class LogoutUseCase extends UseCase<LogoutUseCase.RequestParams, Void> {
+public class Logout extends UseCase<Logout.RequestParams, Void> {
 
     private UserRepository userRepository;
 
-    public LogoutUseCase(UseCaseConfig useCaseConfig, UserRepository userRepository) {
+    public Logout(UseCaseConfig useCaseConfig, UserRepository userRepository) {
         super(useCaseConfig);
         this.userRepository = userRepository;
     }
