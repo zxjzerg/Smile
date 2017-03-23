@@ -1,7 +1,7 @@
 package com.zxjdev.smile.domain.moment.usecase;
 
+import com.zxjdev.smile.domain.base.SchedulerFactory;
 import com.zxjdev.smile.domain.base.UseCase;
-import com.zxjdev.smile.domain.base.UseCaseConfig;
 import com.zxjdev.smile.domain.moment.MomentRepository;
 
 import rx.Observable;
@@ -10,8 +10,8 @@ public class AddMoment extends UseCase<AddMoment.RequestParams, Void> {
 
     private MomentRepository momentRepository;
 
-    public AddMoment(UseCaseConfig useCaseConfig, MomentRepository momentRepository) {
-        super(useCaseConfig);
+    public AddMoment(SchedulerFactory schedulerFactory, MomentRepository momentRepository) {
+        super(schedulerFactory);
         this.momentRepository = momentRepository;
     }
 

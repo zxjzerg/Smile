@@ -1,6 +1,6 @@
 package com.zxjdev.smile.presentation.user;
 
-import com.zxjdev.smile.domain.base.UseCaseConfig;
+import com.zxjdev.smile.domain.base.SchedulerFactory;
 import com.zxjdev.smile.domain.user.UserRepository;
 import com.zxjdev.smile.domain.user.usecase.AutoLogin;
 import com.zxjdev.smile.domain.user.usecase.GetCurrentUser;
@@ -16,34 +16,34 @@ import dagger.Provides;
 public class UserUseCaseModule {
 
     @Provides
-    AutoLogin provideAutoLogin(UseCaseConfig useCaseConfig, UserRepository userRepository) {
-        return new AutoLogin(useCaseConfig, userRepository);
+    AutoLogin provideAutoLogin(SchedulerFactory schedulerFactory, UserRepository userRepository) {
+        return new AutoLogin(schedulerFactory, userRepository);
     }
 
     @Provides
-    Login provideLogin(UseCaseConfig useCaseConfig, UserRepository userRepository) {
-        return new Login(useCaseConfig, userRepository);
+    Login provideLogin(SchedulerFactory schedulerFactory, UserRepository userRepository) {
+        return new Login(schedulerFactory, userRepository);
     }
 
     @Provides
-    Logout provideLogout(UseCaseConfig useCaseConfig, UserRepository userRepository) {
-        return new Logout(useCaseConfig, userRepository);
+    Logout provideLogout(SchedulerFactory schedulerFactory, UserRepository userRepository) {
+        return new Logout(schedulerFactory, userRepository);
     }
 
     @Provides
-    Register provideRegister(UseCaseConfig useCaseConfig, UserRepository userRepository) {
-        return new Register(useCaseConfig, userRepository);
+    Register provideRegister(SchedulerFactory schedulerFactory, UserRepository userRepository) {
+        return new Register(schedulerFactory, userRepository);
     }
 
     @Provides
-    GetCurrentUser provideGetCurrentUser(UseCaseConfig useCaseConfig,
+    GetCurrentUser provideGetCurrentUser(SchedulerFactory schedulerFactory,
         UserRepository userRepository) {
-        return new GetCurrentUser(useCaseConfig, userRepository);
+        return new GetCurrentUser(schedulerFactory, userRepository);
     }
 
     @Provides
-    UploadAvatar provideUploadAvatar(UseCaseConfig useCaseConfig,
+    UploadAvatar provideUploadAvatar(SchedulerFactory schedulerFactory,
         UserRepository userRepository) {
-        return new UploadAvatar(useCaseConfig, userRepository);
+        return new UploadAvatar(schedulerFactory, userRepository);
     }
 }

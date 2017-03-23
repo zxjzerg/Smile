@@ -1,7 +1,7 @@
 package com.zxjdev.smile.domain.user.usecase;
 
+import com.zxjdev.smile.domain.base.SchedulerFactory;
 import com.zxjdev.smile.domain.base.UseCase;
-import com.zxjdev.smile.domain.base.UseCaseConfig;
 import com.zxjdev.smile.domain.user.User;
 import com.zxjdev.smile.domain.user.UserRepository;
 
@@ -14,8 +14,8 @@ public class Login extends UseCase<Login.RequestParams, User> {
     private UserRepository userRepository;
 
     @Inject
-    public Login(UseCaseConfig useCaseConfig, UserRepository userRepository) {
-        super(useCaseConfig);
+    public Login(SchedulerFactory schedulerFactory, UserRepository userRepository) {
+        super(schedulerFactory);
         this.userRepository = userRepository;
     }
 
