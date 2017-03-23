@@ -46,7 +46,8 @@ public class UserDataRepository implements UserRepository {
 
     @Override
     public Observable<User> getCurrentUser() {
-        return userCloudDataSource.getUser(null).map(userEntity -> userMapper.transform(userEntity));
+        return userCloudDataSource.getUser(null)
+            .map(userEntity -> userMapper.transform(userEntity));
     }
 
     @Override

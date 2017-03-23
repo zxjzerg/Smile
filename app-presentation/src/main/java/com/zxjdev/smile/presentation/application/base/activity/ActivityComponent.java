@@ -14,10 +14,7 @@ import com.zxjdev.smile.presentation.user.authorization.register.di.RegisterActi
 
 import dagger.Subcomponent;
 
-@Subcomponent(
-    modules = {
-        ActivityModule.class
-    })
+@Subcomponent(modules = {ActivityModule.class})
 @ActivityScope
 public interface ActivityComponent {
 

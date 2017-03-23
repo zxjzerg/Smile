@@ -9,10 +9,7 @@ import com.zxjdev.smile.presentation.user.settings.di.SettingsFragmentModule;
 
 import dagger.Subcomponent;
 
-@Subcomponent(
-    modules = {
-        MainActivityModule.class
-    })
+@Subcomponent(modules = {MainActivityModule.class})
 public interface MainActivityComponent {
 
     void inject(MainActivity activity);

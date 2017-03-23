@@ -23,7 +23,8 @@ public class MomentListFragmentModule {
 
     @Provides
     @FragmentScope
-    MomentAdapter provideMomentAdapter(@Named(DiConstant.FRAGMENT_IMAGE_LOADER) ImageLoader imageLoader) {
+    MomentAdapter provideMomentAdapter(@Named(
+        DiConstant.FRAGMENT_IMAGE_LOADER) ImageLoader imageLoader) {
         return new MomentAdapter(imageLoader);
     }
 
