@@ -11,6 +11,8 @@ android {
         targetSdkVersion rootProject.ext.androidTargetSdkVersion
         versionCode rootProject.ext.androidVersionCode
         versionName rootProject.ext.androidVersionName
+
+        buildConfigField "int", "QUERY_LIMIT", "20"
     }
 
     buildTypes {

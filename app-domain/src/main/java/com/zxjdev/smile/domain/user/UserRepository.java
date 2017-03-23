@@ -8,7 +8,6 @@ public interface UserRepository {
 
     Observable<User> login(String username, String password);
 
-    /** 检查是否已经在本机登录了 */
     Observable<Boolean> checkHasAuthorized();
 
     Observable<Void> logout();

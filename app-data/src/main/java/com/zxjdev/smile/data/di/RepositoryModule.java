@@ -1,4 +1,4 @@
-package com.zxjdev.smile.presentation.application.di.module;
+package com.zxjdev.smile.data.di;
 
 import com.zxjdev.smile.data.moment.MomentDataRepository;
 import com.zxjdev.smile.data.user.UserDataRepository;

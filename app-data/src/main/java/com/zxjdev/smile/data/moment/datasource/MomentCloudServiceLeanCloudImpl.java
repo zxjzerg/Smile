@@ -3,8 +3,9 @@ package com.zxjdev.smile.data.moment.datasource;
 import com.avos.avoscloud.AVException;
 import com.avos.avoscloud.AVObject;
 import com.avos.avoscloud.AVQuery;
+import com.zxjdev.smile.data.BuildConfig;
 import com.zxjdev.smile.data.moment.MomentEntity;
-import com.zxjdev.smile.data.utils.LeanCloudUtils;
+import com.zxjdev.smile.data.user.UserEntity;
 
 import java.util.List;
 
@@ -14,9 +15,11 @@ import rx.Observable;
 
 public class MomentCloudServiceLeanCloudImpl implements MomentCloudService {
 
-    @Inject
-    public MomentCloudServiceLeanCloudImpl() {
+    private UserEntity currentUser;
 
+    @Inject
+    public MomentCloudServiceLeanCloudImpl(UserEntity currentUser) {
+        this.currentUser = currentUser;
     }
 
     @Override
@@ -24,7 +27,7 @@ public class MomentCloudServiceLeanCloudImpl implements MomentCloudService {
         return Observable.create(subscriber -> {
             MomentEntity momentEntity = new MomentEntity();
             momentEntity.setContent(content);
-            momentEntity.setOwner(LeanCloudUtils.getCurrentUser());
+            momentEntity.setOwner(currentUser);
             try {
                 momentEntity.save();
                 subscriber.onCompleted();
@@ -38,9 +41,9 @@ public class MomentCloudServiceLeanCloudImpl implements MomentCloudService {
     public Observable<List<MomentEntity>> getMomentList() {
         return Observable.create(subscriber -> {
             AVQuery<MomentEntity> query = AVObject.getQuery(MomentEntity.class);
-            query.whereEqualTo("user", LeanCloudUtils.getCurrentUser());
+            query.whereEqualTo("user", currentUser);
             query.include("user");
-            query.limit(LeanCloudUtils.QUERY_LIMIT);
+            query.limit(BuildConfig.QUERY_LIMIT);
             query.orderByDescending("createdAt");
             try {
                 subscriber.onNext(query.find());

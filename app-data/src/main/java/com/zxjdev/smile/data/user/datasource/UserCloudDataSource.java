@@ -1,7 +1,6 @@
 package com.zxjdev.smile.data.user.datasource;
 
 import com.zxjdev.smile.data.user.UserEntity;
-import com.zxjdev.smile.data.utils.LeanCloudUtils;
 
 import javax.inject.Inject;
 
@@ -15,10 +14,12 @@ import rx.Observable;
 public class UserCloudDataSource {
 
     private UserCloudService userCloudService;
+    private UserEntity currentUser;
 
     @Inject
-    public UserCloudDataSource(UserCloudService userCloudService) {
+    public UserCloudDataSource(UserCloudService userCloudService, UserEntity currentUser) {
         this.userCloudService = userCloudService;
+        this.currentUser = currentUser;
     }
 
     public Observable<Void> register(String username, String password) {
@@ -39,7 +40,7 @@ public class UserCloudDataSource {
 
     public Observable<UserEntity> getUser(String id) {
         if (id == null) {
-            return Observable.just(LeanCloudUtils.getCurrentUser());
+            return Observable.just(currentUser);
         } else {
             return Observable.empty();
         }

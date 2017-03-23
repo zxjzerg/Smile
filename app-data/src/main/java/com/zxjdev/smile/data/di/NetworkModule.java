@@ -1,4 +1,4 @@
-package com.zxjdev.smile.presentation.application.di.module;
+package com.zxjdev.smile.data.di;
 
 import com.zxjdev.smile.data.moment.datasource.MomentCloudService;
 import com.zxjdev.smile.data.moment.datasource.MomentCloudServiceLeanCloudImpl;

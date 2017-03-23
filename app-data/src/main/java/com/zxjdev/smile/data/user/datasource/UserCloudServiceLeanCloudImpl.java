@@ -4,7 +4,6 @@ import com.avos.avoscloud.AVException;
 import com.avos.avoscloud.AVFile;
 import com.avos.avoscloud.AVUser;
 import com.zxjdev.smile.data.user.UserEntity;
-import com.zxjdev.smile.data.utils.LeanCloudUtils;
 
 import java.io.FileNotFoundException;
 
@@ -14,9 +13,11 @@ import rx.Observable;
 
 public class UserCloudServiceLeanCloudImpl implements UserCloudService {
 
-    @Inject
-    public UserCloudServiceLeanCloudImpl() {
+    private UserEntity currentUser;
 
+    @Inject
+    public UserCloudServiceLeanCloudImpl(UserEntity currentUser) {
+        this.currentUser = currentUser;
     }
 
     @Override
@@ -66,7 +67,6 @@ public class UserCloudServiceLeanCloudImpl implements UserCloudService {
             try {
                 AVFile file = AVFile.withAbsoluteLocalPath("avatar.jpg", localPath);
                 file.save();
-                UserEntity currentUser = LeanCloudUtils.getCurrentUser();
                 currentUser.setAvatar(file.getUrl());
                 currentUser.save();
                 subscriber.onNext(file.getUrl());
