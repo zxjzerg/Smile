@@ -5,9 +5,9 @@ import com.zxjdev.smile.presentation.user.authorization.register.RegisterActivit
 import dagger.Subcomponent;
 
 @Subcomponent(modules = {
-    RegisterActivityModule.class
+  RegisterActivityModule.class
 })
 public interface RegisterActivityComponent {
 
-    void inject(RegisterActivity activity);
+  void inject(RegisterActivity activity);
 }

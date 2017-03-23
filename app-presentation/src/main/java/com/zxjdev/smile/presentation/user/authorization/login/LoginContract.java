@@ -2,15 +2,15 @@ package com.zxjdev.smile.presentation.user.authorization.login;
 
 public interface LoginContract {
 
-    interface View {
+  interface View {
 
-        void navigateToMain();
-    }
+    void navigateToMain();
+  }
 
-    interface Presenter {
+  interface Presenter {
 
-        void destroy();
+    void destroy();
 
-        void handleLogin(String username, String password);
-    }
+    void handleLogin(String username, String password);
+  }
 }

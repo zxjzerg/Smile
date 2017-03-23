@@ -10,13 +10,13 @@ import dagger.Provides;
 @Module
 public class DataModule {
 
-    @Provides
-    UserEntity provideCurrentUser() {
-        UserEntity currentUser = AVUser.getCurrentUser(UserEntity.class);
-        if (currentUser != null) {
-            return currentUser;
-        } else {
-            throw new AuthorizationException("There is no user login.");
-        }
+  @Provides
+  UserEntity provideCurrentUser() {
+    UserEntity currentUser = AVUser.getCurrentUser(UserEntity.class);
+    if (currentUser != null) {
+      return currentUser;
+    } else {
+      throw new AuthorizationException("There is no user login.");
     }
+  }
 }

@@ -2,15 +2,15 @@ package com.zxjdev.smile.presentation.moment.create;
 
 public interface NewMomentContract {
 
-    interface View {
+  interface View {
 
-        void close();
-    }
+    void close();
+  }
 
-    interface Presenter {
+  interface Presenter {
 
-        void destroy();
+    void destroy();
 
-        void handleAddMoment(String context);
-    }
+    void handleAddMoment(String context);
+  }
 }

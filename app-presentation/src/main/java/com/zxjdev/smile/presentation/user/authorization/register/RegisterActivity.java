@@ -19,51 +19,50 @@ import butterknife.OnClick;
 
 public class RegisterActivity extends BaseDaggerActivity implements RegisterContract.View {
 
-    @BindView(R.id.et_username) EditText etUsername;
-    @BindView(R.id.et_password) EditText etPassword;
-    @BindView(R.id.toolbar) Toolbar toolbar;
+  @BindView(R.id.et_username) EditText etUsername;
+  @BindView(R.id.et_password) EditText etPassword;
+  @BindView(R.id.toolbar) Toolbar toolbar;
 
-    @Inject RegisterContract.Presenter presenter;
+  @Inject RegisterContract.Presenter presenter;
 
-    private RegisterActivityComponent registerActivityComponent;
+  private RegisterActivityComponent registerActivityComponent;
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
+  @Override
+  protected void onCreate(Bundle savedInstanceState) {
+    super.onCreate(savedInstanceState);
 
-        setContentView(R.layout.activity_register);
-        ButterKnife.bind(this);
-        initUi();
-    }
+    setContentView(R.layout.activity_register);
+    ButterKnife.bind(this);
+    initUi();
+  }
 
-    @Override
-    protected void initDaggerComponent() {
-        registerActivityComponent = getActivityComponent().getRegisterActivityComponent(
-            new RegisterActivityModule(this));
-        registerActivityComponent.inject(this);
-    }
+  @Override
+  protected void initDaggerComponent() {
+    registerActivityComponent = getActivityComponent().getRegisterActivityComponent(new RegisterActivityModule(this));
+    registerActivityComponent.inject(this);
+  }
 
-    @Override
-    protected void onDestroy() {
-        registerActivityComponent = null;
-        super.onDestroy();
-    }
+  @Override
+  protected void onDestroy() {
+    registerActivityComponent = null;
+    super.onDestroy();
+  }
 
-    @OnClick(R.id.btn_register)
-    void handleRegisterClick() {
-        presenter.handleRegister(etUsername.getText().toString(), etPassword.getText().toString());
-    }
+  @OnClick(R.id.btn_register)
+  void handleRegisterClick() {
+    presenter.handleRegister(etUsername.getText().toString(), etPassword.getText().toString());
+  }
 
-    @Override
-    public void navigateToMain() {
-        Intent intent = new Intent(context, MainActivity.class);
-        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-        startActivity(intent);
-    }
+  @Override
+  public void navigateToMain() {
+    Intent intent = new Intent(context, MainActivity.class);
+    intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+    startActivity(intent);
+  }
 
-    private void initUi() {
-        setSupportActionBar(toolbar);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        getSupportActionBar().setTitle(null);
-    }
+  private void initUi() {
+    setSupportActionBar(toolbar);
+    getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+    getSupportActionBar().setTitle(null);
+  }
 }

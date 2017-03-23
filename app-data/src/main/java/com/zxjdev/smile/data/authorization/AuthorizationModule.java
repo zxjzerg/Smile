@@ -6,8 +6,8 @@ import dagger.Provides;
 @Module
 public class AuthorizationModule {
 
-    @Provides
-    AuthorizationCloudService provideCloudService(AuthorizationCloudServiceLeanCloudImpl cloudService) {
-        return cloudService;
-    }
+  @Provides
+  AuthorizationCloudService provideCloudService(AuthorizationCloudServiceLeanCloudImpl cloudService) {
+    return cloudService;
+  }
 }

@@ -15,35 +15,33 @@ import dagger.Provides;
 @Module
 public class UserUseCaseModule {
 
-    @Provides
-    AutoLogin provideAutoLogin(SchedulerFactory schedulerFactory, UserRepository userRepository) {
-        return new AutoLogin(schedulerFactory, userRepository);
-    }
+  @Provides
+  AutoLogin provideAutoLogin(SchedulerFactory schedulerFactory, UserRepository userRepository) {
+    return new AutoLogin(schedulerFactory, userRepository);
+  }
 
-    @Provides
-    Login provideLogin(SchedulerFactory schedulerFactory, UserRepository userRepository) {
-        return new Login(schedulerFactory, userRepository);
-    }
+  @Provides
+  Login provideLogin(SchedulerFactory schedulerFactory, UserRepository userRepository) {
+    return new Login(schedulerFactory, userRepository);
+  }
 
-    @Provides
-    Logout provideLogout(SchedulerFactory schedulerFactory, UserRepository userRepository) {
-        return new Logout(schedulerFactory, userRepository);
-    }
+  @Provides
+  Logout provideLogout(SchedulerFactory schedulerFactory, UserRepository userRepository) {
+    return new Logout(schedulerFactory, userRepository);
+  }
 
-    @Provides
-    Register provideRegister(SchedulerFactory schedulerFactory, UserRepository userRepository) {
-        return new Register(schedulerFactory, userRepository);
-    }
+  @Provides
+  Register provideRegister(SchedulerFactory schedulerFactory, UserRepository userRepository) {
+    return new Register(schedulerFactory, userRepository);
+  }
 
-    @Provides
-    GetCurrentUser provideGetCurrentUser(SchedulerFactory schedulerFactory,
-        UserRepository userRepository) {
-        return new GetCurrentUser(schedulerFactory, userRepository);
-    }
+  @Provides
+  GetCurrentUser provideGetCurrentUser(SchedulerFactory schedulerFactory, UserRepository userRepository) {
+    return new GetCurrentUser(schedulerFactory, userRepository);
+  }
 
-    @Provides
-    UploadAvatar provideUploadAvatar(SchedulerFactory schedulerFactory,
-        UserRepository userRepository) {
-        return new UploadAvatar(schedulerFactory, userRepository);
-    }
+  @Provides
+  UploadAvatar provideUploadAvatar(SchedulerFactory schedulerFactory, UserRepository userRepository) {
+    return new UploadAvatar(schedulerFactory, userRepository);
+  }
 }

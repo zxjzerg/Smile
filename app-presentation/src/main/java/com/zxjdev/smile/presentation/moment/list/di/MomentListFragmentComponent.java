@@ -10,5 +10,5 @@ import dagger.Subcomponent;
 @FragmentScope
 public interface MomentListFragmentComponent {
 
-    void inject(MomentListFragment fragment);
+  void inject(MomentListFragment fragment);
 }

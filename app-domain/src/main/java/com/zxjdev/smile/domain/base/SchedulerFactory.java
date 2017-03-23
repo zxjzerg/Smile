@@ -8,21 +8,21 @@ import rx.schedulers.Schedulers;
  */
 public class SchedulerFactory {
 
-    private Scheduler uiScheduler;
+  private Scheduler uiScheduler;
 
-    public SchedulerFactory(Scheduler uiScheduler) {
-        this.uiScheduler = uiScheduler;
-    }
+  public SchedulerFactory(Scheduler uiScheduler) {
+    this.uiScheduler = uiScheduler;
+  }
 
-    public Scheduler getIoScheduler() {
-        return Schedulers.io();
-    }
+  public Scheduler getIoScheduler() {
+    return Schedulers.io();
+  }
 
-    public Scheduler getUiScheduler() {
-        return uiScheduler;
-    }
+  public Scheduler getUiScheduler() {
+    return uiScheduler;
+  }
 
-    public Scheduler getComputationScheduler() {
-        return Schedulers.computation();
-    }
+  public Scheduler getComputationScheduler() {
+    return Schedulers.computation();
+  }
 }

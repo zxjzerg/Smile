@@ -17,53 +17,51 @@ import timber.log.Timber;
 
 public class SmileApplication extends Application {
 
-    private ApplicationComponent applicationComponent;
+  private ApplicationComponent applicationComponent;
 
-    @Override
-    public void onCreate() {
-        super.onCreate();
+  @Override
+  public void onCreate() {
+    super.onCreate();
 
-        initInjector();
+    initInjector();
 
-        initThirdPartySDK();
-    }
+    initThirdPartySDK();
+  }
 
-    private void initThirdPartySDK() {
-        initLeanCloud();
+  private void initThirdPartySDK() {
+    initLeanCloud();
 
-        initTimber();
+    initTimber();
 
-        initStetho();
-    }
+    initStetho();
+  }
 
-    private void initLeanCloud() {
-        // 使运行时获得用户对象都未UserEntity, 必须在initialize之前调用
-        AVUser.alwaysUseSubUserClass(UserEntity.class);
+  private void initLeanCloud() {
+    // 使运行时获得用户对象都未UserEntity, 必须在initialize之前调用
+    AVUser.alwaysUseSubUserClass(UserEntity.class);
 
-        // 注册子类化的类
-        AVObject.registerSubclass(MomentEntity.class);
+    // 注册子类化的类
+    AVObject.registerSubclass(MomentEntity.class);
 
-        // 初始化LeanCloud
-        AVOSCloud.initialize(this, BuildConfig.LEANCOULD_APP_ID, BuildConfig.LEANCOULD_APP_KEY);
-    }
+    // 初始化LeanCloud
+    AVOSCloud.initialize(this, BuildConfig.LEANCOULD_APP_ID, BuildConfig.LEANCOULD_APP_KEY);
+  }
 
-    private void initTimber() {
-        if (BuildConfig.DEBUG) Timber.plant(new Timber.DebugTree());
-    }
+  private void initTimber() {
+    if (BuildConfig.DEBUG) Timber.plant(new Timber.DebugTree());
+  }
 
-    private void initInjector() {
-        applicationComponent = DaggerApplicationComponent.builder()
-            .applicationModule(new ApplicationModule(this))
-            .build();
-    }
+  private void initInjector() {
+    applicationComponent = DaggerApplicationComponent.builder().applicationModule(new ApplicationModule(this)).build();
+  }
 
-    private void initStetho() {
-        Stetho.initializeWithDefaults(this);
-    }
+  private void initStetho() {
+    Stetho.initializeWithDefaults(this);
+  }
 
-    public ApplicationComponent getApplicationComponent() {
-        return applicationComponent;
-    }
+  public ApplicationComponent getApplicationComponent() {
+    return applicationComponent;
+  }
 }
 
 

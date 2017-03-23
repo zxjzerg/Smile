@@ -8,28 +8,28 @@ import javax.inject.Inject;
 
 public class SettingsPresenter implements SettingsContract.Presenter {
 
-    @Inject SettingsContract.View view;
-    @Inject Logout logout;
-    @Inject ErrorMessagePrinter errorMessagePrinter;
+  @Inject SettingsContract.View view;
+  @Inject Logout logout;
+  @Inject ErrorMessagePrinter errorMessagePrinter;
 
-    @Inject
-    public SettingsPresenter() {
+  @Inject
+  public SettingsPresenter() {
 
-    }
+  }
 
-    @Override
-    public void handleLogout() {
-        logout.execute(new DefaultSubscriber<Void>(errorMessagePrinter) {
-            @Override
-            public void onCompleted() {
-                super.onCompleted();
-                view.navigateToSplash();
-            }
-        });
-    }
+  @Override
+  public void handleLogout() {
+    logout.execute(new DefaultSubscriber<Void>(errorMessagePrinter) {
+      @Override
+      public void onCompleted() {
+        super.onCompleted();
+        view.navigateToSplash();
+      }
+    });
+  }
 
-    @Override
-    public void destroy() {
-        logout.unSubscribe();
-    }
+  @Override
+  public void destroy() {
+    logout.unSubscribe();
+  }
 }

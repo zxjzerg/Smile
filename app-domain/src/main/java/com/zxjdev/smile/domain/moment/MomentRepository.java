@@ -6,9 +6,9 @@ import rx.Observable;
 
 public interface MomentRepository {
 
-    Observable<Void> addMoment(String content);
+  Observable<Void> addMoment(String content);
 
-    Observable<List<Moment>> queryMomentList();
+  Observable<List<Moment>> queryMomentList();
 
-    Observable<Moment> queryMoment(String momentId);
+  Observable<Moment> queryMoment(String momentId);
 }

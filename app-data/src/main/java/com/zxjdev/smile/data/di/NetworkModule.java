@@ -13,15 +13,15 @@ import dagger.Provides;
 @Module
 public class NetworkModule {
 
-    @Provides
-    @Singleton
-    UserCloudService provideAuthorizationService(UserCloudServiceLeanCloudImpl userCloudService) {
-        return userCloudService;
-    }
+  @Provides
+  @Singleton
+  UserCloudService provideAuthorizationService(UserCloudServiceLeanCloudImpl userCloudService) {
+    return userCloudService;
+  }
 
-    @Provides
-    @Singleton
-    MomentCloudService provideMomentService(MomentCloudServiceLeanCloudImpl momentCloudService) {
-        return momentCloudService;
-    }
+  @Provides
+  @Singleton
+  MomentCloudService provideMomentService(MomentCloudServiceLeanCloudImpl momentCloudService) {
+    return momentCloudService;
+  }
 }

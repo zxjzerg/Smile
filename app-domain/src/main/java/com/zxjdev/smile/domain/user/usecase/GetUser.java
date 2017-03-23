@@ -9,19 +9,19 @@ import rx.Observable;
 
 public class GetUser extends UseCase<GetUser.RequestParams, User> {
 
-    private UserRepository userRepository;
+  private UserRepository userRepository;
 
-    public GetUser(SchedulerFactory schedulerFactory, UserRepository userRepository) {
-        super(schedulerFactory);
-        this.userRepository = userRepository;
-    }
+  public GetUser(SchedulerFactory schedulerFactory, UserRepository userRepository) {
+    super(schedulerFactory);
+    this.userRepository = userRepository;
+  }
 
-    @Override
-    protected Observable<User> buildUseCaseObservable(RequestParams params) {
-        return null;
-    }
+  @Override
+  protected Observable<User> buildUseCaseObservable(RequestParams params) {
+    return null;
+  }
 
-    public static final class RequestParams implements UseCase.RequestParams {
+  public static final class RequestParams implements UseCase.RequestParams {
 
-    }
+  }
 }

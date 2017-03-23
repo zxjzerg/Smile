@@ -31,81 +31,78 @@ import butterknife.OnClick;
 
 public class MomentListFragment extends DaggerBaseFragment implements MomentListContract.View {
 
-    public static final String TAG = MomentListFragment.class.getSimpleName();
+  public static final String TAG = MomentListFragment.class.getSimpleName();
 
-    @BindView(R.id.rv_moments) RecyclerView rvMoments;
-    @BindView(R.id.fbtn_add_new_moment) FloatingActionButton btnNewMoment;
-    @BindView(R.id.layout_swipe) SwipeRefreshLayout layoutSwipe;
+  @BindView(R.id.rv_moments) RecyclerView rvMoments;
+  @BindView(R.id.fbtn_add_new_moment) FloatingActionButton btnNewMoment;
+  @BindView(R.id.layout_swipe) SwipeRefreshLayout layoutSwipe;
 
-    private MomentAdapter momentAdapter;
-    @Inject MomentListContract.Presenter presenter;
+  private MomentAdapter momentAdapter;
+  @Inject MomentListContract.Presenter presenter;
 
-    private MomentListFragmentComponent momentListFragmentComponent;
+  private MomentListFragmentComponent momentListFragmentComponent;
 
-    public MomentListFragment() {
+  public MomentListFragment() {
 
+  }
+
+  @Override
+  protected void initDaggerComponent() {
+    if (getActivity() instanceof MainActivity) {
+      momentListFragmentComponent = ((MainActivity) getActivity()).getComponent()
+        .getMomentsFragmentComponent(new FragmentModule(this), new MomentListFragmentModule(this));
+      momentListFragmentComponent.inject(this);
     }
+  }
 
-    @Override
-    protected void initDaggerComponent() {
-        if (getActivity() instanceof MainActivity) {
-            momentListFragmentComponent = ((MainActivity) getActivity()).getComponent()
-                .getMomentsFragmentComponent(new FragmentModule(this),
-                    new MomentListFragmentModule(this));
-            momentListFragmentComponent.inject(this);
-        }
-    }
+  @Override
+  protected void releaseDaggerComponent() {
+    momentListFragmentComponent = null;
+  }
 
-    @Override
-    protected void releaseDaggerComponent() {
-        momentListFragmentComponent = null;
-    }
+  @Nullable
+  @Override
+  public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+    super.onCreateView(inflater, container, savedInstanceState);
+    View view = inflater.inflate(R.layout.fragment_moments, container, false);
+    ButterKnife.bind(this, view);
+    initUi();
+    return view;
+  }
 
-    @Nullable
-    @Override
-    public View onCreateView(LayoutInflater inflater,
-        ViewGroup container,
-        Bundle savedInstanceState) {
-        super.onCreateView(inflater, container, savedInstanceState);
-        View view = inflater.inflate(R.layout.fragment_moments, container, false);
-        ButterKnife.bind(this, view);
-        initUi();
-        return view;
-    }
+  @Override
+  protected void onDependencyCreated() {
+    presenter.create();
+  }
 
-    @Override
-    protected void onDependencyCreated() {
-        presenter.create();
-    }
+  private void initUi() {
+    rvMoments.setLayoutManager(new LinearLayoutManager(getActivity()));
+    momentAdapter = new MomentAdapter(super.getImageLoader());
+    rvMoments.setAdapter(momentAdapter);
 
-    private void initUi() {
-        rvMoments.setLayoutManager(new LinearLayoutManager(getActivity()));
-        momentAdapter = new MomentAdapter(super.getImageLoader());
-        rvMoments.setAdapter(momentAdapter);
+    layoutSwipe.setColorSchemeResources(R.color.colorAccent);
+    layoutSwipe.setOnRefreshListener(() -> presenter.refreshMoments());
+  }
 
-        layoutSwipe.setColorSchemeResources(R.color.colorAccent);
-        layoutSwipe.setOnRefreshListener(() -> presenter.refreshMoments());
-    }
+  @Override
+  public void onDestroy() {
+    super.onDestroy();
+    momentListFragmentComponent = null;
+  }
 
-    @Override
-    public void onDestroy() {
-        super.onDestroy();
-        momentListFragmentComponent = null;
-    }
+  @OnClick(R.id.fbtn_add_new_moment)
+  public void addNewMomentClick() {
+    Intent addMoment = new Intent(getActivity(), NewMomentActivity.class);
+    startActivity(addMoment);
+  }
 
-    @OnClick(R.id.fbtn_add_new_moment)
-    public void addNewMomentClick() {
-        Intent addMoment = new Intent(getActivity(), NewMomentActivity.class);
-        startActivity(addMoment);
-    }
+  @Override
+  public void displayMomentList(List<MomentModel> momentModels) {
+    momentAdapter.setMoments(momentModels);
+  }
 
-    @Override
-    public void displayMomentList(List<MomentModel> momentModels) {
-        momentAdapter.setMoments(momentModels);
-    }
-
-    @Override
-    public void dismissRefreshingView() {
-        layoutSwipe.setRefreshing(false);
-    }
+  @Override
+  public void dismissRefreshingView() {
+    layoutSwipe.setRefreshing(false);
+  }
 }

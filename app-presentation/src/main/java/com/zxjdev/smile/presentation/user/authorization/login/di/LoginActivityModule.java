@@ -9,19 +9,19 @@ import dagger.Provides;
 @Module
 public class LoginActivityModule {
 
-    private LoginContract.View view;
+  private LoginContract.View view;
 
-    public LoginActivityModule(LoginContract.View view) {
-        this.view = view;
-    }
+  public LoginActivityModule(LoginContract.View view) {
+    this.view = view;
+  }
 
-    @Provides
-    LoginContract.View provideView() {
-        return view;
-    }
+  @Provides
+  LoginContract.View provideView() {
+    return view;
+  }
 
-    @Provides
-    LoginContract.Presenter providePresenter(LoginPresenter presenter) {
-        return presenter;
-    }
+  @Provides
+  LoginContract.Presenter providePresenter(LoginPresenter presenter) {
+    return presenter;
+  }
 }

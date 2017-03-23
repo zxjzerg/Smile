@@ -12,15 +12,15 @@ import dagger.Provides;
 @Module
 public class FragmentModule {
 
-    private Fragment fragment;
+  private Fragment fragment;
 
-    public FragmentModule(Fragment fragment) {
-        this.fragment = fragment;
-    }
+  public FragmentModule(Fragment fragment) {
+    this.fragment = fragment;
+  }
 
-    @Provides
-    @FragmentScope
-    RequestManager provideRequestManager() {
-        return Glide.with(fragment);
-    }
+  @Provides
+  @FragmentScope
+  RequestManager provideRequestManager() {
+    return Glide.with(fragment);
+  }
 }

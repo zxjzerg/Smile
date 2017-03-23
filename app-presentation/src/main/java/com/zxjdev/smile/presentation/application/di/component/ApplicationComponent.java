@@ -18,7 +18,9 @@ import dagger.Component;
     ApplicationModule.class,
     NetworkModule.class,
     RepositoryModule.class,
-    UserUseCaseModule.class, MomentUseCaseModule.class, DataModule.class
+    UserUseCaseModule.class,
+    MomentUseCaseModule.class,
+    DataModule.class
 })
 public interface ApplicationComponent {
 

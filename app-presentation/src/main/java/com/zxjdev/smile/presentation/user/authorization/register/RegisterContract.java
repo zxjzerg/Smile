@@ -2,13 +2,13 @@ package com.zxjdev.smile.presentation.user.authorization.register;
 
 public interface RegisterContract {
 
-    interface View {
+  interface View {
 
-        void navigateToMain();
-    }
+    void navigateToMain();
+  }
 
-    interface Presenter {
+  interface Presenter {
 
-        void handleRegister(String username, String password);
-    }
+    void handleRegister(String username, String password);
+  }
 }

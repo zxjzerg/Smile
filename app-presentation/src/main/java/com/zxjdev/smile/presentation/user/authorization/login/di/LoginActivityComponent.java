@@ -5,9 +5,9 @@ import com.zxjdev.smile.presentation.user.authorization.login.LoginActivity;
 import dagger.Subcomponent;
 
 @Subcomponent(modules = {
-    LoginActivityModule.class
+  LoginActivityModule.class
 })
 public interface LoginActivityComponent {
 
-    void inject(LoginActivity activity);
+  void inject(LoginActivity activity);
 }

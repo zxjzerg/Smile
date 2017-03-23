@@ -9,19 +9,19 @@ import dagger.Provides;
 @Module
 public class SplashActivityModule {
 
-    private SplashContract.View view;
+  private SplashContract.View view;
 
-    public SplashActivityModule(SplashContract.View view) {
-        this.view = view;
-    }
+  public SplashActivityModule(SplashContract.View view) {
+    this.view = view;
+  }
 
-    @Provides
-    SplashContract.View provideView() {
-        return view;
-    }
+  @Provides
+  SplashContract.View provideView() {
+    return view;
+  }
 
-    @Provides
-    SplashContract.Presenter providePresenter(SplashPresenter presenter) {
-        return presenter;
-    }
+  @Provides
+  SplashContract.Presenter providePresenter(SplashPresenter presenter) {
+    return presenter;
+  }
 }

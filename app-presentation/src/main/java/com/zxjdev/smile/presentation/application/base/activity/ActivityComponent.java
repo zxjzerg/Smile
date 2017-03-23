@@ -18,13 +18,13 @@ import dagger.Subcomponent;
 @ActivityScope
 public interface ActivityComponent {
 
-    NewMomentActivityComponent getNewMomentActivityComponent(NewMomentActivityModule newMomentActivityModule);
+  NewMomentActivityComponent getNewMomentActivityComponent(NewMomentActivityModule newMomentActivityModule);
 
-    LoginActivityComponent getLoginActivityComponent(LoginActivityModule loginActivityModule);
+  LoginActivityComponent getLoginActivityComponent(LoginActivityModule loginActivityModule);
 
-    RegisterActivityComponent getRegisterActivityComponent(RegisterActivityModule registerActivityModule);
+  RegisterActivityComponent getRegisterActivityComponent(RegisterActivityModule registerActivityModule);
 
-    SplashActivityComponent getSplashActivityComponent(SplashActivityModule splashActivityModule);
+  SplashActivityComponent getSplashActivityComponent(SplashActivityModule splashActivityModule);
 
-    MainActivityComponent getMainActivityComponent(MainActivityModule mainActivityModule);
+  MainActivityComponent getMainActivityComponent(MainActivityModule mainActivityModule);
 }

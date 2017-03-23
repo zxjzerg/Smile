@@ -5,11 +5,11 @@ import android.widget.ImageView;
 
 public interface ImageLoader {
 
-    void loadImage(String url, ImageView imageView);
+  void loadImage(String url, ImageView imageView);
 
-    void loadImage(@DrawableRes int res, ImageView imageView);
+  void loadImage(@DrawableRes int res, ImageView imageView);
 
-    void loadCircleImage(String url, ImageView imageView);
+  void loadCircleImage(String url, ImageView imageView);
 
-    void loadCircleImage(@DrawableRes int res, ImageView imageView);
+  void loadCircleImage(@DrawableRes int res, ImageView imageView);
 }

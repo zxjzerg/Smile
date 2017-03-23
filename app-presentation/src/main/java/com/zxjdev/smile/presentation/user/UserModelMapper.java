@@ -7,16 +7,16 @@ import javax.inject.Inject;
 
 public class UserModelMapper extends BaseMapper<UserModel, User> {
 
-    @Inject
-    public UserModelMapper() {
+  @Inject
+  public UserModelMapper() {
 
-    }
+  }
 
-    @Override
-    public UserModel transform(User data) {
-        UserModel model = new UserModel();
-        model.setUsername(data.getUsername());
-        model.setAvatar(data.getAvatar());
-        return model;
-    }
+  @Override
+  public UserModel transform(User data) {
+    UserModel model = new UserModel();
+    model.setUsername(data.getUsername());
+    model.setAvatar(data.getAvatar());
+    return model;
+  }
 }

@@ -23,51 +23,50 @@ import butterknife.OnClick;
  */
 public class LoginActivity extends BaseDaggerActivity implements LoginContract.View {
 
-    @BindView(R.id.et_username) EditText etUsername;
-    @BindView(R.id.et_password) EditText etPassword;
-    @BindView(R.id.toolbar) Toolbar toolbar;
+  @BindView(R.id.et_username) EditText etUsername;
+  @BindView(R.id.et_password) EditText etPassword;
+  @BindView(R.id.toolbar) Toolbar toolbar;
 
-    @Inject LoginContract.Presenter presenter;
-    private LoginActivityComponent loginActivityComponent;
+  @Inject LoginContract.Presenter presenter;
+  private LoginActivityComponent loginActivityComponent;
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
+  @Override
+  protected void onCreate(Bundle savedInstanceState) {
+    super.onCreate(savedInstanceState);
 
-        setContentView(R.layout.activity_login);
-        ButterKnife.bind(this);
-        initUi();
-    }
+    setContentView(R.layout.activity_login);
+    ButterKnife.bind(this);
+    initUi();
+  }
 
-    @Override
-    protected void initDaggerComponent() {
-        loginActivityComponent = getActivityComponent().getLoginActivityComponent(
-            new LoginActivityModule(this));
-        loginActivityComponent.inject(this);
-    }
+  @Override
+  protected void initDaggerComponent() {
+    loginActivityComponent = getActivityComponent().getLoginActivityComponent(new LoginActivityModule(this));
+    loginActivityComponent.inject(this);
+  }
 
-    @Override
-    protected void onDestroy() {
-        presenter.destroy();
-        loginActivityComponent = null;
-        super.onDestroy();
-    }
+  @Override
+  protected void onDestroy() {
+    presenter.destroy();
+    loginActivityComponent = null;
+    super.onDestroy();
+  }
 
-    @OnClick(R.id.btn_login)
-    public void loginClick() {
-        presenter.handleLogin(etUsername.getText().toString(), etPassword.getText().toString());
-    }
+  @OnClick(R.id.btn_login)
+  public void loginClick() {
+    presenter.handleLogin(etUsername.getText().toString(), etPassword.getText().toString());
+  }
 
-    @Override
-    public void navigateToMain() {
-        Intent intent = new Intent(context, MainActivity.class);
-        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-        startActivity(intent);
-    }
+  @Override
+  public void navigateToMain() {
+    Intent intent = new Intent(context, MainActivity.class);
+    intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+    startActivity(intent);
+  }
 
-    private void initUi() {
-        setSupportActionBar(toolbar);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        getSupportActionBar().setTitle(null);
-    }
+  private void initUi() {
+    setSupportActionBar(toolbar);
+    getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+    getSupportActionBar().setTitle(null);
+  }
 }

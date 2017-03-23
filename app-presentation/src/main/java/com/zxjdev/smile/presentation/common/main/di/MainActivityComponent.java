@@ -12,10 +12,10 @@ import dagger.Subcomponent;
 @Subcomponent(modules = {MainActivityModule.class})
 public interface MainActivityComponent {
 
-    void inject(MainActivity activity);
+  void inject(MainActivity activity);
 
-    MomentListFragmentComponent getMomentsFragmentComponent(FragmentModule fragmentModule,
-        MomentListFragmentModule momentListFragmentModule);
+  MomentListFragmentComponent getMomentsFragmentComponent(FragmentModule fragmentModule,
+    MomentListFragmentModule momentListFragmentModule);
 
-    SettingsFragmentComponent getSettingsFragmentComponent(SettingsFragmentModule settingsFragmentModule);
+  SettingsFragmentComponent getSettingsFragmentComponent(SettingsFragmentModule settingsFragmentModule);
 }

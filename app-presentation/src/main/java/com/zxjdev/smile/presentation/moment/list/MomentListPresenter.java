@@ -13,41 +13,41 @@ import javax.inject.Inject;
 
 public class MomentListPresenter implements MomentListContract.Presenter {
 
-    @Inject MomentListContract.View view;
-    @Inject GetMomentList getMomentList;
-    @Inject MomentModelMapper momentModelMapper;
-    @Inject ErrorMessagePrinter errorMessagePrinter;
+  @Inject MomentListContract.View view;
+  @Inject GetMomentList getMomentList;
+  @Inject MomentModelMapper momentModelMapper;
+  @Inject ErrorMessagePrinter errorMessagePrinter;
 
-    @Inject
-    public MomentListPresenter() {
+  @Inject
+  public MomentListPresenter() {
 
-    }
+  }
 
-    @Override
-    public void create() {
-        loadMoments();
-    }
+  @Override
+  public void create() {
+    loadMoments();
+  }
 
-    @Override
-    public void loadMoments() {
-        getMomentList.execute(new DefaultSubscriber<List<Moment>>(errorMessagePrinter) {
-            @Override
-            public void onNext(List<Moment> data) {
-                List<MomentModel> momentModels = momentModelMapper.transform(data);
-                view.displayMomentList(momentModels);
-            }
-        });
-    }
+  @Override
+  public void loadMoments() {
+    getMomentList.execute(new DefaultSubscriber<List<Moment>>(errorMessagePrinter) {
+      @Override
+      public void onNext(List<Moment> data) {
+        List<MomentModel> momentModels = momentModelMapper.transform(data);
+        view.displayMomentList(momentModels);
+      }
+    });
+  }
 
-    @Override
-    public void refreshMoments() {
-        getMomentList.execute(new DefaultSubscriber<List<Moment>>(errorMessagePrinter) {
-            @Override
-            public void onNext(List<Moment> data) {
-                List<MomentModel> momentModels = momentModelMapper.transform(data);
-                view.displayMomentList(momentModels);
-                view.dismissRefreshingView();
-            }
-        });
-    }
+  @Override
+  public void refreshMoments() {
+    getMomentList.execute(new DefaultSubscriber<List<Moment>>(errorMessagePrinter) {
+      @Override
+      public void onNext(List<Moment> data) {
+        List<MomentModel> momentModels = momentModelMapper.transform(data);
+        view.displayMomentList(momentModels);
+        view.dismissRefreshingView();
+      }
+    });
+  }
 }

@@ -4,19 +4,19 @@ import com.zxjdev.smile.presentation.user.UserModel;
 
 public interface MainContract {
 
-    interface View {
+  interface View {
 
-        void displayUser(UserModel user);
+    void displayUser(UserModel user);
 
-        void changeUserAvatar(String url);
-    }
+    void changeUserAvatar(String url);
+  }
 
-    interface Presenter {
+  interface Presenter {
 
-        void onCreate();
+    void onCreate();
 
-        void onDestroy();
+    void onDestroy();
 
-        void handleChangeAvatar(String picturePath);
-    }
+    void handleChangeAvatar(String picturePath);
+  }
 }

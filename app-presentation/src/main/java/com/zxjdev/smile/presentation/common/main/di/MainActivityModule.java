@@ -9,19 +9,19 @@ import dagger.Provides;
 @Module
 public class MainActivityModule {
 
-    private MainContract.View view;
+  private MainContract.View view;
 
-    public MainActivityModule(MainContract.View view) {
-        this.view = view;
-    }
+  public MainActivityModule(MainContract.View view) {
+    this.view = view;
+  }
 
-    @Provides
-    MainContract.View provideView() {
-        return view;
-    }
+  @Provides
+  MainContract.View provideView() {
+    return view;
+  }
 
-    @Provides
-    MainContract.Presenter providePresenter(MainPresenter presenter) {
-        return presenter;
-    }
+  @Provides
+  MainContract.Presenter providePresenter(MainPresenter presenter) {
+    return presenter;
+  }
 }

@@ -6,19 +6,19 @@ import java.util.List;
 
 public interface MomentListContract {
 
-    interface View {
+  interface View {
 
-        void displayMomentList(List<MomentModel> momentModels);
+    void displayMomentList(List<MomentModel> momentModels);
 
-        void dismissRefreshingView();
-    }
+    void dismissRefreshingView();
+  }
 
-    interface Presenter {
+  interface Presenter {
 
-        void create();
+    void create();
 
-        void loadMoments();
+    void loadMoments();
 
-        void refreshMoments();
-    }
+    void refreshMoments();
+  }
 }

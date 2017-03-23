@@ -8,19 +8,19 @@ import rx.Observable;
 
 public class AutoLogin extends UseCase<AutoLogin.RequestParams, Boolean> {
 
-    private UserRepository userRepository;
+  private UserRepository userRepository;
 
-    public AutoLogin(SchedulerFactory schedulerFactory, UserRepository userRepository) {
-        super(schedulerFactory);
-        this.userRepository = userRepository;
-    }
+  public AutoLogin(SchedulerFactory schedulerFactory, UserRepository userRepository) {
+    super(schedulerFactory);
+    this.userRepository = userRepository;
+  }
 
-    @Override
-    protected Observable<Boolean> buildUseCaseObservable(RequestParams params) {
-        return this.userRepository.checkHasAuthorized();
-    }
+  @Override
+  protected Observable<Boolean> buildUseCaseObservable(RequestParams params) {
+    return this.userRepository.checkHasAuthorized();
+  }
 
-    public static class RequestParams implements UseCase.RequestParams {
+  public static class RequestParams implements UseCase.RequestParams {
 
-    }
+  }
 }

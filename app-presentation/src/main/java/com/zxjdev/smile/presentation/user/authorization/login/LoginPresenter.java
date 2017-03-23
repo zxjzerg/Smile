@@ -11,29 +11,28 @@ import timber.log.Timber;
 
 public class LoginPresenter implements LoginContract.Presenter {
 
-    @Inject LoginContract.View view;
-    @Inject Login login;
-    @Inject ErrorMessagePrinter errorMessagePrinter;
+  @Inject LoginContract.View view;
+  @Inject Login login;
+  @Inject ErrorMessagePrinter errorMessagePrinter;
 
-    @Inject
-    public LoginPresenter() {
+  @Inject
+  public LoginPresenter() {
 
-    }
+  }
 
-    @Override
-    public void handleLogin(String username, String password) {
-        login.execute(new Login.RequestParams(username, password),
-            new DefaultSubscriber<User>(errorMessagePrinter) {
-                @Override
-                public void onNext(User user) {
-                    Timber.d("login success. user: %s", user.getUsername());
-                    view.navigateToMain();
-                }
-            });
-    }
+  @Override
+  public void handleLogin(String username, String password) {
+    login.execute(new Login.RequestParams(username, password), new DefaultSubscriber<User>(errorMessagePrinter) {
+      @Override
+      public void onNext(User user) {
+        Timber.d("login success. user: %s", user.getUsername());
+        view.navigateToMain();
+      }
+    });
+  }
 
-    @Override
-    public void destroy() {
-        login.unSubscribe();
-    }
+  @Override
+  public void destroy() {
+    login.unSubscribe();
+  }
 }

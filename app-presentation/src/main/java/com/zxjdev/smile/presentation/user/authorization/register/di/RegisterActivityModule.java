@@ -9,19 +9,19 @@ import dagger.Provides;
 @Module
 public class RegisterActivityModule {
 
-    private RegisterContract.View view;
+  private RegisterContract.View view;
 
-    public RegisterActivityModule(RegisterContract.View view) {
-        this.view = view;
-    }
+  public RegisterActivityModule(RegisterContract.View view) {
+    this.view = view;
+  }
 
-    @Provides
-    RegisterContract.View provideView() {
-        return view;
-    }
+  @Provides
+  RegisterContract.View provideView() {
+    return view;
+  }
 
-    @Provides
-    RegisterContract.Presenter providePresenter(RegisterPresenter presenter) {
-        return presenter;
-    }
+  @Provides
+  RegisterContract.Presenter providePresenter(RegisterPresenter presenter) {
+    return presenter;
+  }
 }

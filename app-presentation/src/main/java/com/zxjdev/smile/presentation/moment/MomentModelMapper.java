@@ -8,19 +8,19 @@ import javax.inject.Inject;
 
 public class MomentModelMapper extends BaseMapper<MomentModel, Moment> {
 
-    @Inject UserModelMapper userModelMapper;
+  @Inject UserModelMapper userModelMapper;
 
-    @Inject
-    public MomentModelMapper() {
+  @Inject
+  public MomentModelMapper() {
 
-    }
+  }
 
-    @Override
-    public MomentModel transform(Moment data) {
-        MomentModel model = new MomentModel();
-        model.setOwner(userModelMapper.transform(data.getOwner()));
-        model.setContent(data.getContent());
-        model.setCreateAt(data.getCreateAt());
-        return model;
-    }
+  @Override
+  public MomentModel transform(Moment data) {
+    MomentModel model = new MomentModel();
+    model.setOwner(userModelMapper.transform(data.getOwner()));
+    model.setContent(data.getContent());
+    model.setCreateAt(data.getCreateAt());
+    return model;
+  }
 }

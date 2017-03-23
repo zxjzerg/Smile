@@ -8,28 +8,28 @@ import rx.Observable;
 
 public class UploadAvatar extends UseCase<UploadAvatar.RequestParams, String> {
 
-    private UserRepository userRepository;
+  private UserRepository userRepository;
 
-    public UploadAvatar(SchedulerFactory schedulerFactory, UserRepository userRepository) {
-        super(schedulerFactory);
-        this.userRepository = userRepository;
+  public UploadAvatar(SchedulerFactory schedulerFactory, UserRepository userRepository) {
+    super(schedulerFactory);
+    this.userRepository = userRepository;
+  }
+
+  @Override
+  protected Observable<String> buildUseCaseObservable(RequestParams params) {
+    return userRepository.uploadAvatar(params.getLocalPath());
+  }
+
+  public static class RequestParams implements UseCase.RequestParams {
+
+    private String localPath;
+
+    public String getLocalPath() {
+      return localPath;
     }
 
-    @Override
-    protected Observable<String> buildUseCaseObservable(RequestParams params) {
-        return userRepository.uploadAvatar(params.getLocalPath());
+    public void setLocalPath(String localPath) {
+      this.localPath = localPath;
     }
-
-    public static class RequestParams implements UseCase.RequestParams {
-
-        private String localPath;
-
-        public String getLocalPath() {
-            return localPath;
-        }
-
-        public void setLocalPath(String localPath) {
-            this.localPath = localPath;
-        }
-    }
+  }
 }

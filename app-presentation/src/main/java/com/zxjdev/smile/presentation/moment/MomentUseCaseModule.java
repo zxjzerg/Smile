@@ -11,15 +11,13 @@ import dagger.Provides;
 @Module
 public class MomentUseCaseModule {
 
-    @Provides
-    AddMoment provideAddMoment(SchedulerFactory schedulerFactory,
-        MomentRepository momentRepository) {
-        return new AddMoment(schedulerFactory, momentRepository);
-    }
+  @Provides
+  AddMoment provideAddMoment(SchedulerFactory schedulerFactory, MomentRepository momentRepository) {
+    return new AddMoment(schedulerFactory, momentRepository);
+  }
 
-    @Provides
-    GetMomentList provideGetMomentList(SchedulerFactory schedulerFactory,
-        MomentRepository momentRepository) {
-        return new GetMomentList(schedulerFactory, momentRepository);
-    }
+  @Provides
+  GetMomentList provideGetMomentList(SchedulerFactory schedulerFactory, MomentRepository momentRepository) {
+    return new GetMomentList(schedulerFactory, momentRepository);
+  }
 }

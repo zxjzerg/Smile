@@ -2,17 +2,17 @@ package com.zxjdev.smile.presentation.common.splash;
 
 public interface SplashContract {
 
-    interface View {
+  interface View {
 
-        void navigateToMain();
+    void navigateToMain();
 
-        void showButtons();
-    }
+    void showButtons();
+  }
 
-    interface Presenter {
+  interface Presenter {
 
-        void handleAutoLogin();
+    void handleAutoLogin();
 
-        void destroy();
-    }
+    void destroy();
+  }
 }

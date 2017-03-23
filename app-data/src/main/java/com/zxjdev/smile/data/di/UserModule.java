@@ -16,24 +16,24 @@ import dagger.Provides;
 @Module
 public class UserModule {
 
-    @Provides
-    UserEntity provideCurrentUser() {
-        UserEntity currentUser = AVUser.getCurrentUser(UserEntity.class);
-        if (currentUser != null) {
-            return currentUser;
-        } else {
-            throw new AuthorizationException("There is no user login.");
-        }
+  @Provides
+  UserEntity provideCurrentUser() {
+    UserEntity currentUser = AVUser.getCurrentUser(UserEntity.class);
+    if (currentUser != null) {
+      return currentUser;
+    } else {
+      throw new AuthorizationException("There is no user login.");
     }
+  }
 
-    @Provides
-    @Singleton
-    UserCloudService provideUserCloudService(UserCloudServiceLeanCloudImpl userCloudService) {
-        return userCloudService;
-    }
+  @Provides
+  @Singleton
+  UserCloudService provideUserCloudService(UserCloudServiceLeanCloudImpl userCloudService) {
+    return userCloudService;
+  }
 
-    @Provides
-    UserRepository provideUserRepository(UserDataRepository userDataRepository) {
-        return userDataRepository;
-    }
+  @Provides
+  UserRepository provideUserRepository(UserDataRepository userDataRepository) {
+    return userDataRepository;
+  }
 }

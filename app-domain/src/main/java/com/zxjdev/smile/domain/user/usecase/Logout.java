@@ -8,19 +8,19 @@ import rx.Observable;
 
 public class Logout extends UseCase<Logout.RequestParams, Void> {
 
-    private UserRepository userRepository;
+  private UserRepository userRepository;
 
-    public Logout(SchedulerFactory schedulerFactory, UserRepository userRepository) {
-        super(schedulerFactory);
-        this.userRepository = userRepository;
-    }
+  public Logout(SchedulerFactory schedulerFactory, UserRepository userRepository) {
+    super(schedulerFactory);
+    this.userRepository = userRepository;
+  }
 
-    @Override
-    protected Observable<Void> buildUseCaseObservable(RequestParams params) {
-        return this.userRepository.logout();
-    }
+  @Override
+  protected Observable<Void> buildUseCaseObservable(RequestParams params) {
+    return this.userRepository.logout();
+  }
 
-    public static class RequestParams implements UseCase.RequestParams {
+  public static class RequestParams implements UseCase.RequestParams {
 
-    }
+  }
 }

@@ -2,15 +2,15 @@ package com.zxjdev.smile.presentation.user.settings;
 
 public interface SettingsContract {
 
-    interface View {
+  interface View {
 
-        void navigateToSplash();
-    }
+    void navigateToSplash();
+  }
 
-    interface Presenter {
+  interface Presenter {
 
-        void handleLogout();
+    void handleLogout();
 
-        void destroy();
-    }
+    void destroy();
+  }
 }

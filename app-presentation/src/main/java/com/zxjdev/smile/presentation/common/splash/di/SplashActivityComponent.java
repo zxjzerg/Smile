@@ -5,9 +5,9 @@ import com.zxjdev.smile.presentation.common.splash.SplashActivity;
 import dagger.Subcomponent;
 
 @Subcomponent(modules = {
-    SplashActivityModule.class
+  SplashActivityModule.class
 })
 public interface SplashActivityComponent {
 
-    void inject(SplashActivity activity);
+  void inject(SplashActivity activity);
 }

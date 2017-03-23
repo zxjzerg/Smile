@@ -18,64 +18,62 @@ import butterknife.ButterKnife;
 
 public class NewMomentActivity extends BaseDaggerActivity implements NewMomentContract.View {
 
-    @BindView(R.id.view_toolbar) Toolbar toolbar;
-    @BindView(R.id.et_content) EditText etContent;
+  @BindView(R.id.view_toolbar) Toolbar toolbar;
+  @BindView(R.id.et_content) EditText etContent;
 
-    @Inject NewMomentContract.Presenter presenter;
+  @Inject NewMomentContract.Presenter presenter;
 
-    private NewMomentActivityComponent newMomentActivityComponent;
+  private NewMomentActivityComponent newMomentActivityComponent;
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_new_moment);
-        ButterKnife.bind(this);
-        initUi();
+  @Override
+  protected void onCreate(Bundle savedInstanceState) {
+    super.onCreate(savedInstanceState);
+    setContentView(R.layout.activity_new_moment);
+    ButterKnife.bind(this);
+    initUi();
+  }
+
+  @Override
+  protected void initDaggerComponent() {
+    newMomentActivityComponent = getActivityComponent().getNewMomentActivityComponent(
+      new NewMomentActivityModule(this));
+    newMomentActivityComponent.inject(this);
+  }
+
+  @Override
+  protected void onDestroy() {
+    super.onDestroy();
+    presenter.destroy();
+    newMomentActivityComponent = null;
+  }
+
+  @Override
+  public boolean onCreateOptionsMenu(Menu menu) {
+    getMenuInflater().inflate(R.menu.menu_new_moment, menu);
+    // Tint the icon in menu to white
+    menu.findItem(R.id.action_send).getIcon().setTint(getResources().getColor(android.R.color.white));
+    return super.onCreateOptionsMenu(menu);
+  }
+
+  @Override
+  public boolean onOptionsItemSelected(MenuItem item) {
+    switch (item.getItemId()) {
+      case R.id.action_send:
+        presenter.handleAddMoment(etContent.getText().toString());
+        return true;
+      default:
+        return super.onOptionsItemSelected(item);
     }
+  }
 
-    @Override
-    protected void initDaggerComponent() {
-        newMomentActivityComponent = getActivityComponent().getNewMomentActivityComponent(
-            new NewMomentActivityModule(this));
-        newMomentActivityComponent.inject(this);
-    }
+  @Override
+  public void close() {
+    onBackPressed();
+  }
 
-    @Override
-    protected void onDestroy() {
-        super.onDestroy();
-        presenter.destroy();
-        newMomentActivityComponent = null;
-    }
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.menu_new_moment, menu);
-        // Tint the icon in menu to white
-        menu.findItem(R.id.action_send)
-            .getIcon()
-            .setTint(getResources().getColor(android.R.color.white));
-        return super.onCreateOptionsMenu(menu);
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()) {
-            case R.id.action_send:
-                presenter.handleAddMoment(etContent.getText().toString());
-                return true;
-            default:
-                return super.onOptionsItemSelected(item);
-        }
-    }
-
-    @Override
-    public void close() {
-        onBackPressed();
-    }
-
-    private void initUi() {
-        setSupportActionBar(toolbar);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        getSupportActionBar().setTitle(null);
-    }
+  private void initUi() {
+    setSupportActionBar(toolbar);
+    getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+    getSupportActionBar().setTitle(null);
+  }
 }

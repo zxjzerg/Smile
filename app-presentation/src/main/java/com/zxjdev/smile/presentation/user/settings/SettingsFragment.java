@@ -23,62 +23,60 @@ import butterknife.OnClick;
 
 public class SettingsFragment extends DaggerBaseFragment implements SettingsContract.View {
 
-    public static final String TAG = SettingsFragment.class.getSimpleName();
+  public static final String TAG = SettingsFragment.class.getSimpleName();
 
-    @BindView(R.id.btn_logout) Button btnLogout;
+  @BindView(R.id.btn_logout) Button btnLogout;
 
-    @Inject SettingsContract.Presenter settingsPresenter;
+  @Inject SettingsContract.Presenter settingsPresenter;
 
-    private SettingsFragmentComponent settingsFragmentComponent;
+  private SettingsFragmentComponent settingsFragmentComponent;
 
-    public SettingsFragment() {
-        setRetainInstance(true);
+  public SettingsFragment() {
+    setRetainInstance(true);
+  }
+
+  @Override
+  public void onCreate(Bundle savedInstanceState) {
+    super.onCreate(savedInstanceState);
+  }
+
+  @Override
+  protected void initDaggerComponent() {
+    if (getActivity() instanceof MainActivity) {
+      settingsFragmentComponent = ((MainActivity) getActivity()).getComponent()
+        .getSettingsFragmentComponent(new SettingsFragmentModule(this));
+      settingsFragmentComponent.inject(this);
     }
+  }
 
-    @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-    }
+  @Override
+  protected void releaseDaggerComponent() {
+    settingsFragmentComponent = null;
+  }
 
-    @Override
-    protected void initDaggerComponent() {
-        if (getActivity() instanceof MainActivity) {
-            settingsFragmentComponent = ((MainActivity) getActivity()).getComponent()
-                .getSettingsFragmentComponent(new SettingsFragmentModule(this));
-            settingsFragmentComponent.inject(this);
-        }
-    }
+  @Nullable
+  @Override
+  public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+    View view = inflater.inflate(R.layout.fragment_settings, container, false);
+    ButterKnife.bind(this, view);
+    return view;
+  }
 
-    @Override
-    protected void releaseDaggerComponent() {
-        settingsFragmentComponent = null;
-    }
+  @Override
+  public void onDestroy() {
+    super.onDestroy();
+    settingsPresenter.destroy();
+  }
 
-    @Nullable
-    @Override
-    public View onCreateView(LayoutInflater inflater,
-        ViewGroup container,
-        Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_settings, container, false);
-        ButterKnife.bind(this, view);
-        return view;
-    }
+  @OnClick(R.id.btn_logout)
+  public void logoutClick() {
+    settingsPresenter.handleLogout();
+  }
 
-    @Override
-    public void onDestroy() {
-        super.onDestroy();
-        settingsPresenter.destroy();
-    }
-
-    @OnClick(R.id.btn_logout)
-    public void logoutClick() {
-        settingsPresenter.handleLogout();
-    }
-
-    @Override
-    public void navigateToSplash() {
-        Intent intent = new Intent(getActivity(), SplashActivity.class);
-        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-        startActivity(intent);
-    }
+  @Override
+  public void navigateToSplash() {
+    Intent intent = new Intent(getActivity(), SplashActivity.class);
+    intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+    startActivity(intent);
+  }
 }

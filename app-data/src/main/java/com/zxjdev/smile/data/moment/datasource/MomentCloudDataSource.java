@@ -10,18 +10,18 @@ import rx.Observable;
 
 public class MomentCloudDataSource {
 
-    private MomentCloudService momentService;
+  private MomentCloudService momentService;
 
-    @Inject
-    public MomentCloudDataSource(MomentCloudService momentService) {
-        this.momentService = momentService;
-    }
+  @Inject
+  public MomentCloudDataSource(MomentCloudService momentService) {
+    this.momentService = momentService;
+  }
 
-    public Observable<Void> addMoment(String content) {
-        return momentService.addMoment(content);
-    }
+  public Observable<Void> addMoment(String content) {
+    return momentService.addMoment(content);
+  }
 
-    public Observable<List<MomentEntity>> getMomentList() {
-        return momentService.getMomentList();
-    }
+  public Observable<List<MomentEntity>> getMomentList() {
+    return momentService.getMomentList();
+  }
 }

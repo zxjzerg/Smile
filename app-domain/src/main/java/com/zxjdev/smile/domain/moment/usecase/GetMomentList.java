@@ -11,19 +11,19 @@ import rx.Observable;
 
 public class GetMomentList extends UseCase<GetMomentList.RequestParams, List<Moment>> {
 
-    private MomentRepository momentRepository;
+  private MomentRepository momentRepository;
 
-    public GetMomentList(SchedulerFactory schedulerFactory, MomentRepository momentRepository) {
-        super(schedulerFactory);
-        this.momentRepository = momentRepository;
-    }
+  public GetMomentList(SchedulerFactory schedulerFactory, MomentRepository momentRepository) {
+    super(schedulerFactory);
+    this.momentRepository = momentRepository;
+  }
 
-    @Override
-    protected Observable<List<Moment>> buildUseCaseObservable(RequestParams params) {
-        return momentRepository.queryMomentList();
-    }
+  @Override
+  protected Observable<List<Moment>> buildUseCaseObservable(RequestParams params) {
+    return momentRepository.queryMomentList();
+  }
 
-    public static class RequestParams implements UseCase.RequestParams {
+  public static class RequestParams implements UseCase.RequestParams {
 
-    }
+  }
 }

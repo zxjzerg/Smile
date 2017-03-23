@@ -14,44 +14,44 @@ import rx.subscriptions.Subscriptions;
  */
 public abstract class UseCase<R extends UseCase.RequestParams, T> {
 
-    private Subscription subscription = Subscriptions.empty();
-    private SchedulerFactory schedulerFactory;
+  private Subscription subscription = Subscriptions.empty();
+  private SchedulerFactory schedulerFactory;
 
-    public UseCase(SchedulerFactory schedulerFactory) {
-        this.schedulerFactory = schedulerFactory;
+  public UseCase(SchedulerFactory schedulerFactory) {
+    this.schedulerFactory = schedulerFactory;
+  }
+
+  protected abstract Observable<T> buildUseCaseObservable(R params);
+
+  public void execute(R params, Subscriber<T> subscriber) {
+    this.subscription = this.buildUseCaseObservable(params)
+      .subscribeOn(getSubscribeOnScheduler())
+      .observeOn(getObserveOnScheduler())
+      .subscribe(subscriber);
+  }
+
+  public void execute(Subscriber<T> subscriber) {
+    this.subscription = this.buildUseCaseObservable(null)
+      .subscribeOn(getSubscribeOnScheduler())
+      .observeOn(getObserveOnScheduler())
+      .subscribe(subscriber);
+  }
+
+  public void unSubscribe() {
+    if (!this.subscription.isUnsubscribed()) {
+      this.subscription.unsubscribe();
     }
+  }
 
-    protected abstract Observable<T> buildUseCaseObservable(R params);
+  protected Scheduler getSubscribeOnScheduler() {
+    return schedulerFactory.getIoScheduler();
+  }
 
-    public void execute(R params, Subscriber<T> subscriber) {
-        this.subscription = this.buildUseCaseObservable(params)
-            .subscribeOn(getSubscribeOnScheduler())
-            .observeOn(getObserveOnScheduler())
-            .subscribe(subscriber);
-    }
+  protected Scheduler getObserveOnScheduler() {
+    return schedulerFactory.getUiScheduler();
+  }
 
-    public void execute(Subscriber<T> subscriber) {
-        this.subscription = this.buildUseCaseObservable(null)
-            .subscribeOn(getSubscribeOnScheduler())
-            .observeOn(getObserveOnScheduler())
-            .subscribe(subscriber);
-    }
+  public interface RequestParams {
 
-    public void unSubscribe() {
-        if (!this.subscription.isUnsubscribed()) {
-            this.subscription.unsubscribe();
-        }
-    }
-
-    protected Scheduler getSubscribeOnScheduler() {
-        return schedulerFactory.getIoScheduler();
-    }
-
-    protected Scheduler getObserveOnScheduler() {
-        return schedulerFactory.getUiScheduler();
-    }
-
-    public interface RequestParams {
-
-    }
+  }
 }

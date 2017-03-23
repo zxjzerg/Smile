@@ -8,13 +8,13 @@ import android.widget.Toast;
  */
 public class ErrorMessagePrinter {
 
-    private Context context;
+  private Context context;
 
-    public ErrorMessagePrinter(Context context) {
-        this.context = context;
-    }
+  public ErrorMessagePrinter(Context context) {
+    this.context = context;
+  }
 
-    public void print(String message) {
-        Toast.makeText(context, message, Toast.LENGTH_SHORT).show();
-    }
+  public void print(String message) {
+    Toast.makeText(context, message, Toast.LENGTH_SHORT).show();
+  }
 }

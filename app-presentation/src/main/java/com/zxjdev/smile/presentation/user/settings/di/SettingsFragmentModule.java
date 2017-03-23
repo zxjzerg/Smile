@@ -10,20 +10,20 @@ import dagger.Provides;
 @Module
 public class SettingsFragmentModule {
 
-    private SettingsContract.View view;
+  private SettingsContract.View view;
 
-    public SettingsFragmentModule(SettingsContract.View view) {
-        this.view = view;
-    }
+  public SettingsFragmentModule(SettingsContract.View view) {
+    this.view = view;
+  }
 
-    @Provides
-    SettingsContract.View provideView() {
-        return view;
-    }
+  @Provides
+  SettingsContract.View provideView() {
+    return view;
+  }
 
-    @Provides
-    @FragmentScope
-    SettingsContract.Presenter providePresenter(SettingsPresenter presenter) {
-        return presenter;
-    }
+  @Provides
+  @FragmentScope
+  SettingsContract.Presenter providePresenter(SettingsPresenter presenter) {
+    return presenter;
+  }
 }

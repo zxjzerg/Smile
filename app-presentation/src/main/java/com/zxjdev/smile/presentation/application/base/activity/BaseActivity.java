@@ -9,18 +9,18 @@ import com.zxjdev.smile.presentation.application.util.image.ImageLoader;
 
 public abstract class BaseActivity extends AppCompatActivity {
 
-    protected Context context = this;
+  protected Context context = this;
 
-    protected void showToast(String message) {
-        Toast.makeText(context, message, Toast.LENGTH_SHORT).show();
+  protected void showToast(String message) {
+    Toast.makeText(context, message, Toast.LENGTH_SHORT).show();
+  }
+
+  private ImageLoader imageLoader;
+
+  protected ImageLoader getImageLoader() {
+    if (imageLoader == null) {
+      imageLoader = new GlideImageLoader(this);
     }
-
-    private ImageLoader imageLoader;
-
-    protected ImageLoader getImageLoader() {
-        if (imageLoader == null) {
-            imageLoader = new GlideImageLoader(this);
-        }
-        return imageLoader;
-    }
+    return imageLoader;
+  }
 }

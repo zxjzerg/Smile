@@ -11,13 +11,13 @@ import dagger.Provides;
 @Module
 public class RepositoryModule {
 
-    @Provides
-    UserRepository provideUserRepository(UserDataRepository userDataRepository) {
-        return userDataRepository;
-    }
+  @Provides
+  UserRepository provideUserRepository(UserDataRepository userDataRepository) {
+    return userDataRepository;
+  }
 
-    @Provides
-    MomentRepository provideMomentRepository(MomentDataRepository momentDataRepository) {
-        return momentDataRepository;
-    }
+  @Provides
+  MomentRepository provideMomentRepository(MomentDataRepository momentDataRepository) {
+    return momentDataRepository;
+  }
 }
