@@ -31,10 +31,10 @@ ext {
     // Android
     androidVersionCode = 1
     androidVersionName = "1.0"
-    androidBuildToolsVersion = "25.0.1"
+    androidBuildToolsVersion = "25.0.2"
     androidMinSdkVersion = 16
     androidTargetSdkVersion = 23
-    androidCompileSdkVersion = 23
+    androidCompileSdkVersion = 25
 
     // Build Configurations
     leancloud_app_key = '"HQu208J1eI4ucxKRMuaLnXmb"'
@@ -55,12 +55,12 @@ ext {
 
     timber = 'com.jakewharton.timber:timber:4.1.2'
 
-    android_support_v4 = 'com.android.support:support-v4:25.0.1'
-    android_support_v7 = 'com.android.support:appcompat-v7:25.0.1'
-    android_support_design = 'com.android.support:design:25.0.1'
+    android_support_v4 = 'com.android.support:support-v4:25.3.0'
+    android_support_v7 = 'com.android.support:appcompat-v7:25.3.0'
+    android_support_design = 'com.android.support:design:25.3.0'
     android_support_constaint = 'com.android.support.constraint:constraint-layout:1.0.1'
-    android_support_cardview = 'com.android.support:cardview-v7:25.0.1'
-    android_support_percent = 'com.android.support:percent:25.0.1'
+    android_support_cardview = 'com.android.support:cardview-v7:25.3.0'
+    android_support_percent = 'com.android.support:percent:25.3.0'
 
 
     leancloud_basic = 'cn.leancloud.android:avoscloud-sdk:v3.+'
