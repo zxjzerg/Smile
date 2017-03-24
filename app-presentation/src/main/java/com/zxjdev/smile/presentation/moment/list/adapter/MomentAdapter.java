@@ -6,7 +6,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.zxjdev.smile.R;
-import com.zxjdev.smile.presentation.application.util.image.ImageLoader;
+import com.zxjdev.smile.presentation.communal.util.image.ImageLoader;
 import com.zxjdev.smile.presentation.moment.MomentModel;
 
 import java.text.SimpleDateFormat;

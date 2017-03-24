@@ -46,12 +46,12 @@ ext {
     rxandroid = 'io.reactivex:rxandroid:1.2.1'
     rxjava = 'io.reactivex:rxjava:1.2.3'
 
-    dagger_compiler = 'com.google.dagger:dagger-compiler:2.8'
-    dagger = 'com.google.dagger:dagger:2.8'
+    dagger_compiler = 'com.google.dagger:dagger-compiler:2.10'
+    dagger = 'com.google.dagger:dagger:2.10'
     javax_inject = 'javax.inject:javax.inject:1'
 
-    butterknife = 'com.jakewharton:butterknife:8.4.0'
-    butterknife_compiler = 'com.jakewharton:butterknife-compiler:8.4.0'
+    butterknife = 'com.jakewharton:butterknife:8.5.1'
+    butterknife_compiler = 'com.jakewharton:butterknife-compiler:8.5.1'
 
     timber = 'com.jakewharton.timber:timber:4.1.2'
 

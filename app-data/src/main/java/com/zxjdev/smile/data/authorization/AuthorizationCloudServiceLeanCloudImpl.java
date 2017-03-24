@@ -48,4 +48,12 @@ public class AuthorizationCloudServiceLeanCloudImpl implements AuthorizationClou
       subscriber.onNext(AVUser.getCurrentUser() != null);
     });
   }
+
+  @Override
+  public Observable<Void> logout() {
+    return Observable.create(subscriber -> {
+      AVUser.logOut();
+      subscriber.onCompleted();
+    });
+  }
 }

@@ -1,8 +1,8 @@
 package com.zxjdev.smile.presentation.user.settings;
 
-import com.zxjdev.smile.domain.user.usecase.Logout;
-import com.zxjdev.smile.presentation.application.DefaultSubscriber;
-import com.zxjdev.smile.presentation.application.util.ui.ErrorMessagePrinter;
+import com.zxjdev.smile.domain.authorization.usecase.Logout;
+import com.zxjdev.smile.presentation.communal.DefaultSubscriber;
+import com.zxjdev.smile.presentation.communal.util.ui.ErrorMessagePrinter;
 
 import javax.inject.Inject;
 
@@ -22,14 +22,13 @@ public class SettingsPresenter implements SettingsContract.Presenter {
     logout.execute(new DefaultSubscriber<Void>(errorMessagePrinter) {
       @Override
       public void onCompleted() {
-        super.onCompleted();
-        view.navigateToSplash();
+        view.onLogoutSuccess();
       }
     });
   }
 
   @Override
-  public void destroy() {
+  public void onDestroy() {
     logout.unSubscribe();
   }
 }

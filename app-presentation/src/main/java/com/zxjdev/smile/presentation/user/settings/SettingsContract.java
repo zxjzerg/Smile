@@ -4,13 +4,13 @@ public interface SettingsContract {
 
   interface View {
 
-    void navigateToSplash();
+    void onLogoutSuccess();
   }
 
   interface Presenter {
 
     void handleLogout();
 
-    void destroy();
+    void onDestroy();
   }
 }

@@ -9,4 +9,6 @@ public interface AuthorizationCloudService {
   Observable<Void> login(String username, String password);
 
   Observable<Boolean> checkIsLogined();
+
+  Observable<Void> logout();
 }

@@ -7,7 +7,8 @@ import android.view.MenuItem;
 import android.widget.EditText;
 
 import com.zxjdev.smile.R;
-import com.zxjdev.smile.presentation.application.base.activity.BaseDaggerActivity;
+import com.zxjdev.smile.presentation.communal.base.activity.ActivityModule;
+import com.zxjdev.smile.presentation.communal.base.activity.BaseDaggerActivity;
 import com.zxjdev.smile.presentation.moment.create.di.NewMomentActivityComponent;
 import com.zxjdev.smile.presentation.moment.create.di.NewMomentActivityModule;
 
@@ -35,7 +36,7 @@ public class NewMomentActivity extends BaseDaggerActivity implements NewMomentCo
 
   @Override
   protected void initDaggerComponent() {
-    newMomentActivityComponent = getActivityComponent().getNewMomentActivityComponent(
+    newMomentActivityComponent = getUserComponent().getNewMomentActivityComponent(new ActivityModule(this),
       new NewMomentActivityModule(this));
     newMomentActivityComponent.inject(this);
   }

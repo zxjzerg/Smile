@@ -20,26 +20,6 @@ public class UserDataRepository implements UserRepository {
   }
 
   @Override
-  public Observable<Void> register(String username, String password) {
-    return userCloudDataSource.register(username, password);
-  }
-
-  @Override
-  public Observable<User> login(String username, String password) {
-    return userCloudDataSource.login(username, password).map(userMapper::transform);
-  }
-
-  @Override
-  public Observable<Boolean> checkHasAuthorized() {
-    return userCloudDataSource.checkHasAuthorized();
-  }
-
-  @Override
-  public Observable<Void> logout() {
-    return userCloudDataSource.logout();
-  }
-
-  @Override
   public Observable<User> getUser(String id) {
     return userCloudDataSource.getUser(id).map(userEntity -> userMapper.transform(userEntity));
   }

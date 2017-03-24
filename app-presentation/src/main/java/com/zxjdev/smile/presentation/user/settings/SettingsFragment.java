@@ -9,9 +9,9 @@ import android.view.ViewGroup;
 import android.widget.Button;
 
 import com.zxjdev.smile.R;
-import com.zxjdev.smile.presentation.application.base.fragment.DaggerBaseFragment;
-import com.zxjdev.smile.presentation.common.main.MainActivity;
-import com.zxjdev.smile.presentation.common.splash.SplashActivity;
+import com.zxjdev.smile.presentation.communal.base.fragment.DaggerBaseFragment;
+import com.zxjdev.smile.presentation.basic.main.MainActivity;
+import com.zxjdev.smile.presentation.basic.splash.SplashActivity;
 import com.zxjdev.smile.presentation.user.settings.di.SettingsFragmentComponent;
 import com.zxjdev.smile.presentation.user.settings.di.SettingsFragmentModule;
 
@@ -65,7 +65,7 @@ public class SettingsFragment extends DaggerBaseFragment implements SettingsCont
   @Override
   public void onDestroy() {
     super.onDestroy();
-    settingsPresenter.destroy();
+    settingsPresenter.onDestroy();
   }
 
   @OnClick(R.id.btn_logout)
@@ -74,7 +74,9 @@ public class SettingsFragment extends DaggerBaseFragment implements SettingsCont
   }
 
   @Override
-  public void navigateToSplash() {
+  public void onLogoutSuccess() {
+    releaseDaggerComponent();
+
     Intent intent = new Intent(getActivity(), SplashActivity.class);
     intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
     startActivity(intent);

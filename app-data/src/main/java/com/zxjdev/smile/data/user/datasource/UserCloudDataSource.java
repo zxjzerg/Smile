@@ -22,22 +22,6 @@ public class UserCloudDataSource {
     this.currentUser = currentUser;
   }
 
-  public Observable<Void> register(String username, String password) {
-    return userCloudService.register(username, password);
-  }
-
-  public Observable<UserEntity> login(String username, String password) {
-    return userCloudService.login(username, password);
-  }
-
-  public Observable<Boolean> checkHasAuthorized() {
-    return userCloudService.checkHasAuthorized();
-  }
-
-  public Observable<Void> logout() {
-    return userCloudService.logout();
-  }
-
   public Observable<UserEntity> getUser(String id) {
     if (id == null) {
       return Observable.just(currentUser);

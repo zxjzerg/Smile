@@ -1,6 +1,6 @@
 package com.zxjdev.smile.presentation.moment;
 
-import com.zxjdev.smile.domain.base.BaseMapper;
+import com.zxjdev.smile.domain.communal.base.BaseMapper;
 import com.zxjdev.smile.domain.moment.Moment;
 import com.zxjdev.smile.presentation.user.UserModelMapper;
 

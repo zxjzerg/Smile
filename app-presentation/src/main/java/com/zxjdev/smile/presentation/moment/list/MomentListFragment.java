@@ -12,9 +12,9 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.zxjdev.smile.R;
-import com.zxjdev.smile.presentation.application.base.fragment.DaggerBaseFragment;
-import com.zxjdev.smile.presentation.application.base.fragment.FragmentModule;
-import com.zxjdev.smile.presentation.common.main.MainActivity;
+import com.zxjdev.smile.presentation.communal.base.fragment.DaggerBaseFragment;
+import com.zxjdev.smile.presentation.communal.base.fragment.FragmentModule;
+import com.zxjdev.smile.presentation.basic.main.MainActivity;
 import com.zxjdev.smile.presentation.moment.MomentModel;
 import com.zxjdev.smile.presentation.moment.create.NewMomentActivity;
 import com.zxjdev.smile.presentation.moment.list.adapter.MomentAdapter;

@@ -1,7 +1,7 @@
 package com.zxjdev.smile.data.moment;
 
 import com.zxjdev.smile.data.user.UserMapper;
-import com.zxjdev.smile.domain.base.BaseMapper;
+import com.zxjdev.smile.domain.communal.base.BaseMapper;
 import com.zxjdev.smile.domain.moment.Moment;
 
 import javax.inject.Inject;
