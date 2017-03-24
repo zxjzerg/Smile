@@ -10,8 +10,8 @@ import android.widget.Button;
 
 import com.zxjdev.smile.R;
 import com.zxjdev.smile.presentation.communal.base.fragment.DaggerBaseFragment;
-import com.zxjdev.smile.presentation.basic.main.MainActivity;
-import com.zxjdev.smile.presentation.basic.splash.SplashActivity;
+import com.zxjdev.smile.presentation.infrastucture.main.MainActivity;
+import com.zxjdev.smile.presentation.infrastucture.splash.SplashActivity;
 import com.zxjdev.smile.presentation.user.settings.di.SettingsFragmentComponent;
 import com.zxjdev.smile.presentation.user.settings.di.SettingsFragmentModule;
 

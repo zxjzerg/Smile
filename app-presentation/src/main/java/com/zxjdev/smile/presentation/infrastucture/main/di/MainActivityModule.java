@@ -1,7 +1,7 @@
-package com.zxjdev.smile.presentation.basic.main.di;
+package com.zxjdev.smile.presentation.infrastucture.main.di;
 
-import com.zxjdev.smile.presentation.basic.main.MainContract;
-import com.zxjdev.smile.presentation.basic.main.MainPresenter;
+import com.zxjdev.smile.presentation.infrastucture.main.MainContract;
+import com.zxjdev.smile.presentation.infrastucture.main.MainPresenter;
 
 import dagger.Module;
 import dagger.Provides;

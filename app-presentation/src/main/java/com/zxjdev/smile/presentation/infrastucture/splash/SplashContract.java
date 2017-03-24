@@ -1,4 +1,4 @@
-package com.zxjdev.smile.presentation.basic.splash;
+package com.zxjdev.smile.presentation.infrastucture.splash;
 
 public interface SplashContract {
 

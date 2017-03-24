@@ -1,4 +1,4 @@
-package com.zxjdev.smile.presentation.basic.main;
+package com.zxjdev.smile.presentation.infrastucture.main;
 
 import com.zxjdev.smile.presentation.user.UserModel;
 

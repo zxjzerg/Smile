@@ -1,4 +1,4 @@
-package com.zxjdev.smile.presentation.basic.splash;
+package com.zxjdev.smile.presentation.infrastucture.splash;
 
 import android.content.Intent;
 import android.graphics.Typeface;
@@ -9,9 +9,9 @@ import android.widget.Button;
 import com.zxjdev.smile.R;
 import com.zxjdev.smile.presentation.communal.base.activity.ActivityModule;
 import com.zxjdev.smile.presentation.communal.base.activity.BaseDaggerActivity;
-import com.zxjdev.smile.presentation.basic.main.MainActivity;
-import com.zxjdev.smile.presentation.basic.splash.di.SplashActivityComponent;
-import com.zxjdev.smile.presentation.basic.splash.di.SplashActivityModule;
+import com.zxjdev.smile.presentation.infrastucture.main.MainActivity;
+import com.zxjdev.smile.presentation.infrastucture.splash.di.SplashActivityComponent;
+import com.zxjdev.smile.presentation.infrastucture.splash.di.SplashActivityModule;
 import com.zxjdev.smile.presentation.authorization.login.LoginActivity;
 import com.zxjdev.smile.presentation.authorization.register.RegisterActivity;
 

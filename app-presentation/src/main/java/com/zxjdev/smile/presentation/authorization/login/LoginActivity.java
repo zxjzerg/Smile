@@ -9,7 +9,7 @@ import com.zxjdev.smile.R;
 import com.zxjdev.smile.presentation.communal.SmileApplication;
 import com.zxjdev.smile.presentation.communal.base.activity.ActivityModule;
 import com.zxjdev.smile.presentation.communal.base.activity.BaseDaggerActivity;
-import com.zxjdev.smile.presentation.basic.main.MainActivity;
+import com.zxjdev.smile.presentation.infrastucture.main.MainActivity;
 import com.zxjdev.smile.presentation.authorization.login.di.LoginActivityComponent;
 import com.zxjdev.smile.presentation.authorization.login.di.LoginActivityModule;
 

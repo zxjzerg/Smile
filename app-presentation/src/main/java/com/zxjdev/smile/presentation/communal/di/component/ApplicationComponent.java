@@ -4,8 +4,8 @@ import com.zxjdev.smile.presentation.authorization.login.di.LoginActivityCompone
 import com.zxjdev.smile.presentation.authorization.login.di.LoginActivityModule;
 import com.zxjdev.smile.presentation.authorization.register.di.RegisterActivityComponent;
 import com.zxjdev.smile.presentation.authorization.register.di.RegisterActivityModule;
-import com.zxjdev.smile.presentation.basic.splash.di.SplashActivityComponent;
-import com.zxjdev.smile.presentation.basic.splash.di.SplashActivityModule;
+import com.zxjdev.smile.presentation.infrastucture.splash.di.SplashActivityComponent;
+import com.zxjdev.smile.presentation.infrastucture.splash.di.SplashActivityModule;
 import com.zxjdev.smile.presentation.communal.base.activity.ActivityModule;
 import com.zxjdev.smile.presentation.communal.di.module.ApplicationModule;
 import com.zxjdev.smile.presentation.communal.di.module.AuthorizationDomainModule;

@@ -17,7 +17,7 @@
         android:theme="@style/Smile">
 
         <!-- authorization -->
-        <activity android:name=".presentation.basic.splash.SplashActivity">
+        <activity android:name=".presentation.infrastucture.splash.SplashActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -27,33 +27,33 @@
 
         <activity
             android:name=".presentation.authorization.login.LoginActivity"
-            android:parentActivityName=".presentation.basic.splash.SplashActivity">
+            android:parentActivityName=".presentation.infrastucture.splash.SplashActivity">
             <!-- Parent activity meta-data to support 4.0 and lower -->
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value=".presentation.basic.splash.SplashActivity" />
+                android:value=".presentation.infrastucture.splash.SplashActivity" />
         </activity>
 
         <activity
             android:name=".presentation.authorization.register.RegisterActivity"
-            android:parentActivityName=".presentation.basic.splash.SplashActivity">
+            android:parentActivityName=".presentation.infrastucture.splash.SplashActivity">
             <!-- Parent activity meta-data to support 4.0 and lower -->
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value=".presentation.basic.splash.SplashActivity" />
+                android:value=".presentation.infrastucture.splash.SplashActivity" />
         </activity>
 
         <activity
-            android:name=".presentation.basic.main.MainActivity"
+            android:name=".presentation.infrastucture.main.MainActivity"
             android:launchMode="singleTask" />
 
         <activity
             android:name=".presentation.moment.create.NewMomentActivity"
-            android:parentActivityName=".presentation.basic.main.MainActivity">
+            android:parentActivityName=".presentation.infrastucture.main.MainActivity">
             <!-- Parent activity meta-data to support 4.0 and lower -->
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value=".presentation.basic.main.MainActivity" />
+                android:value=".presentation.infrastucture.main.MainActivity" />
         </activity>
 
         <!-- activity from android-crop lib -->

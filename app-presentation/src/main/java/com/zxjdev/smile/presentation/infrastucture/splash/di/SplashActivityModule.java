@@ -1,7 +1,7 @@
-package com.zxjdev.smile.presentation.basic.splash.di;
+package com.zxjdev.smile.presentation.infrastucture.splash.di;
 
-import com.zxjdev.smile.presentation.basic.splash.SplashContract;
-import com.zxjdev.smile.presentation.basic.splash.SplashPresenter;
+import com.zxjdev.smile.presentation.infrastucture.splash.SplashContract;
+import com.zxjdev.smile.presentation.infrastucture.splash.SplashPresenter;
 
 import dagger.Module;
 import dagger.Provides;

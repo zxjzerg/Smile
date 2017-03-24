@@ -1,4 +1,4 @@
-package com.zxjdev.smile.presentation.basic.main;
+package com.zxjdev.smile.presentation.infrastucture.main;
 
 import android.content.Intent;
 import android.database.Cursor;
@@ -24,8 +24,8 @@ import com.soundcloud.android.crop.Crop;
 import com.zxjdev.smile.R;
 import com.zxjdev.smile.presentation.communal.base.activity.ActivityModule;
 import com.zxjdev.smile.presentation.communal.base.activity.BaseDaggerActivity;
-import com.zxjdev.smile.presentation.basic.main.di.MainActivityComponent;
-import com.zxjdev.smile.presentation.basic.main.di.MainActivityModule;
+import com.zxjdev.smile.presentation.infrastucture.main.di.MainActivityComponent;
+import com.zxjdev.smile.presentation.infrastucture.main.di.MainActivityModule;
 import com.zxjdev.smile.presentation.moment.list.MomentListFragment;
 import com.zxjdev.smile.presentation.user.UserModel;
 import com.zxjdev.smile.presentation.user.settings.SettingsFragment;
