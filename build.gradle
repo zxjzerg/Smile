@@ -42,6 +42,8 @@ ext {
 
     // Dependencies
     junit = 'junit:junit:4.12'
+    mockito = 'org.mockito:mockito-core:2.+'
+    mockito_android = 'org.mockito:mockito-android:2.+'
 
     rxandroid = 'io.reactivex:rxandroid:1.2.1'
     rxjava = 'io.reactivex:rxjava:1.2.3'

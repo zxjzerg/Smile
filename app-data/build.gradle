@@ -40,4 +40,6 @@ dependencies {
     apt rootProject.ext.dagger_compiler
 
     testCompile rootProject.ext.junit
+    testCompile rootProject.ext.mockito
+    androidTestCompile rootProject.ext.mockito_android
 }
