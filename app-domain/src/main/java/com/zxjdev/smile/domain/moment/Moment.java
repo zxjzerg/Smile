@@ -8,8 +8,7 @@ public class Moment {
 
   private String id;
   private Date createAt;
-
-  private String Content;
+  private String content;
   private User owner;
 
   public String getId() {
@@ -29,11 +28,11 @@ public class Moment {
   }
 
   public String getContent() {
-    return Content;
+    return content;
   }
 
   public void setContent(String content) {
-    Content = content;
+    this.content = content;
   }
 
   public User getOwner() {
