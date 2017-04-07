@@ -22,6 +22,10 @@
 ### 数据层（app-data）
 负责实现具体的数据操作逻辑，提供了Repository的实现。数据层的Repository实现类负责管理用到的DataSource类。DataSource类封装了从不同的数据来源存取数据的方法，例如UserCloudDataSource是向云端存取User数据的类，UserLocalDataSource是在本地存取User数据的类。这些DataSource类负责调用NetworkService或是DAO来完成具体的数据操作，例如UserCloudDataSource会调用UserCloudService是进行网络请求，UserLocalDataSource会调用UserDao来操作本地数据库。
 
+## 资料
+### 项目的UML类图
 ![Smile_Uml](https://github.com/zxjzerg/zxjzerg.github.io/blob/master/images/smile_class_uml.png?raw=true)
-
+### 相关笔记
+1. [Dagger学习笔记](http://zxjzerg.github.io/2017/04/07/Learnning-Dagger/)
+2. [NavigationView学习笔记](http://zxjzerg.github.io/2016/07/12/NavigationView%E7%9A%84%E7%AE%80%E5%8D%95%E4%BD%BF%E7%94%A8/)
 
