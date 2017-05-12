@@ -7,7 +7,7 @@ import android.widget.EditText;
 
 import com.zxjdev.smile.R;
 import com.zxjdev.smile.presentation.communal.base.activity.ActivityModule;
-import com.zxjdev.smile.presentation.communal.base.activity.BaseDaggerActivity;
+import com.zxjdev.smile.presentation.communal.base.activity.DaggerActivity;
 import com.zxjdev.smile.presentation.infrastucture.main.MainActivity;
 import com.zxjdev.smile.presentation.authorization.register.di.RegisterActivityComponent;
 import com.zxjdev.smile.presentation.authorization.register.di.RegisterActivityModule;
@@ -18,7 +18,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
-public class RegisterActivity extends BaseDaggerActivity implements RegisterContract.View {
+public class RegisterActivity extends DaggerActivity implements RegisterContract.View {
 
   @BindView(R.id.et_username) EditText etUsername;
   @BindView(R.id.et_password) EditText etPassword;

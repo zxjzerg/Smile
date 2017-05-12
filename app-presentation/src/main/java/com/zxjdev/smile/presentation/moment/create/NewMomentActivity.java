@@ -8,7 +8,7 @@ import android.widget.EditText;
 
 import com.zxjdev.smile.R;
 import com.zxjdev.smile.presentation.communal.base.activity.ActivityModule;
-import com.zxjdev.smile.presentation.communal.base.activity.BaseDaggerActivity;
+import com.zxjdev.smile.presentation.communal.base.activity.DaggerActivity;
 import com.zxjdev.smile.presentation.moment.create.di.NewMomentActivityComponent;
 import com.zxjdev.smile.presentation.moment.create.di.NewMomentActivityModule;
 
@@ -17,7 +17,7 @@ import javax.inject.Inject;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-public class NewMomentActivity extends BaseDaggerActivity implements NewMomentContract.View {
+public class NewMomentActivity extends DaggerActivity implements NewMomentContract.View {
 
   @BindView(R.id.view_toolbar) Toolbar toolbar;
   @BindView(R.id.et_content) EditText etContent;

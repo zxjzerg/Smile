@@ -12,7 +12,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.zxjdev.smile.R;
-import com.zxjdev.smile.presentation.communal.base.fragment.DaggerBaseFragment;
+import com.zxjdev.smile.presentation.communal.base.fragment.DaggerFragment;
 import com.zxjdev.smile.presentation.communal.base.fragment.FragmentModule;
 import com.zxjdev.smile.presentation.infrastucture.main.MainActivity;
 import com.zxjdev.smile.presentation.moment.MomentModel;
@@ -29,7 +29,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
-public class MomentListFragment extends DaggerBaseFragment implements MomentListContract.View {
+public class MomentListFragment extends DaggerFragment implements MomentListContract.View {
 
   public static final String TAG = MomentListFragment.class.getSimpleName();
 

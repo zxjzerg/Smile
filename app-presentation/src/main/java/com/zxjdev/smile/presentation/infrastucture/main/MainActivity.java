@@ -23,7 +23,7 @@ import android.widget.TextView;
 import com.soundcloud.android.crop.Crop;
 import com.zxjdev.smile.R;
 import com.zxjdev.smile.presentation.communal.base.activity.ActivityModule;
-import com.zxjdev.smile.presentation.communal.base.activity.BaseDaggerActivity;
+import com.zxjdev.smile.presentation.communal.base.activity.DaggerActivity;
 import com.zxjdev.smile.presentation.infrastucture.main.di.MainActivityComponent;
 import com.zxjdev.smile.presentation.infrastucture.main.di.MainActivityModule;
 import com.zxjdev.smile.presentation.moment.list.MomentListFragment;
@@ -39,7 +39,7 @@ import javax.inject.Inject;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-public class MainActivity extends BaseDaggerActivity implements MainContract.View {
+public class MainActivity extends DaggerActivity implements MainContract.View {
 
   @BindView(R.id.dlyt_container) DrawerLayout dlytContainer;
   @BindView(R.id.view_toolbar) Toolbar toolbar;

@@ -2,7 +2,10 @@ package com.zxjdev.smile.presentation.communal.base.fragment;
 
 import android.os.Bundle;
 
-public abstract class DaggerBaseFragment extends BaseFragment {
+import com.zxjdev.smile.presentation.communal.DaggerApplication;
+import com.zxjdev.smile.presentation.communal.base.activity.DaggerActivity;
+
+public abstract class DaggerFragment extends BaseFragment {
 
   protected boolean componentCreated = false;
 
@@ -33,4 +36,20 @@ public abstract class DaggerBaseFragment extends BaseFragment {
   protected abstract void initDaggerComponent();
 
   protected abstract void releaseDaggerComponent();
+
+  protected DaggerApplication getDaggerApplication() {
+    return getDaggerActivity().getDaggerApplication();
+  }
+
+  protected DaggerActivity getDaggerActivity() {
+    if (getActivity() == null) {
+      throw new IllegalStateException("Cannot get Activity!");
+    }
+
+    if (getActivity() instanceof DaggerActivity) {
+      return (DaggerActivity) getActivity();
+    } else {
+      throw new IllegalAccessError("This fragment not contained in DaggerActivity!");
+    }
+  }
 }

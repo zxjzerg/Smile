@@ -3,11 +3,11 @@ package com.zxjdev.smile.presentation.communal.base.activity;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 
-import com.zxjdev.smile.presentation.communal.SmileApplication;
+import com.zxjdev.smile.presentation.communal.DaggerApplication;
 import com.zxjdev.smile.presentation.communal.di.component.ApplicationComponent;
 import com.zxjdev.smile.presentation.communal.di.component.UserComponent;
 
-public abstract class BaseDaggerActivity extends BaseActivity {
+public abstract class DaggerActivity extends BaseActivity {
 
   @Override
   protected void onCreate(Bundle savedInstanceState) {
@@ -21,11 +21,19 @@ public abstract class BaseDaggerActivity extends BaseActivity {
   protected abstract void initDaggerComponent();
 
   protected ApplicationComponent getApplicationComponent() {
-    return ((SmileApplication) getApplication()).getApplicationComponent();
+    return getDaggerApplication().getApplicationComponent();
   }
 
   @Nullable
   protected UserComponent getUserComponent() {
-    return ((SmileApplication) getApplication()).getUserComponent();
+    return getDaggerApplication().getUserComponent();
+  }
+
+  public DaggerApplication getDaggerApplication() {
+    if (getApplication() instanceof DaggerApplication) {
+      return (DaggerApplication) getApplication();
+    } else {
+      throw new IllegalAccessError("Project's Application not extends DaggerApplication!");
+    }
   }
 }

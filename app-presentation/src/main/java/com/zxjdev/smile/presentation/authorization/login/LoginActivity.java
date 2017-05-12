@@ -6,12 +6,12 @@ import android.support.v7.widget.Toolbar;
 import android.widget.EditText;
 
 import com.zxjdev.smile.R;
-import com.zxjdev.smile.presentation.communal.SmileApplication;
-import com.zxjdev.smile.presentation.communal.base.activity.ActivityModule;
-import com.zxjdev.smile.presentation.communal.base.activity.BaseDaggerActivity;
-import com.zxjdev.smile.presentation.infrastucture.main.MainActivity;
 import com.zxjdev.smile.presentation.authorization.login.di.LoginActivityComponent;
 import com.zxjdev.smile.presentation.authorization.login.di.LoginActivityModule;
+import com.zxjdev.smile.presentation.communal.DaggerApplication;
+import com.zxjdev.smile.presentation.communal.base.activity.ActivityModule;
+import com.zxjdev.smile.presentation.communal.base.activity.DaggerActivity;
+import com.zxjdev.smile.presentation.infrastucture.main.MainActivity;
 
 import javax.inject.Inject;
 
@@ -23,7 +23,7 @@ import butterknife.OnClick;
  * 登录界面
  * Created by Andrew on 7/5/16.
  */
-public class LoginActivity extends BaseDaggerActivity implements LoginContract.View {
+public class LoginActivity extends DaggerActivity implements LoginContract.View {
 
   @BindView(R.id.et_username) EditText etUsername;
   @BindView(R.id.et_password) EditText etPassword;
@@ -69,7 +69,7 @@ public class LoginActivity extends BaseDaggerActivity implements LoginContract.V
 
   @Override
   public void initUserComponent() {
-    ((SmileApplication) getApplication()).initUserComponent();
+    ((DaggerApplication) getApplication()).initUserComponent();
   }
 
   private void initUi() {

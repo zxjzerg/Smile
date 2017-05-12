@@ -9,7 +9,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 
 import com.zxjdev.smile.R;
-import com.zxjdev.smile.presentation.communal.base.fragment.DaggerBaseFragment;
+import com.zxjdev.smile.presentation.communal.base.fragment.DaggerFragment;
 import com.zxjdev.smile.presentation.infrastucture.main.MainActivity;
 import com.zxjdev.smile.presentation.infrastucture.splash.SplashActivity;
 import com.zxjdev.smile.presentation.user.settings.di.SettingsFragmentComponent;
@@ -21,7 +21,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
-public class SettingsFragment extends DaggerBaseFragment implements SettingsContract.View {
+public class SettingsFragment extends DaggerFragment implements SettingsContract.View {
 
   public static final String TAG = SettingsFragment.class.getSimpleName();
 
@@ -76,6 +76,7 @@ public class SettingsFragment extends DaggerBaseFragment implements SettingsCont
   @Override
   public void onLogoutSuccess() {
     releaseDaggerComponent();
+    getDaggerApplication().releaseUserComponent();
 
     Intent intent = new Intent(getActivity(), SplashActivity.class);
     intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
