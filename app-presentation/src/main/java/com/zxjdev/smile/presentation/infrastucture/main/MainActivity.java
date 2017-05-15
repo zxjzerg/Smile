@@ -24,6 +24,7 @@ import com.soundcloud.android.crop.Crop;
 import com.zxjdev.smile.R;
 import com.zxjdev.smile.presentation.communal.base.activity.ActivityModule;
 import com.zxjdev.smile.presentation.communal.base.activity.DaggerActivity;
+import com.zxjdev.smile.presentation.family.display.FamilyFragment;
 import com.zxjdev.smile.presentation.infrastucture.main.di.MainActivityComponent;
 import com.zxjdev.smile.presentation.infrastucture.main.di.MainActivityModule;
 import com.zxjdev.smile.presentation.moment.list.MomentListFragment;
@@ -60,6 +61,7 @@ public class MainActivity extends DaggerActivity implements MainContract.View {
     initUi();
     fragmentTags.add(MomentListFragment.TAG);
     fragmentTags.add(SettingsFragment.TAG);
+    fragmentTags.add(FamilyFragment.TAG);
 
     if (savedInstanceState == null) {
       showFragment(R.id.flyt_content, MomentListFragment.class, MomentListFragment.TAG);
@@ -180,6 +182,9 @@ public class MainActivity extends DaggerActivity implements MainContract.View {
           break;
         case R.id.navi_item_settings:
           showFragment(R.id.flyt_content, SettingsFragment.class, SettingsFragment.TAG);
+          break;
+        case R.id.navi_item_family:
+          showFragment(R.id.flyt_content, FamilyFragment.class, FamilyFragment.TAG);
           break;
       }
       dlytContainer.closeDrawers();

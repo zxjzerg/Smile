@@ -11,9 +11,9 @@
             android:icon="@drawable/ic_settings_black_24dp"
             android:title="@string/settings" />
 
-        <!--<item
-            android:id="@+id/navi_item_friends"
-            android:icon="@drawable/ic_people_black_24dp"
-            android:title="@string/friend" />-->
+        <item
+            android:id="@+id/navi_item_family"
+            android:icon="@drawable/ic_home_black_24dp"
+            android:title="@string/family" />
     </group>
 </menu>

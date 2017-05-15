@@ -12,6 +12,7 @@
     <string name="logout">退出登录</string>
     <string name="send">发送</string>
     <string name="friend">好友</string>
+    <string name="family">家庭</string>
 
     <!-- font family -->
     <string name="font_family_light">sans-serif-light</string>
