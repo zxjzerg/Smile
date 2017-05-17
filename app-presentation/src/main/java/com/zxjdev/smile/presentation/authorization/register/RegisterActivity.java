@@ -6,8 +6,8 @@ import android.support.v7.widget.Toolbar;
 import android.widget.EditText;
 
 import com.zxjdev.smile.R;
-import com.zxjdev.smile.presentation.communal.base.activity.ActivityModule;
-import com.zxjdev.smile.presentation.communal.base.activity.DaggerActivity;
+import com.zxjdev.smile.presentation.common.base.activity.ActivityModule;
+import com.zxjdev.smile.presentation.common.base.activity.DaggerActivity;
 import com.zxjdev.smile.presentation.infrastucture.main.MainActivity;
 import com.zxjdev.smile.presentation.authorization.register.di.RegisterActivityComponent;
 import com.zxjdev.smile.presentation.authorization.register.di.RegisterActivityModule;

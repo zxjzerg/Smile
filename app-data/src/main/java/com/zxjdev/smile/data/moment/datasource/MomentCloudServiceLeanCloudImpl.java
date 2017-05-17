@@ -4,8 +4,8 @@ import com.avos.avoscloud.AVException;
 import com.avos.avoscloud.AVObject;
 import com.avos.avoscloud.AVQuery;
 import com.zxjdev.smile.data.BuildConfig;
-import com.zxjdev.smile.data.moment.MomentEntity;
-import com.zxjdev.smile.data.user.UserEntity;
+import com.zxjdev.smile.data.moment.entity.MomentEntity;
+import com.zxjdev.smile.data.user.entity.UserEntity;
 
 import java.util.List;
 

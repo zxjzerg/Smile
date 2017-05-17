@@ -22,8 +22,8 @@ import android.widget.TextView;
 
 import com.soundcloud.android.crop.Crop;
 import com.zxjdev.smile.R;
-import com.zxjdev.smile.presentation.communal.base.activity.ActivityModule;
-import com.zxjdev.smile.presentation.communal.base.activity.DaggerActivity;
+import com.zxjdev.smile.presentation.common.base.activity.ActivityModule;
+import com.zxjdev.smile.presentation.common.base.activity.DaggerActivity;
 import com.zxjdev.smile.presentation.infrastucture.main.di.MainActivityComponent;
 import com.zxjdev.smile.presentation.infrastucture.main.di.MainActivityModule;
 import com.zxjdev.smile.presentation.moment.list.MomentListFragment;

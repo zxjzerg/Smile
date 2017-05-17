@@ -1,6 +1,6 @@
 package com.zxjdev.smile.data.user.datasource;
 
-import com.zxjdev.smile.data.user.UserEntity;
+import com.zxjdev.smile.data.user.entity.UserEntity;
 
 import javax.inject.Inject;
 

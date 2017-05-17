@@ -1,7 +1,7 @@
 package com.zxjdev.smile.presentation.moment.list.di;
 
-import com.zxjdev.smile.presentation.communal.base.fragment.FragmentModule;
-import com.zxjdev.smile.presentation.communal.di.scope.FragmentScope;
+import com.zxjdev.smile.presentation.common.base.fragment.FragmentModule;
+import com.zxjdev.smile.presentation.common.di.scope.FragmentScope;
 import com.zxjdev.smile.presentation.moment.list.MomentListFragment;
 
 import dagger.Subcomponent;

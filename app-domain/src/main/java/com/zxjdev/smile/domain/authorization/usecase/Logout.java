@@ -1,8 +1,8 @@
 package com.zxjdev.smile.domain.authorization.usecase;
 
 import com.zxjdev.smile.domain.authorization.AuthorizationRepository;
-import com.zxjdev.smile.domain.communal.base.SchedulerFactory;
-import com.zxjdev.smile.domain.communal.base.UseCase;
+import com.zxjdev.smile.domain.common.SchedulerFactory;
+import com.zxjdev.smile.domain.common.base.UseCase;
 
 import rx.Observable;
 

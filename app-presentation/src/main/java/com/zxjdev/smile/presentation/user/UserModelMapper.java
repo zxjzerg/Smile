@@ -1,6 +1,6 @@
 package com.zxjdev.smile.presentation.user;
 
-import com.zxjdev.smile.domain.communal.base.BaseMapper;
+import com.zxjdev.smile.domain.common.base.BaseMapper;
 import com.zxjdev.smile.domain.user.User;
 
 import javax.inject.Inject;

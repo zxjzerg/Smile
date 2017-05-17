@@ -2,7 +2,7 @@ package com.zxjdev.smile.data.user.datasource;
 
 import com.avos.avoscloud.AVException;
 import com.avos.avoscloud.AVFile;
-import com.zxjdev.smile.data.user.UserEntity;
+import com.zxjdev.smile.data.user.entity.UserEntity;
 
 import java.io.FileNotFoundException;
 

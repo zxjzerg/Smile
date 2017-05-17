@@ -7,8 +7,8 @@ import android.view.MenuItem;
 import android.widget.EditText;
 
 import com.zxjdev.smile.R;
-import com.zxjdev.smile.presentation.communal.base.activity.ActivityModule;
-import com.zxjdev.smile.presentation.communal.base.activity.DaggerActivity;
+import com.zxjdev.smile.presentation.common.base.activity.ActivityModule;
+import com.zxjdev.smile.presentation.common.base.activity.DaggerActivity;
 import com.zxjdev.smile.presentation.moment.create.di.NewMomentActivityComponent;
 import com.zxjdev.smile.presentation.moment.create.di.NewMomentActivityModule;
 

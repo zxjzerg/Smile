@@ -1,6 +1,6 @@
 package com.zxjdev.smile.presentation.user.settings.di;
 
-import com.zxjdev.smile.presentation.communal.di.scope.FragmentScope;
+import com.zxjdev.smile.presentation.common.di.scope.FragmentScope;
 import com.zxjdev.smile.presentation.user.settings.SettingsFragment;
 
 import dagger.Subcomponent;

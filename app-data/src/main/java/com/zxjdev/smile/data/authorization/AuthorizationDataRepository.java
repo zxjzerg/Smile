@@ -1,5 +1,6 @@
 package com.zxjdev.smile.data.authorization;
 
+import com.zxjdev.smile.data.authorization.datasource.AuthorizationCloudDataSource;
 import com.zxjdev.smile.domain.authorization.AuthorizationRepository;
 
 import javax.inject.Inject;

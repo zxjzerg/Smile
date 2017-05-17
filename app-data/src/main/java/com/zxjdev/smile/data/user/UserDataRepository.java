@@ -1,6 +1,7 @@
 package com.zxjdev.smile.data.user;
 
 import com.zxjdev.smile.data.user.datasource.UserCloudDataSource;
+import com.zxjdev.smile.data.user.entity.UserMapper;
 import com.zxjdev.smile.domain.user.User;
 import com.zxjdev.smile.domain.user.UserRepository;
 

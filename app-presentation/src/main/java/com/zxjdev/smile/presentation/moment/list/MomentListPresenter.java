@@ -2,8 +2,8 @@ package com.zxjdev.smile.presentation.moment.list;
 
 import com.zxjdev.smile.domain.moment.Moment;
 import com.zxjdev.smile.domain.moment.usecase.GetMomentList;
-import com.zxjdev.smile.presentation.communal.DefaultSubscriber;
-import com.zxjdev.smile.presentation.communal.util.ui.ErrorMessagePrinter;
+import com.zxjdev.smile.presentation.common.DefaultSubscriber;
+import com.zxjdev.smile.presentation.common.util.ui.ErrorMessagePrinter;
 import com.zxjdev.smile.presentation.moment.MomentModel;
 import com.zxjdev.smile.presentation.moment.MomentModelMapper;
 

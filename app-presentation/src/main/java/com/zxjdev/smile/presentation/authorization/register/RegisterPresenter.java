@@ -1,8 +1,8 @@
 package com.zxjdev.smile.presentation.authorization.register;
 
 import com.zxjdev.smile.domain.authorization.usecase.Register;
-import com.zxjdev.smile.presentation.communal.DefaultSubscriber;
-import com.zxjdev.smile.presentation.communal.util.ui.ErrorMessagePrinter;
+import com.zxjdev.smile.presentation.common.DefaultSubscriber;
+import com.zxjdev.smile.presentation.common.util.ui.ErrorMessagePrinter;
 
 import javax.inject.Inject;
 

@@ -1,7 +1,7 @@
 package com.zxjdev.smile.presentation.infrastucture.splash.di;
 
-import com.zxjdev.smile.presentation.communal.base.activity.ActivityModule;
-import com.zxjdev.smile.presentation.communal.di.scope.ActivityScope;
+import com.zxjdev.smile.presentation.common.base.activity.ActivityModule;
+import com.zxjdev.smile.presentation.common.di.scope.ActivityScope;
 import com.zxjdev.smile.presentation.infrastucture.splash.SplashActivity;
 
 import dagger.Subcomponent;

@@ -1,6 +1,7 @@
 package com.zxjdev.smile.data.moment;
 
 import com.zxjdev.smile.data.moment.datasource.MomentCloudDataSource;
+import com.zxjdev.smile.data.moment.entity.MomentMapper;
 import com.zxjdev.smile.domain.moment.Moment;
 import com.zxjdev.smile.domain.moment.MomentRepository;
 

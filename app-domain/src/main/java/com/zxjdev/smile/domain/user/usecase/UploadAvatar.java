@@ -1,7 +1,7 @@
 package com.zxjdev.smile.domain.user.usecase;
 
-import com.zxjdev.smile.domain.communal.base.SchedulerFactory;
-import com.zxjdev.smile.domain.communal.base.UseCase;
+import com.zxjdev.smile.domain.common.SchedulerFactory;
+import com.zxjdev.smile.domain.common.base.UseCase;
 import com.zxjdev.smile.domain.user.UserRepository;
 
 import rx.Observable;

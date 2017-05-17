@@ -9,7 +9,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 
 import com.zxjdev.smile.R;
-import com.zxjdev.smile.presentation.communal.base.fragment.DaggerFragment;
+import com.zxjdev.smile.presentation.common.base.fragment.DaggerFragment;
 import com.zxjdev.smile.presentation.infrastucture.main.MainActivity;
 import com.zxjdev.smile.presentation.infrastucture.splash.SplashActivity;
 import com.zxjdev.smile.presentation.user.settings.di.SettingsFragmentComponent;

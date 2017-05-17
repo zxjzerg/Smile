@@ -3,8 +3,8 @@ package com.zxjdev.smile.presentation.infrastucture.main;
 import com.zxjdev.smile.domain.user.User;
 import com.zxjdev.smile.domain.user.usecase.GetCurrentUser;
 import com.zxjdev.smile.domain.user.usecase.UploadAvatar;
-import com.zxjdev.smile.presentation.communal.DefaultSubscriber;
-import com.zxjdev.smile.presentation.communal.util.ui.ErrorMessagePrinter;
+import com.zxjdev.smile.presentation.common.DefaultSubscriber;
+import com.zxjdev.smile.presentation.common.util.ui.ErrorMessagePrinter;
 import com.zxjdev.smile.presentation.user.UserModel;
 import com.zxjdev.smile.presentation.user.UserModelMapper;
 

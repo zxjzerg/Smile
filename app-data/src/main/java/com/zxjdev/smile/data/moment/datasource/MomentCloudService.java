@@ -1,6 +1,6 @@
 package com.zxjdev.smile.data.moment.datasource;
 
-import com.zxjdev.smile.data.moment.MomentEntity;
+import com.zxjdev.smile.data.moment.entity.MomentEntity;
 
 import java.util.List;
 

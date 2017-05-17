@@ -1,8 +1,8 @@
 package com.zxjdev.smile.domian.moment;
 
 import com.zxjdev.smile.data.moment.MomentDataRepository;
-import com.zxjdev.smile.data.moment.MomentEntity;
-import com.zxjdev.smile.data.moment.MomentMapper;
+import com.zxjdev.smile.data.moment.entity.MomentEntity;
+import com.zxjdev.smile.data.moment.entity.MomentMapper;
 import com.zxjdev.smile.data.moment.datasource.MomentCloudDataSource;
 
 import org.junit.Before;
