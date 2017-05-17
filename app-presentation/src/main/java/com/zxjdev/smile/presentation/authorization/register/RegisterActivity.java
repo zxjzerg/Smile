@@ -45,6 +45,11 @@ public class RegisterActivity extends DaggerActivity implements RegisterContract
   }
 
   @Override
+  protected void releaseDaggerComponent() {
+
+  }
+
+  @Override
   protected void onDestroy() {
     registerActivityComponent = null;
     super.onDestroy();

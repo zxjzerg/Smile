@@ -79,6 +79,11 @@ public class MainActivity extends DaggerActivity implements MainContract.View {
   }
 
   @Override
+  protected void releaseDaggerComponent() {
+
+  }
+
+  @Override
   protected void onPostCreate(@Nullable Bundle savedInstanceState) {
     super.onPostCreate(savedInstanceState);
     drawerToggle.syncState();

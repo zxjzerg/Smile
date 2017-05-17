@@ -26,15 +26,15 @@ public abstract class DaggerFragment extends BaseFragment {
     super.onDestroy();
   }
 
-  /**
-   * Called after view is created and all dependencies is ready. Share same lifecycle with onActivityCreated().
-   */
-  protected void onDependencyCreated() {
+  /** Called after view is created and all dependencies is ready.
+   * <br/>Share same lifecycle with onActivityCreated(). */
+  protected void onDependencyCreated() {}
 
-  }
-
+  /** Implement this method to initialize your Component for this Fragment. */
   protected abstract void initDaggerComponent();
 
+  /** Implement this method to release your Component for this Fragment.
+   * <br/>This method can be left empty if there are no specified instances should be released manually */
   protected abstract void releaseDaggerComponent();
 
   protected DaggerApplication getDaggerApplication() {

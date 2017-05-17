@@ -49,6 +49,11 @@ public class LoginActivity extends DaggerActivity implements LoginContract.View 
   }
 
   @Override
+  protected void releaseDaggerComponent() {
+
+  }
+
+  @Override
   protected void onDestroy() {
     presenter.destroy();
     loginActivityComponent = null;

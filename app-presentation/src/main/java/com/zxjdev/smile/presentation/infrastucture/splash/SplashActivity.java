@@ -54,6 +54,11 @@ public class SplashActivity extends DaggerActivity implements SplashContract.Vie
   }
 
   @Override
+  protected void releaseDaggerComponent() {
+
+  }
+
+  @Override
   protected void onDestroy() {
     super.onDestroy();
     presenter.destroy();

@@ -15,10 +15,12 @@ public abstract class DaggerActivity extends BaseActivity {
     initDaggerComponent();
   }
 
-  /**
-   * 配置依赖注入
-   */
+  /** Implement this method to initialize your Component for this Activity. */
   protected abstract void initDaggerComponent();
+
+  /** Implement this method to release your Component for this Activity.
+   * <br/>This method can be left empty if there are no specified instances should be released manually */
+  protected abstract void releaseDaggerComponent();
 
   protected ApplicationComponent getApplicationComponent() {
     return getDaggerApplication().getApplicationComponent();

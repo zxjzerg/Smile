@@ -20,9 +20,6 @@ public class DaggerApplication extends Application {
 
   private void initInjector() {
     applicationComponent = DaggerApplicationComponent.builder().applicationModule(new ApplicationModule(this)).build();
-    if (getSharedPreferences("auth", MODE_PRIVATE).getBoolean("auto_login", false)) {
-      initUserComponent();
-    }
   }
 
   public ApplicationComponent getApplicationComponent() {
@@ -30,8 +27,8 @@ public class DaggerApplication extends Application {
   }
 
   /**
-   * Get instance of {@link UserComponent}. When null, will check if the user has login before and try to restore
-   *  the component.
+   * Get instance of {@link UserComponent}.
+   * <br/>When null, will check if the user has login before and try to restore the component.
    */
   public UserComponent getUserComponent() {
     if (userComponent == null) {

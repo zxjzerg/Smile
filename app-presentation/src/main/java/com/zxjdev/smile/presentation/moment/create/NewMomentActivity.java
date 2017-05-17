@@ -42,6 +42,11 @@ public class NewMomentActivity extends DaggerActivity implements NewMomentContra
   }
 
   @Override
+  protected void releaseDaggerComponent() {
+
+  }
+
+  @Override
   protected void onDestroy() {
     super.onDestroy();
     presenter.destroy();
