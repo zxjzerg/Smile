@@ -3,29 +3,6 @@
 
 *.iml
 
-## Directory-based project format:
-.idea/
-# if you remove the above rule, at least ignore the following:
-
-# User-specific stuff:
-# .idea/workspace.xml
-# .idea/tasks.xml
-# .idea/dictionaries
-
-# Sensitive or high-churn files:
-# .idea/dataSources.ids
-# .idea/dataSources.xml
-# .idea/sqlDataSources.xml
-# .idea/dynamic.xml
-# .idea/uiDesigner.xml
-
-# Gradle:
-# .idea/gradle.xml
-# .idea/libraries
-
-# Mongo Explorer plugin:
-# .idea/mongoSettings.xml
-
 ## File-based project format:
 *.ipr
 *.iws
@@ -34,9 +11,6 @@
 
 # IntelliJ
 /out/
-
-# mpeltonen/sbt-idea plugin
-.idea_modules/
 
 # JIRA plugin
 atlassian-ide-plugin.xml
@@ -75,6 +49,15 @@ proguard/
 
 # Android Studio Navigation editor temp files
 .navigation/
-icon.png
-icon.jpg
 /captures/
+/projectFilesBackup/
+
+.idea/*
+!.idea/
+!.idea/inspectionProfiles
+!.idea/codeStyleSettings.xml
+!.idea/encodings.xml
+!.idea/icon.png
+!.idea/icon_dark.png
+!.idea/vcs.xml
+
