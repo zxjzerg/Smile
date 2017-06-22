@@ -22,6 +22,7 @@ public class RegisterPresenter implements RegisterContract.Presenter {
     register.execute(new Register.RequestParams(username, password), new DefaultSubscriber<Void>(errorMessagePrinter) {
       @Override
       public void onCompleted() {
+        view.initUserComponent();
         view.navigateToMain();
       }
     });

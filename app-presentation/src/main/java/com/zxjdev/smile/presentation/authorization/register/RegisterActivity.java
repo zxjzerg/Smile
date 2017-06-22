@@ -6,11 +6,12 @@ import android.support.v7.widget.Toolbar;
 import android.widget.EditText;
 
 import com.zxjdev.smile.R;
+import com.zxjdev.smile.presentation.authorization.register.di.RegisterActivityComponent;
+import com.zxjdev.smile.presentation.authorization.register.di.RegisterActivityModule;
+import com.zxjdev.smile.presentation.common.DaggerApplication;
 import com.zxjdev.smile.presentation.common.base.activity.ActivityModule;
 import com.zxjdev.smile.presentation.common.base.activity.DaggerActivity;
 import com.zxjdev.smile.presentation.infrastucture.main.MainActivity;
-import com.zxjdev.smile.presentation.authorization.register.di.RegisterActivityComponent;
-import com.zxjdev.smile.presentation.authorization.register.di.RegisterActivityModule;
 
 import javax.inject.Inject;
 
@@ -65,6 +66,11 @@ public class RegisterActivity extends DaggerActivity implements RegisterContract
     Intent intent = new Intent(context, MainActivity.class);
     intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
     startActivity(intent);
+  }
+
+  @Override
+  public void initUserComponent() {
+    ((DaggerApplication) getApplication()).initUserComponent();
   }
 
   private void initUi() {

@@ -5,6 +5,8 @@ public interface RegisterContract {
   interface View {
 
     void navigateToMain();
+
+    void initUserComponent();
   }
 
   interface Presenter {
