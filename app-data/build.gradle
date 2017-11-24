@@ -35,7 +35,7 @@ dependencies {
     compile rootProject.ext.leancloud_basic
     compile rootProject.ext.rxjava
     compile rootProject.ext.dagger
-    annotationProcessor rootProject.ext.dagger_compiler
+    annotationProcessor rootProject.ext.dagger_processor
 
     testCompile rootProject.ext.junit
     testCompile rootProject.ext.mockito
