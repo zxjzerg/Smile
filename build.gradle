@@ -6,11 +6,12 @@ buildscript {
         maven {
             url "http://mvn.leancloud.cn/nexus/content/repositories/releases"
         }
+        google()
     }
     dependencies {
-        classpath 'com.android.tools.build:gradle:3.0.0-alpha9'
+        classpath 'com.android.tools.build:gradle:3.1.0-alpha04'
         classpath 'com.neenbedankt.gradle.plugins:android-apt:1.8'
-        classpath 'me.tatarka:gradle-retrolambda:3.2.3'
+        classpath 'me.tatarka:gradle-retrolambda:3.2.5'
     }
 }
 
@@ -20,6 +21,7 @@ allprojects {
         maven {
             url "http://mvn.leancloud.cn/nexus/content/repositories/releases"
         }
+        google()
     }
 }
 
@@ -31,7 +33,7 @@ project.ext {
     // Android
     androidVersionCode = 1
     androidVersionName = "1.0"
-    androidBuildToolsVersion = "25.0.2"
+    androidBuildToolsVersion = "27.0.1"
     androidMinSdkVersion = 16
     androidTargetSdkVersion = 23
     androidCompileSdkVersion = 25
