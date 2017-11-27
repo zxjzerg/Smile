@@ -71,7 +71,8 @@ public class MomentListFragment extends DaggerFragment implements MomentListCont
   }
 
   @Override
-  protected void onDependencyCreated() {
+  public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
+    super.onViewCreated(view, savedInstanceState);
     presenter.create();
   }
 

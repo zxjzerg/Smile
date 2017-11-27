@@ -1,34 +1,23 @@
 package com.zxjdev.smile.presentation.common.base.fragment;
 
-import android.os.Bundle;
+import android.content.Context;
 
 import com.zxjdev.smile.presentation.common.DaggerApplication;
 import com.zxjdev.smile.presentation.common.base.activity.DaggerActivity;
 
 public abstract class DaggerFragment extends BaseFragment {
 
-  protected boolean componentCreated = false;
-
   @Override
-  public void onActivityCreated(Bundle savedInstanceState) {
-    super.onActivityCreated(savedInstanceState);
-    if (!componentCreated) {
-      initDaggerComponent();
-      componentCreated = true;
-    }
-    onDependencyCreated();
+  public void onAttach(Context context) {
+    initDaggerComponent();
+    super.onAttach(context);
   }
 
   @Override
   public void onDestroy() {
     releaseDaggerComponent();
-    componentCreated = false;
     super.onDestroy();
   }
-
-  /** Called after view is created and all dependencies is ready.
-   * <br/>Share same lifecycle with onActivityCreated(). */
-  protected void onDependencyCreated() {}
 
   /** Implement this method to initialize your Component for this Fragment. */
   protected abstract void initDaggerComponent();
