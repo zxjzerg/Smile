@@ -59,7 +59,10 @@ dependencies {
     compile rootProject.ext.rxandroid
 
     compile rootProject.ext.dagger
-    annotationProcessor rootProject.ext.dagger_compiler
+    compile rootProject.ext.dagger_android
+    compile rootProject.ext.dagger_android_support
+    annotationProcessor rootProject.ext.dagger_processor
+    annotationProcessor rootProject.ext.dagger_android_processor
 
     compile rootProject.ext.butterknife
     annotationProcessor rootProject.ext.butterknife_compiler

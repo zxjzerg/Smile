@@ -11,8 +11,8 @@ public abstract class DaggerActivity extends BaseActivity {
 
   @Override
   protected void onCreate(Bundle savedInstanceState) {
-    super.onCreate(savedInstanceState);
     initDaggerComponent();
+    super.onCreate(savedInstanceState);
   }
 
   /** Implement this method to initialize your Component for this Activity. */
