@@ -55,8 +55,8 @@ dependencies {
     compile rootProject.ext.android_support_v7
     compile rootProject.ext.android_support_design
 
-    compile rootProject.ext.rxjava
-    compile rootProject.ext.rxandroid
+    compile rootProject.ext.rxjava2
+    compile rootProject.ext.rxandroid2
 
     compile rootProject.ext.dagger
     compile rootProject.ext.dagger_android

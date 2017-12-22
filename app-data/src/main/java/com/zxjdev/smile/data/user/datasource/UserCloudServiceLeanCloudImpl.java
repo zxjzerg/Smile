@@ -8,7 +8,7 @@ import java.io.FileNotFoundException;
 
 import javax.inject.Inject;
 
-import rx.Observable;
+import io.reactivex.Observable;
 
 public class UserCloudServiceLeanCloudImpl implements UserCloudService {
 
@@ -28,9 +28,9 @@ public class UserCloudServiceLeanCloudImpl implements UserCloudService {
         currentUser.setAvatar(file.getUrl());
         currentUser.save();
         subscriber.onNext(file.getUrl());
-        subscriber.onCompleted();
+        subscriber.onComplete();
       } catch (FileNotFoundException | AVException e) {
-        subscriber.onError(e);
+        subscriber.tryOnError(e);
       }
     });
   }

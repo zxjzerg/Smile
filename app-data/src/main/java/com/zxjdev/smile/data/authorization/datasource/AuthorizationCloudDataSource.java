@@ -2,7 +2,7 @@ package com.zxjdev.smile.data.authorization.datasource;
 
 import javax.inject.Inject;
 
-import rx.Observable;
+import io.reactivex.Observable;
 
 public class AuthorizationCloudDataSource {
 
@@ -17,7 +17,7 @@ public class AuthorizationCloudDataSource {
     return authorizationCloudService.register(username, password);
   }
 
-  public rx.Observable<Void> login(String username, String password) {
+  public Observable<Void> login(String username, String password) {
     return authorizationCloudService.login(username, password);
   }
 

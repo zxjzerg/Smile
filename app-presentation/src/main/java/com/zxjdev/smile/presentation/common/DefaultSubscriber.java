@@ -3,10 +3,10 @@ package com.zxjdev.smile.presentation.common;
 import com.avos.avoscloud.AVException;
 import com.zxjdev.smile.presentation.common.util.ui.ErrorMessagePrinter;
 
-import rx.Subscriber;
+import io.reactivex.observers.DisposableObserver;
 import timber.log.Timber;
 
-public class DefaultSubscriber<T> extends Subscriber<T> {
+public class DefaultSubscriber<T> extends DisposableObserver<T> {
 
   private ErrorMessagePrinter errorMessagePrinter;
 
@@ -20,8 +20,8 @@ public class DefaultSubscriber<T> extends Subscriber<T> {
   }
 
   @Override
-  public void onCompleted() {
-
+  public void onComplete() {
+    
   }
 
   @Override

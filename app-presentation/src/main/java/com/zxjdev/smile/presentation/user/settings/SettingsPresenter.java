@@ -21,7 +21,7 @@ public class SettingsPresenter implements SettingsContract.Presenter {
   public void handleLogout() {
     logout.execute(new DefaultSubscriber<Void>(errorMessagePrinter) {
       @Override
-      public void onCompleted() {
+      public void onComplete() {
         view.onLogoutSuccess();
       }
     });
