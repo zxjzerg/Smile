@@ -1,6 +1,6 @@
 package com.zxjdev.smile.domain.authorization;
 
-import rx.Observable;
+import io.reactivex.Observable;
 
 public interface AuthorizationRepository {
 

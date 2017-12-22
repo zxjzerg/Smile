@@ -6,7 +6,7 @@ import com.zxjdev.smile.data.user.entity.UserEntity;
 
 import javax.inject.Inject;
 
-import rx.Observable;
+import io.reactivex.Observable;
 
 public class AuthorizationCloudServiceLeanCloudImpl implements AuthorizationCloudService {
 
@@ -17,43 +17,44 @@ public class AuthorizationCloudServiceLeanCloudImpl implements AuthorizationClou
 
   @Override
   public Observable<Void> register(String username, String password) {
-    return Observable.create(subscriber -> {
+    return Observable.create(emitter -> {
       AVUser user = new AVUser();
       user.setUsername(username);
       user.setPassword(password);
       try {
         user.signUp();
-        subscriber.onCompleted();
+        emitter.onComplete();
       } catch (AVException e) {
-        subscriber.onError(e);
+        emitter.tryOnError(e);
       }
     });
   }
 
   @Override
   public Observable<Void> login(String username, String password) {
-    return Observable.create(subscriber -> {
+    return Observable.create(emitter -> {
       try {
         AVUser.logIn(username, password, UserEntity.class);
-        subscriber.onCompleted();
+        emitter.onComplete();
       } catch (AVException e) {
-        subscriber.onError(e);
+        emitter.tryOnError(e);
       }
     });
   }
 
   @Override
   public Observable<Boolean> checkIsLogined() {
-    return Observable.create(subscriber -> {
-      subscriber.onNext(AVUser.getCurrentUser() != null);
+    return Observable.create(emitter -> {
+      emitter.onNext(AVUser.getCurrentUser() != null);
+      emitter.onComplete();
     });
   }
 
   @Override
   public Observable<Void> logout() {
-    return Observable.create(subscriber -> {
+    return Observable.create(emitter -> {
       AVUser.logOut();
-      subscriber.onCompleted();
+      emitter.onComplete();
     });
   }
 }

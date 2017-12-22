@@ -2,11 +2,10 @@ package com.zxjdev.smile.domain.common.base;
 
 import com.zxjdev.smile.domain.common.SchedulerFactory;
 
-import rx.Observable;
-import rx.Scheduler;
-import rx.Subscriber;
-import rx.Subscription;
-import rx.subscriptions.Subscriptions;
+import io.reactivex.Observable;
+import io.reactivex.Scheduler;
+import io.reactivex.disposables.CompositeDisposable;
+import io.reactivex.observers.DisposableObserver;
 
 /**
  * Super class of all UseCase classes.
@@ -16,33 +15,27 @@ import rx.subscriptions.Subscriptions;
  */
 public abstract class UseCase<R extends UseCase.RequestParams, T> {
 
-  private Subscription subscription = Subscriptions.empty();
+  private CompositeDisposable compositeDisposable;
   private SchedulerFactory schedulerFactory;
 
   public UseCase(SchedulerFactory schedulerFactory) {
     this.schedulerFactory = schedulerFactory;
+    this.compositeDisposable = new CompositeDisposable();
   }
 
   protected abstract Observable<T> buildUseCaseObservable(R params);
 
-  public void execute(R params, Subscriber<T> subscriber) {
-    this.subscription = this.buildUseCaseObservable(params)
-      .subscribeOn(getSubscribeOnScheduler())
-      .observeOn(getObserveOnScheduler())
-      .subscribe(subscriber);
+  public void execute(R params, DisposableObserver<T> observer) {
+    compositeDisposable.add(buildUseCaseObservable(params).subscribeOn(getSubscribeOnScheduler())
+      .observeOn(getObserveOnScheduler()).subscribeWith(observer));
   }
 
-  public void execute(Subscriber<T> subscriber) {
-    this.subscription = this.buildUseCaseObservable(null)
-      .subscribeOn(getSubscribeOnScheduler())
-      .observeOn(getObserveOnScheduler())
-      .subscribe(subscriber);
+  public void execute(DisposableObserver<T> observer) {
+    execute(null, observer);
   }
 
   public void unSubscribe() {
-    if (!this.subscription.isUnsubscribed()) {
-      this.subscription.unsubscribe();
-    }
+    compositeDisposable.dispose();
   }
 
   protected Scheduler getSubscribeOnScheduler() {

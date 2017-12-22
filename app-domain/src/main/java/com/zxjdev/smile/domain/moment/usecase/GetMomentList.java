@@ -7,7 +7,7 @@ import com.zxjdev.smile.domain.moment.MomentRepository;
 
 import java.util.List;
 
-import rx.Observable;
+import io.reactivex.Observable;
 
 public class GetMomentList extends UseCase<GetMomentList.RequestParams, List<Moment>> {
 

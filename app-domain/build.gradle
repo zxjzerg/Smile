@@ -7,5 +7,5 @@ targetCompatibility = 1.7
 
 dependencies {
     compile rootProject.ext.javax_inject
-    compile rootProject.ext.rxjava
+    compile rootProject.ext.rxjava2
 }

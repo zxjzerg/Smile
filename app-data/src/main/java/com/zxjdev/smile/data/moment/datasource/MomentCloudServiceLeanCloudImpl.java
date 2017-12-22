@@ -11,46 +11,46 @@ import java.util.List;
 
 import javax.inject.Inject;
 
-import rx.Observable;
+import io.reactivex.Observable;
 
 public class MomentCloudServiceLeanCloudImpl implements MomentCloudService {
 
-    private UserEntity currentUser;
+  private UserEntity currentUser;
 
-    @Inject
-    public MomentCloudServiceLeanCloudImpl(UserEntity currentUser) {
-        this.currentUser = currentUser;
-    }
+  @Inject
+  public MomentCloudServiceLeanCloudImpl(UserEntity currentUser) {
+    this.currentUser = currentUser;
+  }
 
-    @Override
-    public Observable<Void> addMoment(String content) {
-        return Observable.create(subscriber -> {
-            MomentEntity momentEntity = new MomentEntity();
-            momentEntity.setContent(content);
-            momentEntity.setOwner(currentUser);
-            try {
-                momentEntity.save();
-                subscriber.onCompleted();
-            } catch (AVException e) {
-                subscriber.onError(e);
-            }
-        });
-    }
+  @Override
+  public Observable<Void> addMoment(String content) {
+    return Observable.create(emitter -> {
+      MomentEntity momentEntity = new MomentEntity();
+      momentEntity.setContent(content);
+      momentEntity.setOwner(currentUser);
+      try {
+        momentEntity.save();
+        emitter.onComplete();
+      } catch (AVException e) {
+        emitter.tryOnError(e);
+      }
+    });
+  }
 
-    @Override
-    public Observable<List<MomentEntity>> getMomentList() {
-        return Observable.create(subscriber -> {
-            AVQuery<MomentEntity> query = AVObject.getQuery(MomentEntity.class);
-            query.whereEqualTo("user", currentUser);
-            query.include("user");
-            query.limit(BuildConfig.QUERY_LIMIT);
-            query.orderByDescending("createdAt");
-            try {
-                subscriber.onNext(query.find());
-                subscriber.onCompleted();
-            } catch (AVException e) {
-                subscriber.onError(e);
-            }
-        });
-    }
+  @Override
+  public Observable<List<MomentEntity>> getMomentList() {
+    return Observable.create(emitter -> {
+      AVQuery<MomentEntity> query = AVObject.getQuery(MomentEntity.class);
+      query.whereEqualTo("user", currentUser);
+      query.include("user");
+      query.limit(BuildConfig.QUERY_LIMIT);
+      query.orderByDescending("createdAt");
+      try {
+        emitter.onNext(query.find());
+        emitter.onComplete();
+      } catch (AVException e) {
+        emitter.tryOnError(e);
+      }
+    });
+  }
 }

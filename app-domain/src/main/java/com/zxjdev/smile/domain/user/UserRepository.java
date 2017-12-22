@@ -1,6 +1,6 @@
 package com.zxjdev.smile.domain.user;
 
-import rx.Observable;
+import io.reactivex.Observable;
 
 public interface UserRepository {
 

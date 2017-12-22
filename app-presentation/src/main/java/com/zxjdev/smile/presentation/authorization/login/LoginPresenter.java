@@ -23,7 +23,7 @@ public class LoginPresenter implements LoginContract.Presenter {
   public void handleLogin(String username, String password) {
     login.execute(new Login.RequestParams(username, password), new DefaultSubscriber<Void>(errorMessagePrinter) {
       @Override
-      public void onCompleted() {
+      public void onComplete() {
         view.initUserComponent();
         view.navigateToMain();
       }

@@ -7,7 +7,7 @@ import com.zxjdev.smile.domain.user.UserRepository;
 
 import javax.inject.Inject;
 
-import rx.Observable;
+import io.reactivex.Observable;
 
 public class UserDataRepository implements UserRepository {
 

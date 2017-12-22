@@ -4,7 +4,7 @@ import com.zxjdev.smile.domain.common.SchedulerFactory;
 import com.zxjdev.smile.domain.common.base.UseCase;
 import com.zxjdev.smile.domain.user.UserRepository;
 
-import rx.Observable;
+import io.reactivex.Observable;
 
 public class UploadAvatar extends UseCase<UploadAvatar.RequestParams, String> {
 
