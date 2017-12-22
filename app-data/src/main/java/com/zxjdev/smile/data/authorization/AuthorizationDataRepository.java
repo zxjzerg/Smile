@@ -5,7 +5,7 @@ import com.zxjdev.smile.domain.authorization.AuthorizationRepository;
 
 import javax.inject.Inject;
 
-import rx.Observable;
+import io.reactivex.Observable;
 
 public class AuthorizationDataRepository implements AuthorizationRepository {
 

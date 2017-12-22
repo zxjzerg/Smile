@@ -5,7 +5,7 @@ import com.zxjdev.smile.domain.common.base.UseCase;
 import com.zxjdev.smile.domain.user.User;
 import com.zxjdev.smile.domain.user.UserRepository;
 
-import rx.Observable;
+import io.reactivex.Observable;
 
 public class GetCurrentUser extends UseCase<GetCurrentUser.RequestParams, User> {
 

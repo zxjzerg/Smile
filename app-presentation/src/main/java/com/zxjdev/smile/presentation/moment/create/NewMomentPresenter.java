@@ -20,8 +20,8 @@ public class NewMomentPresenter implements NewMomentContract.Presenter {
   public void handleAddMoment(String content) {
     addMoment.execute(new AddMoment.RequestParams(content), new DefaultSubscriber<Void>(errorMessagePrinter) {
       @Override
-      public void onCompleted() {
-        super.onCompleted();
+      public void onComplete() {
+        super.onComplete();
         view.close();
       }
     });

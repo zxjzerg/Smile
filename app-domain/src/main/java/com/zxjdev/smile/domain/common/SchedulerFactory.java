@@ -1,7 +1,7 @@
 package com.zxjdev.smile.domain.common;
 
-import rx.Scheduler;
-import rx.schedulers.Schedulers;
+import io.reactivex.Scheduler;
+import io.reactivex.schedulers.Schedulers;
 
 /**
  * Provide schedulers used in usecases

@@ -6,7 +6,7 @@ import com.zxjdev.smile.domain.common.base.UseCase;
 
 import javax.inject.Inject;
 
-import rx.Observable;
+import io.reactivex.Observable;
 
 public class Login extends UseCase<Login.RequestParams, Void> {
 

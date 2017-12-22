@@ -1,6 +1,6 @@
 package com.zxjdev.smile.data.user.datasource;
 
-import rx.Observable;
+import io.reactivex.Observable;
 
 public interface UserCloudService {
 
