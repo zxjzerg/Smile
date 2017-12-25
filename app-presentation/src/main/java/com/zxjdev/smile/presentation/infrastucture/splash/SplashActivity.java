@@ -1,5 +1,8 @@
 package com.zxjdev.smile.presentation.infrastucture.splash;
 
+import android.animation.Animator;
+import android.animation.AnimatorSet;
+import android.animation.ObjectAnimator;
 import android.content.Intent;
 import android.graphics.Typeface;
 import android.os.Bundle;
@@ -7,13 +10,13 @@ import android.view.View;
 import android.widget.Button;
 
 import com.zxjdev.smile.R;
+import com.zxjdev.smile.presentation.authorization.login.LoginActivity;
+import com.zxjdev.smile.presentation.authorization.register.RegisterActivity;
 import com.zxjdev.smile.presentation.common.base.activity.ActivityModule;
 import com.zxjdev.smile.presentation.common.base.activity.DaggerActivity;
 import com.zxjdev.smile.presentation.infrastucture.main.MainActivity;
 import com.zxjdev.smile.presentation.infrastucture.splash.di.SplashActivityComponent;
 import com.zxjdev.smile.presentation.infrastucture.splash.di.SplashActivityModule;
-import com.zxjdev.smile.presentation.authorization.login.LoginActivity;
-import com.zxjdev.smile.presentation.authorization.register.RegisterActivity;
 
 import javax.inject.Inject;
 
@@ -23,7 +26,6 @@ import butterknife.OnClick;
 
 /**
  * 开屏界面
- * Created by Andrew on 7/4/16.
  */
 public class SplashActivity extends DaggerActivity implements SplashContract.View {
 
@@ -44,6 +46,20 @@ public class SplashActivity extends DaggerActivity implements SplashContract.Vie
     initUi();
 
     presenter.handleAutoLogin();
+
+    animatorSet = new AnimatorSet();
+  }
+
+  @Override
+  protected void onStart() {
+    super.onStart();
+    // executeButtonsAnimation();
+  }
+
+  @Override
+  protected void onResume() {
+    super.onResume();
+    // executeButtonsAnimation();
   }
 
   @Override
@@ -101,6 +117,62 @@ public class SplashActivity extends DaggerActivity implements SplashContract.Vie
 
   @Override
   public void showButtons() {
+    isAnimated = false;
     buttonContainer.setVisibility(View.VISIBLE);
+    buttonContainer.getViewTreeObserver().addOnGlobalLayoutListener(() -> {
+      if (!isAnimated) {
+        executeButtonsAnimation();
+        isAnimated = true;
+      }
+    });
+  }
+
+  AnimatorSet animatorSet;
+  private boolean isAnimated = false;
+
+  private void executeButtonsAnimation() {
+    if (!animatorSet.isStarted()) {
+
+      float btnLoginStartPosition = buttonContainer.getX() + buttonContainer.getMeasuredWidth();
+      float btnLoginEndPosition = btnLogin.getX();
+
+      ObjectAnimator btnLoginPosition = ObjectAnimator.ofFloat(btnLogin, "x", btnLoginStartPosition,
+        btnLoginEndPosition);
+      btnLoginPosition.setDuration(3000);
+
+      ObjectAnimator btnLoginRotation = ObjectAnimator.ofFloat(btnLogin, "rotation", 0, -360);
+      btnLoginRotation.setDuration(3000);
+
+      float btnRegisterStartPosition = buttonContainer.getX();
+      float btnRegisterEndPosition = btnRegister.getX();
+
+      ObjectAnimator btnRegisterPosition = ObjectAnimator.ofFloat(btnRegister, "x", btnRegisterStartPosition,
+        btnRegisterEndPosition);
+      btnRegisterPosition.setDuration(3000);
+
+      ObjectAnimator btnRegisterRotation = ObjectAnimator.ofFloat(btnRegister, "rotation", 0, 360);
+      btnRegisterRotation.setDuration(3000);
+
+      animatorSet.playTogether(btnRegisterPosition, btnRegisterRotation, btnLoginPosition, btnLoginRotation);
+      animatorSet.addListener(new Animator.AnimatorListener() {
+        @Override
+        public void onAnimationStart(Animator animation) {
+        }
+
+        @Override
+        public void onAnimationEnd(Animator animation) {
+        }
+
+        @Override
+        public void onAnimationCancel(Animator animation) {
+        }
+
+        @Override
+        public void onAnimationRepeat(Animator animation) {
+
+        }
+      });
+      animatorSet.start();
+    }
   }
 }
