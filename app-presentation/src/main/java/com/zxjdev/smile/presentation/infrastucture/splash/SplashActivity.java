@@ -143,7 +143,7 @@ public class SplashActivity extends DaggerActivity implements SplashContract.Vie
       ObjectAnimator btnLoginRotation = ObjectAnimator.ofFloat(btnLogin, "rotation", 0, -360);
       btnLoginRotation.setDuration(3000);
 
-      float btnRegisterStartPosition = buttonContainer.getX();
+      float btnRegisterStartPosition = buttonContainer.getX() - btnRegister.getMeasuredWidth();
       float btnRegisterEndPosition = btnRegister.getX();
 
       ObjectAnimator btnRegisterPosition = ObjectAnimator.ofFloat(btnRegister, "x", btnRegisterStartPosition,
