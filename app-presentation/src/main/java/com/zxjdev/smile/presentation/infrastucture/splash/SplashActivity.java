@@ -4,16 +4,18 @@ import android.content.Intent;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.view.View;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.Button;
 
 import com.zxjdev.smile.R;
+import com.zxjdev.smile.presentation.authorization.login.LoginActivity;
+import com.zxjdev.smile.presentation.authorization.register.RegisterActivity;
 import com.zxjdev.smile.presentation.common.base.activity.ActivityModule;
 import com.zxjdev.smile.presentation.common.base.activity.DaggerActivity;
 import com.zxjdev.smile.presentation.infrastucture.main.MainActivity;
 import com.zxjdev.smile.presentation.infrastucture.splash.di.SplashActivityComponent;
 import com.zxjdev.smile.presentation.infrastucture.splash.di.SplashActivityModule;
-import com.zxjdev.smile.presentation.authorization.login.LoginActivity;
-import com.zxjdev.smile.presentation.authorization.register.RegisterActivity;
 
 import javax.inject.Inject;
 
@@ -33,6 +35,9 @@ public class SplashActivity extends DaggerActivity implements SplashContract.Vie
 
   @Inject SplashContract.Presenter presenter;
 
+  Animation animRollInFromLeft;
+  Animation animRollInFromRight;
+
   private SplashActivityComponent splashActivityComponent;
 
   @Override
@@ -41,6 +46,12 @@ public class SplashActivity extends DaggerActivity implements SplashContract.Vie
 
     setContentView(R.layout.activity_splash);
     ButterKnife.bind(this);
+
+    animRollInFromLeft = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.anim_roll_in_from_left);
+    animRollInFromRight = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.anim_roll_in_from_right);
+    btnRegister.startAnimation(animRollInFromRight);
+    btnLogin.startAnimation(animRollInFromLeft);
+
     initUi();
 
     presenter.handleAutoLogin();
