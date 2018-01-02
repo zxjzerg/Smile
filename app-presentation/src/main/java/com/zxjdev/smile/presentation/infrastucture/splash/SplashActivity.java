@@ -7,6 +7,11 @@ import android.content.Intent;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.view.View;
+import android.view.animation.Animation;
+import android.view.animation.AnimationSet;
+import android.view.animation.AnimationUtils;
+import android.view.animation.RotateAnimation;
+import android.view.animation.TranslateAnimation;
 import android.widget.Button;
 
 import com.zxjdev.smile.R;
@@ -43,23 +48,22 @@ public class SplashActivity extends DaggerActivity implements SplashContract.Vie
 
     setContentView(R.layout.activity_splash);
     ButterKnife.bind(this);
+
     initUi();
 
     presenter.handleAutoLogin();
-
-    animatorSet = new AnimatorSet();
   }
 
   @Override
   protected void onStart() {
     super.onStart();
-    // executeButtonsAnimation();
+    // doButtonsPropertyAnimationFromCode();
   }
 
   @Override
   protected void onResume() {
     super.onResume();
-    // executeButtonsAnimation();
+    // doButtonsPropertyAnimationFromCode();
   }
 
   @Override
@@ -117,62 +121,94 @@ public class SplashActivity extends DaggerActivity implements SplashContract.Vie
 
   @Override
   public void showButtons() {
-    isAnimated = false;
     buttonContainer.setVisibility(View.VISIBLE);
-    buttonContainer.getViewTreeObserver().addOnGlobalLayoutListener(() -> {
-      if (!isAnimated) {
-        executeButtonsAnimation();
-        isAnimated = true;
-      }
-    });
+
+    doButtonsViewAnimationFromRes();
+    // buttonContainer.post(this::doButtonsPropertyAnimationFromCode);
+    // buttonContainer.post(this::doButtonsViewAnimationFromCode);
   }
 
-  AnimatorSet animatorSet;
-  private boolean isAnimated = false;
+  private void doButtonsPropertyAnimationFromCode() {
+    float btnLoginStartPosition = buttonContainer.getX() + buttonContainer.getMeasuredWidth();
+    float btnLoginEndPosition = btnLogin.getX();
 
-  private void executeButtonsAnimation() {
-    if (!animatorSet.isStarted()) {
+    ObjectAnimator btnLoginPosition = ObjectAnimator.ofFloat(btnLogin, "x", btnLoginStartPosition, btnLoginEndPosition);
+    btnLoginPosition.setDuration(3000);
 
-      float btnLoginStartPosition = buttonContainer.getX() + buttonContainer.getMeasuredWidth();
-      float btnLoginEndPosition = btnLogin.getX();
+    ObjectAnimator btnLoginRotation = ObjectAnimator.ofFloat(btnLogin, "rotation", 0, -360);
+    btnLoginRotation.setDuration(3000);
 
-      ObjectAnimator btnLoginPosition = ObjectAnimator.ofFloat(btnLogin, "x", btnLoginStartPosition,
-        btnLoginEndPosition);
-      btnLoginPosition.setDuration(3000);
+    float btnRegisterStartPosition = buttonContainer.getX() - btnRegister.getMeasuredWidth();
+    float btnRegisterEndPosition = btnRegister.getX();
+    ObjectAnimator btnRegisterPosition = ObjectAnimator.ofFloat(btnRegister, "x", btnRegisterStartPosition,
+      btnRegisterEndPosition);
+    btnRegisterPosition.setDuration(3000);
 
-      ObjectAnimator btnLoginRotation = ObjectAnimator.ofFloat(btnLogin, "rotation", 0, -360);
-      btnLoginRotation.setDuration(3000);
+    ObjectAnimator btnRegisterRotation = ObjectAnimator.ofFloat(btnRegister, "rotation", 0, 360);
+    btnRegisterRotation.setDuration(3000);
 
-      float btnRegisterStartPosition = buttonContainer.getX() - btnRegister.getMeasuredWidth();
-      float btnRegisterEndPosition = btnRegister.getX();
+    AnimatorSet animatorSet = new AnimatorSet();
+    animatorSet.playTogether(btnRegisterPosition, btnRegisterRotation, btnLoginPosition, btnLoginRotation);
+    animatorSet.addListener(new Animator.AnimatorListener() {
+      @Override
+      public void onAnimationStart(Animator animation) {
+      }
 
-      ObjectAnimator btnRegisterPosition = ObjectAnimator.ofFloat(btnRegister, "x", btnRegisterStartPosition,
-        btnRegisterEndPosition);
-      btnRegisterPosition.setDuration(3000);
+      @Override
+      public void onAnimationEnd(Animator animation) {
+      }
 
-      ObjectAnimator btnRegisterRotation = ObjectAnimator.ofFloat(btnRegister, "rotation", 0, 360);
-      btnRegisterRotation.setDuration(3000);
+      @Override
+      public void onAnimationCancel(Animator animation) {
+      }
 
-      animatorSet.playTogether(btnRegisterPosition, btnRegisterRotation, btnLoginPosition, btnLoginRotation);
-      animatorSet.addListener(new Animator.AnimatorListener() {
-        @Override
-        public void onAnimationStart(Animator animation) {
-        }
+      @Override
+      public void onAnimationRepeat(Animator animation) {
 
-        @Override
-        public void onAnimationEnd(Animator animation) {
-        }
+      }
+    });
+    animatorSet.start();
+  }
 
-        @Override
-        public void onAnimationCancel(Animator animation) {
-        }
+  private void doButtonsViewAnimationFromCode() {
+    float btnLoginStartPosition = -(btnLogin.getX() + btnLogin.getWidth());
+    float btnLoginEndPosition = 0;
 
-        @Override
-        public void onAnimationRepeat(Animator animation) {
+    TranslateAnimation btnLoginTranslate = new TranslateAnimation(Animation.ABSOLUTE, btnLoginStartPosition,
+      Animation.ABSOLUTE, btnLoginEndPosition, Animation.RELATIVE_TO_SELF, 0, Animation.RELATIVE_TO_SELF, 0);
 
-        }
-      });
-      animatorSet.start();
-    }
+    RotateAnimation btnLoginRotate = new RotateAnimation(0, 360, Animation.RELATIVE_TO_SELF, 0.5f,
+      Animation.RELATIVE_TO_SELF, 0.5f);
+
+    AnimationSet btnLoginAnimation = new AnimationSet(true);
+    btnLoginAnimation.addAnimation(btnLoginRotate);
+    btnLoginAnimation.addAnimation(btnLoginTranslate);
+    btnLoginAnimation.setDuration(3000);
+
+    btnLogin.startAnimation(btnLoginAnimation);
+
+    float btnRegisterStartPosition = buttonContainer.getWidth() - btnRegister.getX();
+    float btnRegisterEndPosition = 0;
+
+    TranslateAnimation btnRegisterTranslate = new TranslateAnimation(Animation.ABSOLUTE, btnRegisterStartPosition,
+      Animation.ABSOLUTE, btnRegisterEndPosition, Animation.RELATIVE_TO_SELF, 0, Animation.RELATIVE_TO_SELF, 0);
+
+    RotateAnimation btnRegisterRotate = new RotateAnimation(0, -360, Animation.RELATIVE_TO_SELF, 0.5f,
+      Animation.RELATIVE_TO_SELF, 0.5f);
+
+    AnimationSet btnRegisterAnimation = new AnimationSet(true);
+    btnRegisterAnimation.addAnimation(btnRegisterRotate);
+    btnRegisterAnimation.addAnimation(btnRegisterTranslate);
+    btnRegisterAnimation.setDuration(3000);
+
+    btnRegister.startAnimation(btnRegisterAnimation);
+  }
+
+  private void doButtonsViewAnimationFromRes() {
+    Animation animRollInFromLeft = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.anim_roll_in_from_left);
+    Animation animRollInFromRight = AnimationUtils.loadAnimation(getApplicationContext(),
+      R.anim.anim_roll_in_from_right);
+    btnRegister.startAnimation(animRollInFromRight);
+    btnLogin.startAnimation(animRollInFromLeft);
   }
 }
