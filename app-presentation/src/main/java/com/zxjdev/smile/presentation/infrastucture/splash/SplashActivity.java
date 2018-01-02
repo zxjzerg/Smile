@@ -1,6 +1,5 @@
 package com.zxjdev.smile.presentation.infrastucture.splash;
 
-import android.animation.Animator;
 import android.animation.AnimatorSet;
 import android.animation.ObjectAnimator;
 import android.content.Intent;
@@ -123,11 +122,14 @@ public class SplashActivity extends DaggerActivity implements SplashContract.Vie
   public void showButtons() {
     buttonContainer.setVisibility(View.VISIBLE);
 
-    doButtonsViewAnimationFromRes();
-    // buttonContainer.post(this::doButtonsPropertyAnimationFromCode);
+    // doButtonsViewAnimationFromRes();
+    buttonContainer.post(this::doButtonsPropertyAnimationFromCode);
     // buttonContainer.post(this::doButtonsViewAnimationFromCode);
   }
 
+  /**
+   * 通过代码实现属性动画
+   */
   private void doButtonsPropertyAnimationFromCode() {
     float btnLoginStartPosition = buttonContainer.getX() + buttonContainer.getMeasuredWidth();
     float btnLoginEndPosition = btnLogin.getX();
@@ -149,27 +151,12 @@ public class SplashActivity extends DaggerActivity implements SplashContract.Vie
 
     AnimatorSet animatorSet = new AnimatorSet();
     animatorSet.playTogether(btnRegisterPosition, btnRegisterRotation, btnLoginPosition, btnLoginRotation);
-    animatorSet.addListener(new Animator.AnimatorListener() {
-      @Override
-      public void onAnimationStart(Animator animation) {
-      }
-
-      @Override
-      public void onAnimationEnd(Animator animation) {
-      }
-
-      @Override
-      public void onAnimationCancel(Animator animation) {
-      }
-
-      @Override
-      public void onAnimationRepeat(Animator animation) {
-
-      }
-    });
     animatorSet.start();
   }
 
+  /**
+   * 通过代码实现View动画，按钮起始位置和结束位置是精确的
+   */
   private void doButtonsViewAnimationFromCode() {
     float btnLoginStartPosition = -(btnLogin.getX() + btnLogin.getWidth());
     float btnLoginEndPosition = 0;
@@ -204,6 +191,9 @@ public class SplashActivity extends DaggerActivity implements SplashContract.Vie
     btnRegister.startAnimation(btnRegisterAnimation);
   }
 
+  /**
+   * 通过XML Resource实现View动画，按钮起始位置和结束位置是不精确的
+   */
   private void doButtonsViewAnimationFromRes() {
     Animation animRollInFromLeft = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.anim_roll_in_from_left);
     Animation animRollInFromRight = AnimationUtils.loadAnimation(getApplicationContext(),
