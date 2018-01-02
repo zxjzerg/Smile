@@ -5,7 +5,10 @@ import android.graphics.Typeface;
 import android.os.Bundle;
 import android.view.View;
 import android.view.animation.Animation;
+import android.view.animation.AnimationSet;
 import android.view.animation.AnimationUtils;
+import android.view.animation.RotateAnimation;
+import android.view.animation.TranslateAnimation;
 import android.widget.Button;
 
 import com.zxjdev.smile.R;
@@ -35,9 +38,6 @@ public class SplashActivity extends DaggerActivity implements SplashContract.Vie
 
   @Inject SplashContract.Presenter presenter;
 
-  Animation animRollInFromLeft;
-  Animation animRollInFromRight;
-
   private SplashActivityComponent splashActivityComponent;
 
   @Override
@@ -46,11 +46,6 @@ public class SplashActivity extends DaggerActivity implements SplashContract.Vie
 
     setContentView(R.layout.activity_splash);
     ButterKnife.bind(this);
-
-    animRollInFromLeft = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.anim_roll_in_from_left);
-    animRollInFromRight = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.anim_roll_in_from_right);
-    btnRegister.startAnimation(animRollInFromRight);
-    btnLogin.startAnimation(animRollInFromLeft);
 
     initUi();
 
@@ -113,5 +108,50 @@ public class SplashActivity extends DaggerActivity implements SplashContract.Vie
   @Override
   public void showButtons() {
     buttonContainer.setVisibility(View.VISIBLE);
+
+    doButtonsViewAnimationFromRes();
+    // buttonContainer.post(this::doButtonsViewAnimationFromCode);
+  }
+
+  private void doButtonsViewAnimationFromCode() {
+    float btnLoginStartPosition = -(btnLogin.getX() + btnLogin.getWidth());
+    float btnLoginEndPosition = 0;
+
+    TranslateAnimation btnLoginTranslate = new TranslateAnimation(Animation.ABSOLUTE, btnLoginStartPosition,
+      Animation.ABSOLUTE, btnLoginEndPosition, Animation.RELATIVE_TO_SELF, 0, Animation.RELATIVE_TO_SELF, 0);
+
+    RotateAnimation btnLoginRotate = new RotateAnimation(0, 360, Animation.RELATIVE_TO_SELF, 0.5f,
+      Animation.RELATIVE_TO_SELF, 0.5f);
+
+    AnimationSet btnLoginAnimation = new AnimationSet(true);
+    btnLoginAnimation.addAnimation(btnLoginRotate);
+    btnLoginAnimation.addAnimation(btnLoginTranslate);
+    btnLoginAnimation.setDuration(3000);
+
+    btnLogin.startAnimation(btnLoginAnimation);
+
+    float btnRegisterStartPosition = buttonContainer.getWidth() - btnRegister.getX();
+    float btnRegisterEndPosition = 0;
+
+    TranslateAnimation btnRegisterTranslate = new TranslateAnimation(Animation.ABSOLUTE, btnRegisterStartPosition,
+      Animation.ABSOLUTE, btnRegisterEndPosition, Animation.RELATIVE_TO_SELF, 0, Animation.RELATIVE_TO_SELF, 0);
+
+    RotateAnimation btnRegisterRotate = new RotateAnimation(0, -360, Animation.RELATIVE_TO_SELF, 0.5f,
+      Animation.RELATIVE_TO_SELF, 0.5f);
+
+    AnimationSet btnRegisterAnimation = new AnimationSet(true);
+    btnRegisterAnimation.addAnimation(btnRegisterRotate);
+    btnRegisterAnimation.addAnimation(btnRegisterTranslate);
+    btnRegisterAnimation.setDuration(3000);
+
+    btnRegister.startAnimation(btnRegisterAnimation);
+  }
+
+  private void doButtonsViewAnimationFromRes() {
+    Animation animRollInFromLeft = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.anim_roll_in_from_left);
+    Animation animRollInFromRight = AnimationUtils.loadAnimation(getApplicationContext(),
+      R.anim.anim_roll_in_from_right);
+    btnRegister.startAnimation(animRollInFromRight);
+    btnLogin.startAnimation(animRollInFromLeft);
   }
 }
