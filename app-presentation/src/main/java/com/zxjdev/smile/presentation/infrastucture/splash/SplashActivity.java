@@ -1,19 +1,26 @@
 package com.zxjdev.smile.presentation.infrastucture.splash;
 
+import android.animation.AnimatorSet;
+import android.animation.ObjectAnimator;
 import android.content.Intent;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.view.View;
+import android.view.animation.Animation;
+import android.view.animation.AnimationSet;
+import android.view.animation.AnimationUtils;
+import android.view.animation.RotateAnimation;
+import android.view.animation.TranslateAnimation;
 import android.widget.Button;
 
 import com.zxjdev.smile.R;
+import com.zxjdev.smile.presentation.authorization.login.LoginActivity;
+import com.zxjdev.smile.presentation.authorization.register.RegisterActivity;
 import com.zxjdev.smile.presentation.common.base.activity.ActivityModule;
 import com.zxjdev.smile.presentation.common.base.activity.DaggerActivity;
 import com.zxjdev.smile.presentation.infrastucture.main.MainActivity;
 import com.zxjdev.smile.presentation.infrastucture.splash.di.SplashActivityComponent;
 import com.zxjdev.smile.presentation.infrastucture.splash.di.SplashActivityModule;
-import com.zxjdev.smile.presentation.authorization.login.LoginActivity;
-import com.zxjdev.smile.presentation.authorization.register.RegisterActivity;
 
 import javax.inject.Inject;
 
@@ -23,7 +30,6 @@ import butterknife.OnClick;
 
 /**
  * 开屏界面
- * Created by Andrew on 7/4/16.
  */
 public class SplashActivity extends DaggerActivity implements SplashContract.View {
 
@@ -41,9 +47,22 @@ public class SplashActivity extends DaggerActivity implements SplashContract.Vie
 
     setContentView(R.layout.activity_splash);
     ButterKnife.bind(this);
+
     initUi();
 
     presenter.handleAutoLogin();
+  }
+
+  @Override
+  protected void onStart() {
+    super.onStart();
+    // doButtonsPropertyAnimationFromCode();
+  }
+
+  @Override
+  protected void onResume() {
+    super.onResume();
+    // doButtonsPropertyAnimationFromCode();
   }
 
   @Override
@@ -102,5 +121,84 @@ public class SplashActivity extends DaggerActivity implements SplashContract.Vie
   @Override
   public void showButtons() {
     buttonContainer.setVisibility(View.VISIBLE);
+
+    // doButtonsViewAnimationFromRes();
+    buttonContainer.post(this::doButtonsPropertyAnimationFromCode);
+    // buttonContainer.post(this::doButtonsViewAnimationFromCode);
+  }
+
+  /**
+   * 通过代码实现属性动画
+   */
+  private void doButtonsPropertyAnimationFromCode() {
+    float btnLoginStartPosition = buttonContainer.getX() + buttonContainer.getMeasuredWidth();
+    float btnLoginEndPosition = btnLogin.getX();
+
+    ObjectAnimator btnLoginPosition = ObjectAnimator.ofFloat(btnLogin, "x", btnLoginStartPosition, btnLoginEndPosition);
+    btnLoginPosition.setDuration(3000);
+
+    ObjectAnimator btnLoginRotation = ObjectAnimator.ofFloat(btnLogin, "rotation", 0, -360);
+    btnLoginRotation.setDuration(3000);
+
+    float btnRegisterStartPosition = buttonContainer.getX() - btnRegister.getMeasuredWidth();
+    float btnRegisterEndPosition = btnRegister.getX();
+    ObjectAnimator btnRegisterPosition = ObjectAnimator.ofFloat(btnRegister, "x", btnRegisterStartPosition,
+      btnRegisterEndPosition);
+    btnRegisterPosition.setDuration(3000);
+
+    ObjectAnimator btnRegisterRotation = ObjectAnimator.ofFloat(btnRegister, "rotation", 0, 360);
+    btnRegisterRotation.setDuration(3000);
+
+    AnimatorSet animatorSet = new AnimatorSet();
+    animatorSet.playTogether(btnRegisterPosition, btnRegisterRotation, btnLoginPosition, btnLoginRotation);
+    animatorSet.start();
+  }
+
+  /**
+   * 通过代码实现View动画，按钮起始位置和结束位置是精确的
+   */
+  private void doButtonsViewAnimationFromCode() {
+    float btnLoginStartPosition = -(btnLogin.getX() + btnLogin.getWidth());
+    float btnLoginEndPosition = 0;
+
+    TranslateAnimation btnLoginTranslate = new TranslateAnimation(Animation.ABSOLUTE, btnLoginStartPosition,
+      Animation.ABSOLUTE, btnLoginEndPosition, Animation.RELATIVE_TO_SELF, 0, Animation.RELATIVE_TO_SELF, 0);
+
+    RotateAnimation btnLoginRotate = new RotateAnimation(0, 360, Animation.RELATIVE_TO_SELF, 0.5f,
+      Animation.RELATIVE_TO_SELF, 0.5f);
+
+    AnimationSet btnLoginAnimation = new AnimationSet(true);
+    btnLoginAnimation.addAnimation(btnLoginRotate);
+    btnLoginAnimation.addAnimation(btnLoginTranslate);
+    btnLoginAnimation.setDuration(3000);
+
+    btnLogin.startAnimation(btnLoginAnimation);
+
+    float btnRegisterStartPosition = buttonContainer.getWidth() - btnRegister.getX();
+    float btnRegisterEndPosition = 0;
+
+    TranslateAnimation btnRegisterTranslate = new TranslateAnimation(Animation.ABSOLUTE, btnRegisterStartPosition,
+      Animation.ABSOLUTE, btnRegisterEndPosition, Animation.RELATIVE_TO_SELF, 0, Animation.RELATIVE_TO_SELF, 0);
+
+    RotateAnimation btnRegisterRotate = new RotateAnimation(0, -360, Animation.RELATIVE_TO_SELF, 0.5f,
+      Animation.RELATIVE_TO_SELF, 0.5f);
+
+    AnimationSet btnRegisterAnimation = new AnimationSet(true);
+    btnRegisterAnimation.addAnimation(btnRegisterRotate);
+    btnRegisterAnimation.addAnimation(btnRegisterTranslate);
+    btnRegisterAnimation.setDuration(3000);
+
+    btnRegister.startAnimation(btnRegisterAnimation);
+  }
+
+  /**
+   * 通过XML Resource实现View动画，按钮起始位置和结束位置是不精确的
+   */
+  private void doButtonsViewAnimationFromRes() {
+    Animation animRollInFromLeft = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.anim_roll_in_from_left);
+    Animation animRollInFromRight = AnimationUtils.loadAnimation(getApplicationContext(),
+      R.anim.anim_roll_in_from_right);
+    btnRegister.startAnimation(animRollInFromRight);
+    btnLogin.startAnimation(animRollInFromLeft);
   }
 }
