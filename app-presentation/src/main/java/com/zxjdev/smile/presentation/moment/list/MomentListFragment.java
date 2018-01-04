@@ -73,7 +73,11 @@ public class MomentListFragment extends DaggerFragment implements MomentListCont
   @Override
   public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
     super.onViewCreated(view, savedInstanceState);
-    presenter.create();
+    if (savedInstanceState == null) {
+      presenter.create();
+    } else {
+      presenter.loadSavedInstanceState(savedInstanceState);
+    }
   }
 
   private void initUi() {
@@ -89,6 +93,12 @@ public class MomentListFragment extends DaggerFragment implements MomentListCont
   public void onDestroy() {
     super.onDestroy();
     momentListFragmentComponent = null;
+  }
+
+  @Override
+  public void onSaveInstanceState(Bundle outState) {
+    presenter.saveInstanceState(outState);
+    super.onSaveInstanceState(outState);
   }
 
   @OnClick(R.id.fbtn_add_new_moment)
