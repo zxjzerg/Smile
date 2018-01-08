@@ -20,6 +20,11 @@ android {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
+
+        // 遍历所有的variant并执行重命名逻辑
+        applicationVariants.all { variant ->
+            renameAPK(variant)
+        }
     }
 
     compileOptions {
@@ -44,6 +49,30 @@ android {
             minSdkVersion 21
         }
     }
+}
+
+def renameAPK(variant) {
+    variant.outputs.all { output ->
+
+        // 获取HEAD的git分支名
+        def branch = getGitRevParseInfo("--abbrev-ref")
+
+        // 获取HEAD的commit信息
+        def revision = ext.revision = getGitRevParseInfo("--short")
+
+        // 重新生成一个输出的文件名
+        def fileName = variant.buildType.name + "_" + branch + "_" + revision + ".apk"
+
+        // 设置新的文件名给输出文件
+        outputFileName = fileName
+    }
+}
+
+// 获取git的信息
+static def getGitRevParseInfo(what) {
+    def cmd = "git rev-parse " + what + " HEAD"
+    def process = cmd.execute()
+    process.text.trim()
 }
 
 dependencies {
