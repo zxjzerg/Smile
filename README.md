@@ -24,7 +24,7 @@
 
 ## 资料
 ### 项目的UML类图
-![Smile_Uml](https://github.com/zxjzerg/zxjzerg.github.io/blob/master/images/smile_class_uml.png?raw=true)
+![Smile_Uml](smile_class_uml.png)
 ### 相关笔记
 1. [使用Dagger 2实现依赖注入](https://github.com/zxjzerg/Smile/wiki/%E4%BD%BF%E7%94%A8Dagger-2%E5%AE%9E%E7%8E%B0%E4%BE%9D%E8%B5%96%E6%B3%A8%E5%85%A5)
 2. [NavigationView学习笔记](http://zxjzerg.github.io/2016/07/12/NavigationView%E7%9A%84%E7%AE%80%E5%8D%95%E4%BD%BF%E7%94%A8/)
