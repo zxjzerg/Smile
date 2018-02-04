@@ -26,6 +26,5 @@
 ### 项目的UML类图
 ![Smile_Uml](smile_class_uml.png)
 ### 相关笔记
-1. [使用Dagger 2实现依赖注入](https://github.com/zxjzerg/Smile/wiki/%E4%BD%BF%E7%94%A8Dagger-2%E5%AE%9E%E7%8E%B0%E4%BE%9D%E8%B5%96%E6%B3%A8%E5%85%A5)
-2. [NavigationView学习笔记](http://zxjzerg.github.io/2016/07/12/NavigationView%E7%9A%84%E7%AE%80%E5%8D%95%E4%BD%BF%E7%94%A8/)
-3. [Domain层是否必要](https://github.com/zxjzerg/Smile/wiki/Domain%E5%B1%82%E6%98%AF%E5%90%A6%E5%BF%85%E8%A6%81)
+1. [使用Dagger 2实现依赖注入](https://github.com/zxjzerg/Smile/wiki/%E4%BD%BF%E7%94%A8Dagger%E5%AE%9E%E7%8E%B0%E4%BE%9D%E8%B5%96%E6%B3%A8%E5%85%A5)
+2. [Domain层是否必要](https://github.com/zxjzerg/Smile/wiki/Domain%E5%B1%82%E7%9A%84%E8%AE%BE%E8%AE%A1%E6%80%9D%E8%B7%AF)
