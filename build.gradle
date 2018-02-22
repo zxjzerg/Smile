@@ -4,7 +4,7 @@ buildscript {
     repositories {
         jcenter()
         maven {
-            url "http://mvn.leancloud.cn/nexus/content/repositories/releases"
+            url "http://mvn.leancloud.cn/nexus/content/repositories/public"
         }
         google()
     }
@@ -70,7 +70,7 @@ project.ext {
     android_support_percent = 'com.android.support:percent:25.3.0'
 
 
-    leancloud_basic = 'cn.leancloud.android:avoscloud-sdk:v3.+'
+    leancloud_basic = 'cn.leancloud.android:avoscloud-sdk:v4.6.4'
 
     circle_image = 'de.hdodenhof:circleimageview:2.1.0'
 
