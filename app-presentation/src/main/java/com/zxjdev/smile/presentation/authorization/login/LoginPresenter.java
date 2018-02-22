@@ -37,6 +37,6 @@ public class LoginPresenter implements LoginContract.Presenter {
 
   @Override
   public void destroy() {
-    login.unSubscribe();
+    login.unsubscribe();
   }
 }

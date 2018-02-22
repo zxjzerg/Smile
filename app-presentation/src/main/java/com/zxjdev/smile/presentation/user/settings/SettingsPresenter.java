@@ -29,6 +29,6 @@ public class SettingsPresenter implements SettingsContract.Presenter {
 
   @Override
   public void onDestroy() {
-    logout.unSubscribe();
+    logout.unsubscribe();
   }
 }

@@ -40,8 +40,8 @@ public class MainPresenter implements MainContract.Presenter {
 
     @Override
     public void onDestroy() {
-        getCurrentUser.unSubscribe();
-        uploadAvatar.unSubscribe();
+        getCurrentUser.unsubscribe();
+        uploadAvatar.unsubscribe();
     }
 
     @Override

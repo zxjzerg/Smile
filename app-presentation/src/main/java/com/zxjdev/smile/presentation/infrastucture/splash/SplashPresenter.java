@@ -38,7 +38,7 @@ public class SplashPresenter implements SplashContract.Presenter {
 
   @Override
   public void destroy() {
-    autoLogin.unSubscribe();
+    autoLogin.unsubscribe();
     handler.removeCallbacks(mNavigateToMainTask);
   }
 

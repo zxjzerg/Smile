@@ -28,6 +28,6 @@ public class NewMomentPresenter implements NewMomentContract.Presenter {
   }
 
   public void destroy() {
-    addMoment.unSubscribe();
+    addMoment.unsubscribe();
   }
 }

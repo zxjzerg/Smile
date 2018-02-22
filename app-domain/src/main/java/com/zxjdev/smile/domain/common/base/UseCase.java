@@ -34,7 +34,7 @@ public abstract class UseCase<R extends UseCase.RequestParams, T> {
     execute(null, observer);
   }
 
-  public void unSubscribe() {
+  public void unsubscribe() {
     compositeDisposable.dispose();
   }
 
