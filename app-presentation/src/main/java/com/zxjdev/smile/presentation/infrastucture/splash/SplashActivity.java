@@ -20,7 +20,6 @@ import com.zxjdev.smile.presentation.common.base.activity.ActivityModule;
 import com.zxjdev.smile.presentation.common.base.activity.DaggerActivity;
 import com.zxjdev.smile.presentation.infrastucture.main.MainActivity;
 import com.zxjdev.smile.presentation.infrastucture.splash.di.SplashActivityComponent;
-import com.zxjdev.smile.presentation.infrastucture.splash.di.SplashActivityModule;
 
 import javax.inject.Inject;
 
@@ -37,7 +36,7 @@ public class SplashActivity extends DaggerActivity implements SplashContract.Vie
   @BindView(R.id.btn_login) Button btnLogin;
   @BindView(R.id.btn_register) Button btnRegister;
 
-  @Inject SplashContract.Presenter presenter;
+  @Inject SplashPresenter presenter;
 
   private SplashActivityComponent splashActivityComponent;
 
@@ -50,6 +49,7 @@ public class SplashActivity extends DaggerActivity implements SplashContract.Vie
 
     initUi();
 
+    presenter.takeView(this);
     presenter.handleAutoLogin();
   }
 
@@ -67,8 +67,7 @@ public class SplashActivity extends DaggerActivity implements SplashContract.Vie
 
   @Override
   protected void initDaggerComponent() {
-    splashActivityComponent = getApplicationComponent().getSplashActivityComponent(new ActivityModule(this),
-      new SplashActivityModule(this));
+    splashActivityComponent = getApplicationComponent().getSplashActivityComponent(new ActivityModule(this));
     splashActivityComponent.inject(this);
   }
 
@@ -80,7 +79,7 @@ public class SplashActivity extends DaggerActivity implements SplashContract.Vie
   @Override
   protected void onDestroy() {
     super.onDestroy();
-    presenter.destroy();
+    presenter.dropView();
     splashActivityComponent = null;
   }
 

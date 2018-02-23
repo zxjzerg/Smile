@@ -8,12 +8,12 @@ import javax.inject.Inject;
 
 public class SettingsPresenter implements SettingsContract.Presenter {
 
-  @Inject SettingsContract.View view;
+  private SettingsContract.View view;
   @Inject Logout logout;
   @Inject ErrorMessagePrinter errorMessagePrinter;
 
   @Inject
-  public SettingsPresenter() {
+  SettingsPresenter() {
 
   }
 
@@ -28,7 +28,13 @@ public class SettingsPresenter implements SettingsContract.Presenter {
   }
 
   @Override
-  public void onDestroy() {
+  public void takeView(SettingsContract.View view) {
+    this.view = view;
+  }
+
+  @Override
+  public void dropView() {
+    this.view = null;
     logout.unsubscribe();
   }
 }

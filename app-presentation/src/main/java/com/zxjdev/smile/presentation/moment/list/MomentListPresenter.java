@@ -18,7 +18,7 @@ public class MomentListPresenter implements MomentListContract.Presenter {
 
   private static final String EXTRA_MOMENT_LIST = "extra_moment_list";
 
-  @Inject MomentListContract.View view;
+  private MomentListContract.View view;
   @Inject GetMomentList getMomentList;
   @Inject MomentModelMapper momentModelMapper;
   @Inject ErrorMessagePrinter errorMessagePrinter;
@@ -26,13 +26,8 @@ public class MomentListPresenter implements MomentListContract.Presenter {
   private ArrayList<MomentModel> moments = new ArrayList<>();
 
   @Inject
-  public MomentListPresenter() {
+  MomentListPresenter() {
 
-  }
-
-  @Override
-  public void create() {
-    loadMoments();
   }
 
   @Override
@@ -74,5 +69,16 @@ public class MomentListPresenter implements MomentListContract.Presenter {
       this.moments = moments;
       view.displayMomentList(moments);
     }
+  }
+
+  @Override
+  public void takeView(MomentListContract.View view) {
+    this.view = view;
+  }
+
+  @Override
+  public void dropView() {
+    this.view = null;
+    getMomentList.unsubscribe();
   }
 }

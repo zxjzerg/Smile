@@ -7,7 +7,6 @@ import android.widget.EditText;
 
 import com.zxjdev.smile.R;
 import com.zxjdev.smile.presentation.authorization.register.di.RegisterActivityComponent;
-import com.zxjdev.smile.presentation.authorization.register.di.RegisterActivityModule;
 import com.zxjdev.smile.presentation.common.DaggerApplication;
 import com.zxjdev.smile.presentation.common.base.activity.ActivityModule;
 import com.zxjdev.smile.presentation.common.base.activity.DaggerActivity;
@@ -25,7 +24,7 @@ public class RegisterActivity extends DaggerActivity implements RegisterContract
   @BindView(R.id.et_password) EditText etPassword;
   @BindView(R.id.toolbar) Toolbar toolbar;
 
-  @Inject RegisterContract.Presenter presenter;
+  @Inject RegisterPresenter presenter;
 
   private RegisterActivityComponent registerActivityComponent;
 
@@ -36,12 +35,13 @@ public class RegisterActivity extends DaggerActivity implements RegisterContract
     setContentView(R.layout.activity_register);
     ButterKnife.bind(this);
     initUi();
+
+    presenter.takeView(this);
   }
 
   @Override
   protected void initDaggerComponent() {
-    registerActivityComponent = getApplicationComponent().getRegisterActivityComponent(new ActivityModule(this),
-      new RegisterActivityModule(this));
+    registerActivityComponent = getApplicationComponent().getRegisterActivityComponent(new ActivityModule(this));
     registerActivityComponent.inject(this);
   }
 
@@ -53,6 +53,7 @@ public class RegisterActivity extends DaggerActivity implements RegisterContract
   @Override
   protected void onDestroy() {
     registerActivityComponent = null;
+    presenter.dropView();
     super.onDestroy();
   }
 

@@ -12,47 +12,54 @@ import javax.inject.Inject;
 
 public class MainPresenter implements MainContract.Presenter {
 
-    @Inject MainContract.View view;
-    @Inject GetCurrentUser getCurrentUser;
-    @Inject UserModelMapper userModelMapper;
-    @Inject UploadAvatar uploadAvatar;
-    @Inject ErrorMessagePrinter errorMessagePrinter;
+  private MainContract.View view;
+  @Inject GetCurrentUser getCurrentUser;
+  @Inject UserModelMapper userModelMapper;
+  @Inject UploadAvatar uploadAvatar;
+  @Inject ErrorMessagePrinter errorMessagePrinter;
 
-    @Inject
-    public MainPresenter() {
+  private UserModel currentUser;
 
-    }
+  @Inject
+  MainPresenter() {
 
-    public void setView(MainContract.View view) {
-        this.view = view;
-    }
+  }
 
-    @Override
-    public void onCreate() {
-        getCurrentUser.execute(new DefaultSubscriber<User>(errorMessagePrinter) {
-            @Override
-            public void onNext(User data) {
-                UserModel userModel = userModelMapper.transform(data);
-                view.displayUser(userModel);
-            }
-        });
-    }
+  @Override
+  public void handleChangeAvatar(String picturePath) {
+    UploadAvatar.RequestParams params = new UploadAvatar.RequestParams();
+    params.setLocalPath(picturePath);
+    uploadAvatar.execute(params, new DefaultSubscriber<String>(errorMessagePrinter) {
+      @Override
+      public void onNext(String data) {
+        if (currentUser != null) {
+          currentUser.setAvatar(data);
+          if (view != null) view.displayUser(currentUser);
+        }
+      }
+    });
+  }
 
-    @Override
-    public void onDestroy() {
-        getCurrentUser.unsubscribe();
-        uploadAvatar.unsubscribe();
-    }
+  @Override
+  public void takeView(MainContract.View view) {
+    this.view = view;
+    loadCurrentUser();
+  }
 
-    @Override
-    public void handleChangeAvatar(String picturePath) {
-        UploadAvatar.RequestParams params = new UploadAvatar.RequestParams();
-        params.setLocalPath(picturePath);
-        uploadAvatar.execute(params, new DefaultSubscriber<String>(errorMessagePrinter) {
-            @Override
-            public void onNext(String data) {
-                view.changeUserAvatar(data);
-            }
-        });
-    }
+  @Override
+  public void dropView() {
+    this.view = null;
+    getCurrentUser.unsubscribe();
+    uploadAvatar.unsubscribe();
+  }
+
+  private void loadCurrentUser() {
+    getCurrentUser.execute(new DefaultSubscriber<User>(errorMessagePrinter) {
+      @Override
+      public void onNext(User data) {
+        currentUser = userModelMapper.transform(data);
+        if (view != null) view.displayUser(currentUser);
+      }
+    });
+  }
 }

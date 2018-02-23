@@ -25,7 +25,6 @@ import com.zxjdev.smile.R;
 import com.zxjdev.smile.presentation.common.base.activity.ActivityModule;
 import com.zxjdev.smile.presentation.common.base.activity.DaggerActivity;
 import com.zxjdev.smile.presentation.infrastucture.main.di.MainActivityComponent;
-import com.zxjdev.smile.presentation.infrastucture.main.di.MainActivityModule;
 import com.zxjdev.smile.presentation.moment.list.MomentListFragment;
 import com.zxjdev.smile.presentation.user.UserModel;
 import com.zxjdev.smile.presentation.user.settings.SettingsFragment;
@@ -50,7 +49,7 @@ public class MainActivity extends DaggerActivity implements MainContract.View {
 
   private List<String> fragmentTags = new ArrayList<>();
 
-  @Inject MainContract.Presenter presenter;
+  @Inject MainPresenter presenter;
 
   @Override
   protected void onCreate(Bundle savedInstanceState) {
@@ -66,15 +65,14 @@ public class MainActivity extends DaggerActivity implements MainContract.View {
       navigationView.setCheckedItem(R.id.navi_item_moments);
     }
 
-    presenter.onCreate();
+    presenter.takeView(this);
   }
 
   private MainActivityComponent mainActivityComponent;
 
   @Override
   protected void initDaggerComponent() {
-    mainActivityComponent = getUserComponent().getMainActivityComponent(new ActivityModule(this),
-      new MainActivityModule(this));
+    mainActivityComponent = getUserComponent().getMainActivityComponent(new ActivityModule(this));
     mainActivityComponent.inject(this);
   }
 
@@ -91,7 +89,7 @@ public class MainActivity extends DaggerActivity implements MainContract.View {
 
   @Override
   protected void onDestroy() {
-    presenter.onDestroy();
+    presenter.dropView();
     mainActivityComponent = null;
     super.onDestroy();
   }
@@ -151,11 +149,6 @@ public class MainActivity extends DaggerActivity implements MainContract.View {
       intent.setAction(Intent.ACTION_GET_CONTENT);
       startActivityForResult(intent, PICK_IMAGE_REQUEST);
     });
-  }
-
-  @Override
-  public void changeUserAvatar(String url) {
-    getImageLoader().loadCircleImage(url, ivAvatar);
   }
 
   /**

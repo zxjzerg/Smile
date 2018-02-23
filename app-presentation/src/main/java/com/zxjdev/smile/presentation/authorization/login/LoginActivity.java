@@ -7,7 +7,6 @@ import android.widget.EditText;
 
 import com.zxjdev.smile.R;
 import com.zxjdev.smile.presentation.authorization.login.di.LoginActivityComponent;
-import com.zxjdev.smile.presentation.authorization.login.di.LoginActivityModule;
 import com.zxjdev.smile.presentation.common.DaggerApplication;
 import com.zxjdev.smile.presentation.common.base.activity.ActivityModule;
 import com.zxjdev.smile.presentation.common.base.activity.DaggerActivity;
@@ -29,7 +28,7 @@ public class LoginActivity extends DaggerActivity implements LoginContract.View 
   @BindView(R.id.et_password) EditText etPassword;
   @BindView(R.id.toolbar) Toolbar toolbar;
 
-  @Inject LoginContract.Presenter presenter;
+  @Inject LoginPresenter presenter;
   private LoginActivityComponent loginActivityComponent;
 
   @Override
@@ -39,12 +38,13 @@ public class LoginActivity extends DaggerActivity implements LoginContract.View 
     setContentView(R.layout.activity_login);
     ButterKnife.bind(this);
     initUi();
+
+    presenter.takeView(this);
   }
 
   @Override
   protected void initDaggerComponent() {
-    loginActivityComponent = getApplicationComponent().getLoginActivityComponent(new ActivityModule(this),
-      new LoginActivityModule(this));
+    loginActivityComponent = getApplicationComponent().getLoginActivityComponent(new ActivityModule(this));
     loginActivityComponent.inject(this);
   }
 
@@ -55,7 +55,7 @@ public class LoginActivity extends DaggerActivity implements LoginContract.View 
 
   @Override
   protected void onDestroy() {
-    presenter.destroy();
+    presenter.dropView();
     loginActivityComponent = null;
     super.onDestroy();
   }

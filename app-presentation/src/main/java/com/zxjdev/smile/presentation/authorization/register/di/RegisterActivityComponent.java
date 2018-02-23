@@ -6,7 +6,7 @@ import com.zxjdev.smile.presentation.authorization.register.RegisterActivity;
 
 import dagger.Subcomponent;
 
-@Subcomponent(modules = {ActivityModule.class, RegisterActivityModule.class})
+@Subcomponent(modules = {ActivityModule.class})
 @ActivityScope
 public interface RegisterActivityComponent {
 

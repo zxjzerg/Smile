@@ -1,21 +1,17 @@
 package com.zxjdev.smile.presentation.infrastucture.main;
 
+import com.zxjdev.smile.presentation.common.base.BasePresenter;
+import com.zxjdev.smile.presentation.common.base.BaseView;
 import com.zxjdev.smile.presentation.user.UserModel;
 
 public interface MainContract {
 
-  interface View {
+  interface View extends BaseView {
 
     void displayUser(UserModel user);
-
-    void changeUserAvatar(String url);
   }
 
-  interface Presenter {
-
-    void onCreate();
-
-    void onDestroy();
+  interface Presenter extends BasePresenter<View> {
 
     void handleChangeAvatar(String picturePath);
   }

@@ -6,7 +6,7 @@ import com.zxjdev.smile.presentation.moment.list.MomentListFragment;
 
 import dagger.Subcomponent;
 
-@Subcomponent(modules = {FragmentModule.class, MomentListFragmentModule.class})
+@Subcomponent(modules = {FragmentModule.class})
 @FragmentScope
 public interface MomentListFragmentComponent {
 

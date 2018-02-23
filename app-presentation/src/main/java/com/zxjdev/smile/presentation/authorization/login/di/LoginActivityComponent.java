@@ -6,7 +6,7 @@ import com.zxjdev.smile.presentation.authorization.login.LoginActivity;
 
 import dagger.Subcomponent;
 
-@Subcomponent(modules = {ActivityModule.class, LoginActivityModule.class})
+@Subcomponent(modules = {ActivityModule.class})
 @ActivityScope
 public interface LoginActivityComponent {
 

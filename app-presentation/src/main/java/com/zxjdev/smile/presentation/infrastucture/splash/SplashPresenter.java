@@ -11,12 +11,12 @@ import javax.inject.Inject;
 public class SplashPresenter implements SplashContract.Presenter {
 
   @Inject AutoLogin autoLogin;
-  @Inject SplashContract.View view;
+  private SplashContract.View view;
   @Inject ErrorMessagePrinter errorMessagePrinter;
   private Handler handler;
 
   @Inject
-  public SplashPresenter() {
+  SplashPresenter() {
     this.handler = new Handler();
   }
 
@@ -36,16 +36,22 @@ public class SplashPresenter implements SplashContract.Presenter {
     });
   }
 
-  @Override
-  public void destroy() {
-    autoLogin.unsubscribe();
-    handler.removeCallbacks(mNavigateToMainTask);
-  }
-
   private Runnable mNavigateToMainTask = new Runnable() {
     @Override
     public void run() {
       view.navigateToMain();
     }
   };
+
+  @Override
+  public void takeView(SplashContract.View view) {
+    this.view = view;
+  }
+
+  @Override
+  public void dropView() {
+    this.view = null;
+    autoLogin.unsubscribe();
+    handler.removeCallbacks(mNavigateToMainTask);
+  }
 }

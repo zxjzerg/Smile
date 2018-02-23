@@ -5,9 +5,7 @@ import com.zxjdev.smile.presentation.user.settings.SettingsFragment;
 
 import dagger.Subcomponent;
 
-@Subcomponent(modules = {
-  SettingsFragmentModule.class
-})
+@Subcomponent
 @FragmentScope
 public interface SettingsFragmentComponent {
 

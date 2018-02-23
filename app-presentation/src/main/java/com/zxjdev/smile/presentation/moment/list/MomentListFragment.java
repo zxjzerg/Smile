@@ -19,7 +19,6 @@ import com.zxjdev.smile.presentation.moment.MomentModel;
 import com.zxjdev.smile.presentation.moment.create.NewMomentActivity;
 import com.zxjdev.smile.presentation.moment.list.adapter.MomentAdapter;
 import com.zxjdev.smile.presentation.moment.list.di.MomentListFragmentComponent;
-import com.zxjdev.smile.presentation.moment.list.di.MomentListFragmentModule;
 
 import java.util.List;
 
@@ -38,7 +37,7 @@ public class MomentListFragment extends DaggerFragment implements MomentListCont
   @BindView(R.id.layout_swipe) SwipeRefreshLayout layoutSwipe;
 
   private MomentAdapter momentAdapter;
-  @Inject MomentListContract.Presenter presenter;
+  @Inject MomentListPresenter presenter;
 
   private MomentListFragmentComponent momentListFragmentComponent;
 
@@ -50,7 +49,7 @@ public class MomentListFragment extends DaggerFragment implements MomentListCont
   protected void initDaggerComponent() {
     if (getActivity() instanceof MainActivity) {
       momentListFragmentComponent = ((MainActivity) getActivity()).getComponent()
-        .getMomentsFragmentComponent(new FragmentModule(this), new MomentListFragmentModule(this));
+        .getMomentsFragmentComponent(new FragmentModule(this));
       momentListFragmentComponent.inject(this);
     }
   }
@@ -73,8 +72,9 @@ public class MomentListFragment extends DaggerFragment implements MomentListCont
   @Override
   public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
     super.onViewCreated(view, savedInstanceState);
+    presenter.takeView(this);
     if (savedInstanceState == null) {
-      presenter.create();
+      presenter.loadMoments();
     } else {
       presenter.loadSavedInstanceState(savedInstanceState);
     }
@@ -92,6 +92,7 @@ public class MomentListFragment extends DaggerFragment implements MomentListCont
   @Override
   public void onDestroy() {
     super.onDestroy();
+    presenter.dropView();
     momentListFragmentComponent = null;
   }
 

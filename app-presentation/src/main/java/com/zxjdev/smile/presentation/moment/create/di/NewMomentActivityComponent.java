@@ -6,7 +6,7 @@ import com.zxjdev.smile.presentation.moment.create.NewMomentActivity;
 
 import dagger.Subcomponent;
 
-@Subcomponent(modules = {ActivityModule.class, NewMomentActivityModule.class})
+@Subcomponent(modules = {ActivityModule.class})
 @ActivityScope
 public interface NewMomentActivityComponent {
 
