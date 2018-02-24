@@ -1,11 +1,9 @@
 package com.zxjdev.smile.presentation.common.base.activity;
 
 import android.os.Bundle;
-import android.support.annotation.Nullable;
 
 import com.zxjdev.smile.presentation.common.DaggerApplication;
 import com.zxjdev.smile.presentation.common.di.component.ApplicationComponent;
-import com.zxjdev.smile.presentation.common.di.component.UserComponent;
 
 public abstract class DaggerActivity extends BaseActivity {
 
@@ -24,11 +22,6 @@ public abstract class DaggerActivity extends BaseActivity {
 
   protected ApplicationComponent getApplicationComponent() {
     return getDaggerApplication().getApplicationComponent();
-  }
-
-  @Nullable
-  protected UserComponent getUserComponent() {
-    return getDaggerApplication().getUserComponent();
   }
 
   public DaggerApplication getDaggerApplication() {

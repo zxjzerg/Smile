@@ -37,7 +37,7 @@ public class NewMomentActivity extends DaggerActivity implements NewMomentContra
 
   @Override
   protected void initDaggerComponent() {
-    newMomentActivityComponent = getUserComponent().getNewMomentActivityComponent(new ActivityModule(this));
+    newMomentActivityComponent = getApplicationComponent().getNewMomentActivityComponent(new ActivityModule(this));
     newMomentActivityComponent.inject(this);
   }
 

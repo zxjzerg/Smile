@@ -72,7 +72,7 @@ public class MainActivity extends DaggerActivity implements MainContract.View {
 
   @Override
   protected void initDaggerComponent() {
-    mainActivityComponent = getUserComponent().getMainActivityComponent(new ActivityModule(this));
+    mainActivityComponent = getApplicationComponent().getMainActivityComponent(new ActivityModule(this));
     mainActivityComponent.inject(this);
   }
 
