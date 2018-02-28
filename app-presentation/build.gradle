@@ -1,4 +1,6 @@
 apply plugin: 'com.android.application'
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-kapt'
 
 android {
     compileSdkVersion rootProject.ext.androidCompileSdkVersion
@@ -92,11 +94,11 @@ dependencies {
     compile rootProject.ext.dagger
     compile rootProject.ext.dagger_android
     compile rootProject.ext.dagger_android_support
-    annotationProcessor rootProject.ext.dagger_processor
-    annotationProcessor rootProject.ext.dagger_android_processor
+    kapt rootProject.ext.dagger_processor
+    kapt rootProject.ext.dagger_android_processor
 
     compile rootProject.ext.butterknife
-    annotationProcessor rootProject.ext.butterknife_compiler
+    kapt rootProject.ext.butterknife_compiler
 
     compile rootProject.ext.leancloud_basic
 
