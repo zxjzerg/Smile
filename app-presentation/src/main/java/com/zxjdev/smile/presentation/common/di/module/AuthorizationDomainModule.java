@@ -6,7 +6,6 @@ import com.zxjdev.smile.domain.authorization.usecase.AutoLogin;
 import com.zxjdev.smile.domain.authorization.usecase.Login;
 import com.zxjdev.smile.domain.authorization.usecase.Logout;
 import com.zxjdev.smile.domain.authorization.usecase.Register;
-import com.zxjdev.smile.domain.common.SchedulerFactory;
 
 import dagger.Module;
 import dagger.Provides;
@@ -15,22 +14,22 @@ import dagger.Provides;
 public class AuthorizationDomainModule {
 
   @Provides
-  AutoLogin provideAutoLogin(SchedulerFactory schedulerFactory, AuthorizationRepository repository) {
-    return new AutoLogin(schedulerFactory, repository);
+  AutoLogin provideAutoLogin(AuthorizationRepository repository) {
+    return new AutoLogin(repository);
   }
 
   @Provides
-  Login provideLogin(SchedulerFactory schedulerFactory, AuthorizationRepository repository) {
-    return new Login(schedulerFactory, repository);
+  Login provideLogin(AuthorizationRepository repository) {
+    return new Login(repository);
   }
 
   @Provides
-  Logout provideLogout(SchedulerFactory schedulerFactory, AuthorizationRepository repository) {
-    return new Logout(schedulerFactory, repository);
+  Logout provideLogout(AuthorizationRepository repository) {
+    return new Logout(repository);
   }
 
   @Provides
-  Register provideRegister(SchedulerFactory schedulerFactory, AuthorizationRepository repository) {
-    return new Register(schedulerFactory, repository);
+  Register provideRegister(AuthorizationRepository repository) {
+    return new Register(repository);
   }
 }

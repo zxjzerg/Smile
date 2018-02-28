@@ -34,6 +34,7 @@ dependencies {
     compile rootProject.ext.android_support_v7
     compile rootProject.ext.leancloud_basic
     compile rootProject.ext.rxjava2
+    compile rootProject.ext.rxandroid2
     compile rootProject.ext.dagger
     annotationProcessor rootProject.ext.dagger_processor
 

@@ -1,6 +1,5 @@
 package com.zxjdev.smile.domain.user.usecase;
 
-import com.zxjdev.smile.domain.common.SchedulerFactory;
 import com.zxjdev.smile.domain.common.base.UseCase;
 import com.zxjdev.smile.domain.user.User;
 import com.zxjdev.smile.domain.user.UserRepository;
@@ -11,8 +10,7 @@ public class GetUser extends UseCase<GetUser.RequestParams, User> {
 
   private UserRepository userRepository;
 
-  public GetUser(SchedulerFactory schedulerFactory, UserRepository userRepository) {
-    super(schedulerFactory);
+  public GetUser(UserRepository userRepository) {
     this.userRepository = userRepository;
   }
 

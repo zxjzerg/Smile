@@ -1,5 +1,6 @@
 package com.zxjdev.smile.data.user;
 
+import com.zxjdev.smile.data.base.BaseDataRepository;
 import com.zxjdev.smile.data.user.datasource.UserCloudDataSource;
 import com.zxjdev.smile.data.user.entity.UserMapper;
 import com.zxjdev.smile.domain.user.User;
@@ -9,7 +10,7 @@ import javax.inject.Inject;
 
 import io.reactivex.Observable;
 
-public class UserDataRepository implements UserRepository {
+public class UserDataRepository extends BaseDataRepository implements UserRepository {
 
   private UserCloudDataSource userCloudDataSource;
   private UserMapper userMapper;
@@ -22,16 +23,20 @@ public class UserDataRepository implements UserRepository {
 
   @Override
   public Observable<User> getUser(String id) {
-    return userCloudDataSource.getUser(id).map(userEntity -> userMapper.transform(userEntity));
+    return userCloudDataSource.getUser(id)
+      .map(userEntity -> userMapper.transform(userEntity))
+      .compose(applyDefaultSchedulerStrategy());
   }
 
   @Override
   public Observable<User> getCurrentUser() {
-    return userCloudDataSource.getUser(null).map(userEntity -> userMapper.transform(userEntity));
+    return userCloudDataSource.getUser(null)
+      .map(userEntity -> userMapper.transform(userEntity))
+      .compose(applyDefaultSchedulerStrategy());
   }
 
   @Override
   public Observable<String> uploadAvatar(String localPath) {
-    return userCloudDataSource.uploadAvatar(localPath);
+    return userCloudDataSource.uploadAvatar(localPath).compose(applyDefaultSchedulerStrategy());
   }
 }

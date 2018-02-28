@@ -1,7 +1,6 @@
 package com.zxjdev.smile.domain.authorization.usecase;
 
 import com.zxjdev.smile.domain.authorization.AuthorizationRepository;
-import com.zxjdev.smile.domain.common.SchedulerFactory;
 import com.zxjdev.smile.domain.common.base.UseCase;
 
 import io.reactivex.Observable;
@@ -10,8 +9,7 @@ public class AutoLogin extends UseCase<AutoLogin.RequestParams, Boolean> {
 
   private AuthorizationRepository authorizationRepository;
 
-  public AutoLogin(SchedulerFactory schedulerFactory, AuthorizationRepository authorizationRepository) {
-    super(schedulerFactory);
+  public AutoLogin(AuthorizationRepository authorizationRepository) {
     this.authorizationRepository = authorizationRepository;
   }
 
