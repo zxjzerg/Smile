@@ -23,7 +23,9 @@ android {
 
         // 遍历所有的variant并执行重命名逻辑
         applicationVariants.all { variant ->
-            renameAPK(variant)
+            if (variant.name.contains("release")) {
+                renameAPK(variant)
+            }
         }
     }
 
