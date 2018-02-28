@@ -9,10 +9,9 @@ import android.view.ViewGroup;
 import android.widget.Button;
 
 import com.zxjdev.smile.R;
-import com.zxjdev.smile.presentation.common.base.fragment.DaggerFragment;
-import com.zxjdev.smile.presentation.infrastucture.main.MainActivity;
+import com.zxjdev.smile.presentation.common.SmileApplication;
+import com.zxjdev.smile.presentation.common.base.fragment.BaseFragment;
 import com.zxjdev.smile.presentation.infrastucture.splash.SplashActivity;
-import com.zxjdev.smile.presentation.user.settings.di.SettingsFragmentComponent;
 
 import javax.inject.Inject;
 
@@ -20,15 +19,13 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
-public class SettingsFragment extends DaggerFragment implements SettingsContract.View {
+public class SettingsFragment extends BaseFragment implements SettingsContract.View {
 
   public static final String TAG = SettingsFragment.class.getSimpleName();
 
   @BindView(R.id.btn_logout) Button btnLogout;
 
   @Inject SettingsPresenter settingsPresenter;
-
-  private SettingsFragmentComponent settingsFragmentComponent;
 
   public SettingsFragment() {
     setRetainInstance(true);
@@ -37,20 +34,6 @@ public class SettingsFragment extends DaggerFragment implements SettingsContract
   @Override
   public void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
-  }
-
-  @Override
-  protected void initDaggerComponent() {
-    if (getActivity() instanceof MainActivity) {
-      settingsFragmentComponent = ((MainActivity) getActivity()).getComponent()
-        .getSettingsFragmentComponent();
-      settingsFragmentComponent.inject(this);
-    }
-  }
-
-  @Override
-  protected void releaseDaggerComponent() {
-    settingsFragmentComponent = null;
   }
 
   @Nullable
@@ -75,8 +58,7 @@ public class SettingsFragment extends DaggerFragment implements SettingsContract
 
   @Override
   public void onLogoutSuccess() {
-    releaseDaggerComponent();
-    getDaggerApplication().releaseUserComponent();
+    ((SmileApplication) getActivity().getApplication()).releaseUserComponent();
 
     Intent intent = new Intent(getActivity(), SplashActivity.class);
     intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);

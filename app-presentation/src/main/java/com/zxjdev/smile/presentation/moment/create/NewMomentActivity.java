@@ -7,23 +7,19 @@ import android.view.MenuItem;
 import android.widget.EditText;
 
 import com.zxjdev.smile.R;
-import com.zxjdev.smile.presentation.common.base.activity.ActivityModule;
-import com.zxjdev.smile.presentation.common.base.activity.DaggerActivity;
-import com.zxjdev.smile.presentation.moment.create.di.NewMomentActivityComponent;
+import com.zxjdev.smile.presentation.common.base.activity.BaseActivity;
 
 import javax.inject.Inject;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-public class NewMomentActivity extends DaggerActivity implements NewMomentContract.View {
+public class NewMomentActivity extends BaseActivity implements NewMomentContract.View {
 
   @BindView(R.id.view_toolbar) Toolbar toolbar;
   @BindView(R.id.et_content) EditText etContent;
 
   @Inject NewMomentPresenter presenter;
-
-  private NewMomentActivityComponent newMomentActivityComponent;
 
   @Override
   protected void onCreate(Bundle savedInstanceState) {
@@ -36,21 +32,9 @@ public class NewMomentActivity extends DaggerActivity implements NewMomentContra
   }
 
   @Override
-  protected void initDaggerComponent() {
-    newMomentActivityComponent = getApplicationComponent().getNewMomentActivityComponent(new ActivityModule(this));
-    newMomentActivityComponent.inject(this);
-  }
-
-  @Override
-  protected void releaseDaggerComponent() {
-
-  }
-
-  @Override
   protected void onDestroy() {
     super.onDestroy();
     presenter.dropView();
-    newMomentActivityComponent = null;
   }
 
   @Override

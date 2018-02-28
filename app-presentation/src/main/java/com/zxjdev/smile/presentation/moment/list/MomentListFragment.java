@@ -12,13 +12,10 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.zxjdev.smile.R;
-import com.zxjdev.smile.presentation.common.base.fragment.DaggerFragment;
-import com.zxjdev.smile.presentation.common.base.fragment.FragmentModule;
-import com.zxjdev.smile.presentation.infrastucture.main.MainActivity;
+import com.zxjdev.smile.presentation.common.base.fragment.BaseFragment;
 import com.zxjdev.smile.presentation.moment.MomentModel;
 import com.zxjdev.smile.presentation.moment.create.NewMomentActivity;
 import com.zxjdev.smile.presentation.moment.list.adapter.MomentAdapter;
-import com.zxjdev.smile.presentation.moment.list.di.MomentListFragmentComponent;
 
 import java.util.List;
 
@@ -28,7 +25,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
-public class MomentListFragment extends DaggerFragment implements MomentListContract.View {
+public class MomentListFragment extends BaseFragment implements MomentListContract.View {
 
   public static final String TAG = MomentListFragment.class.getSimpleName();
 
@@ -39,24 +36,8 @@ public class MomentListFragment extends DaggerFragment implements MomentListCont
   private MomentAdapter momentAdapter;
   @Inject MomentListPresenter presenter;
 
-  private MomentListFragmentComponent momentListFragmentComponent;
-
   public MomentListFragment() {
 
-  }
-
-  @Override
-  protected void initDaggerComponent() {
-    if (getActivity() instanceof MainActivity) {
-      momentListFragmentComponent = ((MainActivity) getActivity()).getComponent()
-        .getMomentsFragmentComponent(new FragmentModule(this));
-      momentListFragmentComponent.inject(this);
-    }
-  }
-
-  @Override
-  protected void releaseDaggerComponent() {
-    momentListFragmentComponent = null;
   }
 
   @Nullable
@@ -93,7 +74,6 @@ public class MomentListFragment extends DaggerFragment implements MomentListCont
   public void onDestroy() {
     super.onDestroy();
     presenter.dropView();
-    momentListFragmentComponent = null;
   }
 
   @Override

@@ -22,9 +22,7 @@ import android.widget.TextView;
 
 import com.soundcloud.android.crop.Crop;
 import com.zxjdev.smile.R;
-import com.zxjdev.smile.presentation.common.base.activity.ActivityModule;
-import com.zxjdev.smile.presentation.common.base.activity.DaggerActivity;
-import com.zxjdev.smile.presentation.infrastucture.main.di.MainActivityComponent;
+import com.zxjdev.smile.presentation.common.base.activity.BaseActivity;
 import com.zxjdev.smile.presentation.moment.list.MomentListFragment;
 import com.zxjdev.smile.presentation.user.UserModel;
 import com.zxjdev.smile.presentation.user.settings.SettingsFragment;
@@ -38,7 +36,7 @@ import javax.inject.Inject;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-public class MainActivity extends DaggerActivity implements MainContract.View {
+public class MainActivity extends BaseActivity implements MainContract.View {
 
   @BindView(R.id.dlyt_container) DrawerLayout dlytContainer;
   @BindView(R.id.view_toolbar) Toolbar toolbar;
@@ -68,19 +66,6 @@ public class MainActivity extends DaggerActivity implements MainContract.View {
     presenter.takeView(this);
   }
 
-  private MainActivityComponent mainActivityComponent;
-
-  @Override
-  protected void initDaggerComponent() {
-    mainActivityComponent = getApplicationComponent().getMainActivityComponent(new ActivityModule(this));
-    mainActivityComponent.inject(this);
-  }
-
-  @Override
-  protected void releaseDaggerComponent() {
-
-  }
-
   @Override
   protected void onPostCreate(@Nullable Bundle savedInstanceState) {
     super.onPostCreate(savedInstanceState);
@@ -90,7 +75,6 @@ public class MainActivity extends DaggerActivity implements MainContract.View {
   @Override
   protected void onDestroy() {
     presenter.dropView();
-    mainActivityComponent = null;
     super.onDestroy();
   }
 
@@ -149,13 +133,6 @@ public class MainActivity extends DaggerActivity implements MainContract.View {
       intent.setAction(Intent.ACTION_GET_CONTENT);
       startActivityForResult(intent, PICK_IMAGE_REQUEST);
     });
-  }
-
-  /**
-   * Get the dagger component of MainActivity. Used in Fragments of MainActivity.
-   */
-  public MainActivityComponent getComponent() {
-    return mainActivityComponent;
   }
 
   private void initUi() {

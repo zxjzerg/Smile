@@ -6,10 +6,8 @@ import android.support.v7.widget.Toolbar;
 import android.widget.EditText;
 
 import com.zxjdev.smile.R;
-import com.zxjdev.smile.presentation.authorization.login.di.LoginActivityComponent;
-import com.zxjdev.smile.presentation.common.DaggerApplication;
-import com.zxjdev.smile.presentation.common.base.activity.ActivityModule;
-import com.zxjdev.smile.presentation.common.base.activity.DaggerActivity;
+import com.zxjdev.smile.presentation.common.SmileApplication;
+import com.zxjdev.smile.presentation.common.base.activity.BaseActivity;
 import com.zxjdev.smile.presentation.infrastucture.main.MainActivity;
 
 import javax.inject.Inject;
@@ -22,14 +20,13 @@ import butterknife.OnClick;
  * 登录界面
  * Created by Andrew on 7/5/16.
  */
-public class LoginActivity extends DaggerActivity implements LoginContract.View {
+public class LoginActivity extends BaseActivity implements LoginContract.View {
 
   @BindView(R.id.et_username) EditText etUsername;
   @BindView(R.id.et_password) EditText etPassword;
   @BindView(R.id.toolbar) Toolbar toolbar;
 
   @Inject LoginPresenter presenter;
-  private LoginActivityComponent loginActivityComponent;
 
   @Override
   protected void onCreate(Bundle savedInstanceState) {
@@ -43,20 +40,8 @@ public class LoginActivity extends DaggerActivity implements LoginContract.View 
   }
 
   @Override
-  protected void initDaggerComponent() {
-    loginActivityComponent = getApplicationComponent().getLoginActivityComponent(new ActivityModule(this));
-    loginActivityComponent.inject(this);
-  }
-
-  @Override
-  protected void releaseDaggerComponent() {
-
-  }
-
-  @Override
   protected void onDestroy() {
     presenter.dropView();
-    loginActivityComponent = null;
     super.onDestroy();
   }
 
@@ -74,7 +59,7 @@ public class LoginActivity extends DaggerActivity implements LoginContract.View 
 
   @Override
   public void initUserComponent() {
-    ((DaggerApplication) getApplication()).initUserComponent();
+    ((SmileApplication) getApplication()).initUserComponent();
   }
 
   private void initUi() {

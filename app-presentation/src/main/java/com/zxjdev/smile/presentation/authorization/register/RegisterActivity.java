@@ -6,10 +6,8 @@ import android.support.v7.widget.Toolbar;
 import android.widget.EditText;
 
 import com.zxjdev.smile.R;
-import com.zxjdev.smile.presentation.authorization.register.di.RegisterActivityComponent;
-import com.zxjdev.smile.presentation.common.DaggerApplication;
-import com.zxjdev.smile.presentation.common.base.activity.ActivityModule;
-import com.zxjdev.smile.presentation.common.base.activity.DaggerActivity;
+import com.zxjdev.smile.presentation.common.SmileApplication;
+import com.zxjdev.smile.presentation.common.base.activity.BaseActivity;
 import com.zxjdev.smile.presentation.infrastucture.main.MainActivity;
 
 import javax.inject.Inject;
@@ -18,15 +16,13 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
-public class RegisterActivity extends DaggerActivity implements RegisterContract.View {
+public class RegisterActivity extends BaseActivity implements RegisterContract.View {
 
   @BindView(R.id.et_username) EditText etUsername;
   @BindView(R.id.et_password) EditText etPassword;
   @BindView(R.id.toolbar) Toolbar toolbar;
 
   @Inject RegisterPresenter presenter;
-
-  private RegisterActivityComponent registerActivityComponent;
 
   @Override
   protected void onCreate(Bundle savedInstanceState) {
@@ -40,19 +36,7 @@ public class RegisterActivity extends DaggerActivity implements RegisterContract
   }
 
   @Override
-  protected void initDaggerComponent() {
-    registerActivityComponent = getApplicationComponent().getRegisterActivityComponent(new ActivityModule(this));
-    registerActivityComponent.inject(this);
-  }
-
-  @Override
-  protected void releaseDaggerComponent() {
-
-  }
-
-  @Override
   protected void onDestroy() {
-    registerActivityComponent = null;
     presenter.dropView();
     super.onDestroy();
   }
@@ -71,7 +55,7 @@ public class RegisterActivity extends DaggerActivity implements RegisterContract
 
   @Override
   public void initUserComponent() {
-    ((DaggerApplication) getApplication()).initUserComponent();
+    ((SmileApplication) getApplication()).initUserComponent();
   }
 
   private void initUi() {

@@ -7,7 +7,10 @@ import com.facebook.stetho.Stetho;
 import com.zxjdev.smile.BuildConfig;
 import com.zxjdev.smile.data.moment.entity.MomentEntity;
 import com.zxjdev.smile.data.user.entity.UserEntity;
+import com.zxjdev.smile.presentation.common.di.component.DaggerApplicationComponent;
 
+import dagger.android.AndroidInjector;
+import dagger.android.DaggerApplication;
 import timber.log.Timber;
 
 public class SmileApplication extends DaggerApplication {
@@ -17,6 +20,11 @@ public class SmileApplication extends DaggerApplication {
     super.onCreate();
 
     initThirdPartySDK();
+  }
+
+  @Override
+  protected AndroidInjector<? extends DaggerApplication> applicationInjector() {
+    return DaggerApplicationComponent.builder().application(this).build();
   }
 
   private void initThirdPartySDK() {
@@ -44,6 +52,14 @@ public class SmileApplication extends DaggerApplication {
 
   private void initStetho() {
     Stetho.initializeWithDefaults(this);
+  }
+
+  public void initUserComponent() {
+    getSharedPreferences("auth", MODE_PRIVATE).edit().putBoolean("auto_login", true).apply();
+  }
+
+  public void releaseUserComponent() {
+    getSharedPreferences("auth", MODE_PRIVATE).edit().putBoolean("auto_login", false).apply();
   }
 }
 

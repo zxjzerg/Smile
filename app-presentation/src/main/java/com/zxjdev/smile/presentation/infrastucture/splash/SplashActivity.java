@@ -16,10 +16,8 @@ import android.widget.Button;
 import com.zxjdev.smile.R;
 import com.zxjdev.smile.presentation.authorization.login.LoginActivity;
 import com.zxjdev.smile.presentation.authorization.register.RegisterActivity;
-import com.zxjdev.smile.presentation.common.base.activity.ActivityModule;
-import com.zxjdev.smile.presentation.common.base.activity.DaggerActivity;
+import com.zxjdev.smile.presentation.common.base.activity.BaseActivity;
 import com.zxjdev.smile.presentation.infrastucture.main.MainActivity;
-import com.zxjdev.smile.presentation.infrastucture.splash.di.SplashActivityComponent;
 
 import javax.inject.Inject;
 
@@ -30,15 +28,13 @@ import butterknife.OnClick;
 /**
  * 开屏界面
  */
-public class SplashActivity extends DaggerActivity implements SplashContract.View {
+public class SplashActivity extends BaseActivity implements SplashContract.View {
 
   @BindView(R.id.layout_button_container) View buttonContainer;
   @BindView(R.id.btn_login) Button btnLogin;
   @BindView(R.id.btn_register) Button btnRegister;
 
   @Inject SplashPresenter presenter;
-
-  private SplashActivityComponent splashActivityComponent;
 
   @Override
   protected void onCreate(Bundle savedInstanceState) {
@@ -66,21 +62,9 @@ public class SplashActivity extends DaggerActivity implements SplashContract.Vie
   }
 
   @Override
-  protected void initDaggerComponent() {
-    splashActivityComponent = getApplicationComponent().getSplashActivityComponent(new ActivityModule(this));
-    splashActivityComponent.inject(this);
-  }
-
-  @Override
-  protected void releaseDaggerComponent() {
-
-  }
-
-  @Override
   protected void onDestroy() {
     super.onDestroy();
     presenter.dropView();
-    splashActivityComponent = null;
   }
 
   private void initUi() {
