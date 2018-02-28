@@ -8,12 +8,12 @@ import javax.inject.Inject;
 
 public class NewMomentPresenter implements NewMomentContract.Presenter {
 
-  @Inject NewMomentContract.View view;
+  private NewMomentContract.View view;
   @Inject AddMoment addMoment;
   @Inject ErrorMessagePrinter errorMessagePrinter;
 
   @Inject
-  public NewMomentPresenter() {
+  NewMomentPresenter() {
 
   }
 
@@ -27,7 +27,14 @@ public class NewMomentPresenter implements NewMomentContract.Presenter {
     });
   }
 
-  public void destroy() {
-    addMoment.unSubscribe();
+  @Override
+  public void takeView(NewMomentContract.View view) {
+    this.view = view;
+  }
+
+  @Override
+  public void dropView() {
+    this.view = null;
+    addMoment.unsubscribe();
   }
 }

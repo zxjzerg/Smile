@@ -1,6 +1,5 @@
 package com.zxjdev.smile.domain.user.usecase;
 
-import com.zxjdev.smile.domain.common.SchedulerFactory;
 import com.zxjdev.smile.domain.common.base.UseCase;
 import com.zxjdev.smile.domain.user.UserRepository;
 
@@ -10,8 +9,7 @@ public class UploadAvatar extends UseCase<UploadAvatar.RequestParams, String> {
 
   private UserRepository userRepository;
 
-  public UploadAvatar(SchedulerFactory schedulerFactory, UserRepository userRepository) {
-    super(schedulerFactory);
+  public UploadAvatar(UserRepository userRepository) {
     this.userRepository = userRepository;
   }
 

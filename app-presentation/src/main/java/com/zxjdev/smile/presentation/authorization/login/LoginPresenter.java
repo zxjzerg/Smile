@@ -10,12 +10,12 @@ import timber.log.Timber;
 
 public class LoginPresenter implements LoginContract.Presenter {
 
-  @Inject LoginContract.View view;
+  private LoginContract.View view;
   @Inject Login login;
   @Inject ErrorMessagePrinter errorMessagePrinter;
 
   @Inject
-  public LoginPresenter() {
+  LoginPresenter() {
 
   }
 
@@ -36,7 +36,13 @@ public class LoginPresenter implements LoginContract.Presenter {
   }
 
   @Override
-  public void destroy() {
-    login.unSubscribe();
+  public void takeView(LoginContract.View view) {
+    this.view = view;
+  }
+
+  @Override
+  public void dropView() {
+    this.view = null;
+    login.unsubscribe();
   }
 }

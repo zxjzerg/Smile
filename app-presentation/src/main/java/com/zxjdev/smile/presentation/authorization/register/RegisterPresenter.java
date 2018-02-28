@@ -8,12 +8,12 @@ import javax.inject.Inject;
 
 public class RegisterPresenter implements RegisterContract.Presenter {
 
-  @Inject RegisterContract.View view;
+  private RegisterContract.View view;
   @Inject Register register;
   @Inject ErrorMessagePrinter errorMessagePrinter;
 
   @Inject
-  public RegisterPresenter() {
+  RegisterPresenter() {
 
   }
 
@@ -26,5 +26,15 @@ public class RegisterPresenter implements RegisterContract.Presenter {
         view.navigateToMain();
       }
     });
+  }
+
+  @Override
+  public void takeView(RegisterContract.View view) {
+    this.view = view;
+  }
+
+  @Override
+  public void dropView() {
+    this.view = null;
   }
 }

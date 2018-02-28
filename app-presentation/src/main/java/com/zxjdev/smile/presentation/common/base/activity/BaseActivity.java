@@ -1,13 +1,14 @@
 package com.zxjdev.smile.presentation.common.base.activity;
 
 import android.content.Context;
-import android.support.v7.app.AppCompatActivity;
 import android.widget.Toast;
 
 import com.zxjdev.smile.presentation.common.util.image.GlideImageLoader;
 import com.zxjdev.smile.presentation.common.util.image.ImageLoader;
 
-public abstract class BaseActivity extends AppCompatActivity {
+import dagger.android.support.DaggerAppCompatActivity;
+
+public abstract class BaseActivity extends DaggerAppCompatActivity {
 
   protected Context context = this;
 

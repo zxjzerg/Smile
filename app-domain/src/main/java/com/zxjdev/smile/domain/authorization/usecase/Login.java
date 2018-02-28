@@ -1,7 +1,6 @@
 package com.zxjdev.smile.domain.authorization.usecase;
 
 import com.zxjdev.smile.domain.authorization.AuthorizationRepository;
-import com.zxjdev.smile.domain.common.SchedulerFactory;
 import com.zxjdev.smile.domain.common.base.UseCase;
 
 import javax.inject.Inject;
@@ -13,8 +12,7 @@ public class Login extends UseCase<Login.RequestParams, Void> {
   private AuthorizationRepository authorizationRepository;
 
   @Inject
-  public Login(SchedulerFactory schedulerFactory, AuthorizationRepository authorizationRepository) {
-    super(schedulerFactory);
+  public Login(AuthorizationRepository authorizationRepository) {
     this.authorizationRepository = authorizationRepository;
   }
 

@@ -1,7 +1,6 @@
 package com.zxjdev.smile.presentation.common.di.module;
 
 import com.zxjdev.smile.data.user.di.UserDataModule;
-import com.zxjdev.smile.domain.common.SchedulerFactory;
 import com.zxjdev.smile.domain.user.UserRepository;
 import com.zxjdev.smile.domain.user.usecase.GetCurrentUser;
 import com.zxjdev.smile.domain.user.usecase.UploadAvatar;
@@ -13,12 +12,12 @@ import dagger.Provides;
 public class UserDomainModule {
 
   @Provides
-  GetCurrentUser provideGetCurrentUser(SchedulerFactory schedulerFactory, UserRepository userRepository) {
-    return new GetCurrentUser(schedulerFactory, userRepository);
+  GetCurrentUser provideGetCurrentUser(UserRepository userRepository) {
+    return new GetCurrentUser(userRepository);
   }
 
   @Provides
-  UploadAvatar provideUploadAvatar(SchedulerFactory schedulerFactory, UserRepository userRepository) {
-    return new UploadAvatar(schedulerFactory, userRepository);
+  UploadAvatar provideUploadAvatar(UserRepository userRepository) {
+    return new UploadAvatar(userRepository);
   }
 }

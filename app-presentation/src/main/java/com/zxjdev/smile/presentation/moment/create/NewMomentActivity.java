@@ -7,24 +7,19 @@ import android.view.MenuItem;
 import android.widget.EditText;
 
 import com.zxjdev.smile.R;
-import com.zxjdev.smile.presentation.common.base.activity.ActivityModule;
-import com.zxjdev.smile.presentation.common.base.activity.DaggerActivity;
-import com.zxjdev.smile.presentation.moment.create.di.NewMomentActivityComponent;
-import com.zxjdev.smile.presentation.moment.create.di.NewMomentActivityModule;
+import com.zxjdev.smile.presentation.common.base.activity.BaseActivity;
 
 import javax.inject.Inject;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-public class NewMomentActivity extends DaggerActivity implements NewMomentContract.View {
+public class NewMomentActivity extends BaseActivity implements NewMomentContract.View {
 
   @BindView(R.id.view_toolbar) Toolbar toolbar;
   @BindView(R.id.et_content) EditText etContent;
 
-  @Inject NewMomentContract.Presenter presenter;
-
-  private NewMomentActivityComponent newMomentActivityComponent;
+  @Inject NewMomentPresenter presenter;
 
   @Override
   protected void onCreate(Bundle savedInstanceState) {
@@ -32,25 +27,14 @@ public class NewMomentActivity extends DaggerActivity implements NewMomentContra
     setContentView(R.layout.activity_new_moment);
     ButterKnife.bind(this);
     initUi();
-  }
 
-  @Override
-  protected void initDaggerComponent() {
-    newMomentActivityComponent = getUserComponent().getNewMomentActivityComponent(new ActivityModule(this),
-      new NewMomentActivityModule(this));
-    newMomentActivityComponent.inject(this);
-  }
-
-  @Override
-  protected void releaseDaggerComponent() {
-
+    presenter.takeView(this);
   }
 
   @Override
   protected void onDestroy() {
     super.onDestroy();
-    presenter.destroy();
-    newMomentActivityComponent = null;
+    presenter.dropView();
   }
 
   @Override

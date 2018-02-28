@@ -1,9 +1,6 @@
 package com.zxjdev.smile.domain.common.base;
 
-import com.zxjdev.smile.domain.common.SchedulerFactory;
-
 import io.reactivex.Observable;
-import io.reactivex.Scheduler;
 import io.reactivex.disposables.CompositeDisposable;
 import io.reactivex.observers.DisposableObserver;
 
@@ -16,34 +13,23 @@ import io.reactivex.observers.DisposableObserver;
 public abstract class UseCase<R extends UseCase.RequestParams, T> {
 
   private CompositeDisposable compositeDisposable;
-  private SchedulerFactory schedulerFactory;
 
-  public UseCase(SchedulerFactory schedulerFactory) {
-    this.schedulerFactory = schedulerFactory;
+  public UseCase() {
     this.compositeDisposable = new CompositeDisposable();
   }
 
   protected abstract Observable<T> buildUseCaseObservable(R params);
 
   public void execute(R params, DisposableObserver<T> observer) {
-    compositeDisposable.add(buildUseCaseObservable(params).subscribeOn(getSubscribeOnScheduler())
-      .observeOn(getObserveOnScheduler()).subscribeWith(observer));
+    compositeDisposable.add(buildUseCaseObservable(params).subscribeWith(observer));
   }
 
   public void execute(DisposableObserver<T> observer) {
     execute(null, observer);
   }
 
-  public void unSubscribe() {
+  public void unsubscribe() {
     compositeDisposable.dispose();
-  }
-
-  protected Scheduler getSubscribeOnScheduler() {
-    return schedulerFactory.getIoScheduler();
-  }
-
-  protected Scheduler getObserveOnScheduler() {
-    return schedulerFactory.getUiScheduler();
   }
 
   public interface RequestParams {

@@ -1,11 +1,11 @@
 package com.zxjdev.smile.presentation.common.base.fragment;
 
-import android.support.v4.app.Fragment;
-
 import com.zxjdev.smile.presentation.common.util.image.GlideImageLoader;
 import com.zxjdev.smile.presentation.common.util.image.ImageLoader;
 
-public class BaseFragment extends Fragment {
+import dagger.android.support.DaggerFragment;
+
+public class BaseFragment extends DaggerFragment {
 
   private ImageLoader imageLoader;
 

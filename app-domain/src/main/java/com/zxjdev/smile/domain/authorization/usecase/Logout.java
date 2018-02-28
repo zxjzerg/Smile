@@ -1,7 +1,6 @@
 package com.zxjdev.smile.domain.authorization.usecase;
 
 import com.zxjdev.smile.domain.authorization.AuthorizationRepository;
-import com.zxjdev.smile.domain.common.SchedulerFactory;
 import com.zxjdev.smile.domain.common.base.UseCase;
 
 import io.reactivex.Observable;
@@ -10,8 +9,7 @@ public class Logout extends UseCase<Logout.RequestParams, Void> {
 
   private AuthorizationRepository authorizationRepository;
 
-  public Logout(SchedulerFactory schedulerFactory, AuthorizationRepository authorizationRepository) {
-    super(schedulerFactory);
+  public Logout(AuthorizationRepository authorizationRepository) {
     this.authorizationRepository = authorizationRepository;
   }
 

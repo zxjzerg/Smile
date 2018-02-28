@@ -9,11 +9,9 @@ import android.view.ViewGroup;
 import android.widget.Button;
 
 import com.zxjdev.smile.R;
-import com.zxjdev.smile.presentation.common.base.fragment.DaggerFragment;
-import com.zxjdev.smile.presentation.infrastucture.main.MainActivity;
+import com.zxjdev.smile.presentation.common.SmileApplication;
+import com.zxjdev.smile.presentation.common.base.fragment.BaseFragment;
 import com.zxjdev.smile.presentation.infrastucture.splash.SplashActivity;
-import com.zxjdev.smile.presentation.user.settings.di.SettingsFragmentComponent;
-import com.zxjdev.smile.presentation.user.settings.di.SettingsFragmentModule;
 
 import javax.inject.Inject;
 
@@ -21,15 +19,13 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
-public class SettingsFragment extends DaggerFragment implements SettingsContract.View {
+public class SettingsFragment extends BaseFragment implements SettingsContract.View {
 
   public static final String TAG = SettingsFragment.class.getSimpleName();
 
   @BindView(R.id.btn_logout) Button btnLogout;
 
-  @Inject SettingsContract.Presenter settingsPresenter;
-
-  private SettingsFragmentComponent settingsFragmentComponent;
+  @Inject SettingsPresenter settingsPresenter;
 
   public SettingsFragment() {
     setRetainInstance(true);
@@ -40,32 +36,19 @@ public class SettingsFragment extends DaggerFragment implements SettingsContract
     super.onCreate(savedInstanceState);
   }
 
-  @Override
-  protected void initDaggerComponent() {
-    if (getActivity() instanceof MainActivity) {
-      settingsFragmentComponent = ((MainActivity) getActivity()).getComponent()
-        .getSettingsFragmentComponent(new SettingsFragmentModule(this));
-      settingsFragmentComponent.inject(this);
-    }
-  }
-
-  @Override
-  protected void releaseDaggerComponent() {
-    settingsFragmentComponent = null;
-  }
-
   @Nullable
   @Override
   public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
     View view = inflater.inflate(R.layout.fragment_settings, container, false);
     ButterKnife.bind(this, view);
+    settingsPresenter.takeView(this);
     return view;
   }
 
   @Override
   public void onDestroy() {
     super.onDestroy();
-    settingsPresenter.onDestroy();
+    settingsPresenter.dropView();
   }
 
   @OnClick(R.id.btn_logout)
@@ -75,8 +58,7 @@ public class SettingsFragment extends DaggerFragment implements SettingsContract
 
   @Override
   public void onLogoutSuccess() {
-    releaseDaggerComponent();
-    getDaggerApplication().releaseUserComponent();
+    ((SmileApplication) getActivity().getApplication()).releaseUserComponent();
 
     Intent intent = new Intent(getActivity(), SplashActivity.class);
     intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
