@@ -4,7 +4,6 @@ import android.app.Application;
 
 import com.zxjdev.smile.presentation.common.di.component.ApplicationComponent;
 import com.zxjdev.smile.presentation.common.di.component.DaggerApplicationComponent;
-import com.zxjdev.smile.presentation.common.di.module.ApplicationModule;
 
 public class DaggerApplication extends Application {
 
@@ -17,7 +16,7 @@ public class DaggerApplication extends Application {
   }
 
   private void initInjector() {
-    applicationComponent = DaggerApplicationComponent.builder().applicationModule(new ApplicationModule(this)).build();
+    applicationComponent = DaggerApplicationComponent.builder().application(this).build();
   }
 
   public ApplicationComponent getApplicationComponent() {
