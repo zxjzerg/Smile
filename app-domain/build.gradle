@@ -6,6 +6,6 @@ sourceCompatibility = 1.7
 targetCompatibility = 1.7
 
 dependencies {
-    compile rootProject.ext.javax_inject
-    compile rootProject.ext.rxjava2
+    implementation rootProject.ext.javax_inject
+    implementation rootProject.ext.rxjava2
 }

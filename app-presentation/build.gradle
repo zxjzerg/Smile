@@ -80,48 +80,52 @@ static def getGitRevParseInfo(what) {
 }
 
 dependencies {
-    compile project(':app-domain')
-    compile project(':app-data')
+    implementation project(':app-domain')
+    implementation project(':app-data')
 
-    compile fileTree(dir: 'libs', include: ['*.jar'])
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
 
-    compile rootProject.ext.android_support_v7
-    compile rootProject.ext.android_support_design
+    implementation rootProject.ext.android_support_v7
+    implementation rootProject.ext.android_support_design
 
-    compile rootProject.ext.rxjava2
-    compile rootProject.ext.rxandroid2
+    implementation rootProject.ext.rxjava2
+    implementation rootProject.ext.rxandroid2
 
-    compile rootProject.ext.dagger
-    compile rootProject.ext.dagger_android
-    compile rootProject.ext.dagger_android_support
+    implementation rootProject.ext.dagger
+    implementation rootProject.ext.dagger_android
+    implementation rootProject.ext.dagger_android_support
     kapt rootProject.ext.dagger_processor
     kapt rootProject.ext.dagger_android_processor
 
-    compile rootProject.ext.butterknife
+    implementation rootProject.ext.butterknife
     kapt rootProject.ext.butterknife_compiler
 
-    compile rootProject.ext.leancloud_basic
+    implementation rootProject.ext.leancloud_basic
 
-    compile rootProject.ext.timber
+    implementation rootProject.ext.timber
 
-    compile rootProject.ext.circle_image
+    implementation rootProject.ext.circle_image
 
-    debugCompile rootProject.ext.leak_canary_debug
-    releaseCompile leak_canary_release
-    testCompile leak_canary_release
+    debugImplementation rootProject.ext.leak_canary_debug
+    releaseImplementation leak_canary_release
+    testImplementation leak_canary_release
 
-    compile rootProject.ext.stetho
+    implementation rootProject.ext.stetho
 
-    testCompile rootProject.ext.junit
+    testImplementation rootProject.ext.junit
 
-    compile rootProject.ext.glide
-    compile rootProject.ext.glide_transformations
+    implementation rootProject.ext.glide
+    implementation rootProject.ext.glide_transformations
 
-    compile rootProject.ext.android_support_constaint
+    implementation rootProject.ext.android_support_constaint
 
-    compile rootProject.ext.android_support_cardview
+    implementation rootProject.ext.android_support_cardview
 
-    compile rootProject.ext.android_support_percent
+    implementation rootProject.ext.android_support_percent
 
-    compile rootProject.ext.image_crop
+    implementation rootProject.ext.image_crop
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
+}
+repositories {
+    mavenCentral()
 }

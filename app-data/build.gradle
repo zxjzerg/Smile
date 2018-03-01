@@ -29,22 +29,22 @@ android {
 }
 
 dependencies {
-    compile project(':app-domain')
+    implementation project(':app-domain')
 
-    compile fileTree(dir: 'libs', include: ['*.jar'])
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
 
-    compile rootProject.ext.android_support_v7
-    compile rootProject.ext.leancloud_basic
-    compile rootProject.ext.rxjava2
-    compile rootProject.ext.rxandroid2
-    compile rootProject.ext.dagger
+    implementation rootProject.ext.android_support_v7
+    implementation rootProject.ext.leancloud_basic
+    implementation rootProject.ext.rxjava2
+    implementation rootProject.ext.rxandroid2
+    implementation rootProject.ext.dagger
     kapt rootProject.ext.dagger_processor
 
-    testCompile rootProject.ext.junit
-    testCompile rootProject.ext.mockito
-    androidTestCompile rootProject.ext.mockito_android
-    compile "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
-    compile "org.jetbrains.kotlin:kotlin-reflect:$kotlin_version"
+    testImplementation rootProject.ext.junit
+    testImplementation rootProject.ext.mockito
+    androidTestImplementation rootProject.ext.mockito_android
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
+    implementation "org.jetbrains.kotlin:kotlin-reflect:$kotlin_version"
 }
 repositories {
     mavenCentral()
