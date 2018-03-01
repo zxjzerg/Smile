@@ -38,30 +38,30 @@ class MomentListFragment : BaseFragment(), MomentListContract.View {
 
     override fun onViewCreated(view: View?, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        presenter!!.takeView(this)
+        presenter.takeView(this)
         if (savedInstanceState == null) {
-            presenter!!.loadMoments()
+            presenter.loadMoments()
         } else {
-            presenter!!.loadSavedInstanceState(savedInstanceState)
+            presenter.loadSavedInstanceState(savedInstanceState)
         }
     }
 
     private fun initUi() {
-        rvMoments!!.layoutManager = LinearLayoutManager(activity)
+        rvMoments.layoutManager = LinearLayoutManager(activity)
         momentAdapter = MomentAdapter(super.imageLoader)
-        rvMoments!!.adapter = momentAdapter
+        rvMoments.adapter = momentAdapter
 
-        layoutSwipe!!.setColorSchemeResources(R.color.colorAccent)
-        layoutSwipe!!.setOnRefreshListener { presenter!!.refreshMoments() }
+        layoutSwipe.setColorSchemeResources(R.color.colorAccent)
+        layoutSwipe.setOnRefreshListener { presenter.refreshMoments() }
     }
 
     override fun onDestroy() {
         super.onDestroy()
-        presenter!!.dropView()
+        presenter.dropView()
     }
 
     override fun onSaveInstanceState(outState: Bundle?) {
-        presenter!!.saveInstanceState(outState)
+        presenter.saveInstanceState(outState)
         super.onSaveInstanceState(outState)
     }
 
@@ -76,7 +76,7 @@ class MomentListFragment : BaseFragment(), MomentListContract.View {
     }
 
     override fun dismissRefreshingView() {
-        layoutSwipe!!.isRefreshing = false
+        layoutSwipe.isRefreshing = false
     }
 
     companion object {

@@ -24,12 +24,12 @@ class NewMomentActivity : BaseActivity(), NewMomentContract.View {
         ButterKnife.bind(this)
         initUi()
 
-        presenter!!.takeView(this)
+        presenter.takeView(this)
     }
 
     override fun onDestroy() {
         super.onDestroy()
-        presenter!!.dropView()
+        presenter.dropView()
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
@@ -40,12 +40,12 @@ class NewMomentActivity : BaseActivity(), NewMomentContract.View {
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        when (item.itemId) {
+        return when (item.itemId) {
             R.id.action_send -> {
-                presenter!!.handleAddMoment(etContent!!.text.toString())
-                return true
+                presenter.handleAddMoment(etContent.text.toString())
+                true
             }
-            else -> return super.onOptionsItemSelected(item)
+            else -> super.onOptionsItemSelected(item)
         }
     }
 

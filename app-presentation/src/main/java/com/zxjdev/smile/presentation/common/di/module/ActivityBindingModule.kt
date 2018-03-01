@@ -16,22 +16,22 @@ import dagger.android.ContributesAndroidInjector
 abstract class ActivityBindingModule {
 
     @ActivityScope
-    @ContributesAndroidInjector(modules = arrayOf(ActivityModule::class))
+    @ContributesAndroidInjector(modules = [ActivityModule::class])
     internal abstract fun splashActivity(): SplashActivity
 
     @ActivityScope
-    @ContributesAndroidInjector(modules = arrayOf(ActivityModule::class))
+    @ContributesAndroidInjector(modules = [ActivityModule::class])
     internal abstract fun loginActivity(): LoginActivity
 
     @ActivityScope
-    @ContributesAndroidInjector(modules = arrayOf(ActivityModule::class))
+    @ContributesAndroidInjector(modules = [ActivityModule::class])
     internal abstract fun registerActivity(): RegisterActivity
 
     @ActivityScope
-    @ContributesAndroidInjector(modules = arrayOf(MainActivityModule::class))
+    @ContributesAndroidInjector(modules = [MainActivityModule::class])
     internal abstract fun mainActivity(): MainActivity
 
     @ActivityScope
-    @ContributesAndroidInjector(modules = arrayOf(ActivityModule::class))
+    @ContributesAndroidInjector(modules = [ActivityModule::class])
     internal abstract fun newMomentActivity(): NewMomentActivity
 }

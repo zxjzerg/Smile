@@ -19,11 +19,4 @@ abstract class BaseActivity : DaggerAppCompatActivity() {
     protected fun showToast(message: String) {
         Toast.makeText(context, message, Toast.LENGTH_SHORT).show()
     }
-
-    /*protected fun getImageLoader(): ImageLoader {
-        if (imageLoader == null) {
-            imageLoader = GlideImageLoader(this)
-        }
-        return imageLoader
-    }*/
 }

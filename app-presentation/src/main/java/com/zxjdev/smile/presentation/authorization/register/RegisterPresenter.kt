@@ -6,20 +6,17 @@ import com.zxjdev.smile.presentation.common.util.ui.ErrorMessagePrinter
 
 import javax.inject.Inject
 
-class RegisterPresenter @Inject
-internal constructor() : RegisterContract.Presenter {
+class RegisterPresenter @Inject internal constructor() : RegisterContract.Presenter {
 
-    private var view: RegisterContract.View? = null
-    @Inject
-    lateinit var register: Register
-    @Inject
-    lateinit var errorMessagePrinter: ErrorMessagePrinter
+    private lateinit var view: RegisterContract.View
+    @Inject lateinit var register: Register
+    @Inject lateinit var errorMessagePrinter: ErrorMessagePrinter
 
     override fun handleRegister(username: String, password: String) {
-        register!!.execute(Register.RequestParams(username, password), object : DefaultSubscriber<Void>(errorMessagePrinter) {
+        register.execute(Register.RequestParams(username, password), object : DefaultSubscriber<Void>(errorMessagePrinter) {
             override fun onComplete() {
-                view!!.initUserComponent()
-                view!!.navigateToMain()
+                view.initUserComponent()
+                view.navigateToMain()
             }
         })
     }
@@ -29,6 +26,5 @@ internal constructor() : RegisterContract.Presenter {
     }
 
     override fun dropView() {
-        this.view = null
     }
 }

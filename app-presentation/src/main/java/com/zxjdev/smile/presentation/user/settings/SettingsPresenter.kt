@@ -6,17 +6,16 @@ import com.zxjdev.smile.presentation.common.util.ui.ErrorMessagePrinter
 
 import javax.inject.Inject
 
-class SettingsPresenter @Inject
-internal constructor() : SettingsContract.Presenter {
+class SettingsPresenter @Inject internal constructor() : SettingsContract.Presenter {
 
-    private var view: SettingsContract.View? = null
+    private lateinit var view: SettingsContract.View
     @Inject lateinit var logout: Logout
     @Inject lateinit var errorMessagePrinter: ErrorMessagePrinter
 
     override fun handleLogout() {
         logout.execute(object : DefaultSubscriber<Void>(errorMessagePrinter) {
             override fun onComplete() {
-                view!!.onLogoutSuccess()
+                view.onLogoutSuccess()
             }
         })
     }
@@ -26,7 +25,6 @@ internal constructor() : SettingsContract.Presenter {
     }
 
     override fun dropView() {
-        this.view = null
         logout.unsubscribe()
     }
 }

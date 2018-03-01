@@ -10,16 +10,12 @@ import com.zxjdev.smile.presentation.moment.MomentModelMapper
 import java.util.*
 import javax.inject.Inject
 
-class MomentListPresenter @Inject
-internal constructor() : MomentListContract.Presenter {
+class MomentListPresenter @Inject internal constructor() : MomentListContract.Presenter {
 
-    private var view: MomentListContract.View? = null
-    @Inject
-    lateinit var getMomentList: GetMomentList
-    @Inject
-    lateinit var momentModelMapper: MomentModelMapper
-    @Inject
-    lateinit var errorMessagePrinter: ErrorMessagePrinter
+    private lateinit var view: MomentListContract.View
+    @Inject lateinit var getMomentList: GetMomentList
+    @Inject lateinit var momentModelMapper: MomentModelMapper
+    @Inject lateinit var errorMessagePrinter: ErrorMessagePrinter
 
     private var moments = ArrayList<MomentModel>()
 
@@ -28,18 +24,18 @@ internal constructor() : MomentListContract.Presenter {
             override fun onNext(data: List<Moment>) {
                 moments.clear()
                 moments.addAll(momentModelMapper.transform(data))
-                view!!.displayMomentList(moments)
+                view.displayMomentList(moments)
             }
         })
     }
 
     override fun refreshMoments() {
-        getMomentList!!.execute(object : DefaultSubscriber<List<Moment>>(errorMessagePrinter) {
+        getMomentList.execute(object : DefaultSubscriber<List<Moment>>(errorMessagePrinter) {
             override fun onNext(data: List<Moment>) {
                 moments.clear()
                 moments.addAll(momentModelMapper!!.transform(data))
-                view!!.displayMomentList(moments)
-                view!!.dismissRefreshingView()
+                view.displayMomentList(moments)
+                view.dismissRefreshingView()
             }
         })
     }
@@ -54,7 +50,7 @@ internal constructor() : MomentListContract.Presenter {
         val moments = savedInstanceState.getParcelableArrayList<MomentModel>(EXTRA_MOMENT_LIST)
         if (moments != null) {
             this.moments = moments
-            view!!.displayMomentList(moments)
+            view.displayMomentList(moments)
         }
     }
 
@@ -63,12 +59,11 @@ internal constructor() : MomentListContract.Presenter {
     }
 
     override fun dropView() {
-        this.view = null
-        getMomentList!!.unsubscribe()
+        getMomentList.unsubscribe()
     }
 
     companion object {
 
-        private val EXTRA_MOMENT_LIST = "extra_moment_list"
+        private const val EXTRA_MOMENT_LIST = "extra_moment_list"
     }
 }

@@ -32,17 +32,17 @@ class LoginActivity : BaseActivity(), LoginContract.View {
         ButterKnife.bind(this)
         initUi()
 
-        presenter!!.takeView(this)
+        presenter.takeView(this)
     }
 
     override fun onDestroy() {
-        presenter!!.dropView()
+        presenter.dropView()
         super.onDestroy()
     }
 
     @OnClick(R.id.btn_login)
     fun loginClick() {
-        presenter!!.handleLogin(etUsername!!.text.toString(), etPassword!!.text.toString())
+        presenter.handleLogin(etUsername.text.toString(), etPassword.text.toString())
     }
 
     override fun navigateToMain() {

@@ -51,10 +51,10 @@ class MainActivity : BaseActivity(), MainContract.View {
 
         if (savedInstanceState == null) {
             showFragment(R.id.flyt_content, MomentListFragment::class.java, MomentListFragment.TAG)
-            navigationView!!.setCheckedItem(R.id.navi_item_moments)
+            navigationView.setCheckedItem(R.id.navi_item_moments)
         }
 
-        presenter!!.takeView(this)
+        presenter.takeView(this)
     }
 
     override fun onPostCreate(savedInstanceState: Bundle?) {
@@ -63,7 +63,7 @@ class MainActivity : BaseActivity(), MainContract.View {
     }
 
     override fun onDestroy() {
-        presenter!!.dropView()
+        presenter.dropView()
         super.onDestroy()
     }
 
@@ -74,7 +74,7 @@ class MainActivity : BaseActivity(), MainContract.View {
             val uri = data.data
             cropImage(uri)
         } else if (requestCode == Crop.REQUEST_CROP && resultCode == Activity.RESULT_OK) {
-            presenter!!.handleChangeAvatar(outputUri!!.path)
+            presenter.handleChangeAvatar(outputUri!!.path)
         }
     }
 
@@ -97,9 +97,9 @@ class MainActivity : BaseActivity(), MainContract.View {
     }
 
     override fun displayUser(user: UserModel) {
-        if (navigationView!!.headerCount <= 0) return
+        if (navigationView.headerCount <= 0) return
 
-        val headerView = navigationView!!.getHeaderView(0)
+        val headerView = navigationView.getHeaderView(0)
         val tvUsername = headerView.findViewById(R.id.tv_name) as TextView
         val ivAvatar = headerView.findViewById(R.id.iv_avatar) as ImageView
 
@@ -109,7 +109,7 @@ class MainActivity : BaseActivity(), MainContract.View {
         } else {
             imageLoader.loadCircleImage(user.avatar, ivAvatar)
         }
-        ivAvatar.setOnClickListener { v ->
+        ivAvatar.setOnClickListener {
             val intent = Intent()
             intent.type = "image/*"
             intent.action = Intent.ACTION_GET_CONTENT
@@ -121,7 +121,7 @@ class MainActivity : BaseActivity(), MainContract.View {
         drawerToggle = ActionBarDrawerToggle(this, dlytContainer, toolbar, R.string.open, R.string.close)
 
         // handle click event for showing the drawer
-        toolbar!!.setNavigationOnClickListener { v -> dlytContainer!!.openDrawer(Gravity.LEFT) }
+        toolbar.setNavigationOnClickListener { dlytContainer.openDrawer(Gravity.LEFT) }
 
         initNavigationView()
     }
@@ -130,16 +130,20 @@ class MainActivity : BaseActivity(), MainContract.View {
      * Initialize the navigation view in the left drawer.
      */
     private fun initNavigationView() {
-        navigationView!!.setNavigationItemSelectedListener { item ->
+        navigationView.setNavigationItemSelectedListener { item ->
             when (item.itemId) {
-                R.id.navi_item_moments -> showFragment(R.id.flyt_content, MomentListFragment::class.java, MomentListFragment.TAG)
-                R.id.navi_item_settings -> showFragment(R.id.flyt_content, SettingsFragment::class.java, SettingsFragment.TAG)
+                R.id.navi_item_moments -> showFragment(R.id.flyt_content,
+                        MomentListFragment::class.java,
+                        MomentListFragment.TAG)
+                R.id.navi_item_settings -> showFragment(R.id.flyt_content,
+                        SettingsFragment::class.java,
+                        SettingsFragment.TAG)
             }
-            dlytContainer!!.closeDrawers()
+            dlytContainer.closeDrawers()
             true
         }
-        if (navigationView!!.headerCount > 0) {
-            val headerView = navigationView!!.getHeaderView(0)
+        if (navigationView.headerCount > 0) {
+            val headerView = navigationView.getHeaderView(0)
             tvUsername = headerView.findViewById(R.id.tv_name) as TextView
             ivAvatar = headerView.findViewById(R.id.iv_avatar) as ImageView
         }
@@ -184,8 +188,8 @@ class MainActivity : BaseActivity(), MainContract.View {
 
     companion object {
 
-        private val TEMP_AVATAR_FILE_NAME = "avatar.jpg"
+        private const val TEMP_AVATAR_FILE_NAME = "avatar.jpg"
 
-        private val PICK_IMAGE_REQUEST = 1
+        private const val PICK_IMAGE_REQUEST = 1
     }
 }

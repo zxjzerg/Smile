@@ -2,17 +2,13 @@ package com.zxjdev.smile.data.moment.datasource
 
 import com.avos.avoscloud.AVException
 import com.avos.avoscloud.AVObject
-import com.avos.avoscloud.AVQuery
 import com.zxjdev.smile.data.BuildConfig
 import com.zxjdev.smile.data.moment.entity.MomentEntity
 import com.zxjdev.smile.data.user.entity.UserEntity
-
+import io.reactivex.Observable
 import javax.inject.Inject
 
-import io.reactivex.Observable
-
-class MomentCloudServiceLeanCloudImpl @Inject
-constructor(private val currentUser: UserEntity) : MomentCloudService {
+class MomentCloudServiceLeanCloudImpl @Inject constructor(private val currentUser: UserEntity) : MomentCloudService {
 
     override val momentList: Observable<List<MomentEntity>>
         get() = Observable.create { emitter ->

@@ -8,7 +8,7 @@ import com.zxjdev.smile.domain.user.usecase.UploadAvatar
 import dagger.Module
 import dagger.Provides
 
-@Module(includes = arrayOf(UserDataModule::class))
+@Module(includes = [UserDataModule::class])
 class UserDomainModule {
 
     @Provides

@@ -10,7 +10,7 @@ import com.zxjdev.smile.domain.authorization.usecase.Register
 import dagger.Module
 import dagger.Provides
 
-@Module(includes = arrayOf(AuthorizationDataModule::class))
+@Module(includes = [AuthorizationDataModule::class])
 class AuthorizationDomainModule {
 
     @Provides

@@ -10,7 +10,12 @@ import dagger.android.support.AndroidSupportInjectionModule
 import javax.inject.Singleton
 
 @Singleton
-@Component(modules = arrayOf(AndroidSupportInjectionModule::class, ApplicationModule::class, AuthorizationDomainModule::class, MomentDomainModule::class, UserDomainModule::class, ActivityBindingModule::class))
+@Component(modules = arrayOf(AndroidSupportInjectionModule::class,
+        ApplicationModule::class,
+        AuthorizationDomainModule::class,
+        MomentDomainModule::class,
+        UserDomainModule::class,
+        ActivityBindingModule::class))
 interface ApplicationComponent : AndroidInjector<SmileApplication> {
 
     @Component.Builder

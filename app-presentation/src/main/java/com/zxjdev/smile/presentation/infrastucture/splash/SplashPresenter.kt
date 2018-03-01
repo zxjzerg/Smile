@@ -8,27 +8,24 @@ import com.zxjdev.smile.presentation.common.util.ui.ErrorMessagePrinter
 
 import javax.inject.Inject
 
-class SplashPresenter @Inject
-internal constructor() : SplashContract.Presenter {
+class SplashPresenter @Inject internal constructor() : SplashContract.Presenter {
 
-    @Inject
-    lateinit var autoLogin: AutoLogin
-    private var view: SplashContract.View? = null
-    @Inject
-    lateinit var errorMessagePrinter: ErrorMessagePrinter
+    @Inject lateinit var autoLogin: AutoLogin
+    private lateinit var view: SplashContract.View
+    @Inject lateinit var errorMessagePrinter: ErrorMessagePrinter
     private val handler: Handler = Handler()
 
-    private val mNavigateToMainTask = Runnable { view!!.navigateToMain() }
+    private val mNavigateToMainTask = Runnable { view.navigateToMain() }
 
     override fun handleAutoLogin() {
-        autoLogin!!.execute(object : DefaultSubscriber<Boolean>(errorMessagePrinter) {
+        autoLogin.execute(object : DefaultSubscriber<Boolean>(errorMessagePrinter) {
             override fun onNext(data: Boolean) {
                 if (data) {
                     // 自动登录
                     handler.postDelayed(mNavigateToMainTask, 500)
                 } else {
                     // 显示登录和注册按钮
-                    view!!.showButtons()
+                    view.showButtons()
                 }
             }
         })
@@ -39,8 +36,7 @@ internal constructor() : SplashContract.Presenter {
     }
 
     override fun dropView() {
-        this.view = null
-        autoLogin!!.unsubscribe()
+        autoLogin.unsubscribe()
         handler.removeCallbacks(mNavigateToMainTask)
     }
 }

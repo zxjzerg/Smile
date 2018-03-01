@@ -28,17 +28,17 @@ class RegisterActivity : BaseActivity(), RegisterContract.View {
         ButterKnife.bind(this)
         initUi()
 
-        presenter!!.takeView(this)
+        presenter.takeView(this)
     }
 
     override fun onDestroy() {
-        presenter!!.dropView()
+        presenter.dropView()
         super.onDestroy()
     }
 
     @OnClick(R.id.btn_register)
     internal fun handleRegisterClick() {
-        presenter!!.handleRegister(etUsername!!.text.toString(), etPassword!!.text.toString())
+        presenter.handleRegister(etUsername.text.toString(), etPassword.text.toString())
     }
 
     override fun navigateToMain() {

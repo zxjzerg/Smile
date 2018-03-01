@@ -10,6 +10,8 @@ import io.reactivex.schedulers.Schedulers
 abstract class BaseDataRepository {
 
     protected fun <T> applyDefaultSchedulerStrategy(): ObservableTransformer<T, T> {
-        return ObservableTransformer { upstream -> upstream.subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread()) }
+        return ObservableTransformer { upstream ->
+            upstream.subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread())
+        }
     }
 }

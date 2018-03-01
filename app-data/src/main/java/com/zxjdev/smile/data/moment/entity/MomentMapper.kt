@@ -6,8 +6,7 @@ import com.zxjdev.smile.domain.moment.Moment
 
 import javax.inject.Inject
 
-class MomentMapper @Inject
-constructor(private val userMapper: UserMapper) : BaseMapper<Moment, MomentEntity>() {
+class MomentMapper @Inject constructor(private val userMapper: UserMapper) : BaseMapper<Moment, MomentEntity>() {
 
     override fun transform(data: MomentEntity): Moment {
         val moment = Moment()

@@ -6,14 +6,13 @@ import com.zxjdev.smile.presentation.user.UserModelMapper
 
 import javax.inject.Inject
 
-class MomentModelMapper @Inject
-constructor() : BaseMapper<MomentModel, Moment>() {
+class MomentModelMapper @Inject constructor() : BaseMapper<MomentModel, Moment>() {
 
     @Inject lateinit var userModelMapper: UserModelMapper
 
     override fun transform(data: Moment): MomentModel {
         val model = MomentModel()
-        model.owner = userModelMapper!!.transform(data.owner)
+        model.owner = userModelMapper.transform(data.owner)
         model.content = data.content
         model.createAt = data.createAt
         return model

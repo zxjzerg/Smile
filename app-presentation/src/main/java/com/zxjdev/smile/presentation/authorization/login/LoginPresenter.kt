@@ -6,8 +6,7 @@ import com.zxjdev.smile.presentation.common.util.ui.ErrorMessagePrinter
 import timber.log.Timber
 import javax.inject.Inject
 
-class LoginPresenter @Inject
-internal constructor() : LoginContract.Presenter {
+class LoginPresenter @Inject internal constructor() : LoginContract.Presenter {
 
     private lateinit var view: LoginContract.View
     @Inject internal lateinit var login: Login

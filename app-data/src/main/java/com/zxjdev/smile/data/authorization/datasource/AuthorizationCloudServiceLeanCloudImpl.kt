@@ -6,8 +6,7 @@ import com.zxjdev.smile.data.user.entity.UserEntity
 import io.reactivex.Observable
 import javax.inject.Inject
 
-class AuthorizationCloudServiceLeanCloudImpl @Inject
-constructor() : AuthorizationCloudService {
+class AuthorizationCloudServiceLeanCloudImpl @Inject constructor() : AuthorizationCloudService {
 
     override fun register(username: String, password: String): Observable<Void> {
         return Observable.create { emitter ->

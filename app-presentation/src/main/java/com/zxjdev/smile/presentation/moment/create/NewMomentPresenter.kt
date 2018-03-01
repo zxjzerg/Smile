@@ -6,20 +6,17 @@ import com.zxjdev.smile.presentation.common.util.ui.ErrorMessagePrinter
 
 import javax.inject.Inject
 
-class NewMomentPresenter @Inject
-internal constructor() : NewMomentContract.Presenter {
+class NewMomentPresenter @Inject internal constructor() : NewMomentContract.Presenter {
 
-    private var view: NewMomentContract.View? = null
-    @Inject
-    lateinit var addMoment: AddMoment
-    @Inject
-    lateinit var errorMessagePrinter: ErrorMessagePrinter
+    private lateinit var view: NewMomentContract.View
+    @Inject lateinit var addMoment: AddMoment
+    @Inject lateinit var errorMessagePrinter: ErrorMessagePrinter
 
     override fun handleAddMoment(content: String) {
         addMoment.execute(AddMoment.RequestParams(content), object : DefaultSubscriber<Void>(errorMessagePrinter) {
             override fun onComplete() {
                 super.onComplete()
-                view!!.close()
+                view.close()
             }
         })
     }
@@ -29,7 +26,6 @@ internal constructor() : NewMomentContract.Presenter {
     }
 
     override fun dropView() {
-        this.view = null
         addMoment.unsubscribe()
     }
 }

@@ -5,8 +5,7 @@ import com.zxjdev.smile.domain.user.User
 
 import javax.inject.Inject
 
-class UserMapper @Inject
-constructor() : BaseMapper<User, UserEntity>() {
+class UserMapper @Inject constructor() : BaseMapper<User, UserEntity>() {
 
     override fun transform(userEntity: UserEntity): User {
         val user = User()
