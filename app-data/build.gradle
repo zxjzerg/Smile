@@ -44,6 +44,7 @@ dependencies {
     testCompile rootProject.ext.mockito
     androidTestCompile rootProject.ext.mockito_android
     compile "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
+    compile "org.jetbrains.kotlin:kotlin-reflect:$kotlin_version"
 }
 repositories {
     mavenCentral()

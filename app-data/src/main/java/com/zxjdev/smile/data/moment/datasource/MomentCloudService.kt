@@ -1,7 +1,6 @@
 package com.zxjdev.smile.data.moment.datasource
 
 import com.zxjdev.smile.data.moment.entity.MomentEntity
-
 import io.reactivex.Observable
 
 interface MomentCloudService {

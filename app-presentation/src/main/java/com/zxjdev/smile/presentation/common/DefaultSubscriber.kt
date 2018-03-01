@@ -28,10 +28,10 @@ open class DefaultSubscriber<T>(errorMessagePrinter: ErrorMessagePrinter) : Disp
     }
 
     private fun processError(e: Throwable) {
+        Log.e("Subscriber", "", e)
         if (e is AVException) {
             processNetworkError(e)
         } else {
-            Log.e("Subscriber", "", e)
             printErrorMessage(e.message)
         }
     }

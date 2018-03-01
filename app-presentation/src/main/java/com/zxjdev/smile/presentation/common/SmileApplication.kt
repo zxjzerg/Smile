@@ -9,7 +9,6 @@ import com.zxjdev.smile.BuildConfig
 import com.zxjdev.smile.data.moment.entity.MomentEntity
 import com.zxjdev.smile.data.user.entity.UserEntity
 import com.zxjdev.smile.presentation.common.di.component.DaggerApplicationComponent
-
 import dagger.android.AndroidInjector
 import dagger.android.DaggerApplication
 import timber.log.Timber
