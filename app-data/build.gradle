@@ -1,4 +1,6 @@
 apply plugin: 'com.android.library'
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-kapt'
 
 android {
     compileSdkVersion rootProject.ext.androidCompileSdkVersion
@@ -36,9 +38,14 @@ dependencies {
     compile rootProject.ext.rxjava2
     compile rootProject.ext.rxandroid2
     compile rootProject.ext.dagger
-    annotationProcessor rootProject.ext.dagger_processor
+    kapt rootProject.ext.dagger_processor
 
     testCompile rootProject.ext.junit
     testCompile rootProject.ext.mockito
     androidTestCompile rootProject.ext.mockito_android
+    compile "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
+    compile "org.jetbrains.kotlin:kotlin-reflect:$kotlin_version"
+}
+repositories {
+    mavenCentral()
 }
