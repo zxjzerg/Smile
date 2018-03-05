@@ -25,7 +25,7 @@ class MomentListFragment : BaseFragment(), MomentListContract.View {
     @BindView(R.id.fbtn_add_new_moment) internal lateinit var btnNewMoment: FloatingActionButton
     @BindView(R.id.layout_swipe) internal lateinit var layoutSwipe: SwipeRefreshLayout
 
-    private var momentAdapter: MomentAdapter? = null
+    private lateinit var momentAdapter: MomentAdapter
     @Inject internal lateinit var presenter: MomentListPresenter
 
     override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?, savedInstanceState: Bundle?): View? {
@@ -39,11 +39,6 @@ class MomentListFragment : BaseFragment(), MomentListContract.View {
     override fun onViewCreated(view: View?, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         presenter.takeView(this)
-        if (savedInstanceState == null) {
-            presenter.loadMoments()
-        } else {
-            presenter.loadSavedInstanceState(savedInstanceState)
-        }
     }
 
     private fun initUi() {
@@ -60,19 +55,14 @@ class MomentListFragment : BaseFragment(), MomentListContract.View {
         presenter.dropView()
     }
 
-    override fun onSaveInstanceState(outState: Bundle?) {
-        presenter.saveInstanceState(outState)
-        super.onSaveInstanceState(outState)
-    }
-
     @OnClick(R.id.fbtn_add_new_moment)
     fun addNewMomentClick() {
         val addMoment = Intent(activity, NewMomentActivity::class.java)
         startActivity(addMoment)
     }
 
-    override fun displayMomentList(momentModels: List<MomentModel>) {
-        momentAdapter!!.setMoments(momentModels)
+    override fun displayMomentList(momentModels: List<MomentModel>?) {
+        if (momentModels != null) momentAdapter.setMoments(momentModels)
     }
 
     override fun dismissRefreshingView() {
