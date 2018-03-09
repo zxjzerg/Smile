@@ -42,6 +42,7 @@ class SmileApplication : DaggerApplication() {
 
         // 初始化LeanCloud
         AVOSCloud.initialize(this, BuildConfig.LEANCOULD_APP_ID, BuildConfig.LEANCOULD_APP_KEY)
+        AVOSCloud.setDebugLogEnabled(BuildConfig.DEBUG)
     }
 
     private fun initTimber() {
