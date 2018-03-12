@@ -40,8 +40,8 @@ project.ext {
     androidVersionName = "1.0"
     androidBuildToolsVersion = "27.0.3"
     androidMinSdkVersion = 16
-    androidTargetSdkVersion = 23
-    androidCompileSdkVersion = 25
+    androidTargetSdkVersion = 26
+    androidCompileSdkVersion = 26
 
     // Build Configurations
     leancloud_app_key = '"HQu208J1eI4ucxKRMuaLnXmb"'
