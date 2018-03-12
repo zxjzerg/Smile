@@ -2,34 +2,20 @@ package com.zxjdev.smile.presentation.authorization.login
 
 import android.content.Intent
 import android.os.Bundle
-import android.support.v7.widget.Toolbar
-import android.widget.EditText
-import butterknife.BindView
-import butterknife.ButterKnife
-import butterknife.OnClick
 import com.zxjdev.smile.R
 import com.zxjdev.smile.presentation.common.SmileApplication
 import com.zxjdev.smile.presentation.common.base.activity.BaseActivity
 import com.zxjdev.smile.presentation.infrastucture.main.MainActivity
+import kotlinx.android.synthetic.main.activity_login.*
 import javax.inject.Inject
 
-/**
- * 登录界面
- * Created by Andrew on 7/5/16.
- */
 class LoginActivity : BaseActivity(), LoginContract.View {
-
-    @BindView(R.id.et_username) internal lateinit var etUsername: EditText
-    @BindView(R.id.et_password) internal lateinit var etPassword: EditText
-    @BindView(R.id.toolbar) internal lateinit var toolbar: Toolbar
 
     @Inject internal lateinit var presenter: LoginPresenter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
         setContentView(R.layout.activity_login)
-        ButterKnife.bind(this)
         initUi()
 
         presenter.takeView(this)
@@ -38,11 +24,6 @@ class LoginActivity : BaseActivity(), LoginContract.View {
     override fun onDestroy() {
         presenter.dropView()
         super.onDestroy()
-    }
-
-    @OnClick(R.id.btn_login)
-    fun loginClick() {
-        presenter.handleLogin(etUsername.text.toString(), etPassword.text.toString())
     }
 
     override fun navigateToMain() {
@@ -57,7 +38,9 @@ class LoginActivity : BaseActivity(), LoginContract.View {
 
     private fun initUi() {
         setSupportActionBar(toolbar)
-        supportActionBar!!.setDisplayHomeAsUpEnabled(true)
-        supportActionBar!!.title = null
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
+        supportActionBar?.title = null
+
+        btn_login.setOnClickListener { presenter.handleLogin(et_username.text.toString(), et_password.text.toString()) }
     }
 }

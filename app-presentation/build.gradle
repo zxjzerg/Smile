@@ -1,6 +1,7 @@
 apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-kapt'
+apply plugin: 'kotlin-android-extensions'
 
 android {
     compileSdkVersion rootProject.ext.androidCompileSdkVersion
@@ -55,6 +56,10 @@ android {
     }
 }
 
+androidExtensions {
+    experimental = true
+}
+
 def renameAPK(variant) {
     variant.outputs.all { output ->
 
@@ -96,9 +101,6 @@ dependencies {
     implementation rootProject.ext.dagger_android_support
     kapt rootProject.ext.dagger_processor
     kapt rootProject.ext.dagger_android_processor
-
-    implementation rootProject.ext.butterknife
-    kapt rootProject.ext.butterknife_compiler
 
     implementation rootProject.ext.leancloud_basic
 

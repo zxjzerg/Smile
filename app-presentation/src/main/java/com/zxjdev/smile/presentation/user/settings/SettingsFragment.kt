@@ -5,19 +5,14 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
-import butterknife.BindView
-import butterknife.ButterKnife
-import butterknife.OnClick
 import com.zxjdev.smile.R
 import com.zxjdev.smile.presentation.common.SmileApplication
 import com.zxjdev.smile.presentation.common.base.fragment.BaseFragment
 import com.zxjdev.smile.presentation.infrastucture.splash.SplashActivity
+import kotlinx.android.synthetic.main.fragment_settings.*
 import javax.inject.Inject
 
 class SettingsFragment : BaseFragment(), SettingsContract.View {
-
-    @BindView(R.id.btn_logout) internal lateinit var btnLogout: Button
 
     @Inject internal lateinit var settingsPresenter: SettingsPresenter
 
@@ -26,20 +21,18 @@ class SettingsFragment : BaseFragment(), SettingsContract.View {
     }
 
     override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        val view = inflater!!.inflate(R.layout.fragment_settings, container, false)
-        ButterKnife.bind(this, view)
+        return inflater!!.inflate(R.layout.fragment_settings, container, false)
+    }
+
+    override fun onViewCreated(view: View?, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        btn_logout.setOnClickListener({ settingsPresenter.handleLogout() })
         settingsPresenter.takeView(this)
-        return view
     }
 
     override fun onDestroy() {
         super.onDestroy()
         settingsPresenter.dropView()
-    }
-
-    @OnClick(R.id.btn_logout)
-    fun logoutClick() {
-        settingsPresenter.handleLogout()
     }
 
     override fun onLogoutSuccess() {

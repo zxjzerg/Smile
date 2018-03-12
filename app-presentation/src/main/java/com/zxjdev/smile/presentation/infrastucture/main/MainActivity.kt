@@ -6,32 +6,25 @@ import android.net.Uri
 import android.os.Bundle
 import android.provider.MediaStore
 import android.support.annotation.IdRes
-import android.support.design.widget.NavigationView
 import android.support.v4.app.Fragment
-import android.support.v4.widget.DrawerLayout
 import android.support.v7.app.ActionBarDrawerToggle
-import android.support.v7.widget.Toolbar
 import android.text.TextUtils
 import android.view.Gravity
 import android.widget.ImageView
 import android.widget.TextView
-import butterknife.BindView
-import butterknife.ButterKnife
 import com.soundcloud.android.crop.Crop
 import com.zxjdev.smile.R
 import com.zxjdev.smile.presentation.common.base.activity.BaseActivity
 import com.zxjdev.smile.presentation.moment.list.MomentListFragment
 import com.zxjdev.smile.presentation.user.UserModel
 import com.zxjdev.smile.presentation.user.settings.SettingsFragment
+import kotlinx.android.synthetic.main.activity_main.*
 import java.io.File
 import java.util.*
 import javax.inject.Inject
 
 class MainActivity : BaseActivity(), MainContract.View {
 
-    @BindView(R.id.dlyt_container) internal lateinit var dlytContainer: DrawerLayout
-    @BindView(R.id.view_toolbar) internal lateinit var toolbar: Toolbar
-    @BindView(R.id.view_navigation) internal lateinit var navigationView: NavigationView
     private var drawerToggle: ActionBarDrawerToggle? = null
     private var tvUsername: TextView? = null
     private var ivAvatar: ImageView? = null
@@ -44,14 +37,13 @@ class MainActivity : BaseActivity(), MainContract.View {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        ButterKnife.bind(this)
         initUi()
         fragmentTags.add(MomentListFragment.TAG)
         fragmentTags.add(SettingsFragment.TAG)
 
         if (savedInstanceState == null) {
             showFragment(R.id.flyt_content, MomentListFragment::class.java, MomentListFragment.TAG)
-            navigationView.setCheckedItem(R.id.navi_item_moments)
+            view_navigation.setCheckedItem(R.id.navi_item_moments)
         }
 
         presenter.takeView(this)
@@ -97,9 +89,9 @@ class MainActivity : BaseActivity(), MainContract.View {
     }
 
     override fun displayUser(user: UserModel) {
-        if (navigationView.headerCount <= 0) return
+        if (view_navigation.headerCount <= 0) return
 
-        val headerView = navigationView.getHeaderView(0)
+        val headerView = view_navigation.getHeaderView(0)
         val tvUsername = headerView.findViewById(R.id.tv_name) as TextView
         val ivAvatar = headerView.findViewById(R.id.iv_avatar) as ImageView
 
@@ -118,10 +110,10 @@ class MainActivity : BaseActivity(), MainContract.View {
     }
 
     private fun initUi() {
-        drawerToggle = ActionBarDrawerToggle(this, dlytContainer, toolbar, R.string.open, R.string.close)
+        drawerToggle = ActionBarDrawerToggle(this, dlyt_container, view_toolbar, R.string.open, R.string.close)
 
         // handle click event for showing the drawer
-        toolbar.setNavigationOnClickListener { dlytContainer.openDrawer(Gravity.LEFT) }
+        view_toolbar.setNavigationOnClickListener { dlyt_container.openDrawer(Gravity.LEFT) }
 
         initNavigationView()
     }
@@ -130,7 +122,7 @@ class MainActivity : BaseActivity(), MainContract.View {
      * Initialize the navigation view in the left drawer.
      */
     private fun initNavigationView() {
-        navigationView.setNavigationItemSelectedListener { item ->
+        view_navigation.setNavigationItemSelectedListener { item ->
             when (item.itemId) {
                 R.id.navi_item_moments -> showFragment(R.id.flyt_content,
                         MomentListFragment::class.java,
@@ -139,11 +131,11 @@ class MainActivity : BaseActivity(), MainContract.View {
                         SettingsFragment::class.java,
                         SettingsFragment.TAG)
             }
-            dlytContainer.closeDrawers()
+            dlyt_container.closeDrawers()
             true
         }
-        if (navigationView.headerCount > 0) {
-            val headerView = navigationView.getHeaderView(0)
+        if (view_navigation.headerCount > 0) {
+            val headerView = view_navigation.getHeaderView(0)
             tvUsername = headerView.findViewById(R.id.tv_name) as TextView
             ivAvatar = headerView.findViewById(R.id.iv_avatar) as ImageView
         }
