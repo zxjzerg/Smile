@@ -6,8 +6,9 @@ import javax.inject.Inject
 
 class MomentCloudDataSource @Inject constructor(private val momentService: MomentCloudService) {
 
-    val momentList: Observable<List<MomentEntity>>
-        get() = momentService.momentList
+    fun getMomentList(): Observable<List<MomentEntity>> {
+        return momentService.getMomentList()
+    }
 
     fun addMoment(content: String): Observable<Void> {
         return momentService.addMoment(content)

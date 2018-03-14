@@ -16,7 +16,7 @@ class MomentDataRepository @Inject constructor(private val momentCloudDataSource
     }
 
     override fun queryMomentList(): Observable<List<Moment>> {
-        return momentCloudDataSource.momentList.map { momentEntities -> momentMapper.transform(momentEntities) }
+        return momentCloudDataSource.getMomentList().map { momentEntities -> momentMapper.transform(momentEntities) }
                 .compose(applyDefaultSchedulerStrategy())
     }
 

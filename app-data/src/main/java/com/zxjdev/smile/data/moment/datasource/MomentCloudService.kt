@@ -10,7 +10,7 @@ interface MomentCloudService {
      *
      * @return A list of moment
      */
-    val momentList: Observable<List<MomentEntity>>
+    fun getMomentList(): Observable<List<MomentEntity>>
 
     /**
      * Publish a moment

@@ -10,8 +10,8 @@ import javax.inject.Inject
 
 class MomentCloudServiceLeanCloudImpl @Inject constructor(private val currentUser: UserEntity) : MomentCloudService {
 
-    override val momentList: Observable<List<MomentEntity>>
-        get() = Observable.create { emitter ->
+    override fun getMomentList(): Observable<List<MomentEntity>> {
+        return Observable.create { emitter ->
             val query = AVObject.getQuery(MomentEntity::class.java)
             query.whereEqualTo("user", currentUser)
             query.include("user")
@@ -24,6 +24,7 @@ class MomentCloudServiceLeanCloudImpl @Inject constructor(private val currentUse
                 emitter.tryOnError(e)
             }
         }
+    }
 
     override fun addMoment(content: String): Observable<Void> {
         return Observable.create { emitter ->
