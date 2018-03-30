@@ -1,9 +1,9 @@
 package com.zxjdev.smile.presentation.moment.create
 
 import com.zxjdev.smile.domain.moment.usecase.AddMoment
-import com.zxjdev.smile.presentation.common.DefaultSubscriber
 import com.zxjdev.smile.presentation.common.util.ui.ErrorMessagePrinter
-
+import io.reactivex.disposables.CompositeDisposable
+import io.reactivex.observers.DisposableCompletableObserver
 import javax.inject.Inject
 
 class NewMomentPresenter @Inject internal constructor() : NewMomentContract.Presenter {
@@ -11,14 +11,18 @@ class NewMomentPresenter @Inject internal constructor() : NewMomentContract.Pres
     private lateinit var view: NewMomentContract.View
     @Inject lateinit var addMoment: AddMoment
     @Inject lateinit var errorMessagePrinter: ErrorMessagePrinter
+    private val compositeDisposable = CompositeDisposable()
 
     override fun handleAddMoment(content: String) {
-        addMoment.execute(AddMoment.RequestParams(content), object : DefaultSubscriber<Void>(errorMessagePrinter) {
+        compositeDisposable.add(addMoment.execute(AddMoment.RequestParams(content)).subscribeWith(object : DisposableCompletableObserver() {
             override fun onComplete() {
-                super.onComplete()
                 view.close()
             }
-        })
+
+            override fun onError(e: Throwable) {
+                errorMessagePrinter.print(e.message)
+            }
+        }))
     }
 
     override fun takeView(view: NewMomentContract.View) {
@@ -26,6 +30,6 @@ class NewMomentPresenter @Inject internal constructor() : NewMomentContract.Pres
     }
 
     override fun dropView() {
-        addMoment.unsubscribe()
+        compositeDisposable.dispose()
     }
 }

@@ -3,9 +3,10 @@ package com.zxjdev.smile.presentation.moment.list
 import android.arch.lifecycle.LifecycleOwner
 import com.zxjdev.smile.domain.moment.Moment
 import com.zxjdev.smile.domain.moment.usecase.GetMomentList
-import com.zxjdev.smile.presentation.common.DefaultSubscriber
 import com.zxjdev.smile.presentation.common.util.ui.ErrorMessagePrinter
 import com.zxjdev.smile.presentation.moment.MomentModelMapper
+import io.reactivex.disposables.CompositeDisposable
+import io.reactivex.observers.DisposableObserver
 import javax.inject.Inject
 
 class MomentListPresenter @Inject internal constructor() : MomentListContract.Presenter {
@@ -16,22 +17,37 @@ class MomentListPresenter @Inject internal constructor() : MomentListContract.Pr
     @Inject lateinit var errorMessagePrinter: ErrorMessagePrinter
     @Inject lateinit var viewModel: MomentListViewModel
     @Inject lateinit var lifecycleOwner: LifecycleOwner
+    private val compositeDisposable = CompositeDisposable()
 
     private fun loadMoments() {
-        getMomentList.execute(object : DefaultSubscriber<List<Moment>>(errorMessagePrinter) {
-            override fun onNext(data: List<Moment>) {
-                viewModel.setMoments(momentModelMapper.transform(data))
+        compositeDisposable.add(getMomentList.execute().subscribeWith(object : DisposableObserver<List<Moment>>() {
+            override fun onComplete() {
             }
-        })
+
+            override fun onNext(t: List<Moment>) {
+                viewModel.setMoments(momentModelMapper.transform(t))
+            }
+
+            override fun onError(e: Throwable) {
+                errorMessagePrinter.print(e.message)
+            }
+        }))
     }
 
     override fun refreshMoments() {
-        getMomentList.execute(object : DefaultSubscriber<List<Moment>>(errorMessagePrinter) {
-            override fun onNext(data: List<Moment>) {
-                view.dismissRefreshingView()
-                viewModel.setMoments(momentModelMapper.transform(data))
+        compositeDisposable.add(getMomentList.execute().subscribeWith(object : DisposableObserver<List<Moment>>() {
+            override fun onComplete() {
             }
-        })
+
+            override fun onNext(t: List<Moment>) {
+                view.dismissRefreshingView()
+                viewModel.setMoments(momentModelMapper.transform(t))
+            }
+
+            override fun onError(e: Throwable) {
+                errorMessagePrinter.print(e.message)
+            }
+        }))
     }
 
     override fun takeView(view: MomentListContract.View) {
@@ -45,6 +61,6 @@ class MomentListPresenter @Inject internal constructor() : MomentListContract.Pr
     }
 
     override fun dropView() {
-        getMomentList.unsubscribe()
+        compositeDisposable.dispose()
     }
 }

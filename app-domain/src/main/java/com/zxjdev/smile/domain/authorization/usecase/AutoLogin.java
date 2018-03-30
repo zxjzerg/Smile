@@ -1,11 +1,12 @@
 package com.zxjdev.smile.domain.authorization.usecase;
 
 import com.zxjdev.smile.domain.authorization.AuthorizationRepository;
-import com.zxjdev.smile.domain.common.base.UseCase;
+import com.zxjdev.smile.domain.common.base.DataUseCase;
+import com.zxjdev.smile.domain.common.base.UseCaseRequestParams;
 
 import io.reactivex.Observable;
 
-public class AutoLogin extends UseCase<AutoLogin.RequestParams, Boolean> {
+public class AutoLogin extends DataUseCase<AutoLogin.RequestParams, Boolean> {
 
   private AuthorizationRepository authorizationRepository;
 
@@ -18,7 +19,7 @@ public class AutoLogin extends UseCase<AutoLogin.RequestParams, Boolean> {
     return authorizationRepository.checkIsLogined();
   }
 
-  public static class RequestParams implements UseCase.RequestParams {
+  public static class RequestParams implements UseCaseRequestParams {
 
   }
 }

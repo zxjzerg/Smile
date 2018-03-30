@@ -1,5 +1,6 @@
 package com.zxjdev.smile.data.base
 
+import io.reactivex.CompletableTransformer
 import io.reactivex.ObservableTransformer
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
@@ -11,6 +12,12 @@ abstract class BaseDataRepository {
 
     protected fun <T> applyDefaultSchedulerStrategy(): ObservableTransformer<T, T> {
         return ObservableTransformer { upstream ->
+            upstream.subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread())
+        }
+    }
+
+    protected fun applyDefaultSchedulerStrategyForCompletable(): CompletableTransformer {
+        return CompletableTransformer { upstream ->
             upstream.subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread())
         }
     }

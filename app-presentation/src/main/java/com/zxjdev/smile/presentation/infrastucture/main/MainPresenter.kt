@@ -3,11 +3,11 @@ package com.zxjdev.smile.presentation.infrastucture.main
 import com.zxjdev.smile.domain.user.User
 import com.zxjdev.smile.domain.user.usecase.GetCurrentUser
 import com.zxjdev.smile.domain.user.usecase.UploadAvatar
-import com.zxjdev.smile.presentation.common.DefaultSubscriber
 import com.zxjdev.smile.presentation.common.util.ui.ErrorMessagePrinter
 import com.zxjdev.smile.presentation.user.UserModel
 import com.zxjdev.smile.presentation.user.UserModelMapper
-
+import io.reactivex.disposables.CompositeDisposable
+import io.reactivex.observers.DisposableObserver
 import javax.inject.Inject
 
 class MainPresenter @Inject internal constructor() : MainContract.Presenter {
@@ -17,20 +17,28 @@ class MainPresenter @Inject internal constructor() : MainContract.Presenter {
     @Inject lateinit var userModelMapper: UserModelMapper
     @Inject lateinit var uploadAvatar: UploadAvatar
     @Inject lateinit var errorMessagePrinter: ErrorMessagePrinter
+    private val compositeDisposable = CompositeDisposable()
 
     private var currentUser: UserModel? = null
 
     override fun handleChangeAvatar(picturePath: String) {
         val params = UploadAvatar.RequestParams()
         params.localPath = picturePath
-        uploadAvatar.execute(params, object : DefaultSubscriber<String>(errorMessagePrinter) {
-            override fun onNext(data: String) {
+        compositeDisposable.add(uploadAvatar.execute(params).subscribeWith(object : DisposableObserver<String>() {
+            override fun onComplete() {
+            }
+
+            override fun onNext(t: String) {
                 if (currentUser != null) {
-                    currentUser?.avatar = data
+                    currentUser?.avatar = t
                     if (view != null) view!!.displayUser(currentUser!!)
                 }
             }
-        })
+
+            override fun onError(e: Throwable) {
+                errorMessagePrinter.print(e.message)
+            }
+        }))
     }
 
     override fun takeView(view: MainContract.View) {
@@ -40,16 +48,22 @@ class MainPresenter @Inject internal constructor() : MainContract.Presenter {
 
     override fun dropView() {
         this.view = null
-        getCurrentUser.unsubscribe()
-        uploadAvatar.unsubscribe()
+        compositeDisposable.dispose()
     }
 
     private fun loadCurrentUser() {
-        getCurrentUser.execute(object : DefaultSubscriber<User>(errorMessagePrinter) {
-            override fun onNext(data: User) {
-                currentUser = userModelMapper.transform(data)
+        compositeDisposable.addAll(getCurrentUser.execute().subscribeWith(object : DisposableObserver<User>() {
+            override fun onComplete() {
+            }
+
+            override fun onNext(t: User) {
+                currentUser = userModelMapper.transform(t)
                 if (view != null) view!!.displayUser(currentUser!!)
             }
-        })
+
+            override fun onError(e: Throwable) {
+                errorMessagePrinter.print(e.message)
+            }
+        }))
     }
 }

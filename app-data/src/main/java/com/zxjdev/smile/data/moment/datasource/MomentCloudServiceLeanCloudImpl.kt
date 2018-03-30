@@ -5,6 +5,7 @@ import com.avos.avoscloud.AVObject
 import com.zxjdev.smile.data.BuildConfig
 import com.zxjdev.smile.data.moment.entity.MomentEntity
 import com.zxjdev.smile.data.user.entity.UserEntity
+import io.reactivex.Completable
 import io.reactivex.Observable
 import javax.inject.Inject
 
@@ -26,8 +27,8 @@ class MomentCloudServiceLeanCloudImpl @Inject constructor(private val currentUse
         }
     }
 
-    override fun addMoment(content: String): Observable<Void> {
-        return Observable.create { emitter ->
+    override fun addMoment(content: String): Completable {
+        return Completable.create { emitter ->
             val momentEntity = MomentEntity()
             momentEntity.content = content
             momentEntity.setOwner(currentUser)

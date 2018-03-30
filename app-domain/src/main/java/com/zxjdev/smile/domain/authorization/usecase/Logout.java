@@ -1,11 +1,12 @@
 package com.zxjdev.smile.domain.authorization.usecase;
 
 import com.zxjdev.smile.domain.authorization.AuthorizationRepository;
-import com.zxjdev.smile.domain.common.base.UseCase;
+import com.zxjdev.smile.domain.common.base.JobUseCase;
+import com.zxjdev.smile.domain.common.base.UseCaseRequestParams;
 
-import io.reactivex.Observable;
+import io.reactivex.Completable;
 
-public class Logout extends UseCase<Logout.RequestParams, Void> {
+public class Logout extends JobUseCase<Logout.RequestParams> {
 
   private AuthorizationRepository authorizationRepository;
 
@@ -14,11 +15,11 @@ public class Logout extends UseCase<Logout.RequestParams, Void> {
   }
 
   @Override
-  protected Observable<Void> buildUseCaseObservable(RequestParams params) {
+  protected Completable buildUseCaseObservable(RequestParams params) {
     return authorizationRepository.logout();
   }
 
-  public static class RequestParams implements UseCase.RequestParams {
+  public static class RequestParams implements UseCaseRequestParams {
 
   }
 }

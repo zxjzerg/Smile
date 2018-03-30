@@ -1,15 +1,16 @@
 package com.zxjdev.smile.data.authorization.datasource
 
+import io.reactivex.Completable
 import io.reactivex.Observable
 import javax.inject.Inject
 
 class AuthorizationCloudDataSource @Inject constructor(private val authorizationCloudService: AuthorizationCloudService) {
 
-    fun register(username: String, password: String): Observable<Void> {
+    fun register(username: String, password: String): Completable {
         return authorizationCloudService.register(username, password)
     }
 
-    fun login(username: String, password: String): Observable<Void> {
+    fun login(username: String, password: String): Completable {
         return authorizationCloudService.login(username, password)
     }
 
@@ -17,7 +18,7 @@ class AuthorizationCloudDataSource @Inject constructor(private val authorization
         return authorizationCloudService.checkIsLogined()
     }
 
-    fun logout(): Observable<Void> {
+    fun logout(): Completable {
         return authorizationCloudService.logout()
     }
 }

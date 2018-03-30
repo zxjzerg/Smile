@@ -1,6 +1,7 @@
 package com.zxjdev.smile.data.moment.datasource
 
 import com.zxjdev.smile.data.moment.entity.MomentEntity
+import io.reactivex.Completable
 import io.reactivex.Observable
 
 interface MomentCloudService {
@@ -17,5 +18,5 @@ interface MomentCloudService {
      *
      * @param content text content of moment
      */
-    fun addMoment(content: String): Observable<Void>
+    fun addMoment(content: String): Completable
 }

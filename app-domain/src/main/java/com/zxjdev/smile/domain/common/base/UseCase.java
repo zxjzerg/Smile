@@ -10,6 +10,7 @@ import io.reactivex.observers.DisposableObserver;
  * @param <R> input for this use case
  * @param <T> the return data type of this UseCase
  */
+@Deprecated
 public abstract class UseCase<R extends UseCase.RequestParams, T> {
 
   private CompositeDisposable compositeDisposable;

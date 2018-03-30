@@ -1,11 +1,12 @@
 package com.zxjdev.smile.domain.user.usecase;
 
-import com.zxjdev.smile.domain.common.base.UseCase;
+import com.zxjdev.smile.domain.common.base.DataUseCase;
+import com.zxjdev.smile.domain.common.base.UseCaseRequestParams;
 import com.zxjdev.smile.domain.user.UserRepository;
 
 import io.reactivex.Observable;
 
-public class UploadAvatar extends UseCase<UploadAvatar.RequestParams, String> {
+public class UploadAvatar extends DataUseCase<UploadAvatar.RequestParams, String> {
 
   private UserRepository userRepository;
 
@@ -18,7 +19,7 @@ public class UploadAvatar extends UseCase<UploadAvatar.RequestParams, String> {
     return userRepository.uploadAvatar(params.getLocalPath());
   }
 
-  public static class RequestParams implements UseCase.RequestParams {
+  public static class RequestParams implements UseCaseRequestParams {
 
     private String localPath;
 
