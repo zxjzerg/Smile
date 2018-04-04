@@ -15,7 +15,8 @@ import javax.inject.Singleton
         AuthorizationDomainModule::class,
         MomentDomainModule::class,
         UserDomainModule::class,
-        ActivityBindingModule::class))
+        ActivityBindingModule::class,
+        PresentationModule::class))
 interface ApplicationComponent : AndroidInjector<SmileApplication> {
 
     @Component.Builder

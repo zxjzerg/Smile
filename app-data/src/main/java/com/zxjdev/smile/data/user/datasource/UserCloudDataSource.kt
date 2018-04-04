@@ -1,7 +1,6 @@
 package com.zxjdev.smile.data.user.datasource
 
 import com.zxjdev.smile.data.user.entity.UserEntity
-import io.reactivex.Observable
 import javax.inject.Inject
 
 /**
@@ -12,15 +11,11 @@ import javax.inject.Inject
 class UserCloudDataSource @Inject constructor(private val userCloudService: UserCloudService,
         private val currentUser: UserEntity) {
 
-    fun getUser(id: String?): Observable<UserEntity> {
-        return if (id == null) {
-            Observable.just(currentUser)
-        } else {
-            Observable.empty()
-        }
+    fun getCurrentUser(): UserEntity {
+        return currentUser
     }
 
-    fun uploadAvatar(localPath: String): Observable<String> {
+    fun uploadAvatar(localPath: String): String {
         return userCloudService.uploadAvatar(localPath)
     }
 }
