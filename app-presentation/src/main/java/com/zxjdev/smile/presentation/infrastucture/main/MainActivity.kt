@@ -5,9 +5,9 @@ import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
 import android.provider.MediaStore
-import android.support.annotation.IdRes
-import android.support.v4.app.Fragment
-import android.support.v7.app.ActionBarDrawerToggle
+import androidx.annotation.IdRes
+import androidx.fragment.app.Fragment
+import androidx.appcompat.app.ActionBarDrawerToggle
 import android.text.TextUtils
 import android.view.Gravity
 import android.widget.ImageView

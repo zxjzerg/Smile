@@ -1,7 +1,7 @@
 // Top-level build file where you can add configuration options common to all sub-projects/modules.
 
 buildscript {
-    ext.kotlin_version = '1.2.31'
+    ext.kotlin_version = '1.4.32'
     ext.viewmodel_and_lifecycle_version = '1.1.0'
     ext.room_version = '1.0.0'
 
@@ -13,7 +13,7 @@ buildscript {
         google()
     }
     dependencies {
-        classpath 'com.android.tools.build:gradle:3.2.0-alpha04'
+        classpath 'com.android.tools.build:gradle:4.1.3'
         classpath 'com.neenbedankt.gradle.plugins:android-apt:1.8'
         classpath 'me.tatarka:gradle-retrolambda:3.2.5'
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
@@ -27,6 +27,9 @@ allprojects {
             url "http://mvn.leancloud.cn/nexus/content/repositories/releases"
         }
         google()
+        maven {
+            url 'https://maven.google.com'
+        }
     }
 }
 
@@ -38,10 +41,10 @@ project.ext {
     // Android
     androidVersionCode = 1
     androidVersionName = "1.0"
-    androidBuildToolsVersion = "27.0.3"
+    androidBuildToolsVersion = "29.0.2"
     androidMinSdkVersion = 16
     androidTargetSdkVersion = 26
-    androidCompileSdkVersion = 26
+    androidCompileSdkVersion = 30
 
     // Build Configurations
     leancloud_app_key = '"HQu208J1eI4ucxKRMuaLnXmb"'
@@ -55,11 +58,11 @@ project.ext {
     rxandroid2 = 'io.reactivex.rxjava2:rxandroid:2.0.1'
     rxjava2 = 'io.reactivex.rxjava2:rxjava:2.1.7'
 
-    dagger = 'com.google.dagger:dagger:2.14.1'
-    dagger_processor = 'com.google.dagger:dagger-compiler:2.14.1'
-    dagger_android = 'com.google.dagger:dagger-android:2.14.1'
-    dagger_android_support = 'com.google.dagger:dagger-android-support:2.14.1'
-    dagger_android_processor = 'com.google.dagger:dagger-android-processor:2.14.1'
+    dagger = 'com.google.dagger:dagger:2.34'
+    dagger_processor = 'com.google.dagger:dagger-compiler:2.34'
+    dagger_android = 'com.google.dagger:dagger-android:2.34'
+    dagger_android_support = 'com.google.dagger:dagger-android-support:2.34'
+    dagger_android_processor = 'com.google.dagger:dagger-android-processor:2.34'
     javax_inject = 'javax.inject:javax.inject:1'
 
     butterknife = 'com.jakewharton:butterknife:8.5.1'
@@ -84,7 +87,7 @@ project.ext {
 
     stetho = 'com.facebook.stetho:stetho:1.4.2'
 
-    glide = 'com.github.bumptech.glide:glide:3.7.0'
+    glide = 'com.github.bumptech.glide:glide:4.12.0'
     glide_transformations = 'jp.wasabeef:glide-transformations:2.0.1'
 
     image_crop = 'com.soundcloud.android:android-crop:1.0.1@aar'

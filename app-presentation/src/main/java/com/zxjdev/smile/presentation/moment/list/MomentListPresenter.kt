@@ -1,6 +1,6 @@
 package com.zxjdev.smile.presentation.moment.list
 
-import android.arch.lifecycle.LifecycleOwner
+import androidx.lifecycle.LifecycleOwner
 import com.zxjdev.smile.domain.moment.Moment
 import com.zxjdev.smile.domain.moment.usecase.GetMomentList
 import com.zxjdev.smile.presentation.common.util.ui.ErrorMessagePrinter
@@ -55,7 +55,7 @@ class MomentListPresenter @Inject internal constructor() : MomentListContract.Pr
         if (viewModel.getMoments().value == null) {
             loadMoments()
         }
-        viewModel.getMoments().observe(lifecycleOwner, android.arch.lifecycle.Observer { models ->
+        viewModel.getMoments().observe(lifecycleOwner, androidx.lifecycle.Observer { models ->
             view.displayMomentList(models)
         })
     }

@@ -1,6 +1,6 @@
 package com.zxjdev.smile.presentation.common.util.image
 
-import android.support.annotation.DrawableRes
+import androidx.annotation.DrawableRes
 import android.widget.ImageView
 
 interface ImageLoader {
