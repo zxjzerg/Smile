@@ -20,13 +20,14 @@ class SettingsFragment : BaseFragment(), SettingsContract.View {
         retainInstance = true
     }
 
-    override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        return inflater!!.inflate(R.layout.fragment_settings, container, false)
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
+            savedInstanceState: Bundle?): View? {
+        return inflater.inflate(R.layout.fragment_settings, container, false)
     }
 
-    override fun onViewCreated(view: View?, savedInstanceState: Bundle?) {
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        btn_logout.setOnClickListener({ settingsPresenter.handleLogout() })
+        btn_logout.setOnClickListener { settingsPresenter.handleLogout() }
         settingsPresenter.takeView(this)
     }
 
@@ -36,7 +37,7 @@ class SettingsFragment : BaseFragment(), SettingsContract.View {
     }
 
     override fun onLogoutSuccess() {
-        (activity.application as SmileApplication).releaseUserComponent()
+        (activity?.application as SmileApplication).releaseUserComponent()
 
         val intent = Intent(activity, SplashActivity::class.java)
         intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
@@ -45,6 +46,6 @@ class SettingsFragment : BaseFragment(), SettingsContract.View {
 
     companion object {
 
-        val TAG = SettingsFragment::class.java.simpleName!!
+        val TAG: String = SettingsFragment::class.java.simpleName
     }
 }

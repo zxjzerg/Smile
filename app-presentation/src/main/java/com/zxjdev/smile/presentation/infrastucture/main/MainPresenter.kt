@@ -21,7 +21,7 @@ class MainPresenter @Inject internal constructor() : MainContract.Presenter {
 
     private var currentUser: UserModel? = null
 
-    override fun handleChangeAvatar(picturePath: String) {
+    override fun handleChangeAvatar(picturePath: String?) {
         val params = UploadAvatar.RequestParams()
         params.localPath = picturePath
         compositeDisposable.add(uploadAvatar.execute(params).subscribeWith(object : DisposableObserver<String>() {

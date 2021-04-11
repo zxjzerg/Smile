@@ -13,6 +13,6 @@ interface MainContract {
 
     interface Presenter : BasePresenter<View> {
 
-        fun handleChangeAvatar(picturePath: String)
+        fun handleChangeAvatar(picturePath: String?)
     }
 }
