@@ -131,7 +131,18 @@ dependencies {
     implementation 'androidx.lifecycle:lifecycle-extensions:2.0.0'
     implementation 'androidx.room:room-runtime:2.0.0'
     annotationProcessor 'androidx.room:room-compiler:2.0.0'
+
+    debugImplementation 'com.zxjdev.smile.smile_flutter_module:flutter_debug:1.0'
+    releaseImplementation 'com.zxjdev.smile.smile_flutter_module:flutter_release:1.0'
 }
+
+String storageUrl = System.env.FLUTTER_STORAGE_BASE_URL ?: "https://storage.googleapis.com"
 repositories {
+    maven {
+        url '../smile_flutter_module/build/host/outputs/repo'
+    }
+    maven {
+        url "$storageUrl/download.flutter.io"
+    }
     mavenCentral()
 }
